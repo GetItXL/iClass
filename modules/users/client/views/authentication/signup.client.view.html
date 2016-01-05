@@ -20,11 +20,28 @@
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase required>
+          <span class="help-block" align="right" style="font-size:10px">* UFL email address is required</span>
           <div ng-messages="userForm.email.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Email address is required.</p>
             <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
           </div>
+          <!--
+              change files in server/models/user.server.model.js
+            -->
         </div>
+        <!-- check if the user is student or professor -->
+        <div class="form-group">
+          <label for="role">I am a ...</label>
+          <form role="form" required>
+            <label class="radio-inline">
+              <input type="radio" name="optradio">Student
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="optradio">Professor
+            </label>
+          </form>
+        </div>
+
         <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
@@ -39,6 +56,10 @@
             <p class="help-block error-text" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
               <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
+            <!--
+              {popoverMsg} is written in client/services/users.client.service.js
+              also in users/client/controllers/authentication.client.controller.js
+            -->
             </div>
           </div>
         </div>
