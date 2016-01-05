@@ -203,6 +203,28 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js'
       }
     },
+    // SAVE & LOAD MONGODB INSTANCES!
+    easy_mongo_fixture: {
+      load: {
+          options: {
+                    database: 'mean-dev',
+                    dir: './mongo-fixtures',
+                    override: true,
+                },
+                collections: ['users'],
+                action: 'load'
+            },
+
+      save: {
+          options: {
+                    database: 'mean-dev',
+                    dir: './mongo-fixtures',
+                    override: true,
+                },
+                collections: ['users'],
+                action: 'save'
+            }
+    },   
     protractor: {
       options: {
         configFile: 'protractor.conf.js',
@@ -318,4 +340,8 @@ module.exports = function (grunt) {
 
   // Run the project in production mode
   grunt.registerTask('prod', ['build', 'env:prod', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+
+      //SAVE AND LOAD MONGODB INSTANCES TASK
+  grunt.registerTask('mongo:load', ['easy_mongo_fixture:load']);
+  grunt.registerTask('mongo:save', ['easy_mongo_fixture:save']);
 };

@@ -75,6 +75,7 @@
     "grunt-contrib-sass": "^0.9.2",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-easy-mongo-fixture": "^1.0.4",
     "grunt-env": "~0.4.4",
     "grunt-eslint": "~17.3.1",
     "grunt-karma": "~0.11.2",
