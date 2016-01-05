@@ -21,9 +21,8 @@ var validateLocalStrategyProperty = function (property) {
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || /^\w+([\.-]?\w+)*@ufl.edu+$/.test(email) );
+  return ((this.provider !== 'local' && !this.updated) || /^\w+([\.-]?\w+)*@ufl.edu+$/.test(email));
 };
-// validator.isEmail(email) is the builtin function in validator 
 
 /**
  * User Schema
@@ -51,7 +50,7 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyEmail, 'Please use your UFL email address']
+    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
   username: {
     type: String,
@@ -80,7 +79,7 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin', 'professor']
+      enum: ['user', 'professor', 'admin']
     }],
     default: ['user'],
     required: 'Please provide at least one role'
@@ -204,7 +203,4 @@ UserSchema.statics.generateRandomPassphrase = function () {
   });
 };
 
-
-
 mongoose.model('User', UserSchema);
-
