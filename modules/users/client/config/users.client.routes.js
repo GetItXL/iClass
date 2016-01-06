@@ -70,15 +70,15 @@ angular.module('users').config(['$stateProvider',
       })
       .state('studentdashboard', {
         url: '/studentdashboard',
-        templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html'
+        templateUrl: 'modules/users/views/dashboard/student-dashboard.client.view.html'
       })
       .state('prodashboard', {
         url: '/professordashboard',
-        templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
+        templateUrl: 'modules/users/views/dashboard/professor-dashboard.client.view.html'
       })
       .state('admindashboard', {
         url: '/admindashboard',
-        templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html'
+        templateUrl: 'modules/users/views/dashboard/admin-dashboard.client.view.html'
       });
   }
 ]);
