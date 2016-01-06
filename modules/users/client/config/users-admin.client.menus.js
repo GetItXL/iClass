@@ -4,8 +4,13 @@
 angular.module('users.admin').run(['Menus',
   function (Menus) {
     Menus.addSubMenuItem('topbar', 'admin', {
-      title: 'Dashboard',
+      title: 'Manage Users',
       state: 'admin.users'
-    });
+    })
+    //  Menus.addSubMenuItem('topbar', 'admin', {
+    //   title: 'Time',
+    //   state: 'admin.users'
+    // })
+    ;
   }
 ]);
