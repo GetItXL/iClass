@@ -10,12 +10,15 @@ angular.module('users').config(['$stateProvider',
         url: '/settings',
         templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin', 'professor']
         }
       })
       .state('settings.profile', {
         url: '/profile',
-        templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html',
+        data: {
+          roles: ['admin']
+        }
       })
       .state('settings.password', {
         url: '/password',
@@ -23,7 +26,10 @@ angular.module('users').config(['$stateProvider',
       })
       .state('settings.accounts', {
         url: '/accounts',
-        templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html',
+        data: {
+          roles: ['admin']
+        }
       })
       .state('settings.picture', {
         url: '/picture',
