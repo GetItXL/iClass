@@ -78,7 +78,7 @@ angular.module('users').config(['$stateProvider',
         url: '/studentdashboard',
         templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html'
       })
-      .state('prodashboard', {
+      .state('professordashboard', {
         url: '/professordashboard',
         templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
       });
