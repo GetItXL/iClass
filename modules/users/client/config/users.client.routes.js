@@ -75,10 +75,6 @@ angular.module('users').config(['$stateProvider',
       .state('prodashboard', {
         url: '/professordashboard',
         templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
-      })
-      .state('admindashboard', {
-        url: '/admindashboard',
-        templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html'
       });
   }
 ]);
