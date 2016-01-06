@@ -67,6 +67,18 @@ angular.module('users').config(['$stateProvider',
       .state('password.reset.form', {
         url: '/:token',
         templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
+      })
+      .state('student-dashboard', {
+            url: '/student-dashboard',
+            templateUrl: 'modules/users/views/student-dashboard.client.view.html'
+        }).
+      .state('professor-dashboard', {
+            url: '/professor-dashboard',
+            templateUrl: 'modules/users/views/professor-dashboard.client.view.html'
+      })
+      .state('admin-dashboard', {
+            url: '/admin-dashboard',
+            templateUrl: 'modules/users/views/admin-dashboard.client.view.html'
       });
   }
 ]);
