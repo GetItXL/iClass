@@ -1,0 +1,23 @@
+<section data-ng-controller="CoursesController">
+    <div course="page-header">
+        <h1>New Course</h1>
+    </div>
+    <div course="col-md-12">
+        <form course="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div course="form-group">
+                    <label course="control-label" for="name">Name</label>
+                    <div course="controls">
+                        <input type="text" data-ng-model="name" id="name" course="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div course="form-group">
+                    <input type="submit" course="btn btn-default">
+                </div>
+				<div data-ng-show="error" course="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
