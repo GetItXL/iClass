@@ -12,24 +12,30 @@ angular.module('courses').config(['$stateProvider',
       })
       .state('courses.list', {
         url: '',
-        templateUrl: 'modules/courses/client/views/list-courses.client.view.html'
+        templateUrl: 'modules/courses/client/views/list-courses.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'professor'] 
+        }
       })
       .state('courses.create', {
         url: '/create',
         templateUrl: 'modules/courses/client/views/create-course.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin', 'professor'] //only user/professor and admins are allowed to manipulate course
         }
       })
       .state('courses.view', {
         url: '/:courseId',
-        templateUrl: 'modules/courses/client/views/view-course.client.view.html'
+        templateUrl: 'modules/courses/client/views/view-course.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'professor'] //only user/professor and admins are allowed to manipulate course
+        }
       })
       .state('courses.edit', {
         url: '/:courseId/edit',
         templateUrl: 'modules/courses/client/views/edit-course.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin', 'professor']
         }
       });
   }
