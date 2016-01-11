@@ -8,7 +8,7 @@ angular.module('courses').config(['$stateProvider',
       .state('courses', {
         abstract: true,
         url: '/courses',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
       })
       .state('courses.list', {
         url: '',

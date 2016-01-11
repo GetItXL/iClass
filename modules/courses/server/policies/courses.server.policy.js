@@ -31,6 +31,15 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }]
   }, {
+    roles: ['professor'],
+    allows: [{
+      resources: '/api/courses',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/courses/:courseId',
+      permissions: ['get']
+    }]
+  },{
     roles: ['guest'],
     allows: [{
       resources: '/api/courses',
