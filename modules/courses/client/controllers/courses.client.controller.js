@@ -82,7 +82,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       $scope.course = Courses.get({
         courseId: $stateParams.courseId
       });
-      console.log($scope.course);
     };
+
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1)
+    }
+
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1)
+    }
+
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1)
+    }
+
   }
 ]);
