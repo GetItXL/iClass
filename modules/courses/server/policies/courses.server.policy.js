@@ -37,7 +37,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/courses/:courseId',
-      permissions: ['get', 'post']
+      permissions: ['get', 'put']
     }]
   },{
     roles: ['guest'], //non loggedin users can't access course
