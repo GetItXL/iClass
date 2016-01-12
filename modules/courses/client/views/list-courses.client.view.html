@@ -3,7 +3,9 @@
     <h1>Courses</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="course in courses" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+    <input type="text" ng-model="keyword" placeholder="search a course" />
+    <label>Search Course</label>
+    <a ng-repeat="course in courses | filter:keyword" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
       <small class="list-group-item-text">
         Created on
         <span ng-bind="course.created | date:'mediumDate'"></span>
