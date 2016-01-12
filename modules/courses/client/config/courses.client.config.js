@@ -22,7 +22,7 @@ angular.module('courses').run(['Menus',
     Menus.addSubMenuItem('topbar', 'courses', {
       title: 'Create Courses',
       state: 'courses.create',
-      roles: ['user', 'admin', 'professor']
+      roles: ['admin', 'professor']
     });
   }
 ]);

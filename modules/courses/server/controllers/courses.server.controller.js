@@ -13,7 +13,9 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var course = new Course(req.body);
-  course.user = req.user;
+
+  //console.log(req);
+  course.professor = req.user;
 
   course.save(function (err) {
     if (err) {
@@ -39,8 +41,9 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var course = req.course;
 
-  course.title = req.body.title;
-  course.content = req.body.content;
+  course.name = req.body.name;
+  course.number = req.body.number;
+  course.passcode = req.body.passcode;
 
   course.save(function (err) {
     if (err) {

@@ -14,18 +14,24 @@ var CourseSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
+  number: { //course number
     type: String,
     default: '',
     trim: true,
-    required: 'Title cannot be blank'
+    required: 'Course number cannot be blank'
   },
-  content: {
+  name:{
     type: String,
     default: '',
-    trim: true
+    trim: true,
+    required: 'Course name cannot be blank'
   },
-  user: {
+  passcode:{
+    type: String,
+    default: '0000',
+    //Doesn't need to be required..
+  },
+  professor: { //Professor who created the course
     type: Schema.ObjectId,
     ref: 'User'
   }

@@ -22,31 +22,31 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     }]
   }, {
-    roles: ['user'],
+    roles: ['user'], //student can only see courses
     allows: [{
       resources: '/api/courses',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/courses/:courseId',
       permissions: ['get']
     }]
   }, {
-    roles: ['professor'],
+    roles: ['professor'], //professor can create/modify course
     allows: [{
       resources: '/api/courses',
       permissions: ['get', 'post']
     }, {
       resources: '/api/courses/:courseId',
-      permissions: ['get']
+      permissions: ['get', 'post']
     }]
   },{
-    roles: ['guest'],
+    roles: ['guest'], //non loggedin users can't access course
     allows: [{
       resources: '/api/courses',
-      permissions: ['get']
+      permissions: []
     }, {
       resources: '/api/courses/:courseId',
-      permissions: ['get']
+      permissions: [] 
     }]
   }]);
 };
@@ -58,7 +58,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an course is being processed and the current user created it then allow any manipulation
-  if (req.course && req.user && req.course.user.id === req.user.id) {
+  if (req.course && req.user && req.course.professor.id === req.user.id) {
     return next();
   }
 

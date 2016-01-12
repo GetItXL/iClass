@@ -17,17 +17,20 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       // Create new Course object
       var course = new Courses({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        number: this.number,
+        passcode: this.passcode
       });
 
       // Redirect after save
       course.$save(function (response) {
         $location.path('courses/' + response._id);
+        //console.log(course.professor);
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.number = '';
+        $scope.passcode = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -79,6 +82,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       $scope.course = Courses.get({
         courseId: $stateParams.courseId
       });
+      console.log($scope.course);
     };
   }
 ]);
