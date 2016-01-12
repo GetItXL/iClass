@@ -3,7 +3,7 @@
     <h1 ng-bind="course.number"></h1>
   </div>
   <div class="pull-right" >
-    <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})">
+    <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})" ng-show="!isStudent()">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
     <a class="btn btn-primary" ng-click="remove();" ng-show="isAdmin()">
