@@ -77,7 +77,7 @@ exports.delete = function (req, res) {
  * List of Courses
  */
 exports.list = function (req, res) {
-  Course.find().sort('-created').populate('user', 'displayName').exec(function (err, courses) {
+  Course.find().sort('-created').populate('professor', 'displayName').exec(function (err, courses) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -99,7 +99,7 @@ exports.courseByID = function (req, res, next, id) {
     });
   }
 
-  Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
+  Course.findById(id).populate('professor', 'displayName').exec(function (err, course) {
     if (err) {
       return next(err);
     } else if (!course) {
