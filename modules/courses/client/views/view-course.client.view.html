@@ -9,6 +9,9 @@
     <a class="btn btn-primary" ng-click="remove();" ng-show="isAdmin()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
+    <a class="btn btn-primary" ng-click="joinCourse(course._id);" ng-show="isStudent()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
   </div>
   <small>
     <em class="text-muted">

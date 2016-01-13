@@ -35,6 +35,11 @@ var CourseSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   }
+  /*, //Not sure if it's needed, may need it later for efficiency
+  enrolledStudents: [{
+    type: Schema.ObjectId,
+    ref: 'User'
+  }]*/ 
 });
 
 mongoose.model('Course', CourseSchema);

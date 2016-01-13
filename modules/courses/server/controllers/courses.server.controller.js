@@ -88,6 +88,7 @@ exports.list = function (req, res) {
   });
 };
 
+
 /**
  * Course middleware
  */

@@ -97,7 +97,10 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+  enrolledCourses: [{ //Stores a list of course the student is enrolled in
+    type: String
+  }]
 });
 
 /**

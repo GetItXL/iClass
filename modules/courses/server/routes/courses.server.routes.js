@@ -17,6 +17,7 @@ module.exports = function (app) {
     .get(courses.read)
     .put(courses.update)
     .delete(courses.delete);
+    //.post(couses.join); //Student enroll in a selected course
 
   // Finish by binding the course middleware
   app.param('courseId', courses.courseByID);

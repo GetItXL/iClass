@@ -1,8 +1,10 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses',
-  function ($scope, $stateParams, $location, Authentication, Courses) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users',
+  function ($scope, $stateParams, $location, Authentication, Courses, Users) {
+    //Courses is refering to the service on the client side
+
     $scope.authentication = Authentication;
 
     // Create new Course
@@ -112,6 +114,33 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     $scope.isStudent = function(){
       return ($scope.authentication.user.roles.indexOf('user') > -1);
+    };
+
+    $scope.joinCourse = function(courseID){
+
+      var student = new Users(Authentication.user);
+
+      //Need to check user's role? (view already handled that)
+
+      //check if student is already enrolled in the course
+      if(student.enrolledCourses.indexOf(courseID) === -1){
+        student.enrolledCourses.push(courseID);
+
+        student.$update(function(res){
+          $scope.success = true;
+          Authentication.user = res;
+
+          console.log(Authentication.user);
+        }, function(errorResponse){
+          $scope.error = errorResponse.data.message;
+        });
+
+      }else{
+        console.log('already enrolled in this class');
+
+        /* TODO: display message  to user */
+      }
+
     };
 
   }
