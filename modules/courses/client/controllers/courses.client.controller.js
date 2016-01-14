@@ -120,10 +120,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       var student = new Users(Authentication.user);
 
-      //Need to check user's role? (view already handled that)
+      console.log($scope.passcode);
+      console.log($scope.course.passcode);
 
-      //check if student is already enrolled in the course
-      if(student.enrolledCourses.indexOf(courseID) === -1){
+      if($scope.passcode !== $scope.course.passcode){
+        console.log("Wrong passcode");
+      }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
         student.enrolledCourses.push(courseID);
 
         student.$update(function(res){
@@ -139,7 +141,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         console.log('already enrolled in this class');
 
         /* TODO: display message to user */
-        /* TODO: passcode verification */
       }
     };
 
