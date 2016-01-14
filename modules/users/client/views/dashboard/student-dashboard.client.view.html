@@ -1,6 +1,23 @@
-<section>
+<section ng-controller="CoursesController" ng-init="findEnrolledCourses()">
   <div class="page-header">
-    <h1> this is student dashboard</h1>
+    <h1>Courses</h1>
+  </div>
+  <div class="list-group">
+    <label>Enrolled Courses</label>
+    <a ng-repeat="course in enrolledCourses" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Created on
+        <span ng-bind="course.created | date:'mediumDate'"></span>
+        by Professor
+        <span ng-bind="course.professor.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
+      <p class="list-group-item-text" ng-bind="course.name"></p>
+      <p class="list-group-item-text" ng-bind="course.passcode"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="courses.$resolved && !courses.length">
+    No courses yet, why don't you <a ui-sref="courses.create">create one</a>?
   </div>
 </section>
 

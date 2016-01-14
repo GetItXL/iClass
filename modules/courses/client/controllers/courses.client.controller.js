@@ -138,10 +138,34 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }else{
         console.log('already enrolled in this class');
 
-        /* TODO: display message  to user */
+        /* TODO: display message to user */
+        /* TODO: passcode verification */
+      }
+    };
+
+    $scope.findEnrolledCourses = function(){
+
+      var user = $scope.authentication.user;
+      var coursesEnrolled = [];
+
+      for(var i = 0; i < user.enrolledCourses.length; i++){
+        console.log(user.enrolledCourses[i]);
+
+        coursesEnrolled.push(Courses.get({
+          courseId: user.enrolledCourses[i]
+        }));
+
       }
 
+      $scope.enrolledCourses = coursesEnrolled;
+
+      //console.log(this.coursesEnrolled);
+      console.log($scope.enrolledCourses);
     };
+
+
+
+    /* TODO: delete enrolled course from user if the course if removed by admin from database */
 
   }
 ]);
