@@ -6,22 +6,22 @@
     <form name="courseForm" class="form-horizontal" ng-submit="update(courseForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="Number">Number</label>
+          <label for="number">Number</label>
           <input name="number" type="text" ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
-          <div ng-messages="courseForm.title.$error" role="alert">
+          <div ng-messages="courseForm.number.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Course number is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <label for="name">Course Name</label>
-          <input name="name" type="text" ng-model="name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
+          <input name="name" type="text" ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
           <div ng-messages="courseForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Course name is required.</p>
           </div>
         </div>
         <div class="form-group">
           <label for="passcode">Course Passcode</label>
-          <textarea name="passcode" ng-model="passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></textarea>
+          <textarea name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></textarea>
         </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
