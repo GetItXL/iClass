@@ -14,7 +14,7 @@
       </small>
       <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
       <p class="list-group-item-text" ng-bind="course.name"></p>
-      <p class="list-group-item-text" ng-bind="course.passcode"></p>
+      <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="courses.$resolved && !courses.length">
