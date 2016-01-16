@@ -1,4 +1,4 @@
-<section>
+<section ng-controller="CoursesController">
   <div class="page-header">
     <h1> this is professor dashboard</h1>
   </div>
@@ -11,5 +11,18 @@
 	  <div class="col-lg-6">
 	  	   <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
 	  </div>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="course in enrolledCourses" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Created on
+        <span ng-bind="course.created | date:'mediumDate'"></span>
+        by Professor
+        <span ng-bind="course.student.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
+      <p class="list-group-item-text" ng-bind="course.name"></p>
+      <p class="list-group-item-text" ng-bind="course.student.displayName"></p>
+    </a>
   </div>
 </section>
