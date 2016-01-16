@@ -1,2 +1,0 @@
-{ "_id" : { "$oid" : "5699e016046a38e1126a8c04" }, "professor" : { "$oid" : "568c0a64f7598612373ec4de" }, "passcode" : "asdfg", "name" : "Fundamental of Computer Programming 2", "number" : "COP3502", "created" : { "$date" : "2016-01-16T01:15:50.059-0500" }, "__v" : 0 }
-{ "_id" : { "$oid" : "5699e1d7046a38e1126a8c05" }, "professor" : { "$oid" : "568c0a64f7598612373ec4de" }, "passcode" : "12345", "name" : "Object Oriented Programming", "number" : "COP4331", "created" : { "$date" : "2016-01-16T01:23:19.923-0500" }, "__v" : 0 }
