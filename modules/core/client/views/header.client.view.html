@@ -8,7 +8,7 @@
     </button>
     <a ui-sref="studentDashboard" class="navbar-brand" ng-if="isStudent()">iClass</a>
     <a ui-sref="home" class="navbar-brand" ng-if="isAdmin()">iClass</a>
-    <a ui-sref="home" class="navbar-brand" ng-if="isProf()">iClass</a>
+    <a ui-sref="professorDashboard" class="navbar-brand" ng-if="isProf()">iClass</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
