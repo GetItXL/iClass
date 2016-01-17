@@ -136,7 +136,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         }, function(errorResponse){
           $scope.error = errorResponse.data.message;
         });
-
       }else{
         console.log('already enrolled in this class');
 
@@ -163,6 +162,24 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       //console.log(this.coursesEnrolled);
       console.log($scope.enrolledCourses);
     };
+
+    //Returns the number of students enrolled in a class
+   // $scope.findNumStudents = function(courseID){
+    //  var allUsers = Users.query();
+
+      /*
+      var numStudentsEnrolled = 0;
+
+      for(var i = 0; i < allUsers.length; i++){
+        if(allUsers[i].enrolledCourses.indexOf(courseID) !== -1)
+          numStudentsEnrolled++;
+      }
+
+      $scope.numEnrolled = numStudentsEnrolled;
+
+      console.log($scope.numEnrolled);*/
+
+    //};
 
 
 

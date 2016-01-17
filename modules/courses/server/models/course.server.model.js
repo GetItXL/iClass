@@ -35,27 +35,11 @@ var CourseSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   }
-/*    ,date: { //course validation date , may need it later.
-    type: {
-        semester: {
-            type  String,
-            enum:[Spring, Summer, Fall],
-        },
-        year: {
-          type: Number
-        }
-    },
-    default: {
-      semester: 'Spring',
-      year: '2016'
-    },
-  }
+  /* may need later for efficiency in query
+  enrolledStudents: [{ //Holds a list of ids of enrolled students
+    type: String
+  }]
   */
-  /*, //Not sure if it's needed, may need it later for efficiency
-  enrolledStudents: [{
-    type: Schema.ObjectId,
-    ref: 'User'
-  }]*/ 
 
 });
 

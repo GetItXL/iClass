@@ -4,5 +4,5 @@
 ApplicationConfiguration.registerModule('core');
 ApplicationConfiguration.registerModule('core.admin', ['core']);
 ApplicationConfiguration.registerModule('core.admin.routes', ['ui.router']);
-// ApplicationConfiguration.registerModule('core.professor', ['core']);
-// ApplicationConfiguration.registerModule('core.professor.routes', ['ui.router']);
+ApplicationConfiguration.registerModule('core.professor', ['core']);
+ApplicationConfiguration.registerModule('core.professor.routes', ['ui.router']);
