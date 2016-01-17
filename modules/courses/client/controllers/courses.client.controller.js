@@ -186,6 +186,22 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
     };
 
+    // Check to see if a course has already been purchased.
+    $scope.isCourseEnrolled = function(enrolledCourseId) {
+        if (!Authentication.user) {
+            return false;
+        } else if (Authentication.user.roles.indexOf('professor') > -1 ||
+            Authentication.user.roles.indexOf('admin') > -1) {
+            return true;
+       } else {
+            for (var a = 0; a != Authentication.user.enrolledCourses.length; a++) {
+               if (Authentication.user.enrolledCourses[a].courseId == enrolledCourseId) {
+                  return true;
+               }
+            }
+            return false;
+        }
+    };
 
     //Returns the number of students enrolled in a class
    // $scope.findNumStudents = function(courseID){
