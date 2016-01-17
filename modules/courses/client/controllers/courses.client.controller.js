@@ -76,7 +76,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     // Find a list of Courses
     $scope.find = function () {
-
+        /* may need to change */
       //professor should only see courses that he/she created
       if($scope.isProf()){
         //console.log('current professor id ' + $scope.authentication.user._id);
@@ -162,6 +162,30 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       //console.log(this.coursesEnrolled);
       console.log($scope.enrolledCourses);
     };
+
+    // Find a list of Courses
+    $scope.createdCourseList= function () {
+
+      //professor should only see courses that he/she created
+      if($scope.isProf()){
+        //console.log('current professor id ' + $scope.authentication.user._id);
+        var professorCourses = [];
+
+        var courses = Courses.query({}, function(){
+          for(var i = 0; i < courses.length; i++){
+            //console.log(courses[i].professor._id);
+            if(courses[i].professor._id === $scope.authentication.user._id){
+              professorCourses.push(courses[i]);
+            }
+          }
+          $scope.courses = professorCourses;
+        });
+        
+      }else{
+        console.log('only professors are able to create course');
+      }
+    };
+
 
     //Returns the number of students enrolled in a class
    // $scope.findNumStudents = function(courseID){
