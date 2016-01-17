@@ -1,11 +1,11 @@
 <section ng-controller="CoursesController" ng-init="createdCourseList()">
   <div class="page-header">
-    <h1> this is professor dashboard</h1>
+    <h1> Professor dashboard</h1>
   </div>
   <div class="row">
-	  <div class="col-lg-6">
-	  	<p class="lead">
-        	My Class (active class)
+	  <div class="col-lg-6" >
+	  	<p class="lead text-center">
+        	My Course (active course)
       </p>
       <div class="list-group">
        <a ng-repeat="course in courses | filter:keyword" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
@@ -24,8 +24,14 @@
     </a>
       </div>
 	   </div>
-	  <div class="col-lg-6">
+	  <div class="col-lg-6 text-center" >
 	  	   <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
 	  </div>
+  </div>
+
+  <div class="row">
+    <p class="lead">
+         inactive course
+      </p>
   </div>
 </section>
