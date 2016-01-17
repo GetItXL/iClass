@@ -2,28 +2,37 @@
   <div class="page-header">
     <h1 ng-bind="course.number"></h1>
   </div>
-  <div class="pull-right" >
-    <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})" ng-show="!isStudent()">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="remove();" ng-show="isAdmin()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-    <!-- TODO: make passcode field required and display message to user if nothing entered -->
-    <input type="text" ng-model="passcode" class="form-control" placeholder="enter class passcode" ng-show="isStudent()" required>
-    <a class="btn btn-primary" ng-click="joinCourse(course._id);" ng-show="isStudent()">
-      <i class="glyphicon glyphicon-plus"></i>
-    </a>
+  <div class="row" >
+     <div class="col-md-8">
+        <small>
+          <em class="text-muted">
+            Created on
+            <span ng-bind="course.created | date:'mediumDate'"></span>
+            by Professor
+            <span ng-bind="course.professor.displayName"></span>
+          </em>
+        </small>
+        <p class="lead" ng-bind="course.name"></p>
+        <p class="lead" ng-bind="course.professor.displayName"></p>
+        <p class="lead" ng-bind="course.passcode" ng-show="!isStudent()"></p>
+      </div>
+    <div class="col-md-4">
+      <div class="col-md-6">
+         <input type="text" ng-model="passcode" class="form-control" placeholder="enter class passcode" ng-show="isStudent()" required>
+      </div>
+       <div class="col-md-6">
+        <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})" ng-show="!isStudent()">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" ng-click="remove();" ng-show="isAdmin()">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+        <!-- TODO: make passcode field required and display message to user if nothing entered -->
+        <a class="btn btn-primary" ng-click="joinCourse(course._id);" ng-show="isStudent()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+        </div>
+    </div>
   </div>
-  <small>
-    <em class="text-muted">
-      Created on
-      <span ng-bind="course.created | date:'mediumDate'"></span>
-      by Professor
-      <span ng-bind="course.professor.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="course.name"></p>
-  <p class="lead" ng-bind="course.professor.displayName"></p>
-  <p class="lead" ng-bind="course.passcode" ng-show="!isStudent()"></p>
+
 </section>
