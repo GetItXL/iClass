@@ -124,7 +124,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       console.log($scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
-        console.log("Wrong passcode");
+        console.log("Wrong passcode" + courseID);
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
         student.enrolledCourses.push(courseID);
 
@@ -188,19 +188,27 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     // Check to see if a course has already been purchased.
     $scope.isCourseEnrolled = function(enrolledCourseId) {
-        if (!Authentication.user) {
-            return false;
-        } else if (Authentication.user.roles.indexOf('professor') > -1 ||
-            Authentication.user.roles.indexOf('admin') > -1) {
-            return true;
-       } else {
-            for (var a = 0; a != Authentication.user.enrolledCourses.length; a++) {
-               if (Authentication.user.enrolledCourses[a].courseId == enrolledCourseId) {
-                  return true;
-               }
-            }
+ 
+         var user = $scope.authentication.user;
+        if(user.enrolledCourses.indexOf(enrolledCourseId) === -1){
+           console.log('course not enrollred! '+ enrolledCourseId);
             return false;
         }
+        else
+        {
+          console.log('course enrolled! '+ enrolledCourseId);
+          return true;
+        }
+            // for (var i = 0; i < user.enrolledCourses.length; i++) {
+            //     console.log('length is '+ i );
+            //     console.log(user.enrolledCourses[i]);
+            //    if (user.enrolledCourses[i].id == enrolledCourseId) {
+            //       console.log('course enrolled! '+ enrolledCourseId);
+            //       return true;
+            //    }
+            // }
+            // return false;
+        
     };
 
     //Returns the number of students enrolled in a class
