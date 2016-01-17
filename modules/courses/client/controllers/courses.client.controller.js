@@ -88,17 +88,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
     };
 
-    $scope.isAdmin = function(){
-      return ($scope.authentication.user.roles.indexOf('admin') > -1);
-    };
-
-    $scope.isProf = function(){
-      return ($scope.authentication.user.roles.indexOf('professor') > -1);
-    };
-
-    $scope.isStudent = function(){
-      return ($scope.authentication.user.roles.indexOf('user') > -1);
-    };
 
     $scope.joinCourse = function(courseID){
 
@@ -125,6 +114,22 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
         /* TODO: display message to user */
       }
+    };
+
+    /********  Move to dashboard CoursesController  **********/
+
+/*
+
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    };
+
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    };
+
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1);
     };
 
     $scope.findEnrolledCourses = function(){
@@ -173,8 +178,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         console.log('only professors are able to create course');
       }
     };
-
-    // Check to see if a course has already been purchased.
+*/
+    // Check to see if a course has already been enrolled.
 
     $scope.isCourseEnrolled = function(enrolledCourseId){
 
