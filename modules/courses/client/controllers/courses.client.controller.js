@@ -76,7 +76,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     // Find a list of Courses
     $scope.find = function () {
-        /* may need to change */
+
       //professor should only see courses that he/she created
       if($scope.isProf()){
         //console.log('current professor id ' + $scope.authentication.user._id);
@@ -124,7 +124,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       console.log($scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
-        console.log("Wrong passcode" + courseID);
+        console.log("Wrong passcode");
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
         student.enrolledCourses.push(courseID);
 
@@ -163,53 +163,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       console.log($scope.enrolledCourses);
     };
 
-    // Find a list of Courses
-    $scope.createdCourseList= function () {
-
-      //professor should only see courses that he/she created
-      if($scope.isProf()){
-        //console.log('current professor id ' + $scope.authentication.user._id);
-        var professorCourses = [];
-
-        var courses = Courses.query({}, function(){
-          for(var i = 0; i < courses.length; i++){
-            //console.log(courses[i].professor._id);
-            if(courses[i].professor._id === $scope.authentication.user._id){
-              professorCourses.push(courses[i]);
-            }
-          }
-          $scope.courses = professorCourses;
-        });
-        
-      }else{
-        console.log('only professors are able to create course');
-      }
-    };
-
-    // Check to see if a course has already been purchased.
-    $scope.isCourseEnrolled = function(enrolledCourseId) {
- 
-         var user = $scope.authentication.user;
-        if(user.enrolledCourses.indexOf(enrolledCourseId) === -1){
-           console.log('course not enrollred! '+ enrolledCourseId);
-            return false;
-        }
-        else
-        {
-          console.log('course enrolled! '+ enrolledCourseId);
-          return true;
-        }
-            // for (var i = 0; i < user.enrolledCourses.length; i++) {
-            //     console.log('length is '+ i );
-            //     console.log(user.enrolledCourses[i]);
-            //    if (user.enrolledCourses[i].id == enrolledCourseId) {
-            //       console.log('course enrolled! '+ enrolledCourseId);
-            //       return true;
-            //    }
-            // }
-            // return false;
-        
-    };
 
     //Returns the number of students enrolled in a class
    // $scope.findNumStudents = function(courseID){
