@@ -124,7 +124,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       console.log($scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
-        console.log("Wrong passcode");
+        console.log('Wrong passcode');
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
         student.enrolledCourses.push(courseID);
 
@@ -165,7 +165,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
 
 // Find a list of Courses
-    $scope.createdCourseList= function () {
+    $scope.createdCourseList = function(){
 
       //professor should only see courses that he/she created
       if($scope.isProf())
@@ -188,6 +188,26 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       {
         console.log('only professors are able to create course');
       }
+    };
+
+    // Check to see if a course has already been purchased.
+
+    $scope.isCourseEnrolled = function(enrolledCourseId){
+
+      //var student = new Users(Authentication.user);
+      var user = $scope.authentication.user;
+
+      if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
+      {
+        console.log('course not enrolled!');
+        return false;
+      }
+      else
+      {
+        console.log('course enrolled!');
+        return true;
+      }
+      
     };
 
 
