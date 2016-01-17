@@ -100,6 +100,9 @@ var UserSchema = new Schema({
   },
   enrolledCourses: [{ //Stores a list of course the student is enrolled in
     type: String
+  }],
+  createdCourses: [{
+    type: String
   }]
 });
 

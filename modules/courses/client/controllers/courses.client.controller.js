@@ -7,6 +7,31 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     $scope.authentication = Authentication;
 
+
+    //added course to professor's createdcourse list
+    $scope.addtoCreateCourseList = function(courseID){
+
+      var professor = new Users(Authentication.user);
+
+      if(!$scope.isStudent()){
+        professor.createdCourses.push(courseID);
+
+        professor.$update(function(res){
+          $scope.success = true;
+          Authentication.user = res;
+          console.log(Authentication.user + 'course add to the list');
+        }, function(errorRes){
+          $scope.error = errorRes.data.message;
+        });
+      }
+      else
+      {
+        console.log('student cannot create course!');
+      }
+
+    };
+
+
     // Create new Course
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -33,9 +58,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.name = '';
         $scope.number = '';
         $scope.passcode = '';
+
+        $scope.addtoCreateCourseList(response._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+      
     };
 
     // Remove existing Course
@@ -89,6 +117,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
 
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    };
+
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    };
+
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1);
+    };
+
+
     $scope.joinCourse = function(courseID){
 
       var student = new Users(Authentication.user);
@@ -115,6 +156,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         /* TODO: display message to user */
       }
     };
+
+
 
     /********  Move to dashboard CoursesController  **********/
 
@@ -199,6 +242,35 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       
     };
 
+    //check if this course is created by one user
+    $scope.isCourseCreated = function(createdCourseId){
+
+      var user = $scope.authentication.user;
+      if($scope.isProf())
+      {
+        //if(user.createdCourses.indexOf(createdCourseId) === -1)
+
+        for(var i = 0; i < user.createdCourses.length; i++)
+        {
+          console.log('length is ' + user.createdCourses.length);
+          console.log('i is ' + i);
+          if(user.createdCourses[i] === createdCourseId){
+            console.log(user.createdCourses[i]);
+            console.log(createdCourseId);
+            console.log('it is my course.');
+            return true;
+          }
+          
+        }
+        
+      }
+      else
+      {
+        console.log('I am not a professor');
+        return false;
+      }
+      
+    };
 
     //Returns the number of students enrolled in a class
    // $scope.findNumStudents = function(courseID){
