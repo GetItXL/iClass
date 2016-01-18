@@ -1,6 +1,10 @@
 <section ng-controller="CoursesController" ng-init="findOne()">
   <div class="page-header">
-    <h1 ng-bind="course.number"></h1>
+      <span style="font-size:3em" ng-bind="course.number"></span>
+      <span style="font-size:1.5em; font-style: italic;"> {{course.semester}} {{course.year}} </span>
+ 
+    </div>
+
   </div>
   <div class="row" >
      <div class="col-md-8">

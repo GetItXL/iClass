@@ -36,7 +36,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         }
         else if(selectedSemester === 'Fall' && thisMonth < '7') //Aug- December 7-11
         {
-          console.log(selectedSemester);
+          console.log(selectedSemester + ' is invaild');
           return false;
         }
         else
@@ -92,17 +92,42 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         return false;
       }
 
-      //console.log('this year is ' + this.year);
+      console.log('this year is ' + this.year);
       // check if date semester is vaild
-      // if($scope.isCorrectDate(this.semester,this.year)){
+      if($scope.isCorrectDate(this.semester,this.year)) {
+          // Create new Course object
+        var course = new Courses({
+          name: this.name,
+          number: this.number,
+          passcode: this.passcode,
+          year: this.year,
+          semester: this.semester,
+          endDate: this.endDate  //need to write a function to find it.
+        });
+        // Redirect after save
+        course.$save(function (response) {
+          $location.path('courses/' + response._id);
 
-      
+          // Clear form fields
+          $scope.name = '';
+          $scope.number = '';
+          $scope.passcode = '';
+          $scope.year = '';
+          $scope.semester = '';
+          $scope.endDate = '';
 
-      // }
-      // else
-      // {
-      //   return false;
-      // }
+          $scope.addtoCreateCourseList(response._id);
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
+        
+
+      }
+      else{
+        return false;
+      }
+    };
+      /*
         // Create new Course object
       var course = new Courses({
         name: this.name,
@@ -131,7 +156,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
       
     };
-
+*/
     // Remove existing Course
     $scope.remove = function (course) {
       if (course) {
