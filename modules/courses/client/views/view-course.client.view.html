@@ -18,9 +18,12 @@
         </small>
         <p class="lead" ng-bind="course.name"></p>
         <p class="lead" ng-bind="course.professor.displayName"></p>
+        end date:
+        <p class="lead" ng-bind="course.endDate"></p>
         <!-- only admin or professor who created the course be able to see passcode -->
         <p class="lead" ng-bind="course.passcode" ng-show="isAdmin()"></p>
         <p class="lead" ng-bind="course.passcode" ng-show="isCourseCreated(course._id)"></p>
+
       </div>
     <div class="col-md-4" text-center ng-show="isStudent()">
       <div class="col-md-6">

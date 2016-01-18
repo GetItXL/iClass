@@ -40,12 +40,12 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var course = req.course;
-
+  // semester and year can be pass today's date
   course.name = req.body.name;
   course.number = req.body.number;
   course.passcode = req.body.passcode;
   course.semester = req.body.semester;
-  course.year = req.body.year;
+  course.year = req.body.semester;
 
   course.save(function (err) {
     if (err) {
