@@ -35,11 +35,13 @@ var CourseSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   }
-  /* may need later for efficiency in query
+  /*
+  // may need later for efficiency in query
   enrolledStudents: [{ //Holds a list of ids of enrolled students
     type: String
-  }]
-  */
+  }]*/
+  //ref is very expensive so stores the key only
+
 
 });
 

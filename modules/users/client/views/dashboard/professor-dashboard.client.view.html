@@ -8,18 +8,18 @@
           My Course (active course)
       </p>
       <div class="list-group">
-         <a ng-repeat="course in courses | filter:keyword" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
+         <a ng-repeat="course in courses | filter:keyword" ng-init="findNumStudentEnrolled(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
         <small class="list-group-item-text">
           Created on
           <span ng-bind="course.created | date:'mediumDate'"></span>
-          by Professor 
+          by Professor
           <span ng-bind="course.professor.displayName"></span>
         </small>
         <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
         <p class="list-group-item-text" ng-bind="course.name"></p>
         <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
         Number of students:
-        <p class="list-group-item-text" ></p>
+        <p class="list-group-item-text" ng-bind="numStudentInCourse[course._id]"></p>
 
        </a>
       </div>

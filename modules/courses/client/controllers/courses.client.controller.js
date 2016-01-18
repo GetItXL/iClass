@@ -134,22 +134,25 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       var student = new Users(Authentication.user);
 
-      console.log($scope.passcode);
-      console.log($scope.course.passcode);
+
+      //console.log($scope.passcode);
+      //console.log($scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
         console.log('Wrong passcode');
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
+
+        //make changes to student save to database
         student.enrolledCourses.push(courseID);
 
         student.$update(function(res){
           $scope.success = true;
           Authentication.user = res;
-
           console.log(Authentication.user);
         }, function(errorResponse){
           $scope.error = errorResponse.data.message;
         });
+
       }else{
         console.log('already enrolled in this class');
 
@@ -231,12 +234,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
       {
-        console.log('course not enrolled!');
+        //console.log('course not enrolled!');
         return false;
       }
       else
       {
-        console.log('course enrolled!');
+        //console.log('course enrolled!');
         return true;
       }
       
@@ -252,12 +255,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
         for(var i = 0; i < user.createdCourses.length; i++)
         {
-          console.log('length is ' + user.createdCourses.length);
-          console.log('i is ' + i);
+          //console.log('length is ' + user.createdCourses.length);
+          //console.log('i is ' + i);
           if(user.createdCourses[i] === createdCourseId){
-            console.log(user.createdCourses[i]);
-            console.log(createdCourseId);
-            console.log('it is my course.');
+            //console.log(user.createdCourses[i]);
+            //console.log(createdCourseId);
+            //console.log('it is my course.');
             return true;
           }
           
@@ -266,7 +269,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
       else
       {
-        console.log('I am not a professor');
+        //console.log('I am not a professor');
         return false;
       }
       

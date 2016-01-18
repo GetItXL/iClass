@@ -4,7 +4,6 @@
 angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users',
   function ($scope, $stateParams, $location, Authentication, Courses, Users) {
 
-
     $scope.isAdmin = function(){
       return ($scope.authentication.user.roles.indexOf('admin') > -1);
     };
@@ -44,6 +43,49 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         console.log('only professors are able to create course');
       }
     };
+
+
+    //Get number of students enrolled in a class
+    //Using $scope.courses
+    $scope.findNumStudentEnrolled = function(){
+
+      var courseStudentPair = {};
+
+      //Initialize the array with 0s
+      for(var i = 0; i < $scope.courses.length; i++){
+        courseStudentPair[$scope.courses[i]._id] = 0;
+      }
+
+      //get all users from database
+      var allUsers = Users.query(function(res){
+
+        var validStudents = [];
+
+        //extract out those students who joined at least one class
+        for(var i = 0; i < allUsers.length; i++){
+
+          if(allUsers[i].enrolledCourses.length != 0)
+            validStudents.push(allUsers[i]);
+        }
+
+        //Get num of students enrolled in a class
+        for(var i = 0; i < validStudents.length; i++) {
+          for (var j = 0; j < $scope.courses.length; j++) {
+
+            if (validStudents[i].enrolledCourses.indexOf($scope.courses[j]._id) !== -1) {
+              courseStudentPair[$scope.courses[j]._id]++;
+              //console.log($scope.courses[j]._id, courseStudentPair[$scope.courses[j]._id]);
+            }
+          }
+        }
+
+        $scope.numStudentInCourse = courseStudentPair;
+       // var associativeArray = {"course._id" : numStudents};
+
+      });
+    };
+    /* TODO: more efficient way to do so other than adding enrolledStudents in course model? */
+    /* TODO: need more students to test this */
 
 
 /*******     student's dashboard function 	***********/
