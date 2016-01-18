@@ -64,15 +64,15 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         //extract out those students who joined at least one class
         for(var i = 0; i < allUsers.length; i++){
 
-          if(allUsers[i].enrolledCourses.length != 0)
+          if(allUsers[i].enrolledCourses.length !== 0)
             validStudents.push(allUsers[i]);
         }
 
         //Get num of students enrolled in a class
-        for(var i = 0; i < validStudents.length; i++) {
+        for(var k = 0; k < validStudents.length; k++) {
           for (var j = 0; j < $scope.courses.length; j++) {
 
-            if (validStudents[i].enrolledCourses.indexOf($scope.courses[j]._id) !== -1) {
+            if (validStudents[k].enrolledCourses.indexOf($scope.courses[j]._id) !== -1) {
               courseStudentPair[$scope.courses[j]._id]++;
               //console.log($scope.courses[j]._id, courseStudentPair[$scope.courses[j]._id]);
             }
