@@ -51,7 +51,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         // and redirect to the pdashboard page
         if($scope.authentication.user.roles.indexOf('admin') > -1)
-          $location.path('/admindashboard');
+          $location.path('/admindashboard/users');
         else if($scope.authentication.user.roles.indexOf('professor') > -1)
           $location.path('/professordashboard');
         else 
