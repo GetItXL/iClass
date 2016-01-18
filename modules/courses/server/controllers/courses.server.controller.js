@@ -44,6 +44,8 @@ exports.update = function (req, res) {
   course.name = req.body.name;
   course.number = req.body.number;
   course.passcode = req.body.passcode;
+  course.semester = req.body.semester;
+  course.year = req.body.year;
 
   course.save(function (err) {
     if (err) {

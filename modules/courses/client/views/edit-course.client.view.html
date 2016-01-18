@@ -1,6 +1,6 @@
 <section ng-controller="CoursesController" ng-init="findOne()">
   <div class="page-header">
-    <h1>Edit Course</h1>
+    <h1>Edit Course {{course.number}}</h1>
   </div>
   <div class="col-md-12">
     <form name="courseForm" class="form-horizontal" ng-submit="update(courseForm.$valid)" novalidate>
@@ -23,6 +23,19 @@
           <label for="passcode">Course Passcode</label>
           <textarea name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></textarea>
         </div>
+            <div class="form-group">
+                <label for="startdate">Semester & year</label>
+                <div class="row">
+                    <div class="col-md-6">
+            
+                    Choose a semester: <select ng-model="course.semester" id="semester" data-ng-options="act for act in semesters"></select>
+                
+                    </div>
+                    <div class="col-md-6">
+                              Choose a year: <select ng-model="course.year" id="year" data-ng-options="act for act in years"></select>
+                    </div>
+                </div>
+            </div>        
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>
