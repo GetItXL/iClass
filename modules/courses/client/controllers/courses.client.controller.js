@@ -19,10 +19,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       var thisYear = today.getFullYear(); 
       var thisMonth = today.getMonth(); //January is 0, February is 1, and so on.
       console.log(today);
-      console.log(thisYear);
-      console.log(thisMonth);
+      console.log(thisYear + 'select year is ' + selectedYear);
+      console.log(thisMonth + 'selected semester is ' + selectedSemester);
 
-      if(selectedYear >= thisYear)
+      if(selectedYear > thisYear)
+      {
+        return true;
+      }
+      else if(selectedYear < thisYear)
+      {
+        console.log(selectedYear + ' is invaild');
+        return false;
+      }
+      else
       {
         if(selectedSemester === 'Spring' && thisMonth >'4')   //Jan - March 0-4
         {
@@ -36,7 +45,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         }
         else if(selectedSemester === 'Fall' && thisMonth < '7') //Aug- December 7-11
         {
-          console.log(selectedSemester + ' is invaild');
+          console.log(selectedSemester + ' is invaild');    //need to add notification to user!!!
           return false;
         }
         else
@@ -45,16 +54,35 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           return true;
         }
       }
-      else
-      {
-        console.log(selectedYear + ' is invaild');
-        return false;
-      }
+      // else if(selectedYear > thisYear)
+      // { return true;}
+      // else
+      // {
+      //   console.log(selectedYear + ' is invaild');
+      //   return false;
+      // }
 
     };
 
-    $scope.endDate = function(selectedSemester,selectedYear){
-
+    $scope.findendDate = function(selectedSemester,selectedYear){
+      var today = new Date();
+      today.setFullYear(selectedYear);
+      console.log('today is change to ' + today);
+      if(selectedSemester === 'Spring') 
+      {
+        today.setMonth(4,30);
+        return today;
+      } 
+      else if (selectedSemester === 'Summer') 
+      {
+        today.setMonth(7,10);
+        return today;
+      }
+      else
+      {
+        today.setMonth(11,30);
+        return today;
+      }
 
     };
 
@@ -102,7 +130,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           passcode: this.passcode,
           year: this.year,
           semester: this.semester,
-          endDate: this.endDate  //need to write a function to find it.
+          endDate: $scope.findendDate(this.semester,this.year)  //need to write a function to find it.
         });
         // Redirect after save
         course.$save(function (response) {
@@ -247,71 +275,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
     };
 
-
-
-    /********  Move to dashboard CoursesController  **********/
-
-/*
-
-    $scope.isAdmin = function(){
-      return ($scope.authentication.user.roles.indexOf('admin') > -1);
-    };
-
-    $scope.isProf = function(){
-      return ($scope.authentication.user.roles.indexOf('professor') > -1);
-    };
-
-    $scope.isStudent = function(){
-      return ($scope.authentication.user.roles.indexOf('user') > -1);
-    };
-
-    $scope.findEnrolledCourses = function(){
-
-      var user = $scope.authentication.user;
-      var coursesEnrolled = [];
-
-      for(var i = 0; i < user.enrolledCourses.length; i++){
-        console.log(user.enrolledCourses[i]);
-
-        coursesEnrolled.push(Courses.get({
-          courseId: user.enrolledCourses[i]
-        }));
-
-      }
-
-      $scope.enrolledCourses = coursesEnrolled;
-
-      //console.log(this.coursesEnrolled);
-      console.log($scope.enrolledCourses);
-    };
-
-
-// Find a list of Courses
-    $scope.createdCourseList = function(){
-
-      //professor should only see courses that he/she created
-      if($scope.isProf())
-      {
-        //console.log('current professor id ' + $scope.authentication.user._id);
-        var professorCourses = [];
-
-        var courses = Courses.query({}, function(){
-          for(var i = 0; i < courses.length; i++){
-            //console.log(courses[i].professor._id);
-            if(courses[i].professor._id === $scope.authentication.user._id){
-              professorCourses.push(courses[i]);
-            }
-          }
-          $scope.courses = professorCourses;
-        });
-        
-      }
-      else
-      {
-        console.log('only professors are able to create course');
-      }
-    };
-*/
     // Check to see if a course has already been enrolled.
 
     $scope.isCourseEnrolled = function(enrolledCourseId){
