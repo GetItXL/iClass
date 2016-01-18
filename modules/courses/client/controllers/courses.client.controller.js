@@ -7,6 +7,56 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     $scope.authentication = Authentication;
 
+  /****************    setting for start and end course date  ***************/
+
+    $scope.semesters = ['Spring','Summer','Fall'];
+    $scope.years = ['2015','2016','2017','2018'];
+   // $scope.selectedItem = $scope.semesters[0];
+
+    $scope.isCorrectDate = function(selectedSemester,selectedYear)
+    {
+      var today = new Date(); 
+      var thisYear = today.getFullYear(); 
+      var thisMonth = today.getMonth(); //January is 0, February is 1, and so on.
+      console.log(today);
+      console.log(thisYear);
+      console.log(thisMonth);
+
+      if(selectedYear >= thisYear)
+      {
+        if(selectedSemester === 'Spring' && thisMonth >'4')   //Jan - March 0-4
+        {
+          console.log(selectedSemester);
+          return false;
+        }
+        else if(selectedSemester === 'Summer' && thisMonth > '7') //March - Aug 4-7
+        {
+          console.log(selectedSemester);
+          return false;
+        }
+        else if(selectedSemester === 'Fall' && thisMonth < '7') //Aug- December 7-11
+        {
+          console.log(selectedSemester);
+          return false;
+        }
+        else
+        {
+          console.log(selectedSemester + ' true');
+          return true;
+        }
+      }
+      else
+      {
+        console.log(selectedYear + ' is invaild');
+        return false;
+      }
+
+    };
+
+    $scope.endDate = function(selectedSemester,selectedYear){
+
+
+    };
 
     //added course to professor's createdcourse list
     $scope.addtoCreateCourseList = function(courseID){
@@ -42,13 +92,26 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         return false;
       }
 
-      // Create new Course object
+      //console.log('this year is ' + this.year);
+      // check if date semester is vaild
+      // if($scope.isCorrectDate(this.semester,this.year)){
+
+      
+
+      // }
+      // else
+      // {
+      //   return false;
+      // }
+        // Create new Course object
       var course = new Courses({
         name: this.name,
         number: this.number,
         passcode: this.passcode
+       //   year: this.year;
+       //   semester: this.semester;
+         // endDate: this.endDate;  //need to write a function to find it.
       });
-
       // Redirect after save
       course.$save(function (response) {
         $location.path('courses/' + response._id);
@@ -58,6 +121,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.name = '';
         $scope.number = '';
         $scope.passcode = '';
+      //  $scope.year = '';
+      //  $scope.semester = '';
+      //  $scope.endDate = '';
 
         $scope.addtoCreateCourseList(response._id);
       }, function (errorResponse) {
@@ -104,7 +170,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     // Find a list of Courses
     $scope.find = function () {
-
       $scope.courses = Courses.query();
 
     };
@@ -134,25 +199,22 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       var student = new Users(Authentication.user);
 
-
-      //console.log($scope.passcode);
-      //console.log($scope.course.passcode);
+      console.log($scope.passcode);
+      console.log($scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
         console.log('Wrong passcode');
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
-
-        //make changes to student save to database
         student.enrolledCourses.push(courseID);
 
         student.$update(function(res){
           $scope.success = true;
           Authentication.user = res;
+
           console.log(Authentication.user);
         }, function(errorResponse){
           $scope.error = errorResponse.data.message;
         });
-
       }else{
         console.log('already enrolled in this class');
 
@@ -234,12 +296,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
       {
-        //console.log('course not enrolled!');
+        console.log('course not enrolled!');
         return false;
       }
       else
       {
-        //console.log('course enrolled!');
+        console.log('course enrolled!');
         return true;
       }
       
@@ -255,12 +317,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
         for(var i = 0; i < user.createdCourses.length; i++)
         {
-          //console.log('length is ' + user.createdCourses.length);
-          //console.log('i is ' + i);
+          console.log('length is ' + user.createdCourses.length);
+          console.log('i is ' + i);
           if(user.createdCourses[i] === createdCourseId){
-            //console.log(user.createdCourses[i]);
-            //console.log(createdCourseId);
-            //console.log('it is my course.');
+            console.log(user.createdCourses[i]);
+            console.log(createdCourseId);
+            console.log('it is my course.');
             return true;
           }
           
@@ -269,11 +331,14 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
       else
       {
-        //console.log('I am not a professor');
+        console.log('I am not a professor');
         return false;
       }
       
     };
+
+  
+
 
     //Returns the number of students enrolled in a class
    // $scope.findNumStudents = function(courseID){

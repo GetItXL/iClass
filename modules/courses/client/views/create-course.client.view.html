@@ -1,35 +1,67 @@
 <section ng-controller="CoursesController">
-  <div class="page-header">
-    <h1>New Course</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="courseForm" class="form-horizontal" ng-submit="create(courseForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="number">Course Number</label>
-          <input name="number" type="text" ng-model="number" id="number" class="form-control" placeholder="e.g. COP4331" required>
-          <div ng-messages="courseForm.number.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Course number is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="name">Course Name</label>
-          <input name="name" type="text" ng-model="name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
-          <div ng-messages="courseForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Course name is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="passcode">Course Passcode</label>
-          <input name="passcode" ng-model="passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
-        </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+    <div class="page-header">
+        <h1>New Course</h1>
+    </div>
+    <div class="col-md-12">
+        <form name="courseForm" class="form-horizontal" ng-submit="create(courseForm.$valid)" novalidate>
+            <fieldset>
+            <div class="form-group" show-errors>
+                <label for="number">Course Number</label>
+                <input name="number" type="text" ng-model="number" id="number" class="form-control" placeholder="e.g. COP4331" required>
+                <div ng-messages="courseForm.number.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Course number is required.</p>
+                </div>
+            </div>
+            <div class="form-group" show-errors>
+                <label for="name">Course Name</label>
+                <input name="name" type="text" ng-model="name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
+                <div ng-messages="courseForm.name.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Course name is required.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passcode">Course Passcode</label>
+                <input name="passcode" ng-model="passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
+            </div>
+            <div class="form-group">
+                <label for="startdate">Semester & year</label>
+                <div class="row">
+                    <div class="col-md-6">
+                    
+        <!--           <div class="startdate">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="semestermenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      {{selectedItem}}
+                    <span class="caret"></span>
+                   </button>
+                <select 
+                        data-ng-options="a in semesters">                
+                </select>
+                    <ul class="dropdown-menu" aria-labelledby="semestermenu">
+                     
+                      <li data-ng-repeat="a in semesters"><a ng-click="selectedStartSemester(a)">{{a}}</a></li>
+                    </ul>
+
+                </div> -->
+                    Choose a semester: <select ng-model="semester" data-ng-options="act for act in semesters"></select>
+                <!-- {{years[0]}} is currently -->
+                    </div>
+                    <div class="col-md-6">
+                              Choose a year: <select ng-model="year"
+                                      data-ng-options="act for act in years"></select>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-default">
+            </div>
+            <div ng-show="error" class="text-danger">
+              <strong ng-bind="error"></strong>
+            </div>
+            </fieldset>
+        </form>
+    </div>
 </section>

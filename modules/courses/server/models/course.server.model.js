@@ -31,6 +31,18 @@ var CourseSchema = new Schema({
     default: '0000',
     //Doesn't need to be required..
   },
+  semester: {
+    type: String,
+    default: 'Spring',
+  },
+  year:{
+    type: Number,
+    default: '2016',
+  },
+  endDate: {
+    type: Date,
+    default: Date.now,
+  },
   professor: { //Professor who created the course
     type: Schema.ObjectId,
     ref: 'User'
