@@ -1,33 +1,36 @@
-<section ng-controller="CoursesController" ng-init="find()"> 
-  <div class="page-header">
-    <h1>All Courses</h1>
-  </div>
-  <div class="list-group">
-    <input type="text" ng-model="keyword" placeholder="search a course" />
-    <label>Search Course</label>
-    <a ng-repeat="course in courses | filter:keyword" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
-      <small class="list-group-item-text">
-        Created on
-        <span ng-bind="course.created | date:'mediumDate'"></span>
-        by Professor 
-        <span ng-bind="course.professor.displayName"></span>
-      </small>
-      <div class="row">
-        <div class="col-md-6">
-          <h4 ng-bind="course.number"></h4>
+<section ng-controller="CoursesListController" > 
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-4">
+            <h1>Course list</h1>
+            </div>
+            <div class="col-md-4" style="margin-top: 2em">
+               <!--  <input class="form-control col-md-4" type="text" ng-model="keyword" placeholder="search a course" ng-change="figureOutItemsToDisplay()" /> -->
+               <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+               <!--  <label>Search Course</label> -->
+                </input>
+            </div>
+            <div class="col-md-4 pull-right nav nav-pills" role="group" style="margin-top: 2em">
+                <button type="button" class="btn btn-default">All Courses</button>
+                <button type="button" class="btn btn-default">Active Courses</button>
+                <button type="button" class="btn btn-default">in-active Courses</button>
+            </div>
         </div>
-        <div class="col-md-6">
-        <h5>{{course.semester}} {{course.year}}</h5>
-        </div>
-      </div>
-      <p class="list-group-item-text" ng-bind="course.name"></p>
-      <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
-      Number of students:
-      <p class="list-group-item-text" ></p>
+    </div>
 
-    </a>
-  </div>
-<!--   <div class="alert alert-warning text-center" ng-if="courses.$resolved && !courses.length">
-    No courses yet, why don't you <a ui-sref="courses.create">create one</a>?
-  </div> -->
+    <div class="list-group">
+        <a ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 ng-bind="course.number"></h4>
+                </div>
+                <div class="col-md-6">
+                    <h5>{{course.semester}} {{course.year}}</h5>
+                </div>
+            </div>
+            <p class="list-group-item-text" ng-bind="course.name"></p>
+            <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+        </a>
+    </div>
+  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 </section>
