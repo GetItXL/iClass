@@ -231,12 +231,27 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
 
     function updateDatabaseAfterRemoveCourse(user){
+
+      console.log("updating user: " + user.displayName);
+
       //update user model in database
       user.$update(function(res){
         $scope.success = true;
-        Authentication.user = res;
 
-        console.log(Authentication.user);
+
+        /*
+        if(res.roles.indexOf('admin') > -1){
+          //Authentication.user = res;
+          //console.log("Admin update I am: " + Authentication.user.displayName);
+        }*/
+
+        /* This works.. but
+            issue: after remove a course created by admin, the courseCreated list will not be updated
+                    may cause problem later if referenced.
+
+         */
+        
+        console.log("I am now: " + Authentication.user.displayName);
       }, function(errorResponse){
         $scope.error = errorResponse.data.message;
       });
