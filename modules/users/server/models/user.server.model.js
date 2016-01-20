@@ -101,7 +101,7 @@ var UserSchema = new Schema({
   enrolledCourses: [{ //Stores a list of course the student is enrolled in
     type: String
   }],
-  createdCourses: [{
+  createdCourses: [{ /* TODO: may not need this, to get a list of createdCourses, just query all course list and check if creator's id = professor id */
     type: String
   }]
 });

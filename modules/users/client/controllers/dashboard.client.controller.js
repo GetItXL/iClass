@@ -97,7 +97,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       var coursesEnrolled = [];
 
       for(var i = 0; i < user.enrolledCourses.length; i++){
-        console.log(user.enrolledCourses[i]);
+        console.log('enrolled course' + i + ': ' + user.enrolledCourses[i]);
 
         coursesEnrolled.push(Courses.get({
           courseId: user.enrolledCourses[i]

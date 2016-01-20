@@ -145,6 +145,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           $scope.endDate = '';
 
           $scope.addtoCreateCourseList(response._id);
+          console.log("User's created course: " + $scope.authentication.user.createdCourses);
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
         });
@@ -187,7 +188,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 */
     // Remove existing Course
     $scope.remove = function (course) {
+
       if (course) {
+        removeEnrolledCourseFromStudent(course._id);
         course.$remove();
 
         for (var i in $scope.courses) {
@@ -196,11 +199,106 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           }
         }
       } else {
+        removeEnrolledCourseFromStudent($scope.course._id);
         $scope.course.$remove(function () {
-          $location.path('courses');
+          $location.path('courses'); //this redirects us back to the list course page
         });
       }
     };
+
+
+    function removeEnrolledCourseFromStudent(courseID){
+
+      var allUsers = Users.query(function(res){
+
+        for(var i = 0; i < allUsers.length; i++){
+
+          //Check if there is anything to be removed
+          if(allUsers[i].createdCourses.indexOf(courseID) !== -1) {//If courseID exists, remove it. admin/prof
+            allUsers[i].createdCourses.splice(allUsers[i].createdCourses.indexOf(courseID), 1);
+            updateDatabaseAfterRemoveCourse(allUsers[i]);
+          }
+          else if (allUsers[i].enrolledCourses.indexOf(courseID) !== -1){ //student
+            allUsers[i].enrolledCourses.splice(allUsers[i].enrolledCourses.indexOf(courseID), 1);
+            updateDatabaseAfterRemoveCourse(allUsers[i]);
+          }
+
+        }
+
+      }); //end querying users
+
+    }
+
+
+    function updateDatabaseAfterRemoveCourse(user){
+      //update user model in database
+      user.$update(function(res){
+        $scope.success = true;
+        Authentication.user = res;
+
+        console.log(Authentication.user);
+      }, function(errorResponse){
+        $scope.error = errorResponse.data.message;
+      });
+    }
+
+
+
+
+
+    //function removeEnrolledCourseFromStudent(courseID){
+
+      /* Get a list of all the users, remove the courseID from both
+        createdCourses and enrolledCourses lists
+       */
+
+
+
+
+      /*
+      var allUsers = Users.query(function(res){
+
+        var updatedUserModel;
+
+        for(var i = 0; i < allUsers.length; i++){
+          updatedUserModel = false;
+
+          //Check if there is anything to be removed
+          if(allUsers[i].createdCourses.indexOf(courseID) !== -1) {//If courseID exists, remove it. admin/prof
+            allUsers[i].createdCourses.splice(allUsers[i].createdCourses.indexOf(courseID), 1);
+            updatedUserModel = true;
+          }
+          else if (allUsers[i].enrolledCourses.indexOf(courseID) !== -1){ //student
+            allUsers[i].enrolledCourses.splice(allUsers[i].enrolledCourses.indexOf(courseID), 1);
+            updatedUserModel = true;
+          }
+
+
+          //update user model in database
+          if(updatedUserModel){
+            allUsers[i].$update(function(res){
+              $scope.success = true;
+              Authentication.user = res;
+
+              console.log(Authentication.user);
+            }, function(errorResponse){
+              $scope.error = errorResponse.data.message;
+            });
+          }
+
+        }
+
+      }); *///end querying all users
+
+    //}
+
+
+
+
+
+
+
+
 
     // Update existing Course
     $scope.update = function (isValid) {
@@ -224,7 +322,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     // Find a list of Courses
     $scope.find = function () {
       $scope.courses = Courses.query();
-
     };
 
     // Find existing Course
@@ -235,6 +332,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
 
+    /*********************** Check current user role ********************/
     $scope.isAdmin = function(){
       return ($scope.authentication.user.roles.indexOf('admin') > -1);
     };
@@ -246,6 +344,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     $scope.isStudent = function(){
       return ($scope.authentication.user.roles.indexOf('user') > -1);
     };
+    /*******************************************************************/
 
 
     $scope.joinCourse = function(courseID){
@@ -276,7 +375,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
     // Check to see if a course has already been enrolled.
-
     $scope.isCourseEnrolled = function(enrolledCourseId){
 
       //var student = new Users(Authentication.user);
@@ -298,7 +396,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     //check if this course is created by one user
     $scope.isCourseCreated = function(createdCourseId){
 
+      console.log("User's created course: " + $scope.authentication.user.createdCourses);
       var user = $scope.authentication.user;
+
       if($scope.isProf())
       {
         //if(user.createdCourses.indexOf(createdCourseId) === -1)
@@ -324,33 +424,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
       
     };
-
-  
-
-
-    //Returns the number of students enrolled in a class
-   // $scope.findNumStudents = function(courseID){
-    //  var allUsers = Users.query();
-
-    //Returns the number of students enrolled in a class
-   // $scope.findNumStudents = function(courseID){
-    //  var allUsers = Users.query();
-
-      /*
-      var numStudentsEnrolled = 0;
-
-      for(var i = 0; i < allUsers.length; i++){
-        if(allUsers[i].enrolledCourses.indexOf(courseID) !== -1)
-          numStudentsEnrolled++;
-      }
-
-      $scope.numEnrolled = numStudentsEnrolled;
-
-      console.log($scope.numEnrolled);*/
-
-    //};
-
-
 
     /* TODO: delete enrolled course from user if the course if removed by admin from database */
 
