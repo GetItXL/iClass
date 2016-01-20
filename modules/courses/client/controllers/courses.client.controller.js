@@ -145,7 +145,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           $scope.endDate = '';
 
           $scope.addtoCreateCourseList(response._id);
-          console.log("User's created course: " + $scope.authentication.user.createdCourses);
+          console.log('Users created course:' + $scope.authentication.user.createdCourses);
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
         });
@@ -232,7 +232,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     function updateDatabaseAfterRemoveCourse(user){
 
-      console.log("updating user: " + user.displayName);
+      //console.log('updating user: ' + user.displayName);
 
       //update user model in database
       user.$update(function(res){
@@ -356,7 +356,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     //check if this course is created by one user
     $scope.isCourseCreated = function(createdCourseId){
 
-      console.log("User's created course: " + $scope.authentication.user.createdCourses);
+      console.log('Users created course: ' + $scope.authentication.user.createdCourses);
       var user = $scope.authentication.user;
 
       if($scope.isProf())
