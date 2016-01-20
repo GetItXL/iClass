@@ -238,81 +238,24 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       user.$update(function(res){
         $scope.success = true;
 
-
         /*
         if(res.roles.indexOf('admin') > -1){
-          //Authentication.user = res;
-          //console.log("Admin update I am: " + Authentication.user.displayName);
+          Authentication.user = res; //what caused the bug
+          console.log("Admin update I am: " + Authentication.user.displayName);
         }*/
 
         /* This works.. but
             issue: after remove a course created by admin, the courseCreated list will not be updated
                     may cause problem later if referenced.
+                    Can be solved by removing the createdCourses field in user model but may not need to
 
          */
-        
-        console.log("I am now: " + Authentication.user.displayName);
+
+        //console.log("I am now: " + Authentication.user.displayName);
       }, function(errorResponse){
         $scope.error = errorResponse.data.message;
       });
     }
-
-
-
-
-
-    //function removeEnrolledCourseFromStudent(courseID){
-
-      /* Get a list of all the users, remove the courseID from both
-        createdCourses and enrolledCourses lists
-       */
-
-
-
-
-      /*
-      var allUsers = Users.query(function(res){
-
-        var updatedUserModel;
-
-        for(var i = 0; i < allUsers.length; i++){
-          updatedUserModel = false;
-
-          //Check if there is anything to be removed
-          if(allUsers[i].createdCourses.indexOf(courseID) !== -1) {//If courseID exists, remove it. admin/prof
-            allUsers[i].createdCourses.splice(allUsers[i].createdCourses.indexOf(courseID), 1);
-            updatedUserModel = true;
-          }
-          else if (allUsers[i].enrolledCourses.indexOf(courseID) !== -1){ //student
-            allUsers[i].enrolledCourses.splice(allUsers[i].enrolledCourses.indexOf(courseID), 1);
-            updatedUserModel = true;
-          }
-
-
-          //update user model in database
-          if(updatedUserModel){
-            allUsers[i].$update(function(res){
-              $scope.success = true;
-              Authentication.user = res;
-
-              console.log(Authentication.user);
-            }, function(errorResponse){
-              $scope.error = errorResponse.data.message;
-            });
-          }
-
-        }
-
-      }); *///end querying all users
-
-    //}
-
-
-
-
-
-
-
 
 
     // Update existing Course
@@ -405,7 +348,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         console.log('course enrolled!');
         return true;
       }
-      
     };
 
     //check if this course is created by one user
