@@ -320,6 +320,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         student.$update(function(res){
           $scope.success = true;
           Authentication.user = res;
+          //$scope.authentication = Authenticaton; ?
+
+          $location.path('studentdashboard');
 
           console.log(Authentication.user);
         }, function(errorResponse){
