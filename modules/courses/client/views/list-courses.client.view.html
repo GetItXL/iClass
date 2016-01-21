@@ -5,20 +5,58 @@
             <h1>Course list</h1>
             </div>
             <div class="col-md-4" style="margin-top: 2em">
-               <!--  <input class="form-control col-md-4" type="text" ng-model="keyword" placeholder="search a course" ng-change="figureOutItemsToDisplay()" /> -->
                <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-               <!--  <label>Search Course</label> -->
                 </input>
             </div>
-            <div class="col-md-4 pull-right nav nav-pills" role="group" style="margin-top: 2em">
+<!--             <div class="col-md-4 pull-right nav nav-pills" role="group" style="margin-top: 2em">
                 <button type="button" class="btn btn-default">All Courses</button>
                 <button type="button" class="btn btn-default">Active Courses</button>
                 <button type="button" class="btn btn-default">in-active Courses</button>
-            </div>
+            </div> -->
         </div>
     </div>
-
-    <div class="list-group">
+            <div class="panel panel-default" data-ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})">
+                <div class="panel-body">
+                    <div class="media-left media-middle">
+                        <a ng-click="modalView('md', course)">
+                            <img class="media-object custom-media" style="height:64px;">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="course-heading"> 
+                            <div class="col-sm-6">
+                                <h4 ng-bind="course.number"></h4>
+                            </div>
+                         
+                            <div class="col-sm-6" >
+                                <h4>{{course.semester}} {{course.year}}</h4>                       
+                            </div>
+                            <div class="col-md-12" >                        
+                                <a ng-click="modalView('md', course)">
+                                    <h3 ng-bind="course.name"></h3>
+                                </a>
+                                <div class="btn-group pull-right" >                  
+                                <button id = "edit" class="btn btn-default btn-sm" ng-controller="CoursesController" ng-show="isCourseCreated(course._id) || isAdmin()" type="submit" data-ng-click="modalUpdate('lg', course)" > Edit </button>
+                                <button id = "delete" class="btn btn-default btn-sm" ng-controller="CoursesController" ng-show="isAdmin()"  type="submit" data-ng-click="modalRemove('sm', course)"> Delete </button>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                    <div class="panel-footer clearfix">
+                        <div class="col-sm-10">
+                            <h4 class="truncate" style="padding-bottom: 2px">
+                                Professor: {{course.professor.displayName}}
+                            </h4>
+                        </div>
+                        <div class="col-sm-2" style="padding-top: 3px; padding-right: 0px; padding-left: 0px" >
+                            <button id="purchase" type="button" class="btn btn-block btn-success pull-right" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalPurchase('sm', course)"> Join Course </button>
+                        </div>
+                    </div> 
+                
+            </div>    
+    <!-- <div class="list-group">
         <a ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
             <div class="row">
                 <div class="col-md-6">
@@ -31,6 +69,6 @@
             <p class="list-group-item-text" ng-bind="course.name"></p>
             <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
         </a>
-    </div>
+    </div> -->
   <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 </section>

@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesListController', ['$scope', '$filter', 'Courses', 
-  function ($scope, $filter, Courses) {
+angular.module('courses').controller('CoursesListController', ['$scope', '$filter', 'Courses', '$modal', '$log',
+  function ($scope, $filter, Courses, $modal, $log) {
     Courses.query(function (data) {
       $scope.courses = data;
       $scope.buildPager();
@@ -29,7 +29,57 @@ angular.module('courses').controller('CoursesListController', ['$scope', '$filte
       $scope.figureOutItemsToDisplay();
     };
 
-    /* TODO: delete enrolled course from user if the course if removed by admin from database */
+    
+    // Open a modal window to View a single course record
+        $scope.modalView = function(size, selectedCourse) {
+
+            var modalFlag = true;
+
+            if (Authentication.user) {
+                if (Authentication.user.roles.indexOf('instructor') > -1 ||
+                    Authentication.user.roles.indexOf('admin') > -1) {
+                    modalFlag = false;
+                    $location.path('course/' + selectedCourse._id);
+                } else {
+                    for (var i = 0; i < Authentication.user.coursesPurchased.length; i++) {
+                        if (Authentication.user.coursesPurchased[i].courseId == selectedCourse._id) {
+                            modalFlag = false;
+                            $location.path('course/' + selectedCourse._id);
+                        }
+                    }
+                }
+            }
+            if (modalFlag) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'modules/courses/client/views/view-course.client.view.html',
+                    controller: ModalViewCtrl,
+                    size: size,
+                    resolve: {
+                        course: function() {
+                            return selectedCourse;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function(selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function() {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            }
+        };
+
+        var ModalViewCtrl = function($scope, $modalInstance, course) {
+            $scope.course = course;
+
+            $scope.ok = function() {
+                $modalInstance.close($scope.course);
+            };
+
+            $scope.cancel = function() {
+                $modalInstance.dismiss('cancel');
+            };
+        };
 
   }
 ]);

@@ -54,14 +54,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           return true;
         }
       }
-      // else if(selectedYear > thisYear)
-      // { return true;}
-      // else
-      // {
-      //   console.log(selectedYear + ' is invaild');
-      //   return false;
-      // }
-
     };
 
     $scope.findendDate = function(selectedSemester,selectedYear){
@@ -83,7 +75,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         today.setMonth(11,30);
         return today;
       }
-
     };
 
     //added course to professor's createdcourse list
@@ -156,36 +147,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         return false;
       }
     };
-      /*
-        // Create new Course object
-      var course = new Courses({
-        name: this.name,
-        number: this.number,
-        passcode: this.passcode
-       //   year: this.year;
-       //   semester: this.semester;
-         // endDate: this.endDate;  //need to write a function to find it.
-      });
-      // Redirect after save
-      course.$save(function (response) {
-        $location.path('courses/' + response._id);
-        //console.log(course.professor);
 
-        // Clear form fields
-        $scope.name = '';
-        $scope.number = '';
-        $scope.passcode = '';
-      //  $scope.year = '';
-      //  $scope.semester = '';
-      //  $scope.endDate = '';
-
-        $scope.addtoCreateCourseList(response._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-      
-    };
-*/
     // Remove existing Course
     $scope.remove = function (course) {
 
@@ -362,7 +324,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       if($scope.isProf())
       {
         //if(user.createdCourses.indexOf(createdCourseId) === -1)
-
         for(var i = 0; i < user.createdCourses.length; i++)
         {
           console.log('length is ' + user.createdCourses.length);
@@ -372,20 +333,23 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             console.log(createdCourseId);
             console.log('it is my course.');
             return true;
-          }
-          
+          } 
         }
-        
       }
       else
       {
         console.log('I am not a professor');
         return false;
       }
-      
     };
 
     /* TODO: delete enrolled course from user if the course if removed by admin from database */
+
+/******************  active course list and in active course list functions ***********************/
+
+
+
+
 
   }
 ]);
