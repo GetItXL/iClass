@@ -25,10 +25,13 @@ var QuizSchema = new Schema({
     default: '',
     trim: true
   },
-  user: {
+  user: { //The professor who created the quiz
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
+  courseID: {
+    type: String
+  } /* May need to modify later */
 });
 
 mongoose.model('Quiz', QuizSchema);
