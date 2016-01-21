@@ -12,24 +12,30 @@ angular.module('quizzes').config(['$stateProvider',
       })
       .state('quizzes.list', {
         url: '',
-        templateUrl: 'modules/quizzes/client/views/list-quizzes.client.view.html'
+        templateUrl: 'modules/quizzes/client/views/list-quizzes.client.view.html',
+        data: {
+          roles: ['professor', 'admin','user']
+        }
       })
       .state('quizzes.create', {
         url: '/create',
         templateUrl: 'modules/quizzes/client/views/create-quiz.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['professor', 'admin']
         }
       })
       .state('quizzes.view', {
         url: '/:quizId',
-        templateUrl: 'modules/quizzes/client/views/view-quiz.client.view.html'
+        templateUrl: 'modules/quizzes/client/views/view-quiz.client.view.html',
+        data: {
+          roles: ['professor', 'admin','user']
+        }
       })
       .state('quizzes.edit', {
         url: '/:quizId/edit',
         templateUrl: 'modules/quizzes/client/views/edit-quiz.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['professor', 'admin']
         }
       });
   }
