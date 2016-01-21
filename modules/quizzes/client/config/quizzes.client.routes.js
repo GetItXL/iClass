@@ -14,7 +14,7 @@ angular.module('quizzes').config(['$stateProvider',
         url: '',
         templateUrl: 'modules/quizzes/client/views/list-quizzes.client.view.html',
         data: {
-          roles: ['professor', 'admin','user']
+          roles: ['user', 'professor', 'admin']
         }
       })
       .state('quizzes.create', {
@@ -28,7 +28,7 @@ angular.module('quizzes').config(['$stateProvider',
         url: '/:quizId',
         templateUrl: 'modules/quizzes/client/views/view-quiz.client.view.html',
         data: {
-          roles: ['professor', 'admin','user']
+          roles: ['professor', 'admin', 'user']
         }
       })
       .state('quizzes.edit', {
