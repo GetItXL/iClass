@@ -36,8 +36,8 @@
                                     <h2 ng-bind="course.name"></h2>
                               
                                 <div class="btn-group pull-right" >                  
-                                <button id = "edit" class="btn btn-default btn-sm" ng-controller="CoursesController" ng-show="isCourseCreated(course._id) || isAdmin()" type="submit" data-ng-click="modalUpdate('lg', course)" > Edit </button>
-                                <button id = "delete" class="btn btn-default btn-sm" ng-controller="CoursesController" ng-show="isAdmin()"  type="submit" data-ng-click="modalRemove('sm', course)"> Delete </button>
+                             <!--    <button id = "edit" class="btn btn-default btn-sm" ng-show="isCourseCreated(course._id) || isAdmin()" type="submit" data-ng-click="modalUpdate('lg', course)" > Edit </button> -->
+                                <button id = "delete" class="btn btn-default btn-sm" ng-show="isAdmin()"  type="submit" data-ng-click="modalRemove('sm', course)"> Delete </button>
                             </div>
                             </div>
                             
@@ -51,7 +51,7 @@
                             </h4>
                         </div>
                         <div class="col-sm-2" style="padding-top: 3px; padding-right: 0px; padding-left: 0px" >
-                            <button id="purchase" type="button" class="btn btn-block btn-success pull-right" ng-controller="CoursesController" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalJoin('sm', course)"> Join Course </button>
+                           <!--  <button id="purchase" type="button" class="btn btn-block btn-success pull-right" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalJoin('sm', course)"> Join Course </button> -->
                         </div>
                     </div> 
                 

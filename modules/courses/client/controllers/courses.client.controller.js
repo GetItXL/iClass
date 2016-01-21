@@ -121,7 +121,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           passcode: this.passcode,
           year: this.year,
           semester: this.semester,
-          endDate: $scope.findendDate(this.semester,this.year)  //need to write a function to find it.
+          endDate: $scope.findendDate(this.semester,this.year)  //end date of the semester
         });
         // Redirect after save
         course.$save(function (response) {
@@ -252,96 +252,96 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
 
-    /*********************** Check current user role ********************/
-    $scope.isAdmin = function(){
-      return ($scope.authentication.user.roles.indexOf('admin') > -1);
-    };
+    // /*********************** Check current user role ********************/
+    // $scope.isAdmin = function(){
+    //   return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    // };
 
-    $scope.isProf = function(){
-      return ($scope.authentication.user.roles.indexOf('professor') > -1);
-    };
+    // $scope.isProf = function(){
+    //   return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    // };
 
-    $scope.isStudent = function(){
-      return ($scope.authentication.user.roles.indexOf('user') > -1);
-    };
-    /*******************************************************************/
+    // $scope.isStudent = function(){
+    //   return ($scope.authentication.user.roles.indexOf('user') > -1);
+    // };
+    // /*******************************************************************/
 
 
-    $scope.joinCourse = function(courseID){
+    // $scope.joinCourse = function(courseID){
 
-      var student = new Users(Authentication.user);
+    //   var student = new Users(Authentication.user);
 
-      console.log($scope.passcode);
-      console.log($scope.course.passcode);
+    //   console.log($scope.passcode);
+    //   console.log($scope.course.passcode);
 
-      if($scope.passcode !== $scope.course.passcode){
-        console.log('Wrong passcode');
-      }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
-        student.enrolledCourses.push(courseID);
+    //   if($scope.passcode !== $scope.course.passcode){
+    //     console.log('Wrong passcode');
+    //   }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
+    //     student.enrolledCourses.push(courseID);
 
-        student.$update(function(res){
-          $scope.success = true;
-          Authentication.user = res;
-          //$scope.authentication = Authenticaton; ?
+    //     student.$update(function(res){
+    //       $scope.success = true;
+    //       Authentication.user = res;
+    //       //$scope.authentication = Authenticaton; ?
 
-          $location.path('studentdashboard');
+    //       $location.path('studentdashboard');
 
-          console.log(Authentication.user);
-        }, function(errorResponse){
-          $scope.error = errorResponse.data.message;
-        });
-      }else{
-        console.log('already enrolled in this class');
+    //       console.log(Authentication.user);
+    //     }, function(errorResponse){
+    //       $scope.error = errorResponse.data.message;
+    //     });
+    //   }else{
+    //     console.log('already enrolled in this class');
 
-        /* TODO: display message to user */
-      }
-    };
+    //     /* TODO: display message to user */
+    //   }
+    // };
 
-    // Check to see if a course has already been enrolled.
-    $scope.isCourseEnrolled = function(enrolledCourseId){
+    // // Check to see if a course has already been enrolled.
+    // $scope.isCourseEnrolled = function(enrolledCourseId){
 
-      //var student = new Users(Authentication.user);
-      var user = $scope.authentication.user;
+    //   //var student = new Users(Authentication.user);
+    //   var user = $scope.authentication.user;
 
-      if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
-      {
-        console.log('course not enrolled!');
-        return false;
-      }
-      else
-      {
-        console.log('course enrolled!');
-        return true;
-      }
-    };
+    //   if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
+    //   {
+    //     console.log('course not enrolled!');
+    //     return false;
+    //   }
+    //   else
+    //   {
+    //     console.log('course enrolled!');
+    //     return true;
+    //   }
+    // };
 
-    //check if this course is created by one user
-    $scope.isCourseCreated = function(createdCourseId){
+    // //check if this course is created by one user
+    // $scope.isCourseCreated = function(createdCourseId){
 
-      console.log('Users created course: ' + $scope.authentication.user.createdCourses);
-      var user = $scope.authentication.user;
+    //   console.log('Users created course: ' + $scope.authentication.user.createdCourses);
+    //   var user = $scope.authentication.user;
 
-      if($scope.isProf())
-      {
-        //if(user.createdCourses.indexOf(createdCourseId) === -1)
-        for(var i = 0; i < user.createdCourses.length; i++)
-        {
-          console.log('length is ' + user.createdCourses.length);
-          console.log('i is ' + i);
-          if(user.createdCourses[i] === createdCourseId){
-            console.log(user.createdCourses[i]);
-            console.log(createdCourseId);
-            console.log('it is my course.');
-            return true;
-          } 
-        }
-      }
-      else
-      {
-        console.log('I am not a professor');
-        return false;
-      }
-    };
+    //   if($scope.isProf())
+    //   {
+    //     //if(user.createdCourses.indexOf(createdCourseId) === -1)
+    //     for(var i = 0; i < user.createdCourses.length; i++)
+    //     {
+    //       console.log('length is ' + user.createdCourses.length);
+    //       console.log('i is ' + i);
+    //       if(user.createdCourses[i] === createdCourseId){
+    //         console.log(user.createdCourses[i]);
+    //         console.log(createdCourseId);
+    //         console.log('it is my course.');
+    //         return true;
+    //       } 
+    //     }
+    //   }
+    //   else
+    //   {
+    //     console.log('I am not a professor');
+    //     return false;
+    //   }
+    // };
 
     /* TODO: delete enrolled course from user if the course if removed by admin from database */
 
