@@ -20,7 +20,7 @@ var QuizSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
-  content: {
+  question: {
     type: String,
     default: '',
     trim: true

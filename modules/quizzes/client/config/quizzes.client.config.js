@@ -22,7 +22,7 @@ angular.module('quizzes').run(['Menus',
     Menus.addSubMenuItem('topbar', 'quizzes', {
       title: 'Create Quizzes',
       state: 'quizzes.create',
-      roles: ['admin', 'professor']
+      roles: ['admin'] //TODO: get rid of this after making course clickable (enter create quiz page) on admin panel */
     });
   }
 ]);

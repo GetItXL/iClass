@@ -1,8 +1,8 @@
 'use strict';
 
 // Quizzes controller
-angular.module('quizzes').controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzes',
-  function ($scope, $stateParams, $location, Authentication, Quizzes) {
+angular.module('quizzes').controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzes', 'CourseInfoFactory',
+  function ($scope, $stateParams, $location, Authentication, Quizzes, CourseInfoFactory) {
     $scope.authentication = Authentication;
 
     // Create new Quiz
@@ -18,7 +18,8 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
       // Create new Quiz object
       var quiz = new Quizzes({
         title: this.title,
-        content: this.content
+        question: this.question,
+        courseID: CourseInfoFactory.getCourseID()
       });
 
       // Redirect after save
@@ -28,6 +29,8 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
+        console.log('quiz course id' + quiz.courseID);
+
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
