@@ -219,21 +219,20 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
     }
 
-
     // Update existing Course
     $scope.update = function (isValid) {
       $scope.error = null;
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'courseForm');
-
+        console.log('error course');
         return false;
       }
 
       var course = $scope.course;
 
       course.$update(function () {
-        $location.path('courses/' + course._id);
+        //$location.path('courses/' + course._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

@@ -32,8 +32,9 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       $scope.figureOutItemsToDisplay();
     };
 
-        // Open a modal window to update a single course record
+    // Open a modal window to update a single course record
     $scope.modalUpdate = function(size, selectedCourse) {
+
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/courses/client/views/edit-course.client.view.html',
@@ -55,9 +56,10 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
     var ModalUpdateCtrl = function($scope, $modalInstance, course) {
       $scope.course = course;
-
+      //console.log("I am update modal window " + Authentication.user.displayName);
       $scope.ok = function() {
         $modalInstance.close($scope.course);
+         $state.reload();
       };
 
       $scope.cancel = function() {

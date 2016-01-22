@@ -1,48 +1,64 @@
-<section ng-controller="CoursesController" ng-init="findOne()">
-  <div class="page-header">
-    <h1>Edit Course {{course.number}}</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="courseForm" class="form-horizontal" ng-submit="update(courseForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="number">Number</label>
-          <input name="number" type="text" ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
-          <div ng-messages="courseForm.number.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Course number is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="name">Course Name</label>
-          <input name="name" type="text" ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
-          <div ng-messages="courseForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Course name is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="passcode">Course Passcode</label>
-          <textarea name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></textarea>
-        </div>
-            <!-- <div class="form-group">
-                <label for="startdate">Semester & year</label>
-                <div class="row">
-                    <div class="col-md-6">
-            
-                    Choose a semester: <select ng-model="course.semester" id="semester" data-ng-options="act for act in semesters"></select>
-                
-                    </div>
-                    <div class="col-md-6">
-                              Choose a year: <select ng-model="course.year" id="year" data-ng-options="act for act in years"></select>
+<section ng-controller="CoursesController">
+   <div class="modal-header">
+        <h3 class="modal-title">Edit {{course.number}} {{course.name}}</h3>
+    </div>
+    <div class="modal-body">
+        <fieldset>
+            <div data-ng-show="error" class="text-center text-danger">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <strong data-ng-bind="error"></strong>
+                </div>íí
+            </div> 
+            <div class="form-group">
+                <label for="number">Number</label>
+                <div class="controls">
+                    <input type="text" data-ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
+                </div>
+             </div>
+            <!-- div class="form-group" show-errors>
+                    <label for="number">Number</label>
+                    <input name="number" type="text" ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
+            </div> -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <div class="controls">
+                    <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
+                </div>
+            </div>
+
+<!--                 <div class="form-group" show-errors>
+                    <label for="name">Course Name</label>
+                     <div class="controls">
+                        <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="Name">
+                    <input name="name" type="text" ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
                     </div>
                 </div> -->
-            </div>        
-        <div class="form-group">
-          <input type="submit" value="Update" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
+                <div class="form-group">
+                    <label for="passcode">Course Passcode</label>
+                    <input name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
+                </div>
+                <div class="form-group" ng-show="isAdmin()">
+                    <label for="startdate">Semester & year</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                        
+        
+                        Choose a semester: <select ng-model="course.semester" data-ng-options="act for act in semesters"></select>
+                    <!-- {{years[0]}} is currently -->
+                        </div>
+                        <div class="col-md-6">
+                                  Choose a year: <select ng-model="course.year"
+                                          data-ng-options="act for act in years"></select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>       
+     
   </div>
+  <div class="modal-footer">
+        <button id="ok" class="btn btn-success" ng-click="update(course); ok()">Update</button>
+        <button id="cancel" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
 </section>
