@@ -25,10 +25,19 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/quizzes',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/quizzes/:quizId',
       permissions: ['get']
+    }]
+  }, {
+    roles: ['professor'],
+    allows: [{
+      resources: '/api/quizzes',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/quizzes/:quizId',
+      permissions: ['get', 'put', 'delete']
     }]
   }, {
     roles: ['guest'],

@@ -59,7 +59,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       //console.log("I am update modal window " + Authentication.user.displayName);
       $scope.ok = function() {
         $modalInstance.close($scope.course);
-         $state.reload();
+        $state.reload();
       };
 
       $scope.cancel = function() {

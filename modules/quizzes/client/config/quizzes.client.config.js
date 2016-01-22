@@ -14,14 +14,15 @@ angular.module('quizzes').run(['Menus',
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'quizzes', {
       title: 'List Quizzes',
-      state: 'quizzes.list'
+      state: 'quizzes.list',
+      roles: ['*']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'quizzes', {
       title: 'Create Quizzes',
       state: 'quizzes.create',
-      roles: ['user']
+      roles: ['admin', 'professor']
     });
   }
 ]);

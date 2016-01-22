@@ -2,7 +2,7 @@
   <div class="page-header">
       <span style="font-size:3em" ng-bind="course.number"></span>
       <span style="font-size:1.5em; font-style: italic;"> {{course.semester}} {{course.year}} </span>
- 
+
     </div>
 
   </div>
@@ -51,5 +51,14 @@
           </a>
     </div>
   </div>
+
+  <div>
+    <a class="btn btn-primary" ui-sref="quizzes.create" ng-show="!isStudent()">
+      <i class="glyphicon glyphicon-plus">CreateQuiz</i>
+    </a>
+  </div>
+
+
+  </section>
 
 </section>
