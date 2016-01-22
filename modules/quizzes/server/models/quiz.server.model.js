@@ -25,6 +25,20 @@ var QuizSchema = new Schema({
     default: '',
     trim: true
   },
+  choices: { /* limit possible choices to 5? */
+    type: [{
+      letter: {
+        type: String //Should be auto assigned by system - A, B, C, D....
+      },
+      description: {
+        type: String,
+        required: 'Answer description cannot be blank'
+      }
+    }]
+  },
+  correctAnswer: {
+    type: String //A, B, C, D
+  },
   user: { //The professor who created the quiz
     type: Schema.ObjectId,
     ref: 'User'
