@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users',
-  function ($scope, $stateParams, $location, Authentication, Courses, Users) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory',
+  function ($scope, $stateParams, $location, Authentication, Courses, Users, CourseInfoFactory) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
@@ -200,6 +200,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       user.$update(function(res){
         $scope.success = true;
 
+
         /*
         if(res.roles.indexOf('admin') > -1){
           Authentication.user = res; //what caused the bug
@@ -218,6 +219,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.error = errorResponse.data.message;
       });
     }
+
 
     // Update existing Course
     $scope.update = function (isValid) {
@@ -248,30 +250,38 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       $scope.course = Courses.get({
         courseId: $stateParams.courseId
       });
+
+      //but $scope.course is undefined here....
+
+      //page flow: enter course page -> create quiz
+      CourseInfoFactory.setCourseID($stateParams.courseId);
     };
 
 
-     /*********************** Check current user role ********************/
-     $scope.isAdmin = function(){
-       return ($scope.authentication.user.roles.indexOf('admin') > -1);
-     };
+    /*********************** Check current user role ********************/
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    };
 
-     $scope.isProf = function(){
-       return ($scope.authentication.user.roles.indexOf('professor') > -1);
-     };
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    };
 
-     $scope.isStudent = function(){
-       return ($scope.authentication.user.roles.indexOf('user') > -1);
-     };
-     /*******************************************************************/
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1);
+    };
+    /*******************************************************************/
 
 
     $scope.joinCourse = function(courseID){
 
+      //$scope.course is defined here...
+
       var student = new Users(Authentication.user);
 
-      console.log($scope.passcode);
-      console.log($scope.course.passcode);
+
+      console.log('pass1' + $scope.passcode);
+      console.log('pass2' + $scope.course.passcode);
 
       if($scope.passcode !== $scope.course.passcode){
         console.log('Wrong passcode');

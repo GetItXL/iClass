@@ -18,9 +18,13 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
+  //console.log('user: ' + user);
 
+  console.log('before delete role ' + req.body.roles);
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
+  //console.log('after delete role ' + req.body.roles);
+
 
   if (user) {
     // Merge existing user
@@ -38,6 +42,7 @@ exports.update = function (req, res) {
           if (err) {
             res.status(400).send(err);
           } else {
+            //console.log('final user' + user);
             res.json(user);
           }
         });
