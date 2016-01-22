@@ -32,7 +32,9 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       $scope.figureOutItemsToDisplay();
     };
 
-    // Open a modal window to update a single course record
+
+  /*********  modal window update course *******************/
+
     $scope.modalUpdate = function(size, selectedCourse) {
 
 
@@ -68,7 +70,8 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       };
     };
 
-        // Open a modal window to Remove a single course record
+    /*********  modal window remove course *******************/
+
     $scope.modalRemove = function(size, selectedCourse) {
 
       var modalInstance = $modal.open({
@@ -105,45 +108,44 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       };
     };
 
+    /*************  modal window join course *******************/
     
-  //   // Open a modal window to View a single course record
-  //   $scope.modalView = function(size, selectedCourse) {
+    $scope.modalJoin = function(size, selectedCourse) {
 
-  //           var modalFlag = true;
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/courses/client/views/join-courses.client.view.html',
+        controller: ModalJoinCtrl,
+        size: size,
+        resolve: {
+          course: function() {
+            return selectedCourse;
+          }
+        }
+      });
 
-  //           if (Authentication.user) {
-  //               if (Authentication.user.roles.indexOf('instructor') > -1 ||
-  //                   Authentication.user.roles.indexOf('admin') > -1) {
-  //                   modalFlag = false;
-  //                   $location.path('course/' + selectedCourse._id);
-  //               } else {
-  //                   for (var i = 0; i < Authentication.user.enrolledCourses.length; i++) {
-  //                       if (Authentication.user.enrolledCourses[i].courseId === selectedCourse._id) {
-  //                           modalFlag = false;
-  //                           $location.path('course/' + selectedCourse._id);
-  //                       }
-  //                   }
-  //               }
-  //           }
-  //           if (modalFlag) {
-  //               var modalInstance = $modal.open({
-  //                   templateUrl: 'modules/courses/client/views/view-course.client.view.html',
-  //                   controller: ModalViewCtrl,
-  //                   size: size,
-  //                   resolve: {
-  //                       course: function() {
-  //                           return selectedCourse;
-  //                       }
-  //                   }
-  //               });
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        console.log('Modal dismissed at: ' + new Date());
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
 
-  //               modalInstance.result.then(function(selectedItem) {
-  //                   $scope.selected = selectedItem;
-  //               }, function() {
-  //                   $log.info('Modal dismissed at: ' + new Date());
-  //               });
-  //           }
-  //   };
+    var ModalJoinCtrl = function($scope, $modalInstance, course) {
+      $scope.course = course;
+
+      $scope.ok = function() {
+        $modalInstance.close($scope.course);
+        $state.reload();
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+        $state.reload();
+      };
+    };
+    
+  
 
   //   var ModalViewCtrl = function($scope, $modalInstance, course) {
   //           $scope.course = course;
@@ -171,35 +173,35 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     };
     /*******************************************************************/
 
-    $scope.joinCourse = function(courseID){
+    // $scope.joinCourse = function(courseID){
 
-      var student = new Users(Authentication.user);
+    //   var student = new Users(Authentication.user);
 
-      console.log($scope.passcode);
-      console.log($scope.course.passcode);
+    //   console.log($scope.passcode);
+    //   console.log($scope.course.passcode);
 
-      if($scope.passcode !== $scope.course.passcode){
-        console.log('Wrong passcode');
-      }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
-        student.enrolledCourses.push(courseID);
+    //   if($scope.passcode !== $scope.course.passcode){
+    //     console.log('Wrong passcode');
+    //   }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
+    //     student.enrolledCourses.push(courseID);
 
-        student.$update(function(res){
-          $scope.success = true;
-          Authentication.user = res;
-          //$scope.authentication = Authenticaton; ?
+    //     student.$update(function(res){
+    //       $scope.success = true;
+    //       Authentication.user = res;
+    //       //$scope.authentication = Authenticaton; ?
 
-          //$location.path('studentdashboard');
+    //       //$location.path('studentdashboard');
 
-          console.log(Authentication.user);
-        }, function(errorResponse){
-          $scope.error = errorResponse.data.message;
-        });
-      }else{
-        console.log('already enrolled in this class');
+    //       console.log(Authentication.user);
+    //     }, function(errorResponse){
+    //       $scope.error = errorResponse.data.message;
+    //     });
+    //   }else{
+    //     console.log('already enrolled in this class');
 
-        /* TODO: display message to user */
-      }
-    };
+    //     /* TODO: display message to user */
+    //   }
+    // };
 
     // Check to see if a course has already been enrolled.
     $scope.isCourseEnrolled = function(enrolledCourseId){

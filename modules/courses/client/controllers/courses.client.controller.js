@@ -266,35 +266,35 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     // /*******************************************************************/
 
 
-    // $scope.joinCourse = function(courseID){
+    $scope.joinCourse = function(courseID){
 
-    //   var student = new Users(Authentication.user);
+      var student = new Users(Authentication.user);
 
-    //   console.log($scope.passcode);
-    //   console.log($scope.course.passcode);
+      console.log($scope.passcode);
+      console.log($scope.course.passcode);
 
-    //   if($scope.passcode !== $scope.course.passcode){
-    //     console.log('Wrong passcode');
-    //   }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
-    //     student.enrolledCourses.push(courseID);
+      if($scope.passcode !== $scope.course.passcode){
+        console.log('Wrong passcode');
+      }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
+        student.enrolledCourses.push(courseID);
 
-    //     student.$update(function(res){
-    //       $scope.success = true;
-    //       Authentication.user = res;
-    //       //$scope.authentication = Authenticaton; ?
+        student.$update(function(res){
+          $scope.success = true;
+          Authentication.user = res;
+          //$scope.authentication = Authenticaton; ?
 
-    //       $location.path('studentdashboard');
+          $location.path('studentdashboard');
 
-    //       console.log(Authentication.user);
-    //     }, function(errorResponse){
-    //       $scope.error = errorResponse.data.message;
-    //     });
-    //   }else{
-    //     console.log('already enrolled in this class');
+          console.log(Authentication.user);
+        }, function(errorResponse){
+          $scope.error = errorResponse.data.message;
+        });
+      }else{
+        console.log('already enrolled in this class');
 
-    //     /* TODO: display message to user */
-    //   }
-    // };
+        /* TODO: display message to user */
+      }
+    };
 
     // // Check to see if a course has already been enrolled.
     // $scope.isCourseEnrolled = function(enrolledCourseId){

@@ -1,0 +1,16 @@
+<section data-ng-controller="CoursesController" >
+    <div class="form-group">
+        <div class="alert alert-success text-center" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 
+            <span>Ready to join {{course.number}} {{course.name}} </span>
+        </div>
+        <div class="text-center form-group">
+            <b>Please enter passcode:</b>
+        </div> 
+        <input type="text" ng-model="passcode" class="form-control" placeholder="  passcode" required>
+    </div>
+    <div class="text-center form-group">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-success" ng-click="joinCourse(course._id); ok()">Join</button>
+    </div>
+</section>
