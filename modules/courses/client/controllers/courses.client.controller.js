@@ -251,19 +251,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
 
-    // /*********************** Check current user role ********************/
-    // $scope.isAdmin = function(){
-    //   return ($scope.authentication.user.roles.indexOf('admin') > -1);
-    // };
+     /*********************** Check current user role ********************/
+     $scope.isAdmin = function(){
+       return ($scope.authentication.user.roles.indexOf('admin') > -1);
+     };
 
-    // $scope.isProf = function(){
-    //   return ($scope.authentication.user.roles.indexOf('professor') > -1);
-    // };
+     $scope.isProf = function(){
+       return ($scope.authentication.user.roles.indexOf('professor') > -1);
+     };
 
-    // $scope.isStudent = function(){
-    //   return ($scope.authentication.user.roles.indexOf('user') > -1);
-    // };
-    // /*******************************************************************/
+     $scope.isStudent = function(){
+       return ($scope.authentication.user.roles.indexOf('user') > -1);
+     };
+     /*******************************************************************/
 
 
     $scope.joinCourse = function(courseID){

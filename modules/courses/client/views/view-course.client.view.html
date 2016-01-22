@@ -25,17 +25,20 @@
         <p class="lead" ng-bind="course.passcode" ng-show="isCourseCreated(course._id)"></p>
 
       </div>
+    <!--
     <div class="col-md-4" text-center ng-show="isStudent()">
       <div class="col-md-6">
          <input type="text" ng-model="passcode" class="form-control" placeholder="enter class passcode" ng-show="!isCourseEnrolled(course._id)" required>
       </div>
        <div class="col-md-6">
-          <!-- TODO: make passcode field required and display message to user if nothing entered -->
           <a class="btn btn-primary" ng-click="joinCourse(course._id)" ng-show="!isCourseEnrolled(course._id)">
             <i class="glyphicon glyphicon-plus"></i>
           </a>
         </div>
     </div>
+    -->
+    <!-- TODO: make passcode field required and display message to user if nothing entered -->
+
     <div class="col-md-4" text-center ng-show="isAdmin()">
           <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})">
             <i class="glyphicon glyphicon-edit"></i>
