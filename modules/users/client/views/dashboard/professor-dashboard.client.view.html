@@ -8,18 +8,17 @@
             My Course (active course)
         </p>
         <div class="list-group">
-            <a ng-repeat="course in courses | filter:keyword" ng-init="findNumStudentEnrolled(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> 
-                <small class="list-group-item-text">
+            <a ng-repeat="course in courses | filter:{active: true}" ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item"> 
+               <!--  <small class="list-group-item-text">
                         Created on
                     <span ng-bind="course.created | date:'mediumDate'"></span>
                         by Professor
                     <span ng-bind="course.professor.displayName"></span>
-                </small>
-                <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
-                <p class="list-group-item-text" ng-bind="course.name"></p>
-                <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
-                    Number of students:
-                <p class="list-group-item-text" ng-bind="numStudentInCourse[course._id]"></p>
+                </small></br> -->
+                     {{course.semester}} {{course.year}} 
+                    <h4> {{course.number}} {{course.name}} </h4>
+                   
+                    Number of students: {{numStudentInCourse[course._id]}}
 
             </a>
         </div>
@@ -28,14 +27,24 @@
          <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
     </div>
     </div>
-
     <div class="row">
-        <p class="lead">
-            inactive course
-        </p>
-        <div class="list-group">
-            <a ng-repeat="course in courses | filter:keyword" ng-init="CoursesListController.isActive(course)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> 
+        <div class="col-md-12">
+        <p class="lead">inactive course</p>
+            <div class="list-group">
+                <a ng-repeat="course in courses | filter:{active: true}" ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item"> 
+               <!--  <small class="list-group-item-text">
+                        Created on
+                    <span ng-bind="course.created | date:'mediumDate'"></span>
+                        by Professor
+                    <span ng-bind="course.professor.displayName"></span>
+                </small></br> -->
+                     {{course.semester}} {{course.year}} 
+                    <h4> {{course.number}} {{course.name}} </h4>
+                   
+                    Number of students: {{numStudentInCourse[course._id]}}
 
+                </a>
+            </div>
         </div>
     </div>
 </section>
