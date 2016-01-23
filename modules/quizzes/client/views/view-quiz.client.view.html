@@ -12,7 +12,7 @@
       <p>{{choice.letter}}  {{choice.description}}</p>
     </div>
   </div>
-  <div class="pull-right" ng-show="authentication.user._id == quiz.user._id">
+  <div class="pull-right" ng-show="!isStudent()">
     <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>

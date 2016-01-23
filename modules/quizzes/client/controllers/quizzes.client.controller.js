@@ -129,5 +129,21 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     }
 
+
+    //TODO: get rid of this code redundancy
+    /*********************** Check current user role ********************/
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    };
+
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    };
+
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1);
+    };
+    /*******************************************************************/
+
   }
 ]);
