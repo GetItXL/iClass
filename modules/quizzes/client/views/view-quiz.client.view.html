@@ -1,6 +1,10 @@
 <section ng-controller="QuizzesController" ng-init="findOne()">
   <div class="page-header">
     <h1 ng-bind="quiz.title"></h1>
+    <h2>choices</h2>
+    <div ng-repeat="choice in quiz.choices">
+      <h4>{{choice.letter}}  {{choice.description}}</h4>
+    </div>
   </div>
   <div class="pull-right" ng-show="authentication.user._id == quiz.user._id">
     <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">

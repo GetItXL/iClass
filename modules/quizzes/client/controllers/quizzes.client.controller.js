@@ -24,7 +24,8 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
       var quiz = new Quizzes({
         title: this.title,
         question: this.question,
-        courseID: CourseInfoFactory.getCourseID()
+        courseID: CourseInfoFactory.getCourseID(),
+        choices: $scope.choices
       });
 
       // Redirect after save
@@ -35,6 +36,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         $scope.title = '';
         $scope.content = '';
         console.log('quiz course id' + quiz.courseID);
+        console.log(quiz.choices);
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -102,5 +104,6 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         quizId: $stateParams.quizId
       });
     };
+    
   }
 ]);
