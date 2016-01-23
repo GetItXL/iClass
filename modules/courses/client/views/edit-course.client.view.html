@@ -67,24 +67,19 @@
                         <div class="col-md-4">                           
                         </div>
                         <div class="col-md-4">
-                            change activation status: <input type="checkbox" ng-model="course.active" > {{course.active}}
-                        </div>
-
-        
-                    <!-- <div class="pull-right" style="text-size">
-                       change activation status: <input type="checkbox" ng-model="course.active" > {{course.active}} -->
+                            <md-checkbox ng-model="course.active" aria-label="Checkbox">
+                                change activation status: {{ course.active}}
+                            </md-checkbox>
+                            <!-- need to refresh the check box when user click outside of the modal window -->
                     
-                
-                  
-                 <!--  <tt>value1 = {{course.active}}</tt><br/> -->
+                        </div>
                     </div>
-                </div>
                 </div>
             </fieldset>       
      
-  </div>
+        </div>
   <div class="modal-footer">
-        <button id="ok" class="btn btn-success" ng-click="update(course); ok()">Update</button>
-        <button id="cancel" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <md-button id="ok" class="md-raised md-primary" ng-click="update(course); ok()">Update</md-button>
+         <md-button id="cancel" class="md-raised" ng-click="cancel()">Cancel</md-button>
     </div>
 </section>
