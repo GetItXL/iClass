@@ -7,7 +7,9 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     //keeps track of choices added
     $scope.currentLetter = 'A'; //default to A
+
     $scope.choices = [{ letter:'A', description:'' }]; //empty array
+    $scope.correctAnswer = '';
 
 
 
@@ -21,12 +23,14 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         return false;
       }
 
+
       // Create new Quiz object
       var quiz = new Quizzes({
         title: this.title,
         question: this.question,
         courseID: CourseInfoFactory.getCourseID(),
-        choices: $scope.choices
+        choices: $scope.choices,
+        correctAnswer: $scope.correctAnswer
       });
 
       // Redirect after save
@@ -36,8 +40,6 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
-        console.log('quiz course id' + quiz.courseID);
-        console.log(quiz.choices);
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -45,17 +47,17 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
     };
 
 
-
-
-
-
     //Add a new choice
-    $scope.addChoice = function (letter, description){
+    $scope.addChoice = function (){
       $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() + 1);
 
       $scope.choices.push({ letter: $scope.currentLetter, description: '' });
 
 
+    /* TODO: delete from end for now. Later add delete button to each choice */
+    $scope.deleteChoice = function(){
+      $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
+      $scope.choices.splice($scope.choices.length-1, 1);
     };
 
     // Remove existing Quiz
@@ -111,8 +113,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     function getCourseDisplayInfo(courseID){
 
-      //not sure why Courses.get() would not work
-
+      //not sure why Courses.get() does not work
 
       var courses = Courses.query(function(){
         var course;

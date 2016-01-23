@@ -43,10 +43,10 @@ exports.invokeRolesPolicies = function () {
     roles: ['guest'],
     allows: [{
       resources: '/api/quizzes',
-      permissions: ['get']
+      permissions: []
     }, {
       resources: '/api/quizzes/:quizId',
-      permissions: ['get']
+      permissions: []
     }]
   }]);
 };

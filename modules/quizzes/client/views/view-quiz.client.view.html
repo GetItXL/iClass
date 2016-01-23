@@ -11,6 +11,9 @@
     <div ng-repeat="choice in quiz.choices">
       <p>{{choice.letter}}  {{choice.description}}</p>
     </div>
+
+    <h2>Correct answer</h2>
+    <p>{{quiz.correctAnswer}}</p>
   </div>
   <div class="pull-right" ng-show="!isStudent()">
     <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">

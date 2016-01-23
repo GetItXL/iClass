@@ -24,9 +24,19 @@
 
           <div>
             <button ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
+            <button ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
           </div>
-
         </div>
+
+
+       <div class="form-group" ng-repeat="choice in choices">
+         <label for="answer" ng-show="$first">Correct Answer</label>
+         <div>
+           <input type="radio" ng-model="$parent.correctAnswer" value="{{choice.letter}}" name="answer" id="answer"> <!-- ng-repeat create a child scope, so you have to bind to the $parent -->
+           {{choice.letter}}
+         </div>
+       </div>
+       <!-- TODO: make radio button selection required input -->
 
 
         <div class="form-group">
