@@ -48,7 +48,13 @@ var QuizSchema = new Schema({
   },
   courseID: {
     type: String
-  } /* May need to modify later */
+  },/* May need to modify later */
+  quizDuration: { //convert duration into millisecond and store as number
+    type: Number  //if quizDuration = -1, means user selected manually hit stop quiz button
+  },
+  quizType: {
+    type: String //"MC", vs "attendence"
+  }
 });
 
 mongoose.model('Quiz', QuizSchema);
