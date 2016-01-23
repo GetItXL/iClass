@@ -48,7 +48,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     //Add a new choice
     $scope.addChoice = function (){
-
+      //console.log($scope.choices);
       $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() + 1);
 
       $scope.choices.push({ letter: $scope.currentLetter, description: '' });
@@ -103,11 +103,18 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     // Find existing Quiz
     $scope.findOne = function () {
+      console.log('Iam ere');
       $scope.quiz = Quizzes.get({
         quizId: $stateParams.quizId
       });
 
       getCourseDisplayInfo($scope.quiz.courseID);
+    };
+
+    $scope.updateChoices = function(){
+      $scope.choices = $scope.quiz.choices;
+      $scope.correctAnswer = $scope.quiz.correctAnswer;
+      $scope.currentLetter = $scope.choices[$scope.choices.length-1].letter;
     };
 
 

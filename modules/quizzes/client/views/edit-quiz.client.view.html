@@ -17,14 +17,14 @@
           <input name="question" ng-model="quiz.question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
         </div>
 
-        <div class="form-group" ng-repeat="choice in quiz.choices">
+        <div class="form-group" ng-init="updateChoices()" ng-repeat="choice in quiz.choices">
           <label for="choiceIn" ng-show="$first">Choices</label>
           <label>{{choice.letter}}</label>
           <input type="text" id="choiceIn" name="choiceIn" class="form-control col-md-4" ng-model="choice.description" placeHolder="please enter a new choice" required>
 
           <div>
-            <button ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
-            <button ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
+            <button type="button" ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
+            <button type="button" ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
         <div class="form-group" ng-repeat="choice in quiz.choices">
           <label for="answer" ng-show="$first">Correct Answer</label>
           <div>
-            <input type="radio" ng-model="$parent.correctAnswer" value="{{choice.letter}}" name="answer" id="answer"> <!-- ng-repeat create a child scope, so you have to bind to the $parent -->
+            <input type="radio" ng-model="$parent.quiz.correctAnswer" value="{{choice.letter}}" name="answer" id="answer"> <!-- ng-repeat create a child scope, so you have to bind to the $parent -->
             {{choice.letter}}
           </div>
         </div>
