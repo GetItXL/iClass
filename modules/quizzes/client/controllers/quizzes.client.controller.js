@@ -8,7 +8,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
     //keeps track of choices added
     $scope.currentLetter = 'A'; //default to A
     $scope.choices = [{letter:'A', description:''}]; //empty array
-
+    $scope.correctAnswer = '';
 
 
     // Create new Quiz
@@ -21,12 +21,14 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         return false;
       }
 
+      
       // Create new Quiz object
       var quiz = new Quizzes({
         title: this.title,
         question: this.question,
         courseID: CourseInfoFactory.getCourseID(),
-        choices: $scope.choices
+        choices: $scope.choices,
+        correctAnswer: $scope.correctAnswer
       });
 
       // Redirect after save
@@ -36,8 +38,9 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
-        console.log('quiz course id' + quiz.courseID);
-        console.log(quiz.choices);
+        //console.log('quiz course id' + quiz.courseID);
+        //console.log(quiz.choices);
+        //console.log(quiz);
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;

@@ -37,7 +37,8 @@ var QuizSchema = new Schema({
     }]
   },
   correctAnswer: {
-    type: String //A, B, C, D
+    type: String, //A, B, C, D,
+    required: 'Please select a correct answer'
   },
   user: { //The professor who created the quiz
     type: Schema.ObjectId,
