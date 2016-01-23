@@ -14,7 +14,7 @@ var QuizSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
+  title: { //name of the quiz
     type: String,
     default: '',
     trim: true,
@@ -23,7 +23,8 @@ var QuizSchema = new Schema({
   question: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
+    required: 'You must enter a question for the quiz'
   },
   choices: { /* limit possible choices to 5? */
     type: [{
@@ -32,7 +33,8 @@ var QuizSchema = new Schema({
       },
       description: {
         type: String,
-        required: 'Answer description cannot be blank'
+        required: 'Answer description cannot be blank',
+        trim: true
       }
     }]
   },

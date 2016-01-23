@@ -38,18 +38,11 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
-        //console.log('quiz course id' + quiz.courseID);
-        //console.log(quiz.choices);
-        //console.log(quiz);
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
-
-
-
-
 
 
     //Add a new choice
@@ -63,7 +56,6 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
     $scope.deleteChoice = function(){
       $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
       $scope.choices.splice($scope.choices.length-1, 1);
-
     };
 
     // Remove existing Quiz
@@ -119,8 +111,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     function getCourseDisplayInfo(courseID){
 
-      //not sure why Courses.get() would not work
-
+      //not sure why Courses.get() does not work
 
       var courses = Courses.query(function(){
         var course;

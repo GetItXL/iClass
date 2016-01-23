@@ -200,21 +200,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       user.$update(function(res){
         $scope.success = true;
 
-
-        /*
-        if(res.roles.indexOf('admin') > -1){
-          Authentication.user = res; //what caused the bug
-          console.log("Admin update I am: " + Authentication.user.displayName);
-        }*/
-
-        /* This works.. but
-            issue: after remove a course created by admin, the courseCreated list will not be updated
-                    may cause problem later if referenced.
-                    Can be solved by removing the createdCourses field in user model but may not need to
-
-         */
-
-        //console.log("I am now: " + Authentication.user.displayName);
       }, function(errorResponse){
         $scope.error = errorResponse.data.message;
       });
