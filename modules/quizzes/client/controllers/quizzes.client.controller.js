@@ -7,7 +7,6 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     //keeps track of choices added
     $scope.currentLetter = 'A'; //default to A
-
     $scope.choices = [{ letter:'A', description:'' }]; //empty array
     $scope.correctAnswer = '';
 
@@ -53,7 +52,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
       $scope.choices.push({ letter: $scope.currentLetter, description: '' });
 
-
+    };
     /* TODO: delete from end for now. Later add delete button to each choice */
     $scope.deleteChoice = function(){
       $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
