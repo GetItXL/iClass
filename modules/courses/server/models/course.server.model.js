@@ -28,20 +28,20 @@ var CourseSchema = new Schema({
   },
   passcode:{
     type: String,
-    default: '0000',
+    default: '0000'
     //Doesn't need to be required..
   },
   semester: {
     type: String,
-    default: 'Spring',
+    default: 'Spring'
   },
   year:{
     type: Number,
-    default: '2016',
+    default: '2016'
   },
-  endDate: {
-    type: Date,
-    default: Date.now,
+  active: {
+    type: Boolean,
+    default: true
   },
   professor: { //Professor who created the course
     type: Schema.ObjectId,

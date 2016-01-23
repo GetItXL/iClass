@@ -202,6 +202,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     //     /* TODO: display message to user */
     //   }
     // };
+    
 
     // Check to see if a course has already been enrolled.
     $scope.isCourseEnrolled = function(enrolledCourseId){

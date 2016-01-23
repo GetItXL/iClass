@@ -1,38 +1,41 @@
 <section ng-controller="DashboardController" ng-init="createdCourseList()">
-  <div class="page-header">
-    <h1> Professor Dashboard</h1>
-  </div>
-  <div class="row">
-	     <div class="col-lg-6" >
-      <p class="lead text-center">
-          My Course (active course)
-      </p>
-      <div class="list-group">
-         <a ng-repeat="course in courses | filter:keyword" ng-init="findNumStudentEnrolled(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> <!-- may need to take care of searching for passcode -->
-        <small class="list-group-item-text">
-          Created on
-          <span ng-bind="course.created | date:'mediumDate'"></span>
-          by Professor
-          <span ng-bind="course.professor.displayName"></span>
-        </small>
-        <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
-        <p class="list-group-item-text" ng-bind="course.name"></p>
-        <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
-        Number of students:
-        <p class="list-group-item-text" ng-bind="numStudentInCourse[course._id]"></p>
+    <div class="page-header">
+        <h1> Professor Dashboard</h1>
+    </div>
+    <div class="row">
+	    <div class="col-lg-6" >
+        <p class="lead text-center">
+            My Course (active course)
+        </p>
+        <div class="list-group">
+            <a ng-repeat="course in courses | filter:keyword" ng-init="findNumStudentEnrolled(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> 
+                <small class="list-group-item-text">
+                        Created on
+                    <span ng-bind="course.created | date:'mediumDate'"></span>
+                        by Professor
+                    <span ng-bind="course.professor.displayName"></span>
+                </small>
+                <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
+                <p class="list-group-item-text" ng-bind="course.name"></p>
+                <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+                    Number of students:
+                <p class="list-group-item-text" ng-bind="numStudentInCourse[course._id]"></p>
 
-       </a>
-      </div>
-     </div>
+            </a>
+        </div>
+    </div>
     <div class="col-lg-6 text-center" >
          <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
     </div>
-  </div>
+    </div>
 
-  <div class="row">
-    <p class="lead">
-         inactive course
-      </p>
+    <div class="row">
+        <p class="lead">
+            inactive course
+        </p>
+        <div class="list-group">
+            <a ng-repeat="course in courses | filter:keyword" ng-init="CoursesListController.isActive(course)" ui-sref="courses.view({courseId: course._id})" class="list-group-item"> 
 
-</div>
+        </div>
+    </div>
 </section>

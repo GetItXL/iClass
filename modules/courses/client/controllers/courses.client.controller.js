@@ -56,26 +56,26 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
     };
 
-    $scope.findendDate = function(selectedSemester,selectedYear){
-      var today = new Date();
-      today.setFullYear(selectedYear);
-      console.log('today is change to ' + today);
-      if(selectedSemester === 'Spring') 
-      {
-        today.setMonth(4,30);
-        return today;
-      } 
-      else if (selectedSemester === 'Summer') 
-      {
-        today.setMonth(7,10);
-        return today;
-      }
-      else
-      {
-        today.setMonth(11,30);
-        return today;
-      }
-    };
+    // $scope.findendDate = function(selectedSemester,selectedYear){
+    //   var today = new Date();
+    //   today.setFullYear(selectedYear);
+    //   console.log('today is change to ' + today);
+    //   if(selectedSemester === 'Spring') 
+    //   {
+    //     today.setMonth(4,30);
+    //     return today;
+    //   } 
+    //   else if (selectedSemester === 'Summer') 
+    //   {
+    //     today.setMonth(7,10);
+    //     return today;
+    //   }
+    //   else
+    //   {
+    //     today.setMonth(11,30);
+    //     return today;
+    //   }
+    // };
 
     //added course to professor's createdcourse list
     $scope.addtoCreateCourseList = function(courseID){
@@ -121,7 +121,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           passcode: this.passcode,
           year: this.year,
           semester: this.semester,
-          endDate: $scope.findendDate(this.semester,this.year)  //end date of the semester
+          //endDate: $scope.findendDate(this.semester,this.year)  //end date of the semester
+          active: this.active,
         });
         // Redirect after save
         course.$save(function (response) {
@@ -133,15 +134,13 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           $scope.passcode = '';
           $scope.year = '';
           $scope.semester = '';
-          $scope.endDate = '';
+          //$scope.endDate = '';
 
           $scope.addtoCreateCourseList(response._id);
           console.log('Users created course:' + $scope.authentication.user.createdCourses);
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
         });
-        
-
       }
       else{
         return false;
@@ -356,7 +355,26 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
 /******************  active course list and in active course list functions ***********************/
 
+//$scope.active = [ {'text': 'Active', 'active': true}, {'text': 'Deactive', 'active': false}];
+    //$scope.checkActive = {active: true, deactive: false};
+    $scope.checkActivation = [];
 
+    // $scope.changeActiveState = function(value, key){
+
+    // };
+
+  
+   
+    $scope.isActive = function(course){
+      if(course.active) {
+        console.log('is active course now .........');
+        $scope.checkActivation.push('activated');
+      }  
+      else {
+        console.log('is deactive course now .........');
+        $scope.checkActivation.push('deactive');
+      }
+    };
 
 
 
