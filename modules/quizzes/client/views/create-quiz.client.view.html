@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-12">
     <form name="quizForm" class="form-horizontal" ng-submit="create(quizForm.$valid)" novalidate>
-      <fieldset>
+     <fieldset>
         <div class="form-group" show-errors>
           <label for="title">Title</label>
           <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
@@ -13,9 +13,28 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="content">Content</label>
-          <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          <label for="question">Question</label>
+          <input name="question" ng-model="question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
         </div>
+
+        <div class="form-group" ng-repeat="choice in choices">
+          <label for="choiceIn" ng-show="$first">Choices</label>
+          <label>{{choice.letter}}</label>
+          <input type="text" id="choiceIn" name="choiceIn" class="form-control col-md-4" ng-model="choice.description" placeHolder="please enter a new choice" required>
+
+          <div>
+            <button ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+
         <div class="form-group">
           <input type="submit" class="btn btn-default">
         </div>

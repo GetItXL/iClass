@@ -5,6 +5,11 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
   function ($scope, $stateParams, $location, Authentication, Quizzes, CourseInfoFactory) {
     $scope.authentication = Authentication;
 
+
+    $scope.currentLetter = 'A'; //default to A
+    $scope.choices = [{letter:'A', description:''}]; //empty array
+
+
     // Create new Quiz
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -34,6 +39,20 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+
+
+
+
+
+
+    //Add a new choice
+    $scope.addChoice = function (letter, description){
+      $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() + 1);
+
+      $scope.choices.push({letter: $scope.currentLetter, description: ''});
+
+
     };
 
     // Remove existing Quiz
