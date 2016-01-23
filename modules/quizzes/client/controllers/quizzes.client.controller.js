@@ -1,13 +1,14 @@
 'use strict';
 
 // Quizzes controller
-angular.module('quizzes').controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzes', 'CourseInfoFactory',
-  function ($scope, $stateParams, $location, Authentication, Quizzes, CourseInfoFactory) {
+angular.module('quizzes').controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzes', 'CourseInfoFactory', 'Courses',
+  function ($scope, $stateParams, $location, Authentication, Quizzes, CourseInfoFactory, Courses) {
     $scope.authentication = Authentication;
 
-
+    //keeps track of choices added
     $scope.currentLetter = 'A'; //default to A
     $scope.choices = [{letter:'A', description:''}]; //empty array
+
 
 
     // Create new Quiz
@@ -103,7 +104,30 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
       $scope.quiz = Quizzes.get({
         quizId: $stateParams.quizId
       });
+
+      getCourseDisplayInfo($scope.quiz.courseID);
     };
-    
+
+
+    function getCourseDisplayInfo(courseID){
+
+      //not sure why Courses.get() would not work
+
+
+      var courses = Courses.query(function(){
+        var course;
+
+        for(var i = 0; i < courses.length; i++){
+          console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+          if(courses[i]._id === $scope.quiz.courseID){
+            course = courses[i];
+          }
+        }
+
+        $scope.courseDisplayInfo = course;
+      });
+
+    }
+
   }
 ]);
