@@ -15,7 +15,7 @@
             </div> -->
         </div>
     </div>
-            <div class="panel panel-default" data-ng-repeat="course in pagedItems" >
+            <div class="panel panel-default" data-ng-repeat="course in pagedItems | filter:{active: true}" >
                 <div class="panel-body">
                     <div class="media-left media-middle">
                         <a ng-click="modalView('md', course)">

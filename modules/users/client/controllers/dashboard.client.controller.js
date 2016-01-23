@@ -147,9 +147,11 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
 
 
+    /********************* collapsed feature *******************/
 
-
-
+    $scope.isCollapsed = true;
+    
+    /**********************************************************/
 
   }
 ]);

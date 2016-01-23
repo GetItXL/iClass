@@ -17,11 +17,15 @@
                 </small></br> -->
                      {{course.semester}} {{course.year}}
                     <h4> {{course.number}} {{course.name}} </h4>
-
+                      <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
+                
                     Number of students: {{numStudentInCourse[course._id]}}
-
+                </br>
                     Number of quizzes: {{numQuizzesInCourse[course._id]}}
-              <button id = "edit" class="btn btn-default btn-sm"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
+           
+               
+                  
+                
 
             </a>
         </div>
@@ -32,21 +36,25 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-        <p class="lead">inactive course</p>
-            <div class="list-group">
-                <a ng-repeat="course in courses | filter:{active: false}" ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item">
-               <!--  <small class="list-group-item-text">
-                        Created on
-                    <span ng-bind="course.created | date:'mediumDate'"></span>
-                        by Professor
-                    <span ng-bind="course.professor.displayName"></span>
-                </small></br> -->
-                     {{course.semester}} {{course.year}}
-                    <h4> {{course.number}} {{course.name}} </h4>
+            <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">List all deactive courses</button>
+            <hr>
+            <div collapse="isCollapsed"> 
+                <!-- uib-collapse only works with bootstrap version 0.14.X -->
+                <div class="list-group">
+                    <a ng-repeat="course in courses | filter:{active: false}" ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item">
+                   <!--  <small class="list-group-item-text">
+                            Created on
+                        <span ng-bind="course.created | date:'mediumDate'"></span>
+                            by Professor
+                        <span ng-bind="course.professor.displayName"></span>
+                    </small></br> -->
+                         {{course.semester}} {{course.year}}
+                        <h4> {{course.number}} {{course.name}} </h4>
 
-                    Number of students: {{numStudentInCourse[course._id]}}
+                        Number of students: {{numStudentInCourse[course._id]}}
 
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

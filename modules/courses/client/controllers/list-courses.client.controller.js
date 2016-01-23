@@ -20,7 +20,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
     $scope.figureOutItemsToDisplay = function () {
       $scope.filteredItems = $filter('filter')($scope.courses, {
-        $: $scope.search
+        $: $scope.search  //need to add | filter:{active: true} to here, look for syntax.
       });
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
