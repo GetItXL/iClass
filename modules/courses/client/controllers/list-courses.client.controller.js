@@ -3,7 +3,7 @@
 // Courses controller
 angular.module('courses').controller('CoursesListController', ['$state', 'Users','Authentication', '$scope', '$filter', 'Courses', '$modal', '$log',
   function ($state, Users, Authentication, $scope, $filter, Courses, $modal, $log) {
-    
+    $scope.authentication = Authentication;
 
 
     Courses.query(function (data) {
