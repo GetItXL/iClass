@@ -48,6 +48,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     //Add a new choice
     $scope.addChoice = function (){
+
       $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() + 1);
 
       $scope.choices.push({ letter: $scope.currentLetter, description: '' });

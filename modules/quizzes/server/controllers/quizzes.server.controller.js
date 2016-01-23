@@ -40,7 +40,9 @@ exports.update = function (req, res) {
   var quiz = req.quiz;
 
   quiz.title = req.body.title;
-  quiz.content = req.body.content;
+  quiz.question = req.body.question;
+  quiz.choices = req.body.choices;
+  quiz.correctAnswer = req.body.correctAnswer;
 
   quiz.save(function (err) {
     if (err) {
