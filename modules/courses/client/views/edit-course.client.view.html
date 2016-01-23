@@ -42,13 +42,15 @@
                 <div class="form-group" >
                     <label for="startdate">Semester & year</label>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                         
         
                         Choose a semester: <select ng-model="course.semester" data-ng-options="act for act in semesters"></select>
                     <!-- {{years[0]}} is currently -->
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
                                   Choose a year: <select ng-model="course.year"
                                           data-ng-options="act for act in years"></select>
                         </div>
@@ -56,11 +58,13 @@
                 </div>
                 <div class="form-group" ng-init="isActive(course)">
                     <div class="row">
-                        <div class="col-md-4">
-                            <label>course is now </label>
+                        <div class="col-md-2">                 
+                            <label>course is now </label>  
                         </div>
-                        <div class="col-md-4">
-                            <div ng-bind="checkActivation" style="color:blue;"></div>
+                        <div class="col-md-2">  
+                            <div ng-bind="checkActivation" style="color:blue;"></div>                        
+                        </div>
+                        <div class="col-md-4">                           
                         </div>
                         <div class="col-md-4">
                             change activation status: <input type="checkbox" ng-model="course.active" > {{course.active}}
