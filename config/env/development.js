@@ -32,7 +32,7 @@ module.exports = {
     }
   },
   app: {
-    title: defaultEnvConfig.app.title + ' - Development Environment'
+    title: defaultEnvConfig.app.title + ' - An In-class Quiz Taking App'
   },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',

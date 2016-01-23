@@ -103,7 +103,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
 
     // Find existing Quiz
     $scope.findOne = function () {
-      console.log('Iam ere');
+
       $scope.quiz = Quizzes.get({
         quizId: $stateParams.quizId
       });
@@ -126,7 +126,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         var course;
 
         for(var i = 0; i < courses.length; i++){
-          console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+        //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
           if(courses[i]._id === $scope.quiz.courseID){
             course = courses[i];
           }

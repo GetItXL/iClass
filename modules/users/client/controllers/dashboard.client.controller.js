@@ -143,7 +143,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         $scope.numQuizzesInCourse = courseQuizPairs;
 
       });
-    } /* TODO: def need better algo later*/
+    }; /* TODO: def need better algo later*/
 
 
 
