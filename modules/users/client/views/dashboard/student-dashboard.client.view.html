@@ -4,7 +4,7 @@
   </div>
   <div class="list-group">
     <label>Enrolled Courses</label>
-    <a ng-repeat="course in enrolledCourses" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+    <a ng-repeat="course in enrolledCourses" ng-init="getNumQuiz(course._id)"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
       <small class="list-group-item-text">
         Created on
         <span ng-bind="course.created | date:'mediumDate'"></span>
@@ -14,6 +14,7 @@
       <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
       <p class="list-group-item-text" ng-bind="course.name"></p>
       <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+      Number of quizzes: {{numQuizzesInCourse[course._id]}}
     </a>
   </div>
 

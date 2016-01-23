@@ -8,7 +8,7 @@
             My Course (active course)
         </p>
         <div class="list-group">
-            <a ng-repeat="course in courses | filter:{active: true}" ng-init="findNumStudentEnrolled(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+            <a ng-repeat="course in courses | filter:{active: true}" ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
                <!--  <small class="list-group-item-text">
                         Created on
                     <span ng-bind="course.created | date:'mediumDate'"></span>
@@ -19,6 +19,8 @@
                     <h4> {{course.number}} {{course.name}} </h4>
 
                     Number of students: {{numStudentInCourse[course._id]}}
+
+                    Number of quizzes: {{numQuizzesInCourse[course._id]}}
               <button id = "edit" class="btn btn-default btn-sm"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
 
             </a>

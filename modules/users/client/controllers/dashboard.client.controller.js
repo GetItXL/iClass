@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users',
-  function ($scope, $stateParams, $location, Authentication, Courses, Users) {
+angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'Quizzes',
+  function ($scope, $stateParams, $location, Authentication, Courses, Users, Quizzes) {
 
     $scope.isAdmin = function(){
       return ($scope.authentication.user.roles.indexOf('admin') > -1);
@@ -88,6 +88,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     /* TODO: need more students to test this */
 
 
+
 /*******     student's dashboard function 	***********/
 
 
@@ -110,6 +111,43 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       //console.log(this.coursesEnrolled);
       console.log($scope.enrolledCourses);
     };
+
+
+
+    /********************* shared ******************/
+
+    //get the total number of quiz in a
+
+    /* getting all the pairs at once because can't use loop function in ng-repeat*/
+    $scope.getNumQuiz = function(){
+
+      var courseQuizPairs = {};
+
+      //Initialize the array with 0s
+      for(var k = 0; k < $scope.courses.length; k++){
+        courseQuizPairs[$scope.courses[k]._id] = 0;
+      }
+
+
+      var quizzes = Quizzes.query(function(){
+        for(var i = 0; i < quizzes.length; i++){
+          for(var j = 0; j < $scope.courses.length; j++){
+
+            if(quizzes[i].courseID === $scope.courses[j]._id){
+              courseQuizPairs[$scope.courses[j]._id]++;
+            }
+
+          }
+        }
+
+        $scope.numQuizzesInCourse = courseQuizPairs;
+
+      });
+    } /* TODO: def need better algo later*/
+
+
+
+
 
 
 
