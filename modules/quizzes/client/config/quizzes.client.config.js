@@ -8,14 +8,14 @@ angular.module('quizzes').run(['Menus',
       title: 'Quizzes',
       state: 'quizzes',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin, user, professor']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'quizzes', {
       title: 'List Quizzes',
       state: 'quizzes.list',
-      roles: ['*']
+      roles: ['admin, user, professor']
     });
 
     // Add the dropdown create item

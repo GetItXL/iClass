@@ -1,11 +1,11 @@
 
-## Framework and packaget using
+## Framework and packages used:
 - bootstrap
 - angular material
 
 
 ## Default Accounts
-These accounts are generated using `grunt mongo:load`
+Load these accounts into database use the command: `grunt mongo:load`
 
 |              | Admin  |  Professor  | Student     |
 | ------------ | ------ | ------------ | --------------- |
