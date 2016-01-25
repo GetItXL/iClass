@@ -1,4 +1,4 @@
-<section ng-controller="CoursesListController" > 
+<section ng-controller="CoursesListController" >
     <div class="page-header">
         <div class="row">
             <div class="col-md-4">
@@ -15,7 +15,7 @@
             </div> -->
         </div>
     </div>
-            <div class="panel panel-default" data-ng-repeat="course in pagedItems" >
+            <div class="panel panel-default" data-ng-repeat="course in pagedItems " >
                 <div class="panel-body">
                     <div class="media-left media-middle">
                         <a ng-click="modalView('md', course)">
@@ -23,24 +23,24 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <div class="course-heading"> 
+                        <div class="course-heading">
                             <div class="col-sm-6">
                                 <h4 ng-bind="course.number"></h4>
                             </div>
-                         
+
                             <div class="col-sm-6" >
-                                <h4>{{course.semester}} {{course.year}}</h4>                       
+                                <h4>{{course.semester}} {{course.year}}</h4>
                             </div>
-                            <div class="col-md-12 CourseTitle">                        
-                                
+                            <div class="col-md-12 CourseTitle">
+
                                     <h2 ng-bind="course.name"></h2>
-                              
-                                <div class="btn-group pull-right" >                  
+
+                                <div class="btn-group pull-right" >
                                 <button id = "edit" class="btn btn-default btn-sm" ng-show="isCourseCreated(course._id) || isAdmin()" type="submit" data-ng-click="modalUpdate('lg', course)" > Edit </button>
                                 <button id = "delete" class="btn btn-default btn-sm" ng-show="isAdmin()"  type="submit" data-ng-click="modalRemove('sm', course)"> Delete </button>
                             </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -53,9 +53,9 @@
                         <div class="col-sm-2" style="padding-top: 3px; padding-right: 0px; padding-left: 0px" >
                             <md-button id="purchase" type="button" class="md-raised md-primary pull-right" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalJoin('md', course)"> Join Course </md-button>
                         </div>
-                    </div> 
-                
-            </div>    
+                    </div>
+
+            </div>
     <!-- <div class="list-group">
         <a ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
             <div class="row">

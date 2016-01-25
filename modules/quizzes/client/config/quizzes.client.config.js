@@ -18,6 +18,8 @@ angular.module('quizzes').run(['Menus',
       roles: ['admin, user, professor']
     });
 
+    //test
+
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'quizzes', {
       title: 'Create Quizzes',
