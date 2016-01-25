@@ -31,5 +31,41 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     $scope.isStudent = function(){
       return ($scope.authentication.user.roles.indexOf('user') > -1);
     };
+
+    $scope.initTopHeader = function() {
+      $('.fa-bars').click(function () {
+        if ($('#sidebar > ul').is(":visible") === true) {
+            $('#main-content').css({
+                'margin-left': '0px'
+            });
+            $('#sidebar').css({
+                'margin-left': '-210px'
+            });
+            $('#sidebar > ul').hide();
+            $("#container").addClass("sidebar-closed");
+        } else {
+            $('#main-content').css({
+                'margin-left': '210px'
+            });
+            $('#sidebar > ul').show();
+            $('#sidebar').css({
+                'margin-left': '0'
+            });
+            $("#container").removeClass("sidebar-closed");
+        }
+      });
+    };
+    
+    $scope.initLeftSidebar = function() {
+      if(!$scope.authentication.user){
+            $('#main-content').css({
+                'margin-left': '0px'
+            });
+            $('#sidebar').css({
+                'margin-left': '-210px'
+            });
+      }
+    };
+
   }
 ]);

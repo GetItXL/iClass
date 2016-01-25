@@ -38,14 +38,17 @@
 <!-- <body class="ng-cloak">
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header> -->
 
-<body class="ng-cloak" ng-controller="AuthenticationController"> <!-- is it ok to put this controller here?-->
-<header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse" ng-if="authentication.user"></header>
+<body class="ng-cloak"> <!-- is it ok to put this controller here?-->
+<header ng-include="'/modules/core/client/views/header.client.view.html'" class="header black-bg"></header>
+<aside ng-include="'/modules/core/client/views/leftSidebar.client.view.html'"></aside>
 
 
 
-  <section class="content">
-    <section class="container">
-      {% block content %}{% endblock %}
+  <section id="main-content">
+    <section class="wrapper">
+     
+        {% block content %}{% endblock %}
+  
     </section>
   </section>
 

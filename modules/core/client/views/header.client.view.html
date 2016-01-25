@@ -1,4 +1,4 @@
-<div class="container" ng-controller="HeaderController">
+<!-- <div class="container" ng-controller="HeaderController">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
       <span class="sr-only">Toggle navigation</span>
@@ -31,10 +31,8 @@
         <a ui-sref="authentication.signin">Sign In</a>
       </li>
     </ul>
-<!--     <ul class="nav navbar-nav" ng-show="authentication.user">
-            <li><a href="#!/dashboard">dashboard</a></li>
-        </ul>
- -->
+</ul>
+ 
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
@@ -60,3 +58,33 @@
     </ul>
   </nav>
 </div>
+ -->
+
+ <header ng-controller="HeaderController" ng-init="initTopHeader()">
+              <div class="sidebar-toggle-box" ng-show="authentication.user">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a ui-sref="studentDashboard" class="logo" ng-if="isStudent()">iClass</a>
+            <a ui-sref="home" class="logo" ng-if="isAdmin()">iClass</a>
+            <a ui-sref="professorDashboard" class="logo" ng-if="isProf()">iClass</a>
+            <a ui-sref="authentication.signin" ng-show="!authentication.user" class="logo"><b>iClass</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+
+                    <!-- inbox dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+              <ul class="nav pull-right top-menu" ng-hide="authentication.user">
+                    <li><a class="logout" ui-sref="authentication.signup">Sign Up</a></li>
+                    <li><a class="logout" ui-sref="authentication.signin">Sign In</a></li>
+              </ul>
+              <ul class="nav pull-right top-menu" ng-show="authentication.user">
+                    <li><a class="logout"  href="/api/auth/signout">Logout</a></li>
+              </ul>
+            </div>
+        </header>

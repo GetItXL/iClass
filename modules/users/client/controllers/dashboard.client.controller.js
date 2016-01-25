@@ -3,7 +3,7 @@
 // Courses controller
 angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'Quizzes',
   function ($scope, $stateParams, $location, Authentication, Courses, Users, Quizzes) {
-
+    $scope.authentication = Authentication;
     $scope.isAdmin = function(){
       return ($scope.authentication.user.roles.indexOf('admin') > -1);
     };
