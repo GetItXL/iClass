@@ -14,6 +14,9 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
     $scope.quizMin = [0, 1, 2, 3, 4, 5];
     $scope.quizSec = [0, 10, 20, 30, 40, 50];
     $scope.showDuration = false;
+    $scope.inputMin = 0;
+    $scope.inputSec = 0;
+    //$scope.totalMS = 0; //total millisecond
 
 
     // Create new Quiz
@@ -33,7 +36,8 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         question: this.question,
         courseID: CourseInfoFactory.getCourseID(),
         choices: $scope.choices,
-        correctAnswer: $scope.correctAnswer
+        correctAnswer: $scope.correctAnswer,
+        quizDuration: $scope.convertToMSec($scope.inputMin, $scope.inputSec)
       });
 
       // Redirect after save
@@ -43,6 +47,7 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
+        console.log(quiz);
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -156,6 +161,24 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
       return ($scope.authentication.user.roles.indexOf('user') > -1);
     };
     /*******************************************************************/
+
+
+    $scope.setDurationVisibility = function(visibility){ //boolean
+      if(visibility)
+        $scope.showDuration = true;
+      else
+        $scope.showDuration = false;
+    };
+
+    $scope.convertToMSec = function(minute, second){
+
+      console.log(minute + ' ' + second);
+
+      if(minute === 0 && second === 0)
+        return -1; //manually end quiz
+
+      return minute * 60 * 1000 + second * 1000;
+    };
 
   }
 ]);

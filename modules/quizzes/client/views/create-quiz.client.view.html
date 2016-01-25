@@ -41,14 +41,14 @@
        <div class="form-group">
          <label for="durationOption">Quiz Duration</label>
          <div>
-           <button type="button" class="btn btn-primary" name="durationOption">Pick a quiz duration</button>
-           <button type="button" class="btn btn-primary" name="durationOption">Manually end quiz</button>
+           <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(true)" name="durationOption" id="durationOption">Pick a quiz duration</button>
+           <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(false)" name="durationOption" id="durationOption">Manually end quiz</button>
            <h1>
 
            </h1>
          </div>
 
-         <div>
+         <div ng-show="showDuration">
            <label>Please select a desired quiz duration</label>
            <p>
 
@@ -56,11 +56,11 @@
            </p>
            <div>
              <label for="quizMin">Select Minute</label>
-             <select ng-model="" data-ng-options="min for min in quizMin" name="quizMin">
+             <select ng-model="inputMin" data-ng-options="min for min in quizMin" name="quizMin" id="quizMin">
                <option value="">-- choose minute --</option>
              </select>
              <label for="quizSec">Select Second</label>
-             <select ng-model="" data-ng-options="sec for sec in quizSec" name="quizSec">
+             <select ng-model="inputSec" data-ng-options="sec for sec in quizSec" name="quizSec" id="quizSec">
                <option value="">-- choose second --</option>
              </select>
            </div>
