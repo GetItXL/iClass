@@ -10,6 +10,10 @@ angular.module('quizzes').controller('QuizzesController', ['$scope', '$statePara
     $scope.choices = [{ letter:'A', description:'' }]; //empty array
     $scope.correctAnswer = '';
 
+    //Stores user defined quiz duration
+    $scope.quizMin = [0, 1, 2, 3, 4, 5];
+    $scope.quizSec = [0, 10, 20, 30, 40, 50];
+    $scope.showDuration = false;
 
 
     // Create new Quiz

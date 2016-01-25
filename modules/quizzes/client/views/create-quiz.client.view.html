@@ -23,8 +23,8 @@
           <input type="text" id="choiceIn" name="choiceIn" class="form-control col-md-4" ng-model="choice.description" placeHolder="please enter a new choice" required>
 
           <div>
-            <button ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
-            <button ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
+            <button type="button" ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
+            <button type="button" ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
           </div>
         </div>
 
@@ -37,6 +37,46 @@
          </div>
        </div>
        <!-- TODO: make radio button selection required input -->
+
+       <div class="form-group">
+         <label for="durationOption">Quiz Duration</label>
+         <div>
+           <button type="button" class="btn btn-primary" name="durationOption">Pick a quiz duration</button>
+           <button type="button" class="btn btn-primary" name="durationOption">Manually end quiz</button>
+           <h1>
+
+           </h1>
+         </div>
+
+         <div>
+           <label>Please select a desired quiz duration</label>
+           <p>
+
+
+           </p>
+           <div>
+             <label for="quizMin">Select Minute</label>
+             <select ng-model="" data-ng-options="min for min in quizMin" name="quizMin">
+               <option value="">-- choose minute --</option>
+             </select>
+             <label for="quizSec">Select Second</label>
+             <select ng-model="" data-ng-options="sec for sec in quizSec" name="quizSec">
+               <option value="">-- choose second --</option>
+             </select>
+           </div>
+
+           <!-- TODO: make this a slider later -->
+         </div>
+
+
+
+
+       </div>
+
+
+
+
+
 
 
         <div class="form-group">
