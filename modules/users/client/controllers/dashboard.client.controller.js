@@ -97,6 +97,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       var user = $scope.authentication.user;
       var coursesEnrolled = [];
 
+      
       for(var i = 0; i < user.enrolledCourses.length; i++){
         console.log('enrolled course' + i + ': ' + user.enrolledCourses[i]);
 
@@ -109,7 +110,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       $scope.enrolledCourses = coursesEnrolled;
 
       //console.log(this.coursesEnrolled);
-      console.log($scope.enrolledCourses);
+      //console.log('enrolled' + $scope.enrolledCourses);
     };
 
 
@@ -121,26 +122,43 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     /* getting all the pairs at once because can't use loop function in ng-repeat*/
     $scope.getNumQuiz = function(){
 
+      var courses;
+
+      if($scope.isAdmin()){
+        courses = Courses.query();
+      }else if($scope.isProf()){
+        courses = $scope.courses;
+      }else if($scope.isStudent()){
+        courses = $scope.enrolledCourses;
+
+      }
+
+      console.log('there? '+ courses);
+
+      /* TODO: fix display num quiz on student side!!!! */
+
       var courseQuizPairs = {};
 
       //Initialize the array with 0s
-      for(var k = 0; k < $scope.courses.length; k++){
-        courseQuizPairs[$scope.courses[k]._id] = 0;
+      for(var k = 0; k < courses.length; k++){
+        courseQuizPairs[courses[k]._id] = 0;
+        console.log('id ' + courses[k]._id);
       }
 
 
       var quizzes = Quizzes.query(function(){
         for(var i = 0; i < quizzes.length; i++){
-          for(var j = 0; j < $scope.courses.length; j++){
+          for(var j = 0; j < courses.length; j++){
 
-            if(quizzes[i].courseID === $scope.courses[j]._id){
-              courseQuizPairs[$scope.courses[j]._id]++;
+            if(quizzes[i].courseID === courses[j]._id){
+              courseQuizPairs[courses[j]._id]++;
             }
 
           }
         }
 
         $scope.numQuizzesInCourse = courseQuizPairs;
+        console.log($scope.numQuizzesInCourse);
 
       });
     }; /* TODO: def need better algo later*/
