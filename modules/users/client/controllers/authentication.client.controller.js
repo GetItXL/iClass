@@ -50,12 +50,16 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         //$state.go($state.previous.state.name || 'home', $state.previous.params);
 
         // and redirect to the pdashboard page
+         angular.element('#main-content').css({
+                'margin-left': '210px'
+            });
         if($scope.authentication.user.roles.indexOf('admin') > -1)
           $location.path('/admindashboard/users');
         else if($scope.authentication.user.roles.indexOf('professor') > -1)
           $location.path('/professordashboard');
         else 
           $location.path('/studentdashboard');
+       
       }).error(function (response) {
         $scope.error = response.message;
       });
