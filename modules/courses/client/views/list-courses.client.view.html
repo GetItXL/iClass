@@ -15,7 +15,9 @@
             </div> -->
         </div>
     </div>
-            <div class="panel panel-default" data-ng-repeat="course in pagedItems " >
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mb"  data-ng-repeat="course in pagedItems ">
+            <div class="content-panel pn" >
                 <div class="panel-body">
                     <div class="media-left media-middle">
                         <a ng-click="modalView('md', course)">
@@ -51,11 +53,12 @@
                             </h4>
                         </div>
                         <div class="col-sm-2" style="padding-top: 3px; padding-right: 0px; padding-left: 0px" >
-                            <md-button id="purchase" type="button" class="md-raised md-primary pull-right" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalJoin('md', course)"> Join Course </md-button>
+                            <button id="purchase" type="button" class="btn btn-theme pull-right" ng-show="!isCourseEnrolled(course._id) && isStudent()" style="margin: 0px" data-ng-click="modalJoin('md', course)"> Join Course </button>
                         </div>
                     </div>
 
             </div>
+        </div>
     <!-- <div class="list-group">
         <a ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
             <div class="row">

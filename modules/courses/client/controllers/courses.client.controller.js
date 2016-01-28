@@ -343,7 +343,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 //$scope.active = [ {'text': 'Active', 'active': true}, {'text': 'Deactive', 'active': false}];
     //$scope.checkActive = {active: true, deactive: false};
     $scope.checkActivation = [];
-
+    $scope.switchStatu = "";
     // $scope.changeActiveState = function(value, key){
 
     // };
@@ -354,14 +354,36 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       if(course.active) {
         console.log('is active course now .........');
         $scope.checkActivation.push('activated');
+        $scope.switchStatu = "switch-on";
       }  
       else {
         console.log('is deactive course now .........');
         $scope.checkActivation.push('deactive');
+        $scope.switchStatu = "switch-off";
       }
     };
 
+    // $scope.switchStatu = $scope.checkSwitchStatu;
 
+    // $scope.checkSwitchStatu = function()  {
+    //   if($scope.checkActivation === 'activated')
+    //     $scope.switchStatu = "switch-on";
+    //   else
+    //      $scope.switchStatu = "switch-off";
+    // };
+
+    $scope.switchOn = function(course){
+        if($scope.switchStatu === "switch-off") {
+          console.log(' switch onnnnnnnn');
+            $scope.switchStatu = "switch-on";
+            course.active = true;
+        }
+        else{
+          console.log(' switch oofffff');
+            $scope.switchStatu = "switch-off";
+            course.active = false;
+        }
+    };
 
   }
 ]);

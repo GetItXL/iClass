@@ -1,5 +1,5 @@
 <section data-ng-controller="CoursesController" >
-    <div class="form-group">
+ <!--    <div class="form-group">
         <div class="alert alert-success text-center" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 
             <span>Ready to join {{course.number}} {{course.name}} </span>
@@ -12,5 +12,23 @@
     <div class="text-center form-group">
         <button class="btn btn-default" ng-click="cancel()">Cancel</button>
         <button class="btn btn-success" ng-click="joinCourse(course._id); ok()">Join</button>
-    </div>
+    </div> -->
+
+    
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true" ng-click="cancel()">×</button>
+                <h4 class="modal-title">{{course.number}} {{course.name}}</h4>
+            </div>
+            <div class="modal-body">
+                    <p>Please enter passcode:</p>
+                    <input type="text" name="passcode" ng-model="passcode" placeholder="passcode" autocomplete="off" class="form-control placeholder-no-fix"required>
+        
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-theme" type="button" ng-click="joinCourse(course._id); ok()">Join</button>
+            </div>
+        </div>
+  
 </section>

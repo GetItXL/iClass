@@ -104,7 +104,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
       $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
-        $state.reload();
+        //$state.reload();
       };
     };
 
@@ -141,7 +141,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
       $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
-        $state.reload();
+        //$state.reload();
       };
     };
     

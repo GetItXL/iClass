@@ -40,46 +40,61 @@
                     <input name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
                 </div>
                 <div class="form-group" >
-                    <label for="startdate">Semester & year</label>
+                  
                     <div class="row">
                         <div class="col-md-4">
+                            <label for="startdate">Semester & year</label>
+                        </div>
+                        <div class="col-md-4" style="text-align: right;" >
                         
         
                         Choose a semester: <select ng-model="course.semester" data-ng-options="act for act in semesters"></select>
                     <!-- {{years[0]}} is currently -->
                         </div>
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
+                        
+                        <div class="col-md-4" style="text-align: right;" >
                                   Choose a year: <select ng-model="course.year"
                                           data-ng-options="act for act in years"></select>
                         </div>
                     </div>       
                 </div>
-                <div class="form-group" ng-init="isActive(course)">
-                    <div class="row">
-                        <div class="col-md-2">                 
-                            <label>course is now </label>  
+                <div class="form-group row" >
+                       <div class="col-md-6 col-lg-6">
+                            activate course now?
                         </div>
-                        <div class="col-md-2">  
-                            <div ng-bind="checkActivation" style="color:blue;"></div>                        
+                        <div class="col-md-6 col-lg-6 text-center" style="text-align: right;" ng-init="isActive(course)">
+                            <div class="switch switch-square has-switch" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                                <div ng-class="switchStatu" class="switch-animate" ng-click="switchOn(course)">
+                                    <input type="checkbox">
+                                        <span class="switch-left">
+                                            <i class="fa fa-check"></i>
+                                        </span><label> </label>
+                                        <span class="switch-right">
+                                            <i class="fa fa-times"></i>
+                                        </span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">                           
-                        </div>
-                        <div class="col-md-4">
-                            <md-checkbox ng-model="course.active" aria-label="Checkbox">
+
+                           <!--  <checkbox ng-model="course.active" aria-label="Checkbox">
                                 change activation status: {{ course.active}}
-                            </md-checkbox>
+                            </checkbox> -->
                             <!-- need to refresh the check box when user click outside of the modal window -->
                     
-                        </div>
-                    </div>
+                        
+                  
                 </div>
             </fieldset>       
      
         </div>
   <div class="modal-footer">
-        <md-button id="ok" class="md-raised md-primary" ng-click="update(course); ok()">Update</md-button>
-         <md-button id="cancel" class="md-raised" ng-click="cancel()">Cancel</md-button>
+        <button id="ok" class="btn btn-theme" ng-click="update(course); ok()">Update</button>
+        <button id="cancel" class="btn btn-default" ng-click="cancel()">Cancel</button>
     </div>
-</section>
+
+
+    
+
+</section>  
+ 
+
