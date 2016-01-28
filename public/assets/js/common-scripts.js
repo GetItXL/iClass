@@ -11,6 +11,7 @@ $(function() {
 //        cookie: 'dcjq-accordion-1',
         classExpand: 'dcjq-current-parent'
     });
+     console.log('in sss dcAccordion');
 });
 
 var Script = function () {

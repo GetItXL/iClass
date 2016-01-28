@@ -11,7 +11,7 @@
 (function($){
 
 	$.fn.dcAccordion = function(options) {
-
+		console.log('in dcAccordion');
 		//set default options 
 		var defaults = {
 			classParent	 : 'dcjq-parent',
@@ -114,6 +114,7 @@
 
 			// Set up accordion
 			function setUpAccordion(){
+				console.log('set up dcAccordion');				
 
 				$arrow = '<span class="'+defaults.classArrow+'"></span>';
 				var classParentLi = defaults.classParent+'-li';
@@ -188,6 +189,7 @@
 		}
 		// Reset accordion using active links
 		function resetAccordion(){
+			console.log('reset dcAccordion');	
 			$('ul',obj).hide();
 			$allActiveLi = $('a.'+defaults.classActive,obj);
 			$allActiveLi.siblings('ul').show();
