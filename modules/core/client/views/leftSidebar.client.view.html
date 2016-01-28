@@ -1,9 +1,9 @@
-<div ng-controller="HomeController" ng-init="initLeftSidebar()">
+<div ng-controller="HomeController" ng-init="initLeftSidebar() ">
 	<div id="sidebar"  class="nav-collapse" ng-if="authentication.user">
               <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
+              <ul class="sidebar-menu" id="nav-accordion" ng-click="subMenu()">
               
-              	  <p class="centered"><a href="profile.html"><img ng-src="{{authentication.user.profileImageURL}}" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><img ng-src="{{authentication.user.profileImageURL}}" class="img-circle" width="60"></a></p>
               	  <h5 class="centered" ng-bind="authentication.user.displayName"></h5>
               	  <h5 class="centered" ng-bind="authentication.user.email"></h5>
     
@@ -16,16 +16,22 @@
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
-                      <a ui-sref="home" ng-if="isAdmin()">
+                      <a ui-sref="/" ng-if="isAdmin()">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a ui-sref="admin.users" ng-if="isAdmin()">
+                          <i class="fa fa-users"></i>
+                          <span>User List</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="/courses">
-                          <i class="fa fa-book"></i>
-                          <span>Course Lists</span>
+                          <i class="fa fa-graduation-cap"></i>
+                          <span>Course List</span>
                       </a>
                   </li>
                   <li class="sub-menu">
@@ -93,8 +99,8 @@
                           <span>Charts</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="/courses">Morris</a></li>
+                          <li><a  href="/quizzes">Chartjs</a></li>
                       </ul>
                   </li>
 
