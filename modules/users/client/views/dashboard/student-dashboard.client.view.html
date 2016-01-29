@@ -3,19 +3,23 @@
     <h1>Courses</h1>
   </div>
   <div class="list-group">
-    <label>Enrolled Courses</label>
-    <a ng-repeat="course in enrolledCourses" ng-init="getNumQuiz(course._id)"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
-      <small class="list-group-item-text">
-        Created on
-        <span ng-bind="course.created | date:'mediumDate'"></span>
-        by Professor
-        <span ng-bind="course.professor.displayName"></span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
-      <p class="list-group-item-text" ng-bind="course.name"></p>
-      <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
-      Number of quizzes: {{numQuizzesInCourse[course._id]}}
-    </a>
+      <label>Enrolled Courses</label>
+      <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in enrolledCourses" >
+          <div class="pn" >
+              <a ng-init="getNumQuiz(course._id)"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+                <small class="list-group-item-text">
+                  Created on
+                  <span ng-bind="course.created | date:'mediumDate'"></span>
+                  by Professor
+                  <span ng-bind="course.professor.displayName"></span>
+                </small>
+                <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
+                <p class="list-group-item-text" ng-bind="course.name"></p>
+                <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+                Number of quizzes: {{numQuizzesInCourse[course._id]}}
+              </a>
+          </div>
+      </div>
   </div>
 
 </section>
