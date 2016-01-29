@@ -23,15 +23,17 @@ describe('Quiz Model Unit Tests:', function () {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
-      email: 'test@test.com',
-      username: 'username',
+      email: 'testasdfadf@ufl.com',
+      username: 'usernameAA',
       password: 'M3@n.jsI$Aw3$0m3'
     });
 
     user.save(function () {
       quiz = new Quiz({
         title: 'Quiz Title',
-        content: 'Quiz Content',
+        question: 'Quiz Content',
+        choices: [{ letter:'A', description:'asdf' }],
+        correctAnswer: 'A',
         user: user
       });
 

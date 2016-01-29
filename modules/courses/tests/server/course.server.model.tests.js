@@ -26,6 +26,7 @@ describe('Course Model Unit Tests:', function () {
       email: 'test@test.com',
       username: 'username',
       password: 'M3@n.jsI$Aw3$0m3'
+
     });
 
     user.save(function () {
@@ -41,6 +42,8 @@ describe('Course Model Unit Tests:', function () {
 
   describe('Method Save', function () {
     it('should be able to save without problems', function (done) {
+      course.name = 'hi there :3';
+      course.number = 2333;
       this.timeout(10000);
       return course.save(function (err) {
         should.not.exist(err);
@@ -48,9 +51,16 @@ describe('Course Model Unit Tests:', function () {
       });
     });
 
-    it('should be able to show an error when try to save without title', function (done) {
-      course.title = '';
+    it('should be able to show an error when try to save without name', function (done) {
+      course.number = 2333;
+      return course.save(function (err) {
+        should.exist(err);
+        done();
+      });
+    });
 
+    it('should be able to show an error when try to save without number', function (done) {
+      course.name = 'hi there :3';
       return course.save(function (err) {
         should.exist(err);
         done();

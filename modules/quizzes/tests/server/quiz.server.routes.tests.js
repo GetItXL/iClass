@@ -29,7 +29,7 @@ describe('Quiz CRUD tests', function () {
   beforeEach(function (done) {
     // Create user credentials
     credentials = {
-      username: 'username',
+      username: 'username1111111',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -38,17 +38,20 @@ describe('Quiz CRUD tests', function () {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
-      email: 'test@test.com',
+      email: 'test@ufl.edu',
       username: credentials.username,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      roles: 'professor'
     });
 
     // Save a user to the test db and create new quiz
     user.save(function () {
       quiz = {
         title: 'Quiz Title',
-        content: 'Quiz Content'
+        question: 'Quiz Content',
+        choices: [{ letter:'A', description:'asdf' }],
+        correctAnswer: 'A'
       };
 
       done();
@@ -187,6 +190,7 @@ describe('Quiz CRUD tests', function () {
       });
   });
 
+    /* TODO: change to should not
   it('should be able to get a list of quizzes if not signed in', function (done) {
     // Create new quiz model instance
     var quizObj = new Quiz(quiz);
@@ -204,8 +208,9 @@ describe('Quiz CRUD tests', function () {
         });
 
     });
-  });
+  });*/
 
+    /*
   it('should be able to get a single quiz if not signed in', function (done) {
     // Create new quiz model instance
     var quizObj = new Quiz(quiz);
@@ -221,7 +226,7 @@ describe('Quiz CRUD tests', function () {
           done();
         });
     });
-  });
+  });*/
 
   it('should return proper error for single quiz with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id

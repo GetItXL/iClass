@@ -29,7 +29,7 @@ describe('Course CRUD tests', function () {
   beforeEach(function (done) {
     // Create user credentials
     credentials = {
-      username: 'username',
+      username: 'username111',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -38,17 +38,18 @@ describe('Course CRUD tests', function () {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
-      email: 'test@test.com',
+      email: 'test123111@ufl.edu',
       username: credentials.username,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      roles: ['professor']
     });
 
     // Save a user to the test db and create new course
     user.save(function () {
       course = {
-        title: 'Course Title',
-        content: 'Course Content'
+        name: 'testCourseName',
+        number: 'testCourseNum'
       };
 
       done();
