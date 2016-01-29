@@ -18,8 +18,8 @@
         </small>
         <p class="lead" ng-bind="course.name"></p>
         <p class="lead" ng-bind="course.professor.displayName"></p>
-        end date:
-        <p class="lead" ng-bind="course.endDate"></p>
+      <p class="lead" ng-bind="course._id"></p>
+
         <!-- only admin or professor who created the course be able to see passcode -->
         <p class="lead" ng-bind="course.passcode" ng-show="isAdmin()"></p>
         <p class="lead" ng-bind="course.passcode" ng-show="isCourseCreated(course._id)"></p>
@@ -60,6 +60,32 @@
       <i class="glyphicon glyphicon-plus">CreateQuiz</i>
     </a>
   </div>
+
+  <div class="row">
+        <div class="col-md-12">
+            <h2> Quizzes </h2>
+            <hr>
+                <!--value of course._id does not pass to the function figureOutQuizToDisplay-->
+                <div class="list-group" ng-controller="QuizzesController" ng-init="figureOutQuizToDisplay(course._id)" >
+                   <!--  {{course._id}} 
+ -->                     <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="quiz in quizzes " >
+                        <div class="pn" >
+                           <a ui-sref="quizzes.view({quizId: quiz._id})" class="list-group-item">
+                             
+                                Posted on
+                                <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                                by
+                                <span ng-bind="quiz.user.displayName"></span>
+                             
+                              <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
+                              <p class="list-group-item-text" ng-bind="quiz.content"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+    </div>
 
 
   </section>
