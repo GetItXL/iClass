@@ -3,7 +3,7 @@
 
     <div id="login-page">
         <div class="container">
-          
+
           <form class="form-login" name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
             <h2 class="form-login-heading">sign up now</h2>
             <fieldset>
@@ -42,7 +42,7 @@
                         <input type="radio" name="optradio">Student
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="optradio">Professor
+                        <input type="radio" name="optradio" ng-model="credentials.roles" value="professor">Professor
                       </label>
                     </form>
                   </div>
@@ -85,7 +85,7 @@
                     </a>
                   </div>
                 </div>
-                  
+
                 </div>
             </fieldset>
           </form>
