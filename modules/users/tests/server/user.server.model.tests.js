@@ -22,7 +22,7 @@ describe('User Model Unit Tests:', function () {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
-      email: 'test@test.com',
+      email: 'test2333@ufl.edu',
       username: 'username',
       password: 'M3@n.jsI$Aw3$0m3',
       provider: 'local'
@@ -33,7 +33,7 @@ describe('User Model Unit Tests:', function () {
       firstName: 'Different',
       lastName: 'User',
       displayName: 'Full Different Name',
-      email: 'test3@test.com',
+      email: 'test3@ufl.edu',
       username: 'different_username',
       password: 'Different_Password1!',
       provider: 'local'
@@ -490,10 +490,29 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should allow single quote characters in email address - "abc\'def@abc.com"', function (done) {
+    /*
+    it('should allow single quote characters in email address - "abc\'def@ufl.edu"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = 'abc\'def@abc.com';
+      _user1.email = 'abc\'def@ufl.edu';
+      _user1.save(function (err) {
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.not.exist(err);
+          done();
+        }
+      });
+    });*/
+
+    it('should allow valid email address - "abc@ufl.edu"', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.email = 'abc@ufl.edu';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
@@ -508,10 +527,29 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should allow valid email address - "abc@abc.com"', function (done) {
+    /*
+    it('should allow valid email address - "abc+def@ufl.edu"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = 'abc@abc.com';
+      _user1.email = 'abc+def@ufl.edu';
+      _user1.save(function (err) {
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err);
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          should.not.exist(err);
+          done();
+        }
+      });
+    });*/
+
+    it('should allow valid email address - "abc.def@ufl.edu"', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.email = 'abc.def@ufl.edu';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
@@ -526,10 +564,10 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should allow valid email address - "abc+def@abc.com"', function (done) {
+    it('should allow valid email address - "abc.def@ufl.edu"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = 'abc+def@abc.com';
+      _user1.email = 'abc.def@ufl.edu';
       _user1.save(function (err) {
         if (!err) {
           _user1.remove(function (err_remove) {
@@ -544,46 +582,10 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
-    it('should allow valid email address - "abc.def@abc.com"', function (done) {
+    it('should allow valid email address - "abc-def@ufl.edu"', function (done) {
       var _user1 = new User(user1);
 
-      _user1.email = 'abc.def@abc.com';
-      _user1.save(function (err) {
-        if (!err) {
-          _user1.remove(function (err_remove) {
-            should.not.exist(err);
-            should.not.exist(err_remove);
-            done();
-          });
-        } else {
-          should.not.exist(err);
-          done();
-        }
-      });
-    });
-
-    it('should allow valid email address - "abc.def@abc.def.com"', function (done) {
-      var _user1 = new User(user1);
-
-      _user1.email = 'abc.def@abc.def.com';
-      _user1.save(function (err) {
-        if (!err) {
-          _user1.remove(function (err_remove) {
-            should.not.exist(err);
-            should.not.exist(err_remove);
-            done();
-          });
-        } else {
-          should.not.exist(err);
-          done();
-        }
-      });
-    });
-
-    it('should allow valid email address - "abc-def@abc.com"', function (done) {
-      var _user1 = new User(user1);
-
-      _user1.email = 'abc-def@abc.com';
+      _user1.email = 'abc-def@ufl.edu';
       _user1.save(function (err) {
         should.not.exist(err);
         if (!err) {
