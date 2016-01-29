@@ -1,41 +1,48 @@
 <section ng-controller="QuizzesController" ng-init="findOne()">
-  <div class="page-header">
-    <h1 ng-bind="quiz.title"></h1>
-  </div>
-  <div>
-    <h2>Class Info</h2>
-    <p>{{courseDisplayInfo.number}}</p>
-    <p>{{courseDisplayInfo.name}}</p>
+    <div class="col-lg-12 mt">
+        <div class="row content-panel">
+            <div class="page-header centered">
+                <h1 ng-bind="quiz.title"></h1>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="invoice-body">
+                    <h2>Class Info</h2>
+                    <p>{{courseDisplayInfo.number}}</p>
+                    <p>{{courseDisplayInfo.name}}</p>
 
-    <h2>Quiz Question</h2>
-    <p>{{quiz.question}}</p>
+                    <h2>Quiz Question</h2>
+                    <p>{{quiz.question}}</p>
 
-    <h2>choices</h2>
-    <div ng-repeat="choice in quiz.choices">
-      <p>{{choice.letter}}  {{choice.description}}</p>
+                    <h2>choices</h2>
+                    <div ng-repeat="choice in quiz.choices">
+                      <p>{{choice.letter}}  {{choice.description}}</p>
+                    </div>
+
+                    <h2>Correct answer</h2>
+                    <p>{{quiz.correctAnswer}}</p>
+
+                    <h2>Quiz Duration</h2>
+                    <p>{{quiz.quizDuration}} milliseconds</p>
+                   
+                    <div class="pull-right" ng-show="!isStudent()" >
+                      <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
+                        <i class="glyphicon glyphicon-edit"></i>
+                      </a>
+                      <a class="btn btn-primary" ng-click="remove();">
+                        <i class="glyphicon glyphicon-trash"></i>
+                      </a>
+                    </div>
+                    <small>
+                      <em class="text-muted">
+                        Posted on
+                        <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                        by
+                        <span ng-bind="quiz.user.displayName"></span>
+                      </em>
+                    </small>
+                    <p class="lead" ng-bind="quiz.content"></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <h2>Correct answer</h2>
-    <p>{{quiz.correctAnswer}}</p>
-
-    <h2>Quiz Duration</h2>
-    <p>{{quiz.quizDuration}} milliseconds</p>
-  </div>
-  <div class="pull-right" ng-show="!isStudent()" >
-    <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="remove();">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="quiz.created | date:'mediumDate'"></span>
-      by
-      <span ng-bind="quiz.user.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="quiz.content"></p>
 </section>
