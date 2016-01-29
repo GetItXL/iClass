@@ -20,7 +20,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
     $scope.figureOutItemsToDisplay = function () {
       $scope.filteredItems = $filter('filter')($scope.courses, {
-        $: $scope.search  //need to add | filter:{active: true} to here, look for syntax.
+        $: $scope.search //need to add | filter:{active: true} to here, look for syntax.
       });
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
@@ -208,16 +208,17 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.isCourseEnrolled = function(enrolledCourseId){
 
       //var student = new Users(Authentication.user);
+       console.log('enrolled:'+enrolledCourseId);
       var user = $scope.authentication.user;
 
       if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)
       {
-        console.log('course not enrolled!');
+      //  console.log('course not enrolled!');
         return false;
       }
       else
       {
-        console.log('course enrolled!');
+      //  console.log('course enrolled!');
         return true;
       }
     };
@@ -226,7 +227,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.isCourseCreated = function(createdCourseId){
 
       //console.log('isCourseCreated function Users created course: ' + $scope.authentication.user.createdCourses);
-      console.log('isCourseCreated function Users created course');
+     // console.log('isCourseCreated function Users created course');
 
       var user = $scope.authentication.user;
 
