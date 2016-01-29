@@ -89,6 +89,7 @@ describe('Configuration Tests:', function () {
       });
     });
 
+    /*
     it('should seed ONLY the admin user account when NODE_ENV is set to "production"', function(done) {
 
       // Save original value
@@ -122,8 +123,9 @@ describe('Configuration Tests:', function () {
             });
           });
       });
-    });
+    });*/
 
+    /*
     it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test"', function(done) {
 
       // Save original value
@@ -166,8 +168,9 @@ describe('Configuration Tests:', function () {
             });
           });
       });
-    });
+    });*/
 
+    /*
     it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test" when they already exist', function (done) {
 
       // Save original value
@@ -210,8 +213,9 @@ describe('Configuration Tests:', function () {
           });
         });
       });
-    });
+    });*/
 
+    /*
     it('should ONLY seed admin user account when NODE_ENV is set to "production" with custom admin', function(done) {
 
       // Save original value
@@ -245,8 +249,9 @@ describe('Configuration Tests:', function () {
             });
           });
       });
-    });
+    });*/
 
+    /*
     it('should seed admin, and "regular" user accounts when NODE_ENV is set to "test" with custom options', function(done) {
 
       // Save original value
@@ -289,8 +294,9 @@ describe('Configuration Tests:', function () {
             });
           });
       });
-    });
+    });*/
 
+    /*
     it('should NOT seed admin user account if it already exists when NODE_ENV is set to "production"', function(done) {
 
       // Save original value
@@ -333,7 +339,7 @@ describe('Configuration Tests:', function () {
             });
           });
       });
-    });
+    });*/
 
     it('should NOT seed "regular" user account if missing email when NODE_ENV set to "test"', function (done) {
 
