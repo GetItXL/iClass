@@ -121,31 +121,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       getCourseDisplayInfo($scope.quiz.courseID);
     };
 
-
-    /************ Find existing Quiz in one courses **************/
-
-    $scope.figureOutQuizToDisplay = function (currentCourseID) {
-      currentCourseID = '5699e1d7046a38e1126a8c05';
-      console.log('build quiz pageaaaa 123 '+currentCourseID);
-      var courseQuizzes = [];
-console.log('build quiz pageaaaa 1 '+currentCourseID);
-        var quizzes = Quizzes.query(function(){
-console.log('build quiz pageaaaa 13 ');
-          for(var i = 0; i < quizzes.length; i++){
-            //console.log(courses[i].professor._id);
-            if(quizzes[i].courseID === currentCourseID){
-              courseQuizzes.push(quizzes[i]);
-              console.log('build quiz page wj '+quizzes[i].courseID);
-            }
-          }
-          $scope.quizzes = courseQuizzes;
-        });
-    };
-  
-
-    /********************/
-
-
+    
     $scope.updateChoices = function(){
       $scope.choices = $scope.quiz.choices;
       $scope.correctAnswer = $scope.quiz.correctAnswer;

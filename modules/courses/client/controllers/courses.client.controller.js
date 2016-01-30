@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory',
-  function ($scope, $stateParams, $location, Authentication, Courses, Users, CourseInfoFactory) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes',
+  function ($scope, $stateParams, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
@@ -384,6 +384,30 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             course.active = false;
         }
     };
+
+
+
+    /****** Finds all quizzes in a class *******/
+    $scope.figureOutQuizToDisplay = function (currentCourseID) {
+
+      var currentCourseId = CourseInfoFactory.getCourseID();
+      var courseQuizzes = [];
+
+      var quizzesInCourse = Quizzes.query(function(){
+
+        for(var i = 0; i < quizzesInCourse.length; i++){
+          if(quizzesInCourse[i].courseID === currentCourseId){
+            courseQuizzes.push(quizzesInCourse[i]);
+            //console.log('I pushed: !!' + quizzesInCourse[i].title + '   ' + quizzesInCourse[i].courseID);
+
+          }
+        }
+        $scope.quizzesInCourse = courseQuizzes;
+      });
+    };
+
+
+
 
 
     // $scope.figureOutQuizToDisplay = function (courseID) {
