@@ -4,6 +4,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
   function ($scope, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+     
 
     $scope.initLeftSidebar = function() {
       if(!$scope.authentication.user){
@@ -100,7 +101,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		        classExpand: 'dcjq-current-parent'
 		    });
 
-		    console.log('in sss dcAccordion');
+		  //  console.log('in sss dcAccordion');
 
 
 		//});

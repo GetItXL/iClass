@@ -8,9 +8,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
 
-    // If user is signed in then redirect back home
+   // If user is signed in then redirect back dashboard
     if ($scope.authentication.user) {
-      $location.path('/');
+      //$location.path('/');
+      if($scope.authentication.user.roles.indexOf('admin') > -1)
+          $location.path('/admindashboard/users');
+      else if($scope.authentication.user.roles.indexOf('professor') > -1)
+          $location.path('/professordashboard');
+      else 
+          $location.path('/studentdashboard');
+    }
+  
+  // If user is not signed in then redirect back to signin page
+    if (!$scope.authentication.user) {
+        $location.path('/authentication/signin');
     }
 
     $scope.signup = function (isValid) {
