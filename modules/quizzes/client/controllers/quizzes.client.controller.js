@@ -182,5 +182,20 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       return minute * 60 * 1000 + second * 1000;
     };
 
+
+    /********  check quiz avaliablity **********/
+
+    $scope.isOpen = function(quiz) {
+
+      if(!quiz.open) {
+         $location.path('quizzes/'+quiz+'/close');
+      }
+      else {
+        console.log('quiz is open');
+          $location.path('quizzes/'+quiz+'/open');
+      }
+
+    };
+
   }
 ]);
