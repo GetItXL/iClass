@@ -54,6 +54,10 @@ var QuizSchema = new Schema({
   },
   quizType: {
     type: String //"MC", vs "attendence"
+  },
+  quizOpen: {
+    type: Boolean,
+    default: false
   }
 });
 
