@@ -68,9 +68,9 @@
           <!--   <a ui-sref="studentDashboard" class="logo" ng-if="isStudent()">iClass</a>
             <a ui-sref="home" class="logo" ng-if="isAdmin()">iClass</a>
             <a ui-sref="professorDashboard" class="logo" ng-if="isProf()">iClass</a> -->
-            <a ui-sref="studentDashboard" class="logo" ng-if="authentication.user" ng-show="isStudent()">iClass</a>
-            <a ui-sref="home" class="logo" ng-if="authentication.user" ng-show="isAdm()">iClass</a>
-            <a ui-sref="professorDashboard" class="logo" ng-if="authentication.user" ng-show="isProf()">iClass</a>
+            <a ui-sref="studentDashboard" class="logo" ng-show="isStudent()">iClass</a>
+            <a ui-sref="home" class="logo" ng-show="isAdmin()">iClass</a>
+            <a ui-sref="professorDashboard" class="logo" ng-show="isProf()">iClass</a>
             <a ui-sref="authentication.signin" ng-show="!authentication.user" class="logo"><b>iClass</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
