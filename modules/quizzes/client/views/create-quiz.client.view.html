@@ -1,91 +1,106 @@
-<section ng-controller="QuizzesController">
-  <div class="page-header">
-    <h1>New Quiz</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="quizForm" class="form-horizontal" ng-submit="create(quizForm.$valid)" novalidate>
-     <fieldset>
-        <div class="form-group" show-errors>
-          <label for="title">Title</label>
-          <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="quizForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required"> Quiz title is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="question">Question</label>
-          <input name="question" ng-model="question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
-        </div>
+<section ng-controller="QuizzesController">           
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+              <div class="col-lg-12">
+                  <div class="form-panel">
+                      <div class="page-header centered">
+                          <h1>New Quiz</h1>
+                      </div>
+                      <form class="form-horizontal style-form" name="quizForm" ng-submit="create(quizForm.$valid)" novalidate>
+                                                  
+                          <fieldset>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Title</label>
+                              <div class="col-sm-10">
+                                  <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
+                                  <div ng-messages="quizForm.title.$error" role="alert">
+                                    <span class="help-block error-text" ng-message="required"> Quiz title is required.</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Question</label>
+                              <div class="col-sm-10">
+                                  <input name="question" ng-model="question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
+                              </div>
+                          </div>
 
-        <div class="form-group" ng-repeat="choice in choices">
-          <label for="choiceIn" ng-show="$first">Choices</label>
-          <label>{{choice.letter}}</label>
-          <input type="text" id="choiceIn" name="choiceIn" class="form-control col-md-4" ng-model="choice.description" placeHolder="please enter a new choice" required>
+                          <div class="form-group" >
+                              <div ng-repeat="choice in choices">
+                                  <label class="col-sm-12 col-sm-12 control-label" for="choiceIn" ng-show="$first">Choices: </label>
+                                  <label class="col-sm-2 col-sm-2 control-label" style="text-align: center">  {{choice.letter}}</label>
+                                  <div class="col-sm-10">
+                                      <input type="text" id="choiceIn" name="choiceIn" class="form-control" ng-model="choice.description" placeHolder="please enter a new choice" required>
+                                  </div>
 
-          <div>
-            <button type="button" ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
-            <button type="button" ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
-          </div>
-        </div>
+                                  <div class="col-sm-2 col-sm-2 "></div>
+                                  <div class="col-sm-10">
+                                      </br>
+                                      <button type="button" ng-show="$last" ng-click="addChoice()" class="btn btn-primary">Add a new choice</button>
+                                      <button type="button" ng-show="$last" ng-click="deleteChoice()" class="btn btn-primary">delete choice</button>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Correct Answer</label>
+                              <div class="col-sm-10" >
+                                                                
+                                      <div class="radio" >
+                                          <label class="radio-inline" ng-repeat="choice in choices">
+                                              <input type="radio" ng-model="$parent.correctAnswer" value="{{choice.letter}}" name="answer" id="answer" checked>
+                                              {{choice.letter}}
+                                          </label>
+                                      </div>
+                                       <!-- TODO: make radio button selection required input -->
+                                  
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Quiz Duration</label>
+                              <div class="col-sm-10">
+                                  <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(true)" name="durationOption" id="durationOption">Pick a quiz duration</button>
+                                  <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(false)" name="durationOption" id="durationOption">Manually end quiz</button>
+                              </div>
+                              <hr>
+                              <div ng-show="showDuration">
+                                  <label class="col-sm-4 col-sm-4 control-label" >Please select a desired quiz duration</label>
+                                  <div class="col-sm-8">
+                                      <label class="radio-inline" for="quizMin">Select Minute
+                                          <select ng-model="inputMin" data-ng-options="min for min in quizMin" name="quizMin" id="quizMin">
+                                             <option value="">-- choose minute --</option>
+                                           </select>
+                                      </label>
+                                      <label  class="radio-inline" for="quizSec">Select Second
+                                          <select ng-model="inputSec" data-ng-options="sec for sec in quizSec" name="quizSec" id="quizSec">
+                                             <option value="">-- choose second --</option>
+                                          </select>
+                                      </label>
+                                 </div>
+
+                                 <!-- TODO: make this a slider later -->
+                               </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-sm-12 text-center">
+                                      <button type="submit" class="btn btn-theme btn-lg">
+                                         <i class="fa fa-check"></i> submit 
+                                      </button>
+                                
+                              </div>
+                          </div>
 
 
-       <div class="form-group" ng-repeat="choice in choices">
-         <label for="answer" ng-show="$first">Correct Answer</label>
-         <div>
-           <input type="radio" ng-model="$parent.correctAnswer" value="{{choice.letter}}" name="answer" id="answer"> <!-- ng-repeat create a child scope, so you have to bind to the $parent -->
-           {{choice.letter}}
-         </div>
-       </div>
-       <!-- TODO: make radio button selection required input -->
 
-       <div class="form-group">
-         <label for="durationOption">Quiz Duration</label>
-         <div>
-           <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(true)" name="durationOption" id="durationOption">Pick a quiz duration</button>
-           <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(false)" name="durationOption" id="durationOption">Manually end quiz</button>
-           <h1>
-
-           </h1>
-         </div>
-
-         <div ng-show="showDuration">
-           <label>Please select a desired quiz duration</label>
-           <p>
-
-
-           </p>
-           <div>
-             <label for="quizMin">Select Minute</label>
-             <select ng-model="inputMin" data-ng-options="min for min in quizMin" name="quizMin" id="quizMin">
-               <option value="">-- choose minute --</option>
-             </select>
-             <label for="quizSec">Select Second</label>
-             <select ng-model="inputSec" data-ng-options="sec for sec in quizSec" name="quizSec" id="quizSec">
-               <option value="">-- choose second --</option>
-             </select>
-           </div>
-
-           <!-- TODO: make this a slider later -->
-         </div>
+                         </fieldset>
+                      </form>
+                  </div>
+              </div><!-- col-lg-12-->       
+            </div><!-- /row -->
+      
 
 
 
-
-       </div>
-
-
-
-
-
-
-
-        <div class="form-group">
-          <input type="submit" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
 </section>
