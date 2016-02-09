@@ -56,27 +56,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
     };
 
-    // $scope.findendDate = function(selectedSemester,selectedYear){
-    //   var today = new Date();
-    //   today.setFullYear(selectedYear);
-    //   console.log('today is change to ' + today);
-    //   if(selectedSemester === 'Spring') 
-    //   {
-    //     today.setMonth(4,30);
-    //     return today;
-    //   } 
-    //   else if (selectedSemester === 'Summer') 
-    //   {
-    //     today.setMonth(7,10);
-    //     return today;
-    //   }
-    //   else
-    //   {
-    //     today.setMonth(11,30);
-    //     return today;
-    //   }
-    // };
-
     //added course to professor's createdcourse list
     $scope.addtoCreateCourseList = function(courseID){
 

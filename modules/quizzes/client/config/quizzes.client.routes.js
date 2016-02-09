@@ -28,7 +28,21 @@ angular.module('quizzes').config(['$stateProvider',
         url: '/:quizId',
         templateUrl: 'modules/quizzes/client/views/view-quiz.client.view.html',
         data: {
-          roles: ['professor', 'admin', 'user']
+          roles: ['professor', 'admin']
+        }
+      })
+      .state('quizzes.close', {
+        url: '/:quizId/close',
+        templateUrl: 'modules/quizzes/client/views/close-quiz.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('quizzes.open', {
+        url: '/:quizId/open',
+        templateUrl: 'modules/quizzes/client/views/open-quiz.client.view.html',
+        data: {
+          roles: ['user', 'admin']
         }
       })
       .state('quizzes.edit', {

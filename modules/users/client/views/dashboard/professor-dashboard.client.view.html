@@ -1,52 +1,59 @@
 <section ng-controller="DashboardController" ng-init="createdCourseList()">
-    <div class="page-header">
-        <h1> Professor Dashboard</h1>
-    </div>
-    <div class="row">
-	    <div class="col-lg-6" >
-        <p class="lead text-center">
-            My Course (active course)
-        </p>
-        <div class="list-group">
-            <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: true}">
-                <div class="pn" >
-                    <a ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id)" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
-                             {{course.semester}} {{course.year}}
-                            <h4> {{course.number}} {{course.name}} </h4>
-                              <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
-                        
-                            Number of students: {{numStudentInCourse[course._id]}}
-                        </br>
-                            Number of quizzes: {{numQuizzesInCourse[course._id]}}
-                    </a>
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+                <div class="page-header centered">
+                    <h1> Professor Dashboard</h1>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 text-center" >
-         <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
-    </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">List all deactive courses</button>
-            <hr>
-            <div collapse="isCollapsed"> 
-                <!-- uib-collapse only works with bootstrap version 0.14.X -->
-                <div class="list-group">
-                     <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: false}">
-                        <div class="pn" >
-                            <a ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item">
-                                 {{course.semester}} {{course.year}}
-                                <h4> {{course.number}} {{course.name}} </h4>
-
-                                Number of students: {{numStudentInCourse[course._id]}}
-
-                            </a>
+                <div class="row">
+                    <div class="col-lg-6" >
+                        <p class="lead text-center">
+                            My Course (active course)
+                        </p>
+                        <div class="list-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: true}">
+                                <div class="pn" >
+                                    <a ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id);" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+                                             {{course.semester}} {{course.year}}
+                                            <h4> {{course.number}} {{course.name}} </h4>
+                                              <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
+                                        
+                                            Number of students: {{numStudentInCourse[course._id]}}
+                                        </br>
+                                            Number of quizzes: {{numQuizzesInCourse[course._id]}}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+              
+                    <div class="col-lg-6 text-center" >
+                         <a class="btn btn-primary btn-lg" href="../courses/create">create course</a>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">List all deactive courses</button>
+                        <hr>
+                        <div collapse="isCollapsed"> 
+                            <!-- uib-collapse only works with bootstrap version 0.14.X -->
+                            <div class="list-group">
+                                 <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: false}">
+                                    <div class="pn" >
+                                        <a ng-init="findNumStudentEnrolled(course._id)"  class="list-group-item">
+                                             {{course.semester}} {{course.year}}
+                                            <h4> {{course.number}} {{course.name}} </h4>
+
+                                            Number of students: {{numStudentInCourse[course._id]}}
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
             </div>
-        </div>
-    </div>
+        </div><!-- col-lg-12-->       
+    </div><!-- /row -->
 </section>
