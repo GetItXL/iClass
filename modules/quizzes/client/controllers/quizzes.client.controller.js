@@ -82,8 +82,12 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     };
     /* TODO: delete from end for now. Later add delete button to each choice */
     $scope.deleteChoice = function(){
-      $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
-      $scope.choices.splice($scope.choices.length-1, 1);
+      if($scope.choices.length !== 1){
+        $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
+        $scope.choices.splice($scope.choices.length-1, 1);
+      }
+
+
     };
 
     // Remove existing Quiz
