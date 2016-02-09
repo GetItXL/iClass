@@ -6,22 +6,38 @@
                 <div class="page-header centered">
                     <h1>New Quiz</h1>
                 </div>
-                <form class="form-horizontal style-form" name="quizForm" ng-submit="create(quizForm.$valid)" novalidate>
+
+              <form class="form-horizontal style-form" name="attendenceQuizForm" ng-submit="create(attendenceQuizForm.$valid, true)" novalidate>
+                <fieldset>
+                  <div class="form-group">
+                    <label for="quizType">Quiz Type</label>
+                    <div>
+                      <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(true)" name="quizType" id="quizType">Multiple Choice</button>
+                      <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(false)" name="quizType" id="quizType">Attendence</button>
+                      <h1>
+
+                      </h1>
+                    </div>
+                  </div>
+
+                  <div class="form-group" ng-show="!showQuizOption">
+                    <div class="col-sm-12 text-center">
+                      <button type="submit" class="btn btn-theme btn-lg">
+                        <i class="fa fa-check"></i> submit
+                      </button>
+                    </div>
+                  </div>
+
+                </fieldset>
+
+
+              </form>
+
+
+
+                <form class="form-horizontal style-form" name="quizForm" ng-submit="create(quizForm.$valid, false)" ng-show="showQuizOption" novalidate>
                     <fieldset>
-
-                      <div class="form-group">
-                        <label for="quizType">Quiz Type</label>
-                        <div>
-                          <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(true)" name="quizType" id="quizType">Multiple Choice</button>
-                          <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(false)" name="quizType" id="quizType">Attendence</button>
-                          <h1>
-
-                          </h1>
-                        </div>
-                      </div>
-
-
-                        <div class="form-group" ng-if="showQuizOption">
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Title</label>
                             <div class="col-sm-10">
                                  <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
@@ -30,13 +46,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-if="showQuizOption">
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Question</label>
                             <div class="col-sm-10">
                                 <input name="question" ng-model="question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
                             </div>
                         </div>
-                        <div class="form-group" ng-if="showQuizOption">
+                        <div class="form-group">
                             <div ng-repeat="choice in choices">
                                 <label class="col-sm-12 col-sm-12 control-label" for="choiceIn" ng-show="$first">Choices: </label>
                                 <label class="col-sm-2 col-sm-2 control-label" style="text-align: center">  {{choice.letter}}</label>
@@ -51,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-if="showQuizOption">
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label" >Correct Answer</label>
                             <div class="col-sm-10">
                                 <div class="radio" >
@@ -64,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" ng-if="showQuizOption">
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Quiz Duration</label>
                             <div class="col-sm-10">
                                 <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(true)" name="durationOption" id="durationOption">Pick a quiz duration</button>

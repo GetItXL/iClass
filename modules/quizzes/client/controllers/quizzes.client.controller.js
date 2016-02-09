@@ -22,13 +22,11 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
 
     // Create new Quiz
-    $scope.create = function (isValid) {
+    $scope.create = function (isValid, isAttendenceQuiz) {
       $scope.error = null;
 
-
-      //If it's attendence quiz
       //TODO: modify later to get rid of required question + answer
-      if(!$scope.showQuizOption){
+      if(isAttendenceQuiz){
         this.title = "Attendence_" + new Date().toJSON().slice(0, 10);
         this.question = "This is an attendence quiz";
         $scope.choices = [{ letter:'A', description:'I am in class!' }];
@@ -37,15 +35,12 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
         $scope.inputSec = 0;
       }
 
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'quizForm');
 
         return false;
       }
-
-
-
-
 
       // Create new Quiz object
       var quiz = new Quizzes({
@@ -82,7 +77,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     };
     /* TODO: delete from end for now. Later add delete button to each choice */
     $scope.deleteChoice = function(){
-      if($scope.choices.length !== 1){
+      if($scope.choices.length > 1){
         $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
         $scope.choices.splice($scope.choices.length-1, 1);
       }
