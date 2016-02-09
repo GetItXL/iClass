@@ -5,19 +5,31 @@
   <div class="col-md-12">
     <form name="quizForm" class="form-horizontal" ng-submit="create(quizForm.$valid)" novalidate>
      <fieldset>
-        <div class="form-group" show-errors>
+       <div class="form-group">
+         <label for="quizType">Quiz Type</label>
+         <div>
+           <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(true)" name="quizType" id="quizType">Multiple Choice</button>
+           <button type="button" class="btn btn-primary" ng-click="setQuizOptionVisibility(false)" name="quizType" id="quizType">Attendence</button>
+           <h1>
+
+           </h1>
+         </div>
+         </div>
+
+
+        <div class="form-group" ng-if="showQuizOption" show-errors>
           <label for="title">Title</label>
           <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
           <div ng-messages="quizForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required"> Quiz title is required.</p>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="showQuizOption">
           <label for="question">Question</label>
           <input name="question" ng-model="question" id="question" class="form-control" cols="30" rows="10" placeholder="question" required>
         </div>
 
-        <div class="form-group" ng-repeat="choice in choices">
+        <div class="form-group" ng-repeat="choice in choices" ng-if="showQuizOption">
           <label for="choiceIn" ng-show="$first">Choices</label>
           <label>{{choice.letter}}</label>
           <input type="text" id="choiceIn" name="choiceIn" class="form-control col-md-4" ng-model="choice.description" placeHolder="please enter a new choice" required>
@@ -29,7 +41,7 @@
         </div>
 
 
-       <div class="form-group" ng-repeat="choice in choices">
+       <div class="form-group" ng-repeat="choice in choices" ng-if="showQuizOption">
          <label for="answer" ng-show="$first">Correct Answer</label>
          <div>
            <input type="radio" ng-model="$parent.correctAnswer" value="{{choice.letter}}" name="answer" id="answer"> <!-- ng-repeat create a child scope, so you have to bind to the $parent -->
@@ -38,7 +50,7 @@
        </div>
        <!-- TODO: make radio button selection required input -->
 
-       <div class="form-group">
+       <div class="form-group" ng-if="showQuizOption">
          <label for="durationOption">Quiz Duration</label>
          <div>
            <button type="button" class="btn btn-primary" ng-click="setDurationVisibility(true)" name="durationOption" id="durationOption">Pick a quiz duration</button>
@@ -48,7 +60,7 @@
            </h1>
          </div>
 
-         <div ng-show="showDuration">
+         <div ng-if="showDuration">
            <label>Please select a desired quiz duration</label>
            <p>
 
@@ -67,16 +79,7 @@
 
            <!-- TODO: make this a slider later -->
          </div>
-
-
-
-
        </div>
-
-
-
-
-
 
 
         <div class="form-group">

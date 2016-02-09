@@ -15,6 +15,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     $scope.quizMin = [0, 1, 2, 3, 4, 5];
     $scope.quizSec = [0, 10, 20, 30, 40, 50];
     $scope.showDuration = false;
+    $scope.showQuizOption = false;
     $scope.inputMin = 0;
     $scope.inputSec = 0;
     //$scope.totalMS = 0; //total millisecond
@@ -24,11 +25,26 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     $scope.create = function (isValid) {
       $scope.error = null;
 
+
+      //If it's attendence quiz
+      //TODO: modify later to get rid of required question + answer
+      if(!$scope.showQuizOption){
+        this.title = "Attendence_" + new Date().toJSON().slice(0, 10);
+        this.question = "This is an attendence quiz";
+        $scope.choices = [{ letter:'A', description:'I am in class!' }];
+        $scope.correctAnswer = 'A';
+        $scope.inputMin = 0;
+        $scope.inputSec = 0;
+      }
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'quizForm');
 
         return false;
       }
+
+
+
 
 
       // Create new Quiz object
@@ -171,6 +187,14 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       else
         $scope.showDuration = false;
     };
+
+    $scope.setQuizOptionVisibility = function(visibility){ //boolean
+      if(visibility)
+        $scope.showQuizOption = true;
+      else
+        $scope.showQuizOption = false;
+    };
+
 
     $scope.convertToMSec = function(minute, second){
 
