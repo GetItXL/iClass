@@ -78,6 +78,10 @@ angular.module('users').config(['$stateProvider',
         url: '/studentdashboard',
         templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html'
       })
+      .state('admindashboard', {
+        url: '/admindashboard',
+        templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html'
+      })
       .state('professordashboard', {
         url: '/professordashboard',
         templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
