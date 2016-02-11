@@ -25,6 +25,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url:'/professordashboard',
       templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
     })
+    .state('adminDashboard', {
+      url:'/admindashboard',
+      templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html'
+    })
     .state('not-found', {
       url: '/not-found',
       templateUrl: 'modules/core/client/views/404.client.view.html',

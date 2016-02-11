@@ -16,7 +16,7 @@
                                     <a ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id);" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
                                              {{course.semester}} {{course.year}}
                                             <h4> {{course.number}} {{course.name}} </h4>
-                                              <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
+                                              <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" ng-controller="CoursesListController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
                                         
                                             Number of students: {{numStudentInCourse[course._id]}}
                                         </br>
