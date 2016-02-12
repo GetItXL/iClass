@@ -18,6 +18,11 @@ module.exports = function (app) {
     .put(quizzes.update)
     .delete(quizzes.delete);
 
+  //submit quiz routes
+  app.route('/api/quizzes/submit/:quizId').all(quizzesPolicy.isAllowed)
+      .get(quizzes.read)//TOOD: need this here?
+      .put(quizzes.submit);
+
   // Finish by binding the quiz middleware
   app.param('quizId', quizzes.quizByID);
 };

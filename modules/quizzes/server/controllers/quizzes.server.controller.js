@@ -55,6 +55,33 @@ exports.update = function (req, res) {
   });
 };
 
+//update quiz score + participant
+exports.submit = function(req, res){
+  var quiz = req.quiz;
+  var user = req.user;
+
+  quiz.totalParticipant++;
+
+  //Be sure to pass in an answer from client controller when student submit answer
+  if(req.answer === quiz.correctAnswer){
+    quiz.scores.push({ studentID : user._id, quizScore : 1});
+  }else{
+    quiz.scores.push({ studentID : user._id, quizScore : 0});
+  }
+
+  quiz.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(quiz);
+    }
+  });
+};
+
+
+
 /**
  * Delete an quiz
  */

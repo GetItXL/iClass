@@ -29,6 +29,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/quizzes/:quizId',
       permissions: ['get']
+    }, {
+      resources: '/api/quizzes/submit/:quizId',
+      permissions: '*'
     }]
   }, {
     roles: ['professor'],
