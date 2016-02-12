@@ -60,24 +60,43 @@ exports.submit = function(req, res){
   var quiz = req.quiz;
   var user = req.user;
 
-  quiz.totalParticipant++;
+  //Used to check if student's answer already exists in db
+  var answerExists = false;
 
-  //Be sure to pass in an answer from client controller when student submit answer
-  if(req.answer === quiz.correctAnswer){
-    quiz.scores.push({ studentID : user._id, quizScore : 1});
-  }else{
-    quiz.scores.push({ studentID : user._id, quizScore : 0});
+  for(var i = 0; i < quiz.scores.length; i++){
+    if(quiz.scores[i].studentID.toString() === user._id.toString()){
+      answerExists = true;
+    }
+
   }
 
-  quiz.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(quiz);
+  //Be sure to pass in an answer from client controller when student submit answer
+  if(!answerExists){
+
+    quiz.totalParticipant++;
+
+    if(req.answer === quiz.correctAnswer){
+      quiz.scores.push({ studentID : user._id, quizScore : 1});
+    }else{
+      quiz.scores.push({ studentID : user._id, quizScore : 0});
     }
-  });
+
+    //TODO: check if student score already exists in the database in the front as well
+
+
+    quiz.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(quiz);
+      }
+    });
+    
+  }else{
+    res.json(quiz);
+  }
 };
 
 
