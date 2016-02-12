@@ -58,7 +58,23 @@ var QuizSchema = new Schema({
   quizOpen: {
     type: Boolean,
     default: false
+  },
+  scores: { //still debating whether to score the quiz score in user or in quiz model
+    type: [{
+      studentID: {
+        type: String
+      },
+      quizScore: {
+        type: Number
+      }
+    }]
+  },
+  totalParticipant:{ //total number of students answered the quiz
+    type: Number,
+    default: 0
   }
+
+
 });
 
 mongoose.model('Quiz', QuizSchema);
