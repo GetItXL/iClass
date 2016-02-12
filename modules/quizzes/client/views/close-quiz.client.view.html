@@ -1,11 +1,12 @@
-<section data-ng-controller="QuizzesController" ng-init="findOne()" >
+<section data-ng-controller="QuizzesController" >
     <div class="form-group">
-        <div class="text-center form-group">
-            <b>{{quiz.title}}</b> is not open at this time.
-        </div> 
-
+        <div class="alert alert-danger text-center" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 
+            <span>quiz <b ng-bind="quiz.title"></b> is not open at this time.</span>
+        </div>
     </div>
     <div class="text-center form-group">
         <button class="btn btn-default" ng-click="cancel()">OK</button>
     </div>
+    
 </section>

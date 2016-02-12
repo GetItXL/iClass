@@ -4,6 +4,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
   function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
+    $scope.popoverMsgforEmail = PasswordValidator.getPopoverMsgforEmail();
 
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
@@ -12,7 +13,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     if ($scope.authentication.user) {
       //$location.path('/');
       if($scope.authentication.user.roles.indexOf('admin') > -1)
-          $location.path('/admindashboard/users');
+          $location.path('/admindashboard');
       else if($scope.authentication.user.roles.indexOf('professor') > -1)
           $location.path('/professordashboard');
       else 
@@ -46,7 +47,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // And redirect to the previous or home page
         //$state.go($state.previous.state.name || 'home', $state.previous.params);
         if($scope.authentication.user.roles.indexOf('admin') > -1)
-          $location.path('/admindashboard/users');
+          $location.path('/admindashboard');
         else if($scope.authentication.user.roles.indexOf('professor') > -1)
           $location.path('/professordashboard');
         else 
@@ -77,7 +78,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                 'margin-left': '210px'
             });
         if($scope.authentication.user.roles.indexOf('admin') > -1)
-          $location.path('/admindashboard/users');
+          $location.path('/admindashboard');
         else if($scope.authentication.user.roles.indexOf('professor') > -1)
           $location.path('/professordashboard');
         else 

@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$log',
-  function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $log) {
+app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log',
+  function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -205,19 +205,57 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       return minute * 60 * 1000 + second * 1000;
     };
 
+ 
+
 
     /********  check quiz avaliablity **********/
 
     $scope.isOpen = function(quiz) {
 
       if(!quiz.open) {
-         $location.path('quizzes/'+quiz+'/close');
+          $scope.modalQuizNotOpen('sm' ,quiz );
+          // $location.path('quizzes/'+quiz+'/close');
       }
       else {
         console.log('quiz is open');
           $location.path('quizzes/'+quiz+'/open');
       }
 
+    };
+
+     /*********  modal window quiz not open  *******************/
+
+    $scope.modalQuizNotOpen = function(size, selectedQuiz) {
+
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/quizzes/client/views/close-quiz.client.view.html',
+        controller: modalQuizNotOpenCtrl,
+        size: size,
+        resolve: {
+          quiz: function() {
+            return selectedQuiz;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    var modalQuizNotOpenCtrl = function($scope, $modalInstance, quiz) {
+       $scope.quiz = quiz;
+      //console.log("I am update modal window " + Authentication.user.displayName);
+      $scope.ok = function() {
+        $modalInstance.close($scope.quiz);
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+      };
     };
 
   }

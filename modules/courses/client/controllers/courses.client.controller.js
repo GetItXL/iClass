@@ -375,53 +375,17 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       var quizzesInCourse = Quizzes.query(function(){
 
         for(var i = 0; i < quizzesInCourse.length; i++){
-          if(quizzesInCourse[i].courseID === currentCourseId){
-            courseQuizzes.push(quizzesInCourse[i]);
-            //console.log('I pushed: !!' + quizzesInCourse[i].title + '   ' + quizzesInCourse[i].courseID);
-
-          }
+            if(quizzesInCourse[i].courseID === currentCourseId){
+              courseQuizzes.push(quizzesInCourse[i]);
+            }
         }
         $scope.quizzesInCourse = courseQuizzes;
       });
     };
+    
 
+   
 
-
-
-
-    // $scope.figureOutQuizToDisplay = function (courseID) {
-    //   console.log('build quiz pageaaaa'+courseID);
-    //   var courseQuizzes = [];
-
-    //     // var quizzes = Quizzes.query({}, function(){
-    //     //   for(var i = 0; i < quizzes.length; i++){
-    //     //     //console.log(courses[i].professor._id);
-    //     //     if(quizzes[i].courseId === courseID){
-    //     //       courseQuizzes.push(quizzes[i]);
-    //     //       console.log('build quiz page'+courseID) ;
-    //     //     }
-    //     //   }
-    //     //   $scope.quizzes = courseQuizzes;
-    //     //   console.log('build quiz pageaaaa');
-    //     //});
-        
-    //   // $scope.filteredQuizItems = $filter('filter')($scope.quizzes, {
-    //   //   $: $scope.search //need to add | filter:{active: true} to here, look for syntax.
-    //   // });
-    //   // // for(var i = 0; i < quizzes.length; i++){
-    //   // //   //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
-    //   // //     if(courseID=== $scope.quiz.courseID){
-    //   // //       $scope.filteredQuizItems.push('activated');
-    //   // //     }
-    //   // //   }
-
-    //   // $scope.filterLength = $scope.filteredQuizItems.length;
-    //   //  console.log('build quiz page'+ $scope.filterLength);
-    //   //  //var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-    //   //  //var end = begin + $scope.itemsPerPage;
-    //   // $scope.quizItems = $scope.filteredQuizItems.slice(0, filterLength);
-    //   //  console.log('build quiz page'+ $scope.filterLength);
-    // };
 
   }
 ]);
