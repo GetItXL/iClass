@@ -15,7 +15,7 @@ angular.module('quizzes').factory('Quizzes', ['$resource',
 
 
 //Quizzes service used for communicating with the submit quiz REST endpoints
-angular.module('quizzes').factory('SubmitQuizzes', ['$resource',
+angular.module('quizzes').factory('SubmitQuiz', ['$resource',
   function ($resource) {
     return $resource('api/quizzes/submit/:quizId', {
       quizId: '@_id'
