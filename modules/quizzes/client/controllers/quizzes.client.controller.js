@@ -19,8 +19,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     $scope.inputMin = 0;
     $scope.inputSec = 0;
     //$scope.totalMS = 0; //total millisecond
-    $scope.isQuizOpen = false;
-    $scope.isQuizEnded = false;
+
 
 
     // Create new Quiz
@@ -52,8 +51,8 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
         choices: $scope.choices,
         correctAnswer: $scope.correctAnswer,
         quizDuration: $scope.convertToMSec($scope.inputMin, $scope.inputSec),
-        quizOpen: $scope.isQuizOpen,
-        quizEnded: $scope.isQuizEnded
+        quizOpen: false,
+        quizEnded: false
       });
 
       // Redirect after save
@@ -124,12 +123,38 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
       var quiz = $scope.quiz;
 
+
       quiz.$update(function () {
         $location.path('quizzes/' + quiz._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
+
+
+    //Function used to update quiz status, where things will not be passed in by input fields
+    $scope.updateQuizStatus = function (isQuizOpen, isQuizEnded) {
+
+
+      /* TODO: since student will update quiz model when submitting answer,
+       we may need to call findone() to update $scope.quiz before updating quiz status
+       */
+
+
+      $scope.quiz.quizOpen = isQuizOpen;
+      $scope.quiz.quizEnded = isQuizEnded;
+      var quiz = $scope.quiz;
+
+
+      quiz.$update(function () {
+        $location.path('quizzes/' + quiz._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+
+
 
     // Find a list of Quizzes
     $scope.find = function () {
@@ -144,6 +169,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       });
 
       getCourseDisplayInfo($scope.quiz.courseID);
+      console.log("findOne() is called");
     };
 
     
@@ -222,6 +248,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
     $scope.isOpen = function(quiz) {
 
+      /*
       if(!quiz.open) {
           $scope.modalQuizNotOpen('sm' ,quiz );
           // $location.path('quizzes/'+quiz+'/close');
@@ -229,6 +256,16 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       else {
         console.log('quiz is open');
           $location.path('quizzes/'+quiz+'/open');
+      }*/
+
+
+      if(!quiz.quizOpen) {
+        $scope.modalQuizNotOpen('sm' ,quiz );
+        // $location.path('quizzes/'+quiz+'/close');
+      }
+      else {
+        console.log('quiz is open');
+        $location.path('quizzes/'+quiz._id+'/open');
       }
 
     };
@@ -271,15 +308,19 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
     //Quiz status - open or closed
     $scope.setQuizStart = function(){
-      $scope.isQuizOpen = true;
-      $scope.isQuizEnded = false;
+      //$scope.isQuizOpen = true;
+      //$scope.isQuizEnded = false;
+      $scope.updateQuizStatus(true, false);
     };
 
     //Call to manully end the quiz
     $scope.setQuizFinished = function(){
-      $scope.isQuiz = true;
-      $scope.isQuizOpen = false;
+      //$scope.isQuizEnded = true;
+      //$scope.isQuizOpen = false;
+
+      $scope.updateQuizStatus(false, true);
+
     };
-    
+
   }
 ]);

@@ -43,6 +43,8 @@ exports.update = function (req, res) {
   quiz.question = req.body.question;
   quiz.choices = req.body.choices;
   quiz.correctAnswer = req.body.correctAnswer;
+  quiz.quizOpen = req.body.quizOpen;
+  quiz.quizEnded = req.body.quizEnded;
 
   quiz.save(function (err) {
     if (err) {

@@ -30,6 +30,28 @@
                     <h2>Quiz Duration</h2>
                     <p>{{quiz.quizDuration}} milliseconds</p>
 
+
+                    <!-- test button -->
+                    <div class="form-group">
+                      <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
+                          <i class="fa fa-check"></i> End the quiz
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- test button -->
+                    <!-- TODO: move this to list view -->
+                    <div class="form-group">
+                      <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizStart()">
+                          <i class="fa fa-check"></i> Open the quiz
+                        </button>
+                      </div>
+                    </div>
+
+
+
                     <div class="pull-right" ng-show="!isStudent()" >
                       <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
                         <i class="glyphicon glyphicon-edit"></i>
