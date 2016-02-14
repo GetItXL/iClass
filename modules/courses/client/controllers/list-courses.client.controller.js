@@ -39,9 +39,12 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
 
       var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
         templateUrl: 'modules/courses/client/views/edit-course.client.view.html',
         controller: ModalUpdateCtrl,
         size: size,
+
         resolve: {
           course: function() {
             return selectedCourse;
@@ -75,6 +78,8 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.modalRemove = function(size, selectedCourse) {
 
       var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
         templateUrl: 'modules/courses/client/views/remove-course.client.view.html',
         controller: ModalRemoveCtrl,
         size: size,
@@ -113,6 +118,8 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.modalJoin = function(size, selectedCourse) {
 
       var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
         templateUrl: 'modules/courses/client/views/join-courses.client.view.html',
         controller: ModalJoinCtrl,
         size: size,
