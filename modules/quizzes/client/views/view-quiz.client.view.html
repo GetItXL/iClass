@@ -7,6 +7,11 @@
             </div>
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="invoice-body">
+                    <h2>Quiz Status</h2>
+                    <p>Is open: {{quiz.quizOpen}}</p>
+                    <p>Is finished: {{quiz.quizEnded}}</p>
+
+
                     <h2>Class Info</h2>
                     <p>{{courseDisplayInfo.number}}</p>
                     <p>{{courseDisplayInfo.name}}</p>
@@ -24,7 +29,7 @@
 
                     <h2>Quiz Duration</h2>
                     <p>{{quiz.quizDuration}} milliseconds</p>
-                   
+
                     <div class="pull-right" ng-show="!isStudent()" >
                       <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
                         <i class="glyphicon glyphicon-edit"></i>

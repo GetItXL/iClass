@@ -19,6 +19,8 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     $scope.inputMin = 0;
     $scope.inputSec = 0;
     //$scope.totalMS = 0; //total millisecond
+    $scope.isQuizOpen = false;
+    $scope.isQuizEnded = false;
 
 
     // Create new Quiz
@@ -49,7 +51,9 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
         courseID: CourseInfoFactory.getCourseID(),
         choices: $scope.choices,
         correctAnswer: $scope.correctAnswer,
-        quizDuration: $scope.convertToMSec($scope.inputMin, $scope.inputSec)
+        quizDuration: $scope.convertToMSec($scope.inputMin, $scope.inputSec),
+        quizOpen: $scope.isQuizOpen,
+        quizEnded: $scope.isQuizEnded
       });
 
       // Redirect after save
@@ -102,7 +106,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       }
     };
 
-    // Update existing Quiz
+    // Update existing Quiz - for professor / admin
     $scope.update = function (isValid) {
       $scope.error = null;
 
@@ -111,6 +115,12 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
         return false;
       }
+
+
+      /* TODO: since student will update quiz model when submitting answer,
+        we may need to call findone() to update $scope.quiz before updating quiz status
+       */
+
 
       var quiz = $scope.quiz;
 
@@ -258,5 +268,18 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       };
     };
 
+
+    //Quiz status - open or closed
+    $scope.setQuizStart = function(){
+      $scope.isQuizOpen = true;
+      $scope.isQuizEnded = false;
+    };
+
+    //Call to manully end the quiz
+    $scope.setQuizFinished = function(){
+      $scope.isQuiz = true;
+      $scope.isQuizOpen = false;
+    };
+    
   }
 ]);

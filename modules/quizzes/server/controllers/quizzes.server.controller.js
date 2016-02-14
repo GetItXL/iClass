@@ -67,7 +67,6 @@ exports.submit = function(req, res){
     if(quiz.scores[i].studentID.toString() === user._id.toString()){
       answerExists = true;
     }
-
   }
 
   //Be sure to pass in an answer from client controller when student submit answer
@@ -93,7 +92,7 @@ exports.submit = function(req, res){
         res.json(quiz);
       }
     });
-    
+
   }else{
     res.json(quiz);
   }

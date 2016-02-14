@@ -55,7 +55,11 @@ var QuizSchema = new Schema({
   quizType: {
     type: String //"MC", vs "attendence"
   },
-  quizOpen: {
+  quizOpen: { //marks whether a quiz is open or closed
+    type: Boolean,
+    default: false
+  },
+  quizEnded: { //Marks whether a quiz has ended
     type: Boolean,
     default: false
   },
