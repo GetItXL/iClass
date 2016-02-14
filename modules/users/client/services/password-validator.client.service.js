@@ -10,6 +10,10 @@ angular.module('users').factory('PasswordValidator', ['$window',
         var result = owaspPasswordStrengthTest.test(password);
         return result;
       },
+      getPopoverMsgforEmail: function () {
+        var popoverMsgforEmail = 'Please enter a @ufl address.';
+        return popoverMsgforEmail;
+      },
       getPopoverMsg: function () {
         var popoverMsg = 'Please enter a passphrase or password with greater than 10 characters, numbers, lowercase, upppercase, and special characters.';
         return popoverMsg;
