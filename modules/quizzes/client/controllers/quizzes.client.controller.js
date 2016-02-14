@@ -90,7 +90,11 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
     // Remove existing Quiz
     $scope.remove = function (quiz) {
+
+      var removedQuizCourseID;
+
       if (quiz) {
+        removedQuizCourseID = quiz.courseID;
         quiz.$remove();
 
         for (var i in $scope.quizzes) {
@@ -99,8 +103,9 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
           }
         }
       } else {
+        removedQuizCourseID = $scope.quiz.courseID;
         $scope.quiz.$remove(function () {
-          $location.path('quizzes');
+          $location.path('courses/'+removedQuizCourseID);
         });
       }
     };
@@ -169,7 +174,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
       });
 
       getCourseDisplayInfo($scope.quiz.courseID);
-      console.log("findOne() is called");
+      //console.log("findOne() is called");
     };
 
     
