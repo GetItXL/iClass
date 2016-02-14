@@ -10,7 +10,7 @@
                         <p class="lead text-center">
                             My Course (active course)
                         </p>
-                        <div class="list-group">
+                        <div class="row list-group">
                             <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: true}">
                                 <div class="pn" >
                                     <a ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id);" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
