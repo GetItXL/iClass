@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesListController', ['$state', 'Users','Authentication', '$scope', '$filter', 'Courses', '$modal', '$log',
-  function ($state, Users, Authentication, $scope, $filter, Courses, $modal, $log) {
+angular.module('courses').controller('CoursesListController', ['$state', 'Users','Authentication', '$scope', '$filter', 'Courses', '$modal', '$log', 'CoursePasscodeFactory',
+  function ($state, Users, Authentication, $scope, $filter, Courses, $modal, $log, CoursePasscodeFactory) {
     $scope.authentication = Authentication;
 
 
@@ -116,10 +116,11 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     /*************  modal window join course *******************/
     
     $scope.modalJoin = function(size, selectedCourse) {
+     
 
       var modalInstance = $modal.open({
         backdrop : 'static',
-        keyboard :false,
+        keyboard : false,
         templateUrl: 'modules/courses/client/views/join-courses.client.view.html',
         controller: ModalJoinCtrl,
         size: size,
@@ -138,12 +139,27 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       });
     };
 
-    var ModalJoinCtrl = function($scope, $modalInstance, course) {
+    var ModalJoinCtrl = function($scope, $modalInstance, course, CoursePasscodeFactory) {
       $scope.course = course;
 
       $scope.ok = function() {
-        $modalInstance.close($scope.course);
-        $state.reload();
+       // console.log('checking passcode error');
+          $scope.$watch('handleBroadcast', function() {
+             // console.log('checking passcode error');
+              $scope.correctPasscode = CoursePasscodeFactory.correctPasscode;
+              var passcodeNoError = $scope.correctPasscode;
+             //  console.log('checking passcode error ' + passcodeNoError);
+              if(passcodeNoError) {
+                  $modalInstance.close($scope.course);
+                  //$state.reload();
+
+                //  console.log('passcode correct');
+              }
+              else
+                 console.log('passcode error');
+            //console.log('end of checking passcode error');
+          });
+           //console.log('there');
       };
 
       $scope.cancel = function() {
@@ -215,7 +231,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.isCourseEnrolled = function(enrolledCourseId){
 
       //var student = new Users(Authentication.user);
-       console.log('enrolled:'+enrolledCourseId);
+       //console.log('enrolled:'+enrolledCourseId);
       var user = $scope.authentication.user;
 
       if(user.enrolledCourses.indexOf(enrolledCourseId) === -1)

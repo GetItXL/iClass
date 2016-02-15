@@ -34,3 +34,22 @@ myModule.factory('CourseInfoFactory', function(){
   return service;
 
 });
+
+myModule.factory('CoursePasscodeFactory', function($rootScope){
+
+    var service = {};
+
+    service.correctPasscode = false;
+
+    service.prepBroadcast = function(passcodeError) {
+        this.correctPasscode = passcodeError;
+        this.broadcastItem();
+    };
+
+    service.broadcastItem = function() {
+      $rootScope.$broadcast('handleBroadcast');
+    };
+
+    return service;
+
+});
