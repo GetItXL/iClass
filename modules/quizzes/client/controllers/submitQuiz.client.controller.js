@@ -9,6 +9,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         // Find existing Quiz
         $scope.findOne = function () {
+            console.log("calling SubmitQuizController");
 
             $scope.quiz = SubmitQuiz.get({
                 quizId: $stateParams.quizId

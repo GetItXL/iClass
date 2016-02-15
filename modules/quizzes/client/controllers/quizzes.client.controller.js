@@ -221,20 +221,6 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     /*******************************************************************/
 
 
-    $scope.setDurationVisibility = function(visibility){ //boolean
-      if(visibility)
-        $scope.showDuration = true;
-      else
-        $scope.showDuration = false;
-    };
-
-    $scope.setQuizOptionVisibility = function(visibility){ //boolean
-      if(visibility)
-        $scope.showQuizOption = true;
-      else
-        $scope.showQuizOption = false;
-    };
-
 
     $scope.convertToMSec = function(minute, second){
 
