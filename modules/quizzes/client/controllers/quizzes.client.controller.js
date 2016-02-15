@@ -267,6 +267,8 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
 
       var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
         templateUrl: 'modules/quizzes/client/views/close-quiz.client.view.html',
         controller: modalQuizNotOpenCtrl,
         size: size,

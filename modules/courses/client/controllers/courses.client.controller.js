@@ -1,12 +1,12 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes',
-  function ($scope, $stateParams, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory',
+  function ($scope, $stateParams, $http, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
-
+   
   /****************    setting for start and end course date  ***************/
 
     $scope.semesters = ['Spring','Summer','Fall'];
@@ -235,39 +235,52 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
     /*******************************************************************/
 
-
+    $scope.correctPasscode = false; 
+    
     $scope.joinCourse = function(courseID){
+        $scope.error = null;
+        var passcodeError = $scope.correctPasscode;
 
       //$scope.course is defined here...
 
-      var student = new Users(Authentication.user);
+        var student = new Users(Authentication.user);
 
 
       console.log('pass1' + $scope.passcode);
       console.log('pass2' + $scope.course.passcode);
 
-      if($scope.passcode !== $scope.course.passcode){
-        console.log('Wrong passcode');
+     if($scope.passcode !== $scope.course.passcode){
+        //  console.log('Wrong passcode');
+          $scope.error = 'passcode is not correct!';
+
       }else if(student.enrolledCourses.indexOf(courseID) === -1){//check if student is already enrolled in the course
-        student.enrolledCourses.push(courseID);
+          
+          passcodeError = true;    
+          student.enrolledCourses.push(courseID);
 
-        student.$update(function(res){
-          $scope.success = true;
-          Authentication.user = res;
-          //$scope.authentication = Authenticaton; ?
+          student.$update(function(res){
+              $scope.success = true;
+              Authentication.user = res;
+            //$scope.authentication = Authenticaton; ?
 
-          $location.path('studentdashboard');
-
-          console.log(Authentication.user);
-        }, function(errorResponse){
-          $scope.error = errorResponse.data.message;
-        });
+              $location.path('studentdashboard');
+              // console.log('correct passcode');
+            //console.log(Authentication.user);
+          }, function(errorResponse){
+              $scope.error = errorResponse.data.message;
+          });
       }else{
         console.log('already enrolled in this class');
-
         /* TODO: display message to user */
       }
+
+      /* message notification */
+      CoursePasscodeFactory.prepBroadcast(passcodeError);
+     // console.log('end of the function');
+      
     };
+
+    
 
     // // Check to see if a course has already been enrolled.
     // $scope.isCourseEnrolled = function(enrolledCourseId){
@@ -389,3 +402,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
   }
 ]);
+
+
+//CoursesController.$inject= ['$scope', 'CoursePasscodeFactory'];

@@ -24,6 +24,9 @@ var validateLocalStrategyEmail = function (email) {
   return ((this.provider !== 'local' && !this.updated) || /^\w+([\.-]?\w+)*@ufl.edu+$/.test(email));
 };
 
+var validateLocalStrategyUser = function (role) {
+  return ((this.provider !== 'local' && !this.updated) || (role !== 'user' && role !== 'professor'));
+};
 /**
  * User Schema
  */
@@ -81,8 +84,8 @@ var UserSchema = new Schema({
       type: String,
       enum: ['user', 'professor', 'admin']
     }],
-    default: ['user'],
-    required: 'Please provide at least one role'
+    default: '',
+    required: 'Please provide at least one role',
   },
   updated: {
     type: Date
