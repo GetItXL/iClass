@@ -59,6 +59,8 @@ exports.update = function (req, res) {
 
 //update quiz score + participant
 exports.submit = function(req, res){
+
+  console.log('calling submit quiz');
   var quiz = req.quiz;
   var user = req.user;
 
@@ -76,10 +78,11 @@ exports.submit = function(req, res){
 
     quiz.totalParticipant++;
 
+
     if(req.answer === quiz.correctAnswer){
-      quiz.scores.push({ studentID : user._id, quizScore : 1});
+      quiz.scores.push({ studentID : user._id, selectedAnswer : req.answer, quizScore : 1});
     }else{
-      quiz.scores.push({ studentID : user._id, quizScore : 0});
+      quiz.scores.push({ studentID : user._id, selectedAnswer : req.answer, quizScore : 0});
     }
 
     //TODO: check if student score already exists in the database in the front as well

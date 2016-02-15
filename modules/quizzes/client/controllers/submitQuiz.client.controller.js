@@ -19,16 +19,34 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             //console.log("findOne() is called");
         };
 
+        function getCourseDisplayInfo(courseID){
+
+            //not sure why Courses.get() does not work
+
+            var courses = Courses.query(function(){
+                var course;
+
+                for(var i = 0; i < courses.length; i++){
+                    //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+                    if(courses[i]._id === $scope.quiz.courseID){
+                        course = courses[i];
+                    }
+                }
+
+                $scope.courseDisplayInfo = course;
+            });
+
+        }
 
         $scope.submit = function(answer){
 
             var quiz = $scope.quiz;
 
             quiz.$update(function () {
-                $location.path('quizzes/' + quiz._id);
+                $location.path('courses/' + $scope.courseDisplayInfo._id);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-        }
+        };
     }
 ]);

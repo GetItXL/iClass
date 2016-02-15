@@ -32,25 +32,27 @@ angular.module('quizzes').config(['$stateProvider',
         }
       })
       .state('quizzes.close', {
-        url: '/:quizId/close',
+        url: '/close/:quizId',
         templateUrl: 'modules/quizzes/client/views/close-quiz.client.view.html',
         data: {
           roles: ['user', 'admin']
         }
       })
       .state('quizzes.open', {
-        url: '/:quizId/open',
+        url: '/open/:quizId',
         templateUrl: 'modules/quizzes/client/views/open-quiz.client.view.html',
         data: {
           roles: ['user', 'admin']
         }
       })
       .state('quizzes.edit', {
-        url: '/:quizId/edit',
+        url: '/edit/:quizId',
         templateUrl: 'modules/quizzes/client/views/edit-quiz.client.view.html',
         data: {
           roles: ['professor', 'admin']
         }
-      });
+      })
+
+    ;
   }
 ]);

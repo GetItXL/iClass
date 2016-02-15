@@ -68,6 +68,10 @@ var QuizSchema = new Schema({
       studentID: {
         type: String
       },
+      selectedAnswer: {
+        type: String,
+        default: ''
+      },
       quizScore: {
         type: Number
       }
