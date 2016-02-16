@@ -16,7 +16,6 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             });
 
             getCourseDisplayInfo($scope.quiz.courseID);
-            //console.log("findOne() is called");
             console.log($scope.quiz);
         };
 
@@ -41,12 +40,14 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         $scope.submit = function(answer){
 
+            console.log('my submitted answer is ' + answer);
+
             //if(!alreadySubmitted()){
                 var quiz = $scope.quiz;
                 quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
 
 
-                quiz.$update(function () {
+                quiz.$submit(function () {
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;

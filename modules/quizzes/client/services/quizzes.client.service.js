@@ -20,7 +20,7 @@ angular.module('quizzes').factory('SubmitQuiz', ['$resource',
     return $resource('api/quizzes/submit/:quizId', {
       quizId: '@_id'
     }, {
-      update: {
+      submit: {
         method: 'PUT'
       }
     });

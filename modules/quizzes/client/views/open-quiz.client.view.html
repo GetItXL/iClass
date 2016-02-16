@@ -9,13 +9,11 @@
                taking quiz now.....
 
 
-              <button ng-click="submit('A')">
-                I select A! :3
-
-
-              </button>
-              <button ng-click="submit('D')">
-                I select D! :3
+              <div class="form-group">
+                <div ng-repeat="choice in quiz.choices">
+                  <button ng-click="submit(choice.letter)">{{choice.letter}}. {{choice.description}}</button>
+                </div>
+              </div>
 
 
               </button>
