@@ -1,100 +1,99 @@
-<section ng-controller="CoursesController">
-   <div class="modal-header">
-        <h3 class="modal-title">Edit {{course.number}} {{course.name}}</h3>
-    </div>
-    <div class="modal-body">
-        <fieldset>
-            <div data-ng-show="error" class="text-center text-danger">
-                <div class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span>
-                    <strong data-ng-bind="error"></strong>
-                </div>íí
-            </div> 
-            <div class="form-group">
-                <label for="number">Number</label>
-                <div class="controls">
-                    <input type="text" data-ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
-                </div>
-             </div>
-            <!-- div class="form-group" show-errors>
-                    <label for="number">Number</label>
-                    <input name="number" type="text" ng-model="course.number" id="number" class="form-control" placeholder="e.g. COP4331" required>
-            </div> -->
-            <div class="form-group">
-                <label for="name">Name</label>
-                <div class="controls">
-                    <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
-                </div>
+<section data-ng-controller="CoursesController">
+    <div class="modal-content">
+        <form name="userForm" novalidate >
+            <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true" ng-click="cancel()">×</button>
+                <h3 class="modal-title">Edit {{course.number}} {{course.name}}</h3>
             </div>
-
-<!--                 <div class="form-group" show-errors>
-                    <label for="name">Course Name</label>
-                     <div class="controls">
-                        <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="Name">
-                    <input name="name" type="text" ng-model="course.name" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
+            <div class="modal-body">
+                <div data-ng-show="error" class="text-center text-danger">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <strong data-ng-bind="error"></strong>
                     </div>
-                </div> -->
+                </div> 
+                <div class="form-group">
+                    <label for="number">Number</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="course.number" id="number" name="number" class="form-control" placeholder="e.g. COP4331" required>
+                    </div>
+                </div>
+                <div ng-messages="userForm.number.$error" ng-show="!userForm.number.$valid"role="alert">
+                    <p class="help-block error-text" required >* course number is required.</p>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" ng-model="course.name" id="name" name="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
+                    </div>
+                </div>
+                 <div ng-messages="userForm.name.$error" ng-show="!userForm.name.$valid"role="alert">
+                    <p class="help-block error-text" required >* course name is required.</p>
+                </div>
                 <div class="form-group">
                     <label for="passcode">Course Passcode</label>
-                    <input name="passcode" ng-model="course.passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
+                        <input name="passcode" ng-model="course.passcode" id="passcode" name="passcode" class="form-control" placeholder="Create a course passcode" required></input>
                 </div>
-                <div class="form-group" >
-                  
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="startdate">Semester & year</label>
-                        </div>
-                        <div class="col-md-4" style="text-align: right;" >
-                        
-        
-                        Choose a semester: <select ng-model="course.semester" data-ng-options="act for act in semesters"></select>
-                    <!-- {{years[0]}} is currently -->
-                        </div>
-                        
-                        <div class="col-md-4" style="text-align: right;" >
-                                  Choose a year: <select ng-model="course.year"
-                                          data-ng-options="act for act in years"></select>
-                        </div>
-                    </div>       
+                 <div ng-messages="userForm.passcode.$error" ng-show="!userForm.passcode.$valid"role="alert">
+                    <p class="help-block error-text" required >* course passcode cannot be empty</p>
                 </div>
-                <div class="form-group row" >
-                       <div class="col-md-6 col-lg-6">
-                            activate course now?
-                        </div>
-                        <div class="col-md-6 col-lg-6 text-center" style="text-align: right;" ng-init="isActive(course)">
-                            <div class="switch switch-square has-switch" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
-                                <div ng-class="switchStatu" class="switch-animate" ng-click="switchOn(course)">
-                                    <input type="checkbox">
-                                        <span class="switch-left">
-                                            <i class="fa fa-check"></i>
-                                        </span><label> </label>
-                                        <span class="switch-right">
-                                            <i class="fa fa-times"></i>
-                                        </span>
-                                </div>
+                    <div class="form-group" >
+                      
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="startdate">Semester & year</label>
                             </div>
+                            <div class="col-md-4" style="text-align: right;" >
+                            
+            
+                            Choose a semester: <select ng-model="course.semester" data-ng-options="act for act in semesters"></select>
+                        <!-- {{years[0]}} is currently -->
+                            </div>
+                            
+                            <div class="col-md-4" style="text-align: right;" >
+                                      Choose a year: <select ng-model="course.year"
+                                              data-ng-options="act for act in years"></select>
+                            </div>
+                        </div>       
+                    </div>
+                    <div class="form-group row" >
+                        <div class="col-md-6 col-lg-6">
+                                activate course now?
                         </div>
-
-                           <!--  <checkbox ng-model="course.active" aria-label="Checkbox">
-                                change activation status: {{ course.active}}
-                            </checkbox> -->
-                            <!-- need to refresh the check box when user click outside of the modal window -->
-                    
-                        
-                  
-                </div>
-            </fieldset>       
-     
-        </div>
-  <div class="modal-footer">
-        <button id="ok" class="btn btn-theme" ng-click="update(course); ok()">Update</button>
-        <button id="cancel" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                            <div class="col-md-6 col-lg-6 text-center" style="text-align: right;" ng-init="isActive(course)">
+                                <div class="switch switch-square has-switch" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                                    <div ng-class="switchStatu" class="switch-animate" ng-click="switchOn(course)">
+                                        <input type="checkbox">
+                                            <span class="switch-left">
+                                                <i class="fa fa-check"></i>
+                                            </span><label> </label>
+                                            <span class="switch-right">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>               
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button id="ok" class="btn btn-theme" ng-click="update(course); ok()" ng-disabled="!userForm.number.$valid || !userForm.name.$valid || !userForm.passcode .$valid">Update</button>
+                <button id="cancel" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </form>
     </div>
-
-
     
 
 </section>  
  
+
+
+
+
+
+
+
+
+
+
 

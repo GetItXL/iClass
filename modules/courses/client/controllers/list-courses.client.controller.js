@@ -1,7 +1,7 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesListController', ['$state', 'Users','Authentication', '$scope', '$filter', 'Courses', '$modal', '$log', 'CoursePasscodeFactory',
+angular.module('courses').controller('CoursesListController', ['$state', 'Users','Authentication', '$scope', '$filter', 'Courses', '$modal', '$log', 'CoursePasscodeFactory', 
   function ($state, Users, Authentication, $scope, $filter, Courses, $modal, $log, CoursePasscodeFactory) {
     $scope.authentication = Authentication;
 
@@ -60,17 +60,19 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     };
 
     var ModalUpdateCtrl = function($scope, $modalInstance, course) {
-      $scope.course = course;
-      //console.log("I am update modal window " + Authentication.user.displayName);
-      $scope.ok = function() {
-        $modalInstance.close($scope.course);
-        $state.reload();
-      };
+        $scope.course = course;
+        //console.log("I am update modal window " + Authentication.user.displayName);
+        $scope.ok = function() {
+            $modalInstance.close($scope.course);
+            $state.reload();
+    
+        };
 
-      $scope.cancel = function() {
-        $modalInstance.dismiss('cancel');
-        $state.reload();
-      };
+
+        $scope.cancel = function() {
+          $modalInstance.dismiss('cancel');
+          $state.reload();
+        };
     };
 
     /*********  modal window remove course *******************/
@@ -93,8 +95,8 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       modalInstance.result.then(function(selectedItem) {
         $scope.selected = selectedItem;
       }, function() {
-        console.log('Modal dismissed at: ' + new Date());
-        $log.info('Modal dismissed at: ' + new Date());
+        //console.log('Modal dismissed at: ' + new Date());
+       // $log.info('Modal dismissed at: ' + new Date());
       });
     };
 
@@ -102,7 +104,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       $scope.course = course;
 
       $scope.ok = function() {
-        console.log('user click ok');
+        //console.log('user click ok');
         $modalInstance.close($scope.course);
         $state.reload();
       };
@@ -134,8 +136,8 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       modalInstance.result.then(function(selectedItem) {
         $scope.selected = selectedItem;
       }, function() {
-        console.log('Modal dismissed at: ' + new Date());
-        $log.info('Modal dismissed at: ' + new Date());
+       // console.log('Modal dismissed at: ' + new Date());
+       // $log.info('Modal dismissed at: ' + new Date());
       });
     };
 
@@ -168,19 +170,6 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       };
     };
     
-  
-
-  //   var ModalViewCtrl = function($scope, $modalInstance, course) {
-  //           $scope.course = course;
-
-  //           $scope.ok = function() {
-  //               $modalInstance.close($scope.course);
-  //           };
-
-  //           $scope.cancel = function() {
-  //               $modalInstance.dismiss('cancel');
-  //           };
-  //       };
 
  /*********************** Check current user role ********************/
     $scope.isAdmin = function(){
