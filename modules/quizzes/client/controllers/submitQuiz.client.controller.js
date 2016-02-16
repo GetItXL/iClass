@@ -17,6 +17,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             getCourseDisplayInfo($scope.quiz.courseID);
             //console.log("findOne() is called");
+            console.log($scope.quiz);
         };
 
         function getCourseDisplayInfo(courseID){
@@ -40,13 +41,36 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         $scope.submit = function(answer){
 
+            //if(!alreadySubmitted()){
+                var quiz = $scope.quiz;
+                quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
+
+
+                quiz.$update(function () {
+                    $location.path('courses/' + $scope.courseDisplayInfo._id);
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            //}
+
+        };
+
+
+        //Check if the student has already submitted the quiz answer
+        function alreadySubmitted(){
+
             var quiz = $scope.quiz;
 
-            quiz.$update(function () {
-                $location.path('courses/' + $scope.courseDisplayInfo._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-        };
+            for (var i = 0; i < quiz.scores.length; i++){
+                if(quiz.scores[i].studentID.toString() === $scope.authentication.user._id.toString()){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
     }
 ]);

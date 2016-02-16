@@ -73,7 +73,8 @@ var QuizSchema = new Schema({
         default: ''
       },
       quizScore: {
-        type: Number
+        type: Number,
+        default: 0 //can be 0 or 1
       }
     }]
   },

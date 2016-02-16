@@ -84,8 +84,6 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
         $scope.currentLetter = String.fromCharCode($scope.currentLetter.charCodeAt() - 1);
         $scope.choices.splice($scope.choices.length-1, 1);
       }
-
-
     };
 
     // Remove existing Quiz

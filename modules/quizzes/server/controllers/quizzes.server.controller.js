@@ -64,6 +64,20 @@ exports.submit = function(req, res){
   var quiz = req.quiz;
   var user = req.user;
 
+  //get the newly submitted one
+  //var submitted = req.body.scores[req.body.scores.length-1];
+  var scores = req.body.scores;
+  //var submitted = scores[scores.length-2];
+  //console.log(scores.length-2);
+  var submitted = scores.pop();
+
+  console.log(quiz.scores);
+
+  console.log(submitted);
+
+
+
+  /*
   //Used to check if student's answer already exists in db
   var answerExists = false;
 
@@ -71,7 +85,10 @@ exports.submit = function(req, res){
     if(quiz.scores[i].studentID.toString() === user._id.toString()){
       answerExists = true;
     }
-  }
+  }*/
+  //testing
+  var answerExists = false;
+
 
   //Be sure to pass in an answer from client controller when student submit answer
   if(!answerExists){
@@ -79,10 +96,20 @@ exports.submit = function(req, res){
     quiz.totalParticipant++;
 
 
+    /*
     if(req.answer === quiz.correctAnswer){
       quiz.scores.push({ studentID : user._id, selectedAnswer : req.answer, quizScore : 1});
     }else{
       quiz.scores.push({ studentID : user._id, selectedAnswer : req.answer, quizScore : 0});
+    }*/
+
+    //newly pushed score = last one in the array
+
+
+    if(submitted.selectedAnswer === quiz.correctAnswer){
+      quiz.scores.push({ studentID : submitted.studentID, selectedAnswer : submitted.selectedAnswer, quizScore : 1});
+    }else{
+      quiz.scores.push({ studentID : submitted.studentID, selectedAnswer : submitted.selectedAnswer, quizScore : 0});
     }
 
     //TODO: check if student score already exists in the database in the front as well
