@@ -236,7 +236,7 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     /********  check quiz avaliablity **********/
 
     $scope.isOpen = function(quiz) {
-      console.log('quiz open is ' + quiz.quizOpen)
+      console.log('quiz open is ' + quiz.quizOpen);
       if(!quiz.quizOpen) {
         $scope.modalQuizNotOpen('sm' ,quiz );
         // $location.path('quizzes/close/'+quiz._id);

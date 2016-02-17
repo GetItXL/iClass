@@ -7,31 +7,36 @@
                     <h1>New Quiz</h1>
                 </div>
 
-              <form class="form-horizontal style-form" name="attendenceQuizForm" ng-submit="create(attendenceQuizForm.$valid, true)" novalidate>
-                <fieldset>
-                  <div class="form-group">
-                    <label for="quizType">Quiz Type</label>
-                    <div>
-                      <button type="button" class="btn btn-primary" ng-click="showQuizOption = true" name="quizType" id="quizType">Multiple Choice</button>
-                      <button type="button" class="btn btn-primary" ng-click="showQuizOption = false" name="quizType" id="quizType">Attendence</button>
-                      <h1>
+                <form class="form-horizontal style-form" name="attendenceQuizForm" ng-submit="create(attendenceQuizForm.$valid, true)" novalidate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label"> select quiz type </label>
+                            <div class="col-sm-10">
+                                <button type="button" class="btn btn-primary external-event" ng-click="showQuizOption = true" name="quizType" id="quizType" style="width:300px">Multiple Choice</button>
+                                <button type="button" class="btn btn-primary external-event" ng-click="showQuizOption = false" name="quizType" id="quizType" style="width:300px">Attendence</button>
+                            </div>
+                           <!--  <label for="quizType">Quiz Type</label>
+                            <div>
+                              <button type="button" class="btn btn-primary" ng-click="showQuizOption = true" name="quizType" id="quizType">Multiple Choice</button>
+                              <button type="button" class="btn btn-primary" ng-click="showQuizOption = false" name="quizType" id="quizType">Attendence</button>
+                              <h1>
 
-                      </h1>
-                    </div>
-                  </div>
+                              </h1>
+                            </div> -->
+                        </div>
 
-                  <div class="form-group" ng-show="!showQuizOption">
-                    <div class="col-sm-12 text-center">
-                      <button type="submit" class="btn btn-theme btn-lg">
-                        <i class="fa fa-check"></i> submit
-                      </button>
-                    </div>
-                  </div>
+                        <div class="form-group" ng-show="!showQuizOption">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-theme btn-lg">
+                                    <i class="fa fa-check"></i> submit
+                                </button>
+                            </div>
+                        </div>
 
                 </fieldset>
 
 
-              </form>
+                </form>
 
 
 

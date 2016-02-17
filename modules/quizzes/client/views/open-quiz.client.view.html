@@ -2,21 +2,42 @@
 <section ng-controller="SubmitQuizController" ng-init="findOne()">
     <div class="col-lg-12 mt">
         <div class="row content-panel">
-            <div class="page-header centered">
-                <h1 ng-bind="quiz.title"></h1>
+            <div class="green-panel">
+                <div class="green-header">
+                    <h5 ng-bind="quiz.title"></h5>
+                </div>
             </div>
             <div class="col-lg-10 col-lg-offset-1">
-               taking quiz now.....
-
-
-              <div class="form-group">
-                <div ng-repeat="choice in quiz.choices">
-                  <button ng-click="submit(choice.letter)">{{choice.letter}}. {{choice.description}}</button>
+                <p class="mt">
+                    <h3> {{quiz.question}} </h3>
+                </p>
+                <hr>
+                <div class="steps" >
+                    <div class = "col-md-4 col-sm-4 mb " ng-repeat="choice in quiz.choices">
+                        <!-- <input type="checkbox" id="op" ng-model="choice.letter" ng-changed="letterChoose(choice.letter)">   -->
+                          <div class="radio">
+                          <label>
+                         <!--  <input type="checkbox" data-checklist-model="choice.letter" data-checklist-value="choice.letter" >  -->
+                         <input class="check" type="radio" ng-model="$parent.choice.letter" value="{{choice.letter}}" >
+                      
+                          <span class="label-text">{{choice.letter}}. {{choice.description}}</span></label>
+                        </div>
+                      </div>
+                  
+                    <input type="submit" value="All Done!" id="submit"  ng-click="submit(choice.letter)">    
                 </div>
-              </div>
+               <!--  <div class="form-group">
+                    <div ng-repeat="choice in quiz.choices">
+                        <div class = "col-md-4 col-sm-4 mb">
+                          <button ng-click="submit(choice.letter)" style="width:150px">{{choice.letter}}. {{choice.description}}</button>
+                        </div>
+                    </div>
+                    <hr>
 
 
-              </button>
+                </div> -->
+                <br>
+                <br>
             </div>
         </div>
     </div>
