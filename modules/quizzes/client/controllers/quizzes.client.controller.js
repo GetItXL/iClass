@@ -236,24 +236,12 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     /********  check quiz avaliablity **********/
 
     $scope.isOpen = function(quiz) {
-
-      /*
-      if(!quiz.open) {
-          $scope.modalQuizNotOpen('sm' ,quiz );
-          // $location.path('quizzes/'+quiz+'/close');
-      }
-      else {
-        console.log('quiz is open');
-          $location.path('quizzes/'+quiz+'/open');
-      }*/
-
-
+      console.log('quiz open is ' + quiz.quizOpen)
       if(!quiz.quizOpen) {
         $scope.modalQuizNotOpen('sm' ,quiz );
         // $location.path('quizzes/close/'+quiz._id);
       }
       else {
-        console.log('quiz is open');
         //$location.path('quizzes/'+quiz._id+'/open');
         $location.path('quizzes/open/'+quiz._id);
       }

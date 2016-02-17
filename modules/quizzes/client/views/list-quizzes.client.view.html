@@ -13,7 +13,7 @@
       <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
       <p class="list-group-item-text" ng-bind="quiz.content"></p>
     </a>
-    <a ng-repeat="quiz in quizzes" ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz._id)"  class="list-group-item">
+    <a ng-repeat="quiz in quizzes" ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)"  class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="quiz.created | date:'mediumDate'"></span>
