@@ -80,7 +80,7 @@
                     <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
                     <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>     
+                    <button type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>     
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -91,7 +91,7 @@
                    <!--  {{course._id}}
  -->                        <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="quiz in quizzesInCourse " >
                                 <div class="pn" >
-                                    <a ng-show="!isStudent()" ui-sref="quizzes.view({quizId: quiz._id})" class="list-group-item">
+                                    <a ng-show="!isStudent()" ui-sref="quizzes.open({quizId: quiz._id})" class="list-group-item">
 
                                         Posted on
                                         <span ng-bind="quiz.created | date:'mediumDate'"></span>
@@ -100,6 +100,7 @@
 
                                         <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
                                         <p class="list-group-item-text" ng-bind="quiz.content"></p>
+                                        <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" ng-controller="CoursesListController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
                                     </a>
                                     <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item"> 
 
