@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log',
-  function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log',
+  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -139,9 +139,9 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
     $scope.updateQuizStatus = function (isQuizOpen, isQuizEnded) {
 
 
-      /* TODO: since student will update quiz model when submitting answer,
-       we may need to call findone() to update $scope.quiz before updating quiz status
-       */
+       // TODO: since student will update quiz model when submitting answer,
+       // we may need to call findone() to update $scope.quiz before updating quiz status
+       
 
 
       $scope.quiz.quizOpen = isQuizOpen;
@@ -150,7 +150,8 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
 
       quiz.$update(function () {
-        $location.path('quizzes/' + quiz._id);
+        //$location.path('quizzes/' + quiz._id);
+        $state.reload();
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

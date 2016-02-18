@@ -7,7 +7,16 @@
                     <h5 ng-bind="quiz.title"></h5>
                 </div>
             </div>
-            <div class="col-lg-10 col-lg-offset-1">
+            <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-controller="QuizzesController" ng-init="findOne()">
+                <a  class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
+                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart()">
+                          <i class="fa fa-check"></i> Open the quiz
+                        </button>
+                   <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizFinished()">
+                          <i class="fa fa-check"></i> End the quiz
+                        </button>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1" ng-show="quiz.quizOpen">
                 <p class="mt">
                     <h3> {{quiz.question}} </h3>
                 </p>
@@ -24,7 +33,7 @@
                         </div>
                       </div>
                   
-                    <input type="submit" value="All Done!" id="submit"  ng-click="submit(choice.letter)">    
+                    <input type="submit" ng-show="isStudent()"value="All Done!" id="submit"  ng-click="submit(choice.letter)">    
                 </div>
                <!--  <div class="form-group">
                     <div ng-repeat="choice in quiz.choices">

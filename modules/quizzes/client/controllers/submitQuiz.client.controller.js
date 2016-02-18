@@ -7,6 +7,22 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
         $scope.authentication = Authentication;
 
 
+//TODO: get rid of this code redundancy
+    /*********************** Check current user role ********************/
+    $scope.isAdmin = function(){
+      return ($scope.authentication.user.roles.indexOf('admin') > -1);
+    };
+
+    $scope.isProf = function(){
+      return ($scope.authentication.user.roles.indexOf('professor') > -1);
+    };
+
+    $scope.isStudent = function(){
+      return ($scope.authentication.user.roles.indexOf('user') > -1);
+    };
+    /*******************************************************************/
+
+
         // Find existing Quiz
         $scope.findOne = function () {
             console.log("calling SubmitQuizController");
@@ -70,6 +86,27 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             return false;
         }
+
+        /* try to use watch instand of reload page */
+        $scope.isOpen = function(quiz){
+
+            $scope.$watch('quizOpen', function() {
+             // console.log('checking passcode error');
+            //   $scope.correctPasscode = CoursePasscodeFactory.correctPasscode;
+            //   var passcodeNoError = $scope.correctPasscode;
+            //  //  console.log('checking passcode error ' + passcodeNoError);
+            //   if(quizIsOpen) {
+            //       $modalInstance.close($scope.course);
+            //       //$state.reload();
+
+            //     //  console.log('passcode correct');
+            //   }
+            //   else
+            //      console.log('passcode error');
+            // //console.log('end of checking passcode error');
+          });
+        }
+
 
 
 
