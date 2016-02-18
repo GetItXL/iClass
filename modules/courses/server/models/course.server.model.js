@@ -46,6 +46,10 @@ var CourseSchema = new Schema({
   professor: { //Professor who created the course
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  numberOfStudent: {
+    type: Number,
+    default: 0
   }
   /*
   // may need later for efficiency in query

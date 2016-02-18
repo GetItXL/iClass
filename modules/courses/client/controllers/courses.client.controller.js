@@ -214,6 +214,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             courseId: $stateParams.courseId
         });
 
+        //      console.log('number of student is ' + $scope.course.year);
+
       //but $scope.course is undefined here....
 
       //page flow: enter course page -> create quiz
@@ -235,9 +237,27 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
     /*******************************************************************/
 
+
+ /*********** record number of students ***********/
+
+    $scope.increaseNumStudent = function(){
+    
+        var course = $scope.course;
+        $scope.course.numberOfStudent += 1;
+        console.log('number of student is ' + $scope.course.numberOfStudent);
+
+        course.$update(function () {
+      //  $location.path('quizzes/' + quiz._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+      
+    }
+
+
     $scope.correctPasscode = false; 
     
-    $scope.joinCourse = function(courseID){
+    $scope.joinCourse = function(courseID,course){
         $scope.error = null;
         var passcodeError = $scope.correctPasscode;
 
@@ -264,6 +284,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             //$scope.authentication = Authenticaton; ?
 
                 $location.path('studentdashboard');
+                $scope.increaseNumStudent();
               // console.log('correct passcode');
             //console.log(Authentication.user);
             }, function(errorResponse){
@@ -301,32 +322,32 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     // };
 
     // //check if this course is created by one user
-    // $scope.isCourseCreated = function(createdCourseId){
+    $scope.isCourseCreated = function(createdCourseId){
 
-    //   console.log('Users created course: ' + $scope.authentication.user.createdCourses);
-    //   var user = $scope.authentication.user;
+      console.log('Users created course: ' + $scope.authentication.user.createdCourses);
+      var user = $scope.authentication.user;
 
-    //   if($scope.isProf())
-    //   {
-    //     //if(user.createdCourses.indexOf(createdCourseId) === -1)
-    //     for(var i = 0; i < user.createdCourses.length; i++)
-    //     {
-    //       console.log('length is ' + user.createdCourses.length);
-    //       console.log('i is ' + i);
-    //       if(user.createdCourses[i] === createdCourseId){
-    //         console.log(user.createdCourses[i]);
-    //         console.log(createdCourseId);
-    //         console.log('it is my course.');
-    //         return true;
-    //       } 
-    //     }
-    //   }
-    //   else
-    //   {
-    //     console.log('I am not a professor');
-    //     return false;
-    //   }
-    // };
+      if($scope.isProf())
+      {
+        //if(user.createdCourses.indexOf(createdCourseId) === -1)
+        for(var i = 0; i < user.createdCourses.length; i++)
+        {
+          console.log('length is ' + user.createdCourses.length);
+          console.log('i is ' + i);
+          if(user.createdCourses[i] === createdCourseId){
+            console.log(user.createdCourses[i]);
+            console.log(createdCourseId);
+            console.log('it is my course.');
+            return true;
+          } 
+        }
+      }
+      else
+      {
+        console.log('I am not a professor');
+        return false;
+      }
+    };
 
     /* TODO: delete enrolled course from user if the course if removed by admin from database */
 
@@ -387,7 +408,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
     };
     
-
+   
 
   }
 ]);

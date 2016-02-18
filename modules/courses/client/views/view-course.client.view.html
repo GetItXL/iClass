@@ -4,87 +4,113 @@
             <div class="form-panel">
                 <div class="page-header ">
                     <span style="font-size:3em" ng-bind="course.number"></span>
-                    <span style="font-size:1.5em; font-style: italic;"> {{course.semester}} {{course.year}} </span> 
-                </div>
-                <div class="row" >
-                   <div class="col-md-8">
-                      <small>
+                    <span style="font-size:1.5em; font-style: italic;" > {{course.semester}} {{course.year}} </span> 
+                    <small>
                         <em class="text-muted">
-                          Created on
-                          <span ng-bind="course.created | date:'mediumDate'"></span>
-                          by Professor
-                          <span ng-bind="course.professor.displayName"></span>
+                          <span class="pull-right">
+                              Created on
+                              <div ng-bind="course.created | date:'mediumDate'"></div>
+                            </span>
                         </em>
-                      </small>
-                      <p class="lead" ng-bind="course.name"></p>
-                      <p class="lead" ng-bind="course.professor.displayName"></p>
-                    
-
-                      <!-- only admin or professor who created the course be able to see passcode -->
-                      <p class="lead" ng-bind="course.passcode" ng-show="isAdmin()"></p>
-                      <p class="lead" ng-bind="course.passcode" ng-show="isCourseCreated(course._id)"></p>
-
-                    </div>
-
-                  <!-- TODO: make passcode field required and display message to user if nothing entered -->
-
-                  <div class="col-md-4" text-center ng-show="isAdmin()">
-                        <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})">
-                          <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <a class="btn btn-primary" ng-click="remove();" ng-show="isAdmin()">
-                          <i class="glyphicon glyphicon-trash"></i>
-                        </a>
-                  </div>
-                   <!-- only admin or professor who created the course be able to edit course -->
-                  <div class="col-md-4" text-center ng-show="isCourseCreated(course._id)">
-                        <a class="btn btn-primary" ui-sref="courses.edit({courseId: course._id})">
-                          <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                  </div>
+                    </small>
                 </div>
+                <div class="form-horizontal style-form" >
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span class="lead" ng-bind="course.name"></span>
+                            <span  ng-bind="course.professor.displayName"></span>
+                        
 
-                <div>
-                  <a class="btn btn-primary" ui-sref="quizzes.create" ng-show="!isStudent()">
-                    <i class="glyphicon glyphicon-plus">CreateQuiz</i>
-                  </a>
+                          <!-- only admin or professor who created the course be able to see passcode -->
+                          <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
+                          <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ui-sref="courses.edit({courseId: course._id})"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()"><i class="fa fa-edit"></i> create Quiz</button>
+                            
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-lg-9 main-chart">
+                    <div class="row ">
+                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                            <div class="box1">
+                                <span class="li_user"></span>
+                                <h3>{{course.numberOfStudent}}</h3>
+                            </div>
+                              <p>{{course.numberOfStudent}} students in this class</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_note"></span>
+                                <h3>2</h3>
+                           </div>
+                                <p>totally 2 quizzes created</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_pen"></span>
+                                 <h3>1</h3>
+                            </div>
+                            <p>1 new quizzes created in this week</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_star"></span>
+                               
+                                <h3>80%</h3>
+                            </div>
+                            
+                              <p> average grade in this course is 80% </p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_heart"></span>
+                                <h3>90%</h3>
+                            </div>
+                            <p>you have 90% of the grade in this course</p>
+                        </div>                  
+                    </div><!-- /row mt -->  
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <h2> Quizzes </h2>
                         <hr>
                 <!--value of course._id does not pass to the function figureOutQuizToDisplay-->
-                <div class="list-group" ng-init="figureOutQuizToDisplay()" >
+                        <div class="list-group" ng-init="figureOutQuizToDisplay()" >
                    <!--  {{course._id}}
- -->                     <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="quiz in quizzesInCourse " >
-                        <div class="pn" >
-                           <a ng-show="!isStudent()" ui-sref="quizzes.view({quizId: quiz._id})" class="list-group-item">
+ -->                        <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="quiz in quizzesInCourse " >
+                                <div class="pn" >
+                                    <a ng-show="!isStudent()" ui-sref="quizzes.view({quizId: quiz._id})" class="list-group-item">
 
-                                Posted on
-                                <span ng-bind="quiz.created | date:'mediumDate'"></span>
-                                by
-                                <span ng-bind="quiz.user.displayName"></span>
+                                        Posted on
+                                        <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                                        by
+                                        <span ng-bind="quiz.user.displayName"></span>
 
-                              <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
-                              <p class="list-group-item-text" ng-bind="quiz.content"></p>
-                            </a>
-                            <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item"> 
+                                        <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
+                                        <p class="list-group-item-text" ng-bind="quiz.content"></p>
+                                    </a>
+                                    <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item"> 
 
-                                Posted on
-                                <span ng-bind="quiz.created | date:'mediumDate'"></span>
-                                by
-                                <span ng-bind="quiz.user.displayName"></span>
+                                        Posted on
+                                        <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                                        by
+                                        <span ng-bind="quiz.user.displayName"></span>
 
-                              <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
-                              <p class="list-group-item-text" ng-bind="quiz.content"></p>
-                            </a>
+                                        <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
+                                        <p class="list-group-item-text" ng-bind="quiz.content"></p>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-        </div>
-    </div>
-            </div>
-        </div><!-- col-lg-12-->       
+                    </div> <!-- col-lg-12 -->
+                </div><!-- row-->           
+            </div><!--form-panel -->
+        </div> <!-- col-lg-12 -->
     </div><!-- /row -->
 </section>
