@@ -237,14 +237,18 @@ app.controller('QuizzesController', ['$scope', '$stateParams', '$location', 'Aut
 
     $scope.isOpen = function(quiz) {
       console.log('quiz open is ' + quiz.quizOpen);
-      if(!quiz.quizOpen) {
-        $scope.modalQuizNotOpen('sm' ,quiz );
-        // $location.path('quizzes/close/'+quiz._id);
-      }
-      else {
-        //$location.path('quizzes/'+quiz._id+'/open');
-        $location.path('quizzes/open/'+quiz._id);
-      }
+    
+    /*  need to fix refresh page in order to take quiz bug  */
+    
+          if(!quiz.quizOpen) {
+            $scope.modalQuizNotOpen('sm' ,quiz );
+            // $location.path('quizzes/close/'+quiz._id);
+          }
+          else {
+            //$location.path('quizzes/'+quiz._id+'/open');
+            $location.path('quizzes/open/'+quiz._id);
+          }
+      
 
     };
 

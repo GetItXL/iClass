@@ -14,6 +14,7 @@
       <p class="list-group-item-text" ng-bind="quiz.content"></p>
     </a>
     <a ng-repeat="quiz in quizzes" ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)"  class="list-group-item">
+      <!-- bug need to fix: user needs to re-fresh in order update course status -->
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="quiz.created | date:'mediumDate'"></span>
