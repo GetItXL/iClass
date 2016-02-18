@@ -1,0 +1,60 @@
+<section ng-controller="SubmitQuizController" ng-init="findOne()">
+    <div class="col-lg-12 mt">
+        <div class="row content-panel mb">
+            <div class="page-header centered">
+                <h1 ng-bind="quiz.title"></h1>
+                <small>
+                    <em class="text-muted">
+                        Create by
+                        <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                        by
+                        <span ng-bind="quiz.user.displayName"></span>
+                    </em>
+                </small>
+            </div>
+            <div class="col-lg-12 main-chart">
+                    <div class="row ">
+                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                            <div class="box1">
+                                <span class="li_user"></span>
+                                <h3>{{course.numberOfStudent}}</h3>
+                            </div>
+                              <p>{{course.numberOfStudent}} students took this quiz</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_note"></span>
+                                <h3>2</h3>
+                           </div>
+                                <p>totally 2 stduent get correct answer</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_pen"></span>
+                                 <h3>1</h3>
+                            </div>
+                            <p>1 new quizzes created in this week</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_star"></span>
+                                <h3>80%</h3>
+                            </div>
+                            <p> average grade in this course is 80% </p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_heart"></span>
+                                <h3>90%</h3>
+                            </div>
+                            <p>you have 90% of the grade in this course</p>
+                        </div>                  
+                    </div><!-- /row mt -->  
+                </div>
+				<a ng-show="!isStudent()" class="btn btn-lg btn-theme02 " ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
+
+
+
+        </div>
+    </div>
+</section>
