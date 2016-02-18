@@ -78,9 +78,9 @@
                 <div class="col-md-3">
                     <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
                     <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
-                    <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ui-sref="courses.edit({courseId: course._id})"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()"><i class="fa fa-edit"></i> create Quiz</button>     
+                    <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>     
                 </div>
                 <div class="row">
                     <div class="col-md-12">

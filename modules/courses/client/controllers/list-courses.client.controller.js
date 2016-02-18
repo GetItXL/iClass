@@ -13,7 +13,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
 
     $scope.buildPager = function () {
       $scope.pagedItems = [];
-      $scope.itemsPerPage = 2;
+      $scope.itemsPerPage = 3;
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
