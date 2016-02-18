@@ -1,7 +1,7 @@
 <!-- this view is for professor review -->
 <section ng-controller="QuizzesController" ng-init="findOne()">
     <div class="col-lg-12 mt">
-        <div class="row content-panel">
+        <div class="row content-panel mb">
             <div class="page-header centered">
                 <h1 ng-bind="quiz.title"></h1>
                 <small>
@@ -13,7 +13,7 @@
                     </em>
                 </small>
             </div>
-            <div class="col-lg-10 col-lg-offset-1">
+            <div class="col-lg-10 col-md-10 col-lg-offset-1">
                 <div class="invoice-body">
                     <h2>Quiz Status</h2>
                     <p>Is open: {{quiz.quizOpen}}</p>
@@ -37,22 +37,33 @@
 
                     <h2>Quiz Duration</h2>
                     <p>{{quiz.quizDuration}} milliseconds</p>
+                </div>
+            </div>
 
+             <div class="col-md-2">
+                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
+                   <!--  <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
+                         End quiz
+                    </button>
+                    <br>
+                    <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizStart()">
+                        Open quiz
+                    </button>
+                             -->
+            </div>
 
                     <!-- test button -->
-                    <div class="form-group">
-                      <div class="col-sm-12 text-center">
-                        <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
+                     <!-- test button -->
+                    <!-- TODO: move this to list view -->
+                    <div class="form-group md">
+                      <div class="col-sm-6 text-center">
+                        <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizFinished()">
                           <i class="fa fa-check"></i> End the quiz
                         </button>
                       </div>
-                    </div>
-
-                    <!-- test button -->
-                    <!-- TODO: move this to list view -->
-                    <div class="form-group">
-                      <div class="col-sm-12 text-center">
-                        <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizStart()">
+                      <div class="col-sm-6 text-center">
+                        <button type="submit" class="btn btn-theme btn-lg pull-left" ng-click="setQuizStart()">
                           <i class="fa fa-check"></i> Open the quiz
                         </button>
                       </div>
@@ -60,18 +71,7 @@
 
 
 
-                    <div class="pull-right" ng-show="!isStudent()">
-                      <a class="btn btn-primary" ui-sref="quizzes.edit({quizId: quiz._id})">
-                        <i class="glyphicon glyphicon-edit"></i>
-                      </a>
-                      <a class="btn btn-primary" ng-click="remove();">
-                        <i class="glyphicon glyphicon-trash"></i>
-                      </a>
-                    </div>
-                    
-                    <p class="lead" ng-bind="quiz.content"></p>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
