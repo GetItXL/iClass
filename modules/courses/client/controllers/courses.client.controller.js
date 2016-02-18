@@ -252,7 +252,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.error = errorResponse.data.message;
       });
       
-    }
+    };
 
 
     $scope.correctPasscode = false; 
