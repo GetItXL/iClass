@@ -13,10 +13,11 @@
                     </em>
                 </small>
             </div>
-            <div class="col-lg-10 col-md-10 col-lg-offset-1">
-                <div class="invoice-body">
+            <div clss="row">
+            <div class="col-lg-8 col-md-9 col-lg-offset-1">
+                <div >
                     <h2>Quiz Status</h2>
-                    <p>Is open: {{quiz.quizOpen}}</p>
+                    </t><p>Is open: {{quiz.quizOpen}}</p>
                     <p>Is finished: {{quiz.quizEnded}}</p>
 
 
@@ -40,9 +41,10 @@
                 </div>
             </div>
 
-             <div class="col-md-2">
+             <div class="col-lg-3 col-md-3">
                     <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
+                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button><br><br>
+                    <a class="btn btn-lg btn-theme02 " ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
                    <!--  <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
                          End quiz
                     </button>
