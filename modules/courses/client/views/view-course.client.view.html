@@ -2,38 +2,21 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <div class="page-header ">
-                    <span style="font-size:3em" ng-bind="course.number"></span>
-                    <span style="font-size:1.5em; font-style: italic;" > {{course.semester}} {{course.year}} </span> 
-                    <small>
-                        <em class="text-muted">
-                          <span class="pull-right">
-                              Created on
-                              <div ng-bind="course.created | date:'mediumDate'"></div>
-                            </span>
-                        </em>
-                    </small>
-                </div>
-                <div class="form-horizontal style-form" >
+                <header >
                     <div class="row">
-                        <div class="col-md-8">
-                            <span class="lead" ng-bind="course.name"></span>
-                            <span  ng-bind="course.professor.displayName"></span>
-                        
-
-                          <!-- only admin or professor who created the course be able to see passcode -->
-                          <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
-                          <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
-
+                        <div class="col-md-9">
+                            <h1 class="title"> {{course.number}} {{course.name}} </h1>
+                            <p class="meta">
+                                create by professor <b>{{course.professor.displayName}}</b> on <span ng-bind="course.created | date:'mediumDate'"></span>
+                            </p>
                         </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ui-sref="courses.edit({courseId: course._id})"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()"><i class="fa fa-edit"></i> create Quiz</button>
-                            
+                        <div class="col-md-3">
+                           <br><br>
+                            <p class="lead">{{course.semester}} {{course.year}} </p>
                         </div>
                     </div>
-                </div>
+                </header>
+
                
                 <div class="col-lg-9 main-chart">
                     <div class="row ">
@@ -76,6 +59,14 @@
                         </div>                  
                     </div><!-- /row mt -->  
                 </div>
+                <div class="col-md-3">
+                    <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
+                          <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
+                            <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ui-sref="courses.edit({courseId: course._id})"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-theme" ui-sref="quizzes.create" ng-show="!isStudent()"><i class="fa fa-edit"></i> create Quiz</button>
+                            
+                        </div>
                 <div class="row">
                     <div class="col-md-12">
                         <h2> Quizzes </h2>
