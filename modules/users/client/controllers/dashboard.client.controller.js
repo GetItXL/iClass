@@ -19,6 +19,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
 /*******     professor's dashboard function 	***********/    
 
+    //TODO: may be able to avoid the loop by modifying backend and service
 	// Find a list of Courses
     $scope.createdCourseList = function(){
 
@@ -46,10 +47,26 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     };
 
 
-    //Get number of students enrolled in a class
-    //Using $scope.courses
+    /* This function grabs numStudentsEnrolled in EACH courese in the database
+      and store the courseID:numStudentEnrolled pair in $scope.numStudentInCourse
+     */
     $scope.findNumStudentEnrolled = function(){
 
+      //$scope.numStudentInCourse = $scope.courses.enrolledStudents.length;
+      //console.log("weird");
+      //console.log($scope.courses);
+      //console.log($scope.courses.numStudents);
+
+      var courseStudentPair = {};
+
+      for(var i = 0; i < $scope.courses.length; i++){
+        //courseStudentPair[$scope.courses[i]._id] = 0;
+        courseStudentPair[$scope.courses[i]._id] = $scope.courses[i].enrolledStudents.length;
+      }
+
+      $scope.numStudentInCourse = courseStudentPair;
+
+      /*
       var courseStudentPair = {};
 
       //Initialize the array with 0s
@@ -83,10 +100,9 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         $scope.numStudentInCourse = courseStudentPair;
        // var associativeArray = {"course._id" : numStudents};
 
-      });
+
+      });*/
     };
-    /* TODO: more efficient way to do so other than adding enrolledStudents in course model? */
-    /* TODO: need more students to test this */
 
 
 

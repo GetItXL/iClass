@@ -105,7 +105,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             //      console.log('passcode error');
             // //console.log('end of checking passcode error');
           });
-        }
+        };
 
 
 
