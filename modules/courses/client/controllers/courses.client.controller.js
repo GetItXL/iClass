@@ -228,7 +228,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
         //      console.log('number of student is ' + $scope.course.year);
 
-      //but $scope.course is undefined here....
+      //but $scope.course is undefined here.... because
+    /* Since querying the database is a non-blocking operation,
+     you cannot expect the function call to return the value from the database immediately.
+     Try passing in a callback instead
+     (see updateCourseModelUponJoin function down below)
+     */
 
       //page flow: enter course page -> create quiz
         CourseInfoFactory.setCourseID($stateParams.courseId);
@@ -294,12 +299,11 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             student.$update(function(res){
                 $scope.success = true;
                 Authentication.user = res;
-            //$scope.authentication = Authenticaton; ?
+
+                //update CourseModel's enrolledStudents as well
+                updateCourseModelUponJoin(courseID, student._id);
 
                 $location.path('studentdashboard');
-                //$scope.increaseNumStudent();
-              // console.log('correct passcode');
-            //console.log(Authentication.user);
             }, function(errorResponse){
                 $scope.error = errorResponse.data.message;
             });
@@ -313,6 +317,34 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
      // console.log('end of the function');
       
     };
+
+
+    function updateCourseModelUponJoin(courseID, enrolledStudentID){
+
+        /* Why Courses.get() without callback function would give you "undefined"
+        Since querying the database is a non-blocking operation,
+        you cannot expect the function call to return the value from the database immediately.
+        Try passing in a callback instead
+         */
+
+        //get the course joined
+        var course = Courses.get({
+            courseId: courseID
+        }, function(){ //callback function to ensure that this executes after database query has finished
+            course.enrolledStudents.push(enrolledStudentID);
+
+            //update user model in database
+            course.$update(function(res){
+                $scope.success = true;
+
+            }, function(errorResponse){
+                $scope.error = errorResponse.data.message;
+            });
+
+        });
+
+
+    }
 
     
 
