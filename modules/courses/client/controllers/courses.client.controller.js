@@ -57,6 +57,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
     //added course to professor's createdcourse list
+      /*
     $scope.addtoCreateCourseList = function(courseID) {
 
         var professor = new Users(Authentication.user);
@@ -77,7 +78,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           console.log('student cannot create course!');
         }
 
-    };
+    };*/
+
 
 
     // Create new Course
@@ -101,7 +103,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             year: this.year,
             semester: this.semester,
             //endDate: $scope.findendDate(this.semester,this.year)  //end date of the semester
-            active: this.active,
+            active: this.active
           });
           // Redirect after save
           course.$save(function (response) {
@@ -115,7 +117,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             $scope.semester = '';
             //$scope.endDate = '';
 
-            $scope.addtoCreateCourseList(response._id);
+            //$scope.addtoCreateCourseList(response._id);
             console.log('Users created course:' + $scope.authentication.user.createdCourses);
           }, function (errorResponse) {
             $scope.error = errorResponse.data.message;
@@ -153,6 +155,15 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
         for(var i = 0; i < allUsers.length; i++){
 
+
+            if (allUsers[i].enrolledCourses.indexOf(courseID) !== -1){ //student
+                console.log('not removed?');
+                console.log(allUsers[i].enrolledCourses);
+                allUsers[i].enrolledCourses.splice(allUsers[i].enrolledCourses.indexOf(courseID), 1);
+                console.log(allUsers[i].enrolledCourses);
+                updateDatabaseAfterRemoveCourse(allUsers[i]);
+            }
+            /*
           //Check if there is anything to be removed
           if(allUsers[i].createdCourses.indexOf(courseID) !== -1) {//If courseID exists, remove it. admin/prof
             allUsers[i].createdCourses.splice(allUsers[i].createdCourses.indexOf(courseID), 1);
@@ -161,7 +172,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           else if (allUsers[i].enrolledCourses.indexOf(courseID) !== -1){ //student
             allUsers[i].enrolledCourses.splice(allUsers[i].enrolledCourses.indexOf(courseID), 1);
             updateDatabaseAfterRemoveCourse(allUsers[i]);
-          }
+          }*/
 
         }
 

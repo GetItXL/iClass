@@ -108,7 +108,6 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
 /*******     student's dashboard function 	***********/
 
-
     $scope.findEnrolledCourses = function(){
 
       var user = $scope.authentication.user;
@@ -126,6 +125,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
       $scope.enrolledCourses = coursesEnrolled;
 
+      console.log('enrolled courses: ' + $scope.enrolledCourses.length);
       //console.log(this.coursesEnrolled);
       //console.log('enrolled' + $scope.enrolledCourses);
     };
@@ -134,9 +134,9 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
     /********************* shared ******************/
 
-    //get the total number of quiz in a
-
+    //get the total number of quiz for EACH course in the database
     /* getting all the pairs at once because can't use loop function in ng-repeat*/
+    //TODO: can look into moving find quiz logic in back end controller. but is not necessary
     $scope.getNumQuiz = function(){
 
       var courses;
@@ -154,6 +154,14 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
       /* TODO: fix display num quiz on student side!!!! */
 
+
+      /* The parameter passed to query = the :id part of URL
+      var quizzes = Quizzes.query({filter:true, courseID:'5699e1d7046a38e1126a8c05'}, function(){
+        console.log('shit');
+        console.log('try' + quizzes.length);
+      });*/
+
+
       var courseQuizPairs = {};
 
       //Initialize the array with 0s
@@ -164,6 +172,8 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
 
 
       var quizzes = Quizzes.query(function(){
+        //console.log('try' + quizzes.length);
+
         for(var i = 0; i < quizzes.length; i++){
           for(var j = 0; j < courses.length; j++){
 
@@ -178,7 +188,8 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         console.log($scope.numQuizzesInCourse);
 
       });
-    }; /* TODO: def need better algo later*/
+    };
+    /* unavoidable nested for loop since getting quiz list for ALL the course */
 
 
 

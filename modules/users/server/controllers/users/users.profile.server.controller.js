@@ -32,6 +32,8 @@ exports.update = function (req, res) {
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
+    console.log('backend enrolled: ' + user.enrolledCourses);
+
     user.save(function (err) {
       if (err) {
         return res.status(400).send({
@@ -43,6 +45,8 @@ exports.update = function (req, res) {
             res.status(400).send(err);
           } else {
             //console.log('final user' + user);
+            console.log('last tset name ' + user.displayName);
+            console.log('last tset ' + user.enrolledCourses);
             res.json(user);
           }
         });

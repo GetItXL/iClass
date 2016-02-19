@@ -138,15 +138,37 @@ exports.delete = function (req, res) {
  * List of Quizzes
  */
 exports.list = function (req, res) {
-  Quiz.find().sort('-created').populate('user', 'displayName').exec(function (err, quizzes) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(quizzes);
-    }
-  });
+
+  //console.log('is ther filter ' + req.query.filter);
+  //console.log(Quiz.find({courseID: req.query.courseID}).length);
+
+  /*
+  if(req.query.filter === true){
+    Quiz.find({'_id': req.query.courseID}).sort('-created').populate('user', 'displayName').exec(function (err, quizzes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(quizzes);
+      }
+    });
+
+  }else{*/
+    Quiz.find().sort('-created').populate('user', 'displayName').exec(function (err, quizzes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(quizzes);
+      }
+    });
+  //}
+
+
+
+
 };
 
 /**
