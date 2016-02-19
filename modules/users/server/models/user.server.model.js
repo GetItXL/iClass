@@ -106,15 +106,21 @@ var UserSchema = new Schema({
   }],
   createdCourses: [{ /* TODO: may not need this, to get a list of createdCourses, just query all course list and check if creator's id = professor id */
     type: String
-  }]/*,
-  quizzesTaken: [{ //For student role only.
-    courseID: String,
-    quizID: String,
-    score: Number
-  }]*/
-  //Don't need to create a list for professor role because that information is hold in Quiz Model as creator
-  /* TODO: may need to modify quiz model and user model later */
+  }],
+  quizzesTaken: { //For student only
+    type: [{
+      courseID: {
+        type: String
+      },
+      quizID: {
+        type: String
+      },
+      quizScore: {
+        type: Number
+      }
+    }]
 
+  }
 });
 
 /**

@@ -79,9 +79,9 @@ var QuizSchema = new Schema({
     }]
   },
   totalParticipant:{ //total number of students answered the quiz
-    type: Number,
-    default: 0
-  }
+    type: Number,     //Figured out why we needed this!
+    default: 0        //because score.length != totalParticipant!
+  }                   //Not all students in class must take the quiz but all students in class need score!
 
 
 });
