@@ -29,7 +29,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
         //console.log('current professor id ' + $scope.authentication.user._id);
         var professorCourses = [];
 
-        var courses = Courses.query({}, function(){
+        var courses = Courses.All.query({}, function(){
           for(var i = 0; i < courses.length; i++){
             //console.log(courses[i].professor._id);
             if(courses[i].professor._id === $scope.authentication.user._id){

@@ -39,7 +39,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             //not sure why Courses.get() does not work
 
-            var courses = Courses.query(function(){
+            var courses = Courses.All.query(function(){
                 var course;
 
                 for(var i = 0; i < courses.length; i++){
