@@ -104,9 +104,10 @@ var UserSchema = new Schema({
   enrolledCourses: [{ //Stores a list of course the student is enrolled in
     type: String
   }],
-  /*createdCourses: [{
+  createdCourses: [{
     type: String
-  }],*/ //Don't need it actually. Many-One. One for loop for querying is ok
+  }], //Don't need it actually. Many-One. One for loop for querying is ok
+      //bad practice to put it here but yea, guess we have to deal with it
   quizzesTaken: { //For student only
     type: [{
       courseID: {
