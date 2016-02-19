@@ -6,13 +6,23 @@ var myModule = angular.module('courses');
 //Courses service used for communicating with the courses REST endpoints
 myModule.factory('Courses', ['$resource',
   function ($resource) {
-    return $resource('api/courses/:courseId', {
-      courseId: '@_id'
-    }, {
-      update: {
-        method: 'PUT'
-      }
-    });
+    return{
+        All: $resource('api/courses/:courseId', {
+                      courseId: '@_id'
+                  }, {
+                      update: {
+                          method: 'PUT'
+                      }
+                  }),
+
+        Student: $resource('/api/courses/enrolledStu/:courseId', {
+                    courseId: '@_id'
+                }, {
+                    updateEnrolledStudent: {
+                        method: 'PUT'
+                    }
+                })
+    };
   }
 ]);
 

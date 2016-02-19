@@ -205,12 +205,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     // Find a list of Courses
     $scope.find = function () {
-        $scope.courses = Courses.query();
+        $scope.courses = Courses.All.query();
     };
 
     // Find existing Course
     $scope.findOne = function () {
-        $scope.course = Courses.get({
+        $scope.course = Courses.All.get({
             courseId: $stateParams.courseId
         });
 
@@ -301,13 +301,13 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
          */
 
         //get the course joined
-        var course = Courses.get({
+        var course = Courses.Student.get({
             courseId: courseID
         }, function(){ //callback function to ensure that this executes after database query has finished
             course.enrolledStudents.push(enrolledStudentID);
 
             //update user model in database
-            course.$update(function(res){
+            course.$updateEnrolledStudent(function(res){
                 $scope.success = true;
 
             }, function(errorResponse){

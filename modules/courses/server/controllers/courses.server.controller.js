@@ -48,8 +48,28 @@ exports.update = function (req, res) {
   course.year = req.body.year;
   course.active = req.body.active;
   //course.numberOfStudent = req.body.numberOfStudent;
-  course.enrolledStudents = req.body.enrolledStudents;
+  //course.enrolledStudents = req.body.enrolledStudents;
   
+  course.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(course);
+    }
+  });
+};
+
+exports.updateEnrolledStudents = function(req, res){
+
+  var course = req.course;
+
+  //course.enrolledStudents = req.body.enrolledStudents;
+  course.enrolledStudents = req.body.enrolledStudents;
+
+  console.log('calling update enrolledStudent');
+
   course.save(function (err) {
     if (err) {
       return res.status(400).send({

@@ -28,8 +28,12 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/courses/:courseId',
-      permissions: ['get','put']
-    }]
+      permissions: ['get']
+    }, {
+      resources: '/api/courses/enrolledStu/:courseId',
+      permissions: '*'
+    }
+    ]
   }, {
     roles: ['professor'], //professor can create/modify course
     allows: [{

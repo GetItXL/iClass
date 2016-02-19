@@ -19,6 +19,12 @@ module.exports = function (app) {
     .delete(courses.delete);
     //.post(couses.join); //Student enroll in a selected course
 
+  //api for students updating enrolledStudents field of course
+  app.route('/api/courses/enrolledStu/:courseId').all(coursesPolicy.isAllowed)
+      .get(courses.read)
+      .put(courses.updateEnrolledStudents);
+
+
   // Finish by binding the course middleware
   app.param('courseId', courses.courseByID);
 };

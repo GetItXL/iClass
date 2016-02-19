@@ -6,7 +6,7 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
     $scope.authentication = Authentication;
 
 
-    Courses.query(function (data) {
+    Courses.All.query(function (data) {
       $scope.courses = data;
       $scope.buildPager();
     });

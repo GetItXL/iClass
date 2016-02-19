@@ -60,7 +60,7 @@ exports.update = function (req, res) {
 //update quiz score + participant
 exports.submit = function(req, res){
 
-  //The one in the db
+  //The (old) one in the db
   var quiz = req.quiz;
   var user = req.user;
 
