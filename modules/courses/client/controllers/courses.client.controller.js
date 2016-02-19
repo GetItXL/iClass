@@ -57,7 +57,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
     //added course to professor's createdcourse list
-    $scope.addtoCreateCourseList = function(courseID) {
+    function addtoCreateCourseList(courseID) {
 
         var professor = new Users(Authentication.user);
 
@@ -117,7 +117,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             $scope.semester = '';
             //$scope.endDate = '';
 
-            $scope.addtoCreateCourseList(response._id);
+            addtoCreateCourseList(response._id);
             console.log('Users created course:' + $scope.authentication.user.createdCourses);
           }, function (errorResponse) {
             $scope.error = errorResponse.data.message;
@@ -245,21 +245,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
  /*********** record number of students ***********/
 
-/*
-    $scope.increaseNumStudent = function(){
-    
-        var course = $scope.course;
-        $scope.course.numberOfStudent += 1;
-        console.log('number of student is ' + $scope.course.numberOfStudent);
-
-        course.$update(function () {
-      //  $location.path('quizzes/' + quiz._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-      
-    };*/
-
 
     $scope.correctPasscode = false; 
     
@@ -382,7 +367,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       }
     };
 
-    /* TODO: delete enrolled course from user if the course if removed by admin from database */
 
 /******************  active course list and in active course list functions ***********************/
 
