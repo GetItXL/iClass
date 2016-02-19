@@ -47,7 +47,8 @@ exports.update = function (req, res) {
   course.semester = req.body.semester;
   course.year = req.body.year;
   course.active = req.body.active;
-  course.numberOfStudent = req.body.numberOfStudent;
+  //course.numberOfStudent = req.body.numberOfStudent;
+  course.enrolledStudents = req.body.enrolledStudents;
   
   course.save(function (err) {
     if (err) {

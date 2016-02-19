@@ -39,9 +39,9 @@
                         <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                             <div class="box1">
                                 <span class="li_user"></span>
-                                <h3>{{course.numberOfStudent}}</h3>
+                                <h3>{{course.enrolledStudents.length}}</h3>
                             </div>
-                              <p>{{course.numberOfStudent}} students in this class</p>
+                              <p>{{course.enrolledStudents.length}} students in this class</p>
                         </div>
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
@@ -60,10 +60,10 @@
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
                                 <span class="li_star"></span>
-                               
+
                                 <h3>80%</h3>
                             </div>
-                            
+
                               <p> average grade in this course is 80% </p>
                         </div>
                         <div class="col-md-2 col-sm-2 box0">
@@ -72,15 +72,15 @@
                                 <h3>90%</h3>
                             </div>
                             <p>you have 90% of the grade in this course</p>
-                        </div>                  
-                    </div><!-- /row mt -->  
+                        </div>
+                    </div><!-- /row mt -->
                 </div>
                 <div class="col-md-3">
                     <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
                     <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
                     <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>     
+                    <button type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -102,7 +102,7 @@
                                         <p class="list-group-item-text" ng-bind="quiz.content"></p>
                                         <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" ng-controller="CoursesListController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
                                     </a>
-                                    <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item"> 
+                                    <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item">
 
                                         Posted on
                                         <span ng-bind="quiz.created | date:'mediumDate'"></span>
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div> <!-- col-lg-12 -->
-                </div><!-- row-->           
+                </div><!-- row-->
             </div><!--form-panel -->
         </div> <!-- col-lg-12 -->
     </div><!-- /row -->

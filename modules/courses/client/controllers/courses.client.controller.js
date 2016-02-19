@@ -103,7 +103,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             year: this.year,
             semester: this.semester,
             //endDate: $scope.findendDate(this.semester,this.year)  //end date of the semester
-            active: this.active
+            active: this.active,
+            enrolledStudents: []
           });
           // Redirect after save
           course.$save(function (response) {
@@ -251,6 +252,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
  /*********** record number of students ***********/
 
+/*
     $scope.increaseNumStudent = function(){
     
         var course = $scope.course;
@@ -263,7 +265,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.error = errorResponse.data.message;
       });
       
-    };
+    };*/
 
 
     $scope.correctPasscode = false; 
@@ -295,7 +297,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             //$scope.authentication = Authenticaton; ?
 
                 $location.path('studentdashboard');
-                $scope.increaseNumStudent();
+                //$scope.increaseNumStudent();
               // console.log('correct passcode');
             //console.log(Authentication.user);
             }, function(errorResponse){
