@@ -104,9 +104,9 @@ var UserSchema = new Schema({
   enrolledCourses: [{ //Stores a list of course the student is enrolled in
     type: String
   }],
-  createdCourses: [{ /* TODO: may not need this, to get a list of createdCourses, just query all course list and check if creator's id = professor id */
+  /*createdCourses: [{
     type: String
-  }],
+  }],*/ //Don't need it actually. Many-One. One for loop for querying is ok
   quizzesTaken: { //For student only
     type: [{
       courseID: {
