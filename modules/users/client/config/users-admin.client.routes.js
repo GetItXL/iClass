@@ -21,6 +21,18 @@ angular.module('users.admin.routes').config(['$stateProvider',
           }]
         }
       })
+      .state('admin.courses', {
+        url: '/courses',
+        templateUrl: 'modules/courses/client/views/admin-list-courses.client.view.html',
+        controller: 'UserController',
+        resolve: {
+          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+            return Admin.get({
+              userId: $stateParams.userId
+            });
+          }]
+        }
+      })
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',

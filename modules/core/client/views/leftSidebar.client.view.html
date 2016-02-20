@@ -28,8 +28,14 @@
                       </a>
                   </li>
 
-                  <li class="sub-menu">
+                  <li class="sub-menu" ng-show="!isAdmin()">
                       <a href="/courses">
+                          <i class="fa fa-graduation-cap"></i>
+                          <span>Course List</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu" ng-show="isAdmin()">
+                      <a href="admindashboard/courses">
                           <i class="fa fa-graduation-cap"></i>
                           <span>Course List</span>
                       </a>
