@@ -36,7 +36,7 @@
                 <hr>
                 <div class="col-lg-9 main-chart" >
                     <div class="row ">
-                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0" ng-controller="DashboardController" ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id);">
+                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                             <div class="box1">
                                 <span class="li_user"></span>
 
@@ -47,9 +47,9 @@
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
                                 <span class="li_note"></span>
-                                <h3>2</h3>
+                                <h3>{{quizzesInCourse.length}}</h3>
                            </div>
-                                <p>totally 2 quizzes created</p>
+                                <p>totally {{quizzesInCourse.length}} quizzes created</p>
                         </div>
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
@@ -101,7 +101,7 @@
 
                                         <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
                                         <p class="list-group-item-text" ng-bind="quiz.content"></p>
-                                    
+
                                     </a>
                                     <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item">
 

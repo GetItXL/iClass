@@ -13,7 +13,7 @@
                         <div class="list-group">
                             <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in enrolledCourses" >
                                 <div class="pn" >
-                                    <a ng-init="getNumQuiz(course._id)"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+                                    <a ng-init="getNumQuiz()"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
                                         <small class="list-group-item-text">
                                             Created on
                                             <span ng-bind="course.created | date:'mediumDate'"></span>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        </div><!-- col-lg-12-->       
+        </div><!-- col-lg-12-->
     </div><!-- /row -->
 </section>
 
