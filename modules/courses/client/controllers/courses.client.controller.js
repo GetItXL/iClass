@@ -77,7 +77,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           console.log('student cannot create course!');
         }
 
-    }
+    } 
 
 
 

@@ -40,7 +40,7 @@
                             <div class="box1">
                                 <span class="li_user"></span>
 
-                                    <h3>{{numStudentInCourse[course._id]}}</h3>
+                                    <h3>{{course.enrolledStudents.length}}</h3>
                             </div>
                               <p>{{course.enrolledStudents.length}} students in this class</p>
                         </div>
@@ -67,7 +67,7 @@
 
                               <p> average grade in this course is 80% </p>
                         </div>
-                        <div class="col-md-2 col-sm-2 box0">
+                        <div class="col-md-2 col-sm-2 box0" ng-show="isStudent()">
                             <div class="box1">
                                 <span class="li_heart"></span>
                                 <h3>90%</h3>
