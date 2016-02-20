@@ -29,14 +29,14 @@
                         </div>
                         <div class="col-md-3">
                            <br><br>
-                            <p class="lead">{{course.semester}} {{course.year}} </p>
+                            <p class="lead">{{course.semester}} {{course.year}} {{course._id}}</p>
                         </div>
                     </div>
                 </header>
                 <hr>
                 <div class="col-lg-9 main-chart" >
                     <div class="row ">
-                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0" ng-controller="DashboardController" ng-init="findNumStudentEnrolled(course._id); getNumQuiz(course._id);">
+                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                             <div class="box1">
                                 <span class="li_user"></span>
 
@@ -44,12 +44,13 @@
                             </div>
                               <p>{{course.enrolledStudents.length}} students in this class</p>
                         </div>
-                        <div class="col-md-2 col-sm-2 box0">
+                        <div class="col-md-2 col-sm-2 box0" ng-init="getNumOfQuiz(course._id);">
+                          <!--   <div class="col-md-2 col-sm-2 box0" ng-controller="DashboardController" ng-init="getNumQuiz();"> -->
                             <div class="box1">
                                 <span class="li_note"></span>
-                                <h3>2</h3>
+                                <h3>{{numQuizzesInCourse[course._id]}}</h3>
                            </div>
-                                <p>totally 2 quizzes created</p>
+                                <p>totally 2 quizzes created  {{course._id}}</p>
                         </div>
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">

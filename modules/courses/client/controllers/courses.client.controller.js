@@ -425,6 +425,48 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
     };
     
+    $scope.getNumOfQuiz = function(createdCourseId) {
+          var user = $scope.authentication.user;
+
+      if($scope.isProf())
+      {
+        var courses = user.createdCourses;
+      }else if($scope.isStudent()){
+        courses = user.enrolledCourses;
+      }
+      else {
+        courses = Courses.query();
+      }
+        var courseQuizPairs = {};
+
+      //Initialize the array with 0s
+      for(var k = 0; k < courses.length; k++){
+        console.log('length ' + courses.length);
+        courseQuizPairs[courses[k]] = 0;
+        console.log('id ' + courses[k]);
+      }
+
+
+      var quizzes = Quizzes.query(function(){
+        //console.log('try' + quizzes.length);
+
+        for(var i = 0; i < quizzes.length; i++){
+          for(var j = 0; j < courses.length; j++){
+
+            if(quizzes[i].courseID === courses[j]){
+              courseQuizPairs[courses[j]]++;
+            }
+
+          }
+        }
+
+        $scope.numQuizzesInCourse = courseQuizPairs;
+        console.log($scope.numQuizzesInCourse);
+
+      });
+
+      
+    };
    
 
   }

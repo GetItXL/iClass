@@ -137,6 +137,8 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     //get the total number of quiz for EACH course in the database
     /* getting all the pairs at once because can't use loop function in ng-repeat*/
     //TODO: can look into moving find quiz logic in back end controller. but is not necessary
+
+     
     $scope.getNumQuiz = function(){
 
       var courses;
@@ -144,7 +146,9 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       if($scope.isAdmin()){
         courses = Courses.query();
       }else if($scope.isProf()){
+
         courses = $scope.courses;
+        console.log('hello'+ courses);
       }else if($scope.isStudent()){
         courses = $scope.enrolledCourses;
 
