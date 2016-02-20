@@ -1,0 +1,49 @@
+<section ng-controller="CoursesListController" >
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-4">
+            <h1>Course admin list</h1>
+            </div>
+            <div class="col-md-4" style="margin-top: 2em">
+               <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+                </input>
+            </div>
+<!--             <div class="col-md-4 pull-right nav nav-pills" role="group" style="margin-top: 2em">
+                <button type="button" class="btn btn-default">All Courses</button>
+                <button type="button" class="btn btn-default">Active Courses</button>
+                <button type="button" class="btn btn-default">in-active Courses</button>
+            </div> -->
+        </div>
+    </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mb"  data-ng-repeat="course in pagedItems ">
+                                <div class="pn" >
+                                    <a ng-init="findNumStudentEnrolled(); getNumQuiz();" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+                                             {{course.semester}} {{course.year}}
+                                            <h4> {{course.number}} {{course.name}} </h4>
+                                              <button id = "edit" class="btn btn-default btn-sm pull-right"  type="submit" ng-controller="CoursesListController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalUpdate('lg', course)" > Edit </button>
+                                               <button id = "delete" class="btn btn-default btn-sm pull-right" ng-show="isAdmin()"  type="submit" data-ng-click="$event.preventDefault(); $event.stopPropagation(); modalRemove('sm', course)"> Delete </button>
+
+                                            Number of students: {{numStudentInCourse[course._id]}}
+                                        </br>
+                                            Number of quizzes: {{numQuizzesInCourse[course._id]}}
+                                    </a>
+                                </div>
+                           
+        </div>
+    <!-- <div class="list-group">
+        <a ng-repeat="course in pagedItems" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 ng-bind="course.number"></h4>
+                </div>
+                <div class="col-md-6">
+                    <h5>{{course.semester}} {{course.year}}</h5>
+                </div>
+            </div>
+            <p class="list-group-item-text" ng-bind="course.name"></p>
+            <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+        </a>
+    </div> -->
+  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+</section>
