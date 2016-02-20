@@ -2,25 +2,25 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'SubmitQuiz', 'CourseInfoFactory', 'Courses', '$modal', '$log',
-    function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, SubmitQuiz, CourseInfoFactory, Courses, $modal, $log) {
+app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'SubmitQuiz', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
+    function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, SubmitQuiz, CourseInfoFactory, Courses, $modal, $log, Socket) {
         $scope.authentication = Authentication;
 
 
-//TODO: get rid of this code redundancy
-    /*********************** Check current user role ********************/
-    $scope.isAdmin = function(){
-      return ($scope.authentication.user.roles.indexOf('admin') > -1);
-    };
+        //TODO: get rid of this code redundancy
+        /*********************** Check current user role ********************/
+        $scope.isAdmin = function(){
+          return ($scope.authentication.user.roles.indexOf('admin') > -1);
+        };
 
-    $scope.isProf = function(){
-      return ($scope.authentication.user.roles.indexOf('professor') > -1);
-    };
+        $scope.isProf = function(){
+          return ($scope.authentication.user.roles.indexOf('professor') > -1);
+        };
 
-    $scope.isStudent = function(){
-      return ($scope.authentication.user.roles.indexOf('user') > -1);
-    };
-    /*******************************************************************/
+        $scope.isStudent = function(){
+          return ($scope.authentication.user.roles.indexOf('user') > -1);
+        };
+        /*******************************************************************/
 
 
         // Find existing Quiz
@@ -107,6 +107,18 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
           });
         };
 
+
+
+
+        // Make sure the Socket is connected
+        if (!Socket.socket) {
+            Socket.connect();
+        }
+
+        // Add an event listener to the 'chatMessage' event
+        Socket.on('userJoined', function (message) {
+            console.log('SOCKET: USER JOINED: ' + message.username);
+        });
 
 
 
