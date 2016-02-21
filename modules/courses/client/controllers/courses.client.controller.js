@@ -446,10 +446,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     };
 
     /************* find number of quizzes in a course  ********/
-    $scope.getNumOfQuiz = function() {
+    $scope.getNumQuiz = function() {
           var user = $scope.authentication.user;
-          console.log('om admin');
-           var courses;
+          var courses;
 
       if($scope.isProf())
       {
