@@ -144,7 +144,7 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       var courses;
 
       if($scope.isAdmin()){
-        courses = Courses.query();
+        courses = Courses.All.query();
       }else if($scope.isProf()){
 
         courses = $scope.courses;
