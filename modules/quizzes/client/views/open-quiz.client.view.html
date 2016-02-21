@@ -40,7 +40,7 @@
                       <!--CUSTOM CHART START -->
                       <hr>
                 <div class="border-head">
-                    <h3>result<h3>
+                    <h3>result total submission: {{quiz.totalParticipant}}<h3>
                 </div>
                 <div class="custom-bar-chart">
                     <ul class="y-axis">
@@ -53,7 +53,7 @@
                     </ul>
                     <div class="bar" ng-repeat="choice in quiz.choices">
                           <div class="title" value="{{choice.letter}}">{{choice.letter}}</div>
-                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">0%</div>
+                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
                     </div>
                 </div>
                       <!--custom chart end-->

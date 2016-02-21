@@ -56,14 +56,24 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         $scope.submit = function(answer){
 
-            console.log('my submitted answer is ' + answer);
+            
 
             //if(!alreadySubmitted()){
-                var quiz = $scope.quiz;
-                quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
+            var quiz = $scope.quiz;
+            quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                // if(quiz.correctAnswer === answer) {
+                //     alert('my submitted answer is correct! ' + answer);
+                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                // }
+                // else {
+                //     alert('my submitted answer is wrong' + answer);
+                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
+                // }
+                   
 
 
                 quiz.$submit(function () {
+                    alert("thank you for submitting answer "+ answer);
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -120,7 +130,35 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             console.log('SOCKET: USER JOINED: ' + message.username);
         });
 
+        /************ figure selecte number of choices *************/
 
+        $scope.figureOutChoicesNum = function(currentQuiz){
+            var choiceNum = currentQuiz.choices;
+            var QuizzesChoice = [];
+           
+            for(var i = 0; i < choiceNum.length; i++){
+               // console.log('choice number length ' + choiceNum.length);
+                QuizzesChoice[choiceNum[i].letter] = 0;
+                //console.log('choice is ' + choiceNum[i].letter);
+             
+            }  
+
+            for(var j = 0; j < choiceNum.length; j++){
+                for(var k = 0; k < currentQuiz.scores.length; k++) {
+                        //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+                    if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
+                         QuizzesChoice[choiceNum[j].letter]++;
+                    }
+                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+                }
+    
+            }  
+
+            $scope.numChoiceQuiz = QuizzesChoice;
+
+            console.log($scope.numChoiceQuiz);
+
+        }; 
 
     }
 ]);
