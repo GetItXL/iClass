@@ -50,59 +50,59 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     /* This function grabs numStudentsEnrolled in EACH courese in the database
       and store the courseID:numStudentEnrolled pair in $scope.numStudentInCourse
      */
-    $scope.findNumStudentEnrolled = function(){
+    // $scope.findNumStudentEnrolled = function(){
 
-      //$scope.numStudentInCourse = $scope.courses.enrolledStudents.length;
-      //console.log("weird");
-      //console.log($scope.courses);
-      //console.log($scope.courses.numStudents);
+    //   //$scope.numStudentInCourse = $scope.courses.enrolledStudents.length;
+    //   //console.log("weird");
+    //   //console.log($scope.courses);
+    //   //console.log($scope.courses.numStudents);
 
-      var courseStudentPair = {};
+    //   var courseStudentPair = {};
 
-      for(var i = 0; i < $scope.courses.length; i++){
-        //courseStudentPair[$scope.courses[i]._id] = 0;
-        courseStudentPair[$scope.courses[i]._id] = $scope.courses[i].enrolledStudents.length;
-      }
+    //   for(var i = 0; i < $scope.courses.length; i++){
+    //     //courseStudentPair[$scope.courses[i]._id] = 0;
+    //     courseStudentPair[$scope.courses[i]._id] = $scope.courses[i].enrolledStudents.length;
+    //   }
 
-      $scope.numStudentInCourse = courseStudentPair;
+    //   $scope.numStudentInCourse = courseStudentPair;
 
-      /*
-      var courseStudentPair = {};
+      
+    //   var courseStudentPair = {};
 
-      //Initialize the array with 0s
-      for(var i = 0; i < $scope.courses.length; i++){
-        courseStudentPair[$scope.courses[i]._id] = 0;
-      }
+    //   //Initialize the array with 0s
+    //   for(var i = 0; i < $scope.courses.length; i++){
+    //     courseStudentPair[$scope.courses[i]._id] = 0;
+    //   }
 
-      //get all users from database
-      var allUsers = Users.query(function(res){
+    //   //get all users from database
+    //   var allUsers = Users.query(function(res){
 
-        var validStudents = [];
+    //     var validStudents = [];
 
-        //extract out those students who joined at least one class
-        for(var i = 0; i < allUsers.length; i++){
+    //     //extract out those students who joined at least one class
+    //     for(var i = 0; i < allUsers.length; i++){
 
-          if(allUsers[i].enrolledCourses.length !== 0)
-            validStudents.push(allUsers[i]);
-        }
+    //       if(allUsers[i].enrolledCourses.length !== 0)
+    //         validStudents.push(allUsers[i]);
+    //     }
 
-        //Get num of students enrolled in a class
-        for(var k = 0; k < validStudents.length; k++) {
-          for (var j = 0; j < $scope.courses.length; j++) {
+    //     //Get num of students enrolled in a class
+    //     for(var k = 0; k < validStudents.length; k++) {
+    //       for (var j = 0; j < $scope.courses.length; j++) {
 
-            if (validStudents[k].enrolledCourses.indexOf($scope.courses[j]._id) !== -1) {
-              courseStudentPair[$scope.courses[j]._id]++;
-              //console.log($scope.courses[j]._id, courseStudentPair[$scope.courses[j]._id]);
-            }
-          }
-        }
+    //         if (validStudents[k].enrolledCourses.indexOf($scope.courses[j]._id) !== -1) {
+    //           courseStudentPair[$scope.courses[j]._id]++;
+    //           //console.log($scope.courses[j]._id, courseStudentPair[$scope.courses[j]._id]);
+    //         }
+    //       }
+    //     }
 
-        $scope.numStudentInCourse = courseStudentPair;
-       // var associativeArray = {"course._id" : numStudents};
+    //     $scope.numStudentInCourse = courseStudentPair;
+    //    // var associativeArray = {"course._id" : numStudents};
 
 
-      });*/
-    };
+    //   });
+    // };
 
 
 
@@ -139,60 +139,61 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     //TODO: can look into moving find quiz logic in back end controller. but is not necessary
 
      
-    $scope.getNumQuiz = function(){
+    // $scope.getNumQuiz = function(){
 
-      var courses;
+    //   var courses;
 
-      if($scope.isAdmin()){
-        courses = Courses.All.query();
-      }else if($scope.isProf()){
+    //   if($scope.isAdmin()){
+    //     courses = Courses.All.query();
+    //   }else if($scope.isProf()){
 
-        courses = $scope.courses;
-        console.log('hello'+ courses);
-      }else if($scope.isStudent()){
-        courses = $scope.enrolledCourses;
+    //     courses = $scope.courses;
+    //     console.log('hello'+ courses);
+    //   }else if($scope.isStudent()){
+    //     courses = $scope.enrolledCourses;
 
-      }
+    //   }
 
-      console.log('there? '+ courses);
+    //   console.log('there? '+ courses);
 
-      /* TODO: fix display num quiz on student side!!!! */
-
-
-      /* The parameter passed to query = the :id part of URL
-      var quizzes = Quizzes.query({filter:true, courseID:'5699e1d7046a38e1126a8c05'}, function(){
-        console.log('shit');
-        console.log('try' + quizzes.length);
-      });*/
+    //   /* TODO: fix display num quiz on student side!!!! */
 
 
-      var courseQuizPairs = {};
-
-      //Initialize the array with 0s
-      for(var k = 0; k < courses.length; k++){
-        courseQuizPairs[courses[k]._id] = 0;
-        console.log('id ' + courses[k]._id);
-      }
+    //   /* The parameter passed to query = the :id part of URL
+    //   var quizzes = Quizzes.query({filter:true, courseID:'5699e1d7046a38e1126a8c05'}, function(){
+    //     console.log('shit');
+    //     console.log('try' + quizzes.length);
+    //   });*/
 
 
-      var quizzes = Quizzes.query(function(){
-        //console.log('try' + quizzes.length);
+    //   var courseQuizPairs = {};
 
-        for(var i = 0; i < quizzes.length; i++){
-          for(var j = 0; j < courses.length; j++){
+    //   //Initialize the array with 0s
+    //   for(var k = 0; k < courses.length; k++){
+    //     courseQuizPairs[courses[k]._id] = 0;
+    //     console.log('id ' + courses[k]._id);
+    //   }
 
-            if(quizzes[i].courseID === courses[j]._id){
-              courseQuizPairs[courses[j]._id]++;
-            }
 
-          }
-        }
+    //   var quizzes = Quizzes.query(function(){
+    //     //console.log('try' + quizzes.length);
 
-        $scope.numQuizzesInCourse = courseQuizPairs;
-        console.log($scope.numQuizzesInCourse);
+    //     for(var i = 0; i < quizzes.length; i++){
+    //       for(var j = 0; j < courses.length; j++){
 
-      });
-    };
+    //         if(quizzes[i].courseID === courses[j]._id){
+    //           courseQuizPairs[courses[j]._id]++;
+    //         }
+
+    //       }
+    //     }
+
+    //     $scope.numQuizzesInCourse = courseQuizPairs;
+    //     console.log($scope.numQuizzesInCourse);
+
+    //   });
+    // };
+    
     /* unavoidable nested for loop since getting quiz list for ALL the course */
 
 
