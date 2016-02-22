@@ -75,15 +75,21 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
                 quiz.$submit(function () {
 
+                    var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
+                        console.log('before emmit:' + course._id);
+                        console.log('before emmit:' + course.name);
 
-
-                    Socket.emit('answerSubmitted', {
-                        quizID: $scope.quiz._id,
-                        answer: answer,// don't need this much info. passing in just in case
-                        userID: $scope.authentication.user._id,
-                        //course: $scope.courseDisplayInfo,
-                        professorID: $scope.courseDisplayInfo.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
+                        Socket.emit('answerSubmitted', {
+                            quizID: $scope.quiz._id,
+                            answer: answer,// don't need this much info. passing in just in case
+                            userID: $scope.authentication.user._id,
+                            //course: $scope.courseDisplayInfo,
+                            professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
+                        });
                     });
+
+
+
 
                     alert("thank you for submitting answer "+ answer);
 

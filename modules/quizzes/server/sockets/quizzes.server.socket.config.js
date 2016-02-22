@@ -37,7 +37,7 @@ module.exports = function (io, socket, socketClients) {
         console.log(data.professorID);
 
 
-        if(data.professorID){
+        if(data.professorID && socketClients[data.professorID]){
             socketClients[data.professorID].emit('notifyProfQuizSubmission', {
                 quizID: data.quizID
             });
