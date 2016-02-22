@@ -304,9 +304,21 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       //$scope.isQuizOpen = false;
 
       $scope.updateQuizStatus(false, true);
-
-
     };
+
+
+/*
+    Socket.on('notifyProfQuizSubmission', function(data){
+      //query database and then update totalParticipant number on the view
+
+      //query db
+      var quiz = Quizzes.get({
+        quizId: data.quizID
+      });
+
+
+    });*/
+
 
   }
 ]);

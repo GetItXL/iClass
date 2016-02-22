@@ -30,30 +30,38 @@ module.exports = function (io, socket, socketClients) {
 
 
 
+
     socket.on('answerSubmitted', function(data){
         //emit this only to the quiz's professor
+        console.log('answerSubmittedBack called!');
+        console.log(data.professorID);
 
-        //for(var i = 0; i < socketClients.length; i++){
-        //    if(socketClients[i].userID === data.professorID){
-        //        socketClients[i]
-        //    }
-        //}
 
-        //io.emit('')
-
+        if(data.professorID){
+            socketClients[data.professorID].emit('notifyProfQuizSubmission', {
+                quizID: data.quizID
+            });
+        }else{
+            console.log('No professor ID passed :(');
+        }
     });
 
 
+    /*
     socket.on('quizClosed', function(data){
 
        //emit only to students in the class
-    });
+    });*/
 
 
 
 
     // Emit the status event when a socket client is disconnected
     socket.on('disconnect', function () {
+
+        //fix firefox crashing server bug
+        //socket.close();
+
 
         console.log('=================Connection destroyed test=====================');
         console.log('ever disconnected?');

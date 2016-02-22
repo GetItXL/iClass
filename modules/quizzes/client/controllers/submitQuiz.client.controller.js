@@ -71,20 +71,25 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                 //     alert('my submitted answer is wrong' + answer);
                 //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
                 // }
-                   
+
 
                 quiz.$submit(function () {
+
 
 
                     Socket.emit('answerSubmitted', {
                         quizID: $scope.quiz._id,
                         answer: answer,// don't need this much info. passing in just in case
                         userID: $scope.authentication.user._id,
-                        course: $scope.courseDisplayInfo, //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
-                        professorID: $scope.courseDisplayInfo.professor._id
+                        //course: $scope.courseDisplayInfo,
+                        professorID: $scope.courseDisplayInfo.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
                     });
 
                     alert("thank you for submitting answer "+ answer);
+
+                    //fix firefox crashing server bug
+                    //Socket.socket.close();
+
 
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
@@ -135,9 +140,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
         // Make sure the Socket is connected
         if (!Socket.socket) {
             //connect whenever in course taking page?
-            Socket.connect(function(){
-                Socket.emit('updateUserClientPair', {userID: $scope.authentication.user._id});
-            });
+            Socket.connect();
 
         }
 
@@ -176,13 +179,31 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
         }; 
 
 
+
+        //put here for testing before separating pages
+        Socket.on('notifyProfQuizSubmission', function(data){
+            //query database and then update totalParticipant number on the view
+
+            console.log('notifyProfQuizSubmission recieved');
+
+
+            //query db
+            var quiz = Quizzes.get({
+                quizId: data.quizID
+            }, function(){
+                $scope.quiz = quiz;
+            });
+
+            //console.log($scope.quiz.totalParticipant);
+
+        });
+
+
         /*
-         $scope.$on('$locationChangeStart', function(event) {
-         //if ($scope.form.$invalid) {
-         //    event.preventDefault();
-         //}
-         Socket.socket.disconnect();
-         });*/
+        $scope.$on('$destroy', function () {
+            Socket.removeListener('notifyProfQuizSubmission');
+            Socket.removeListener('testUserSocketPair');
+        });*/
 
     }
 ]);
