@@ -39,6 +39,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             //not sure why Courses.get() does not work
 
+            //TODO: can actually pass parameter in query instead
             var courses = Courses.All.query(function(){
                 var course;
 
@@ -56,6 +57,11 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         $scope.submit = function(answer){
 
+            Socket.emit('wth', {data: 'data'});
+            Socket.emit('myUserInfo', {username: $scope.authentication.user.username});
+            //Socket.socket.disconnect();
+
+
             console.log('my submitted answer is ' + answer);
 
             //if(!alreadySubmitted()){
@@ -64,6 +70,14 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
 
                 quiz.$submit(function () {
+
+                    Socket.emit('answerSubmitted', {
+                       quizID: $scope.quiz._id,
+                        answer: answer,// don't need this much info. passing in just in case
+                        userID: $scope.authentication.user._id,
+                        courseID: $scope.courseDisplayInfo //may return undefined...
+                    });
+
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -112,14 +126,26 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         // Make sure the Socket is connected
         if (!Socket.socket) {
-            Socket.connect();
+            //connect whenever in course taking page?
+            Socket.connect(function(){
+                Socket.emit('updateUserClientPair', {userID: $scope.authentication.user._id});
+            });
+
         }
 
-        // Add an event listener to the 'chatMessage' event
-        Socket.on('userJoined', function (message) {
-            console.log('SOCKET: USER JOINED: ' + message.username);
+        Socket.on('testUserSocketPair', function(data){
+            console.log('test user socket pair recieved by front');
+            Socket.emit('testUserSocketPairBack', {data: 'hi'});
         });
 
+
+        /*
+        $scope.$on('$locationChangeStart', function(event) {
+            //if ($scope.form.$invalid) {
+            //    event.preventDefault();
+            //}
+            Socket.socket.disconnect();
+        });*/
 
 
     }

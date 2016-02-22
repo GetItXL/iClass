@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 
-  function ($scope, $stateParams, $http, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 'Socket',
+  function ($scope, $stateParams, $http, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory, Socket) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
@@ -424,7 +424,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.quizzesInCourse = courseQuizzes;
       });
     };
-    
+
+      /*
     $scope.getNumOfQuiz = function(createdCourseId) {
           var user = $scope.authentication.user;
 
@@ -466,8 +467,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
 
       
-    };
-   
+    };*/
+
+
+      if (!Socket.socket) {
+          //connect whenever in course taking page?
+          Socket.connect();
+
+      }
+
+      Socket.on('testUserSocketPair', function(data){
+          console.log('test user socket pair recieved by front');
+          Socket.emit('testUserSocketPairBack', {data: 'hi'});
+      });
 
   }
 ]);

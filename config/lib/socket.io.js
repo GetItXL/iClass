@@ -12,6 +12,9 @@ var config = require('../config'),
   session = require('express-session'),
   MongoStore = require('connect-mongo')(session);
 
+//stores userid and socket id pair
+var socketClients = [];
+
 // Define the Socket.io configuration method
 module.exports = function (app, db) {
   var server;
@@ -66,6 +69,8 @@ module.exports = function (app, db) {
     collection: config.sessionCollection
   });
 
+
+
   // Intercept Socket.io's handshake request
   io.use(function (socket, next) {
     // Use the 'cookie-parser' module to parse the request cookies
@@ -98,11 +103,24 @@ module.exports = function (app, db) {
   });
 
   // Add an event listener to the 'connection' event
+  // MEANJS's original socket io integration
   io.on('connection', function (socket) {
+    //refresh page = reconnect
+
+    //pairing user id with socket id
+    socketClients.push({userID: socket.request.user._id, socketID: socket.id});
+
+    console.log('AM I CONNECTED THIS TIME');
+    console.log(socket.id);
+
+
     config.files.server.sockets.forEach(function (socketConfiguration) {
-      require(path.resolve(socketConfiguration))(io, socket);
+      require(path.resolve(socketConfiguration))(io, socket, socketClients);
     });
   });
+
+  //disconnects only when user logged out
+
 
   return server;
 };

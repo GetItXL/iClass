@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log',
-  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
+  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -304,6 +304,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       //$scope.isQuizOpen = false;
 
       $scope.updateQuizStatus(false, true);
+
 
     };
 
