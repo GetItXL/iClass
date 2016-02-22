@@ -425,18 +425,45 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
     };
 
-      /*
-    $scope.getNumOfQuiz = function(createdCourseId) {
+
+    /********** find number of student in a course and quiz in course ********/
+      $scope.findNumStudentEnrolled = function(){
+
+      //$scope.numStudentInCourse = $scope.courses.enrolledStudents.length;
+      //console.log("weird");
+      //console.log($scope.courses);
+      //console.log($scope.courses.numStudents);
+
+      var courseStudentPair = {};
+
+      for(var i = 0; i < $scope.courses.length; i++){
+        //courseStudentPair[$scope.courses[i]._id] = 0;
+        courseStudentPair[$scope.courses[i]._id] = $scope.courses[i].enrolledStudents.length;
+      }
+
+      $scope.numStudentInCourse = courseStudentPair;
+
+    };
+
+    /************* find number of quizzes in a course  ********/
+    $scope.getNumQuiz = function() {
           var user = $scope.authentication.user;
+          var courses;
 
       if($scope.isProf())
       {
-        var courses = user.createdCourses;
+        courses = user.createdCourses;
       }else if($scope.isStudent()){
         courses = user.enrolledCourses;
       }
       else {
-        courses = Courses.query();
+
+        console.log('om admin');
+        // Courses.All.query(function (data) {
+        //  $scope.courses = data;
+      
+        // });
+       // courses = $scope.courses;
       }
         var courseQuizPairs = {};
 
@@ -467,7 +494,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       });
 
       
-    };*/
+    };
 
 
       if (!Socket.socket) {

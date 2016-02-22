@@ -265,5 +265,9 @@ angular.module('courses').controller('CoursesListController', ['$state', 'Users'
       }
     };
 
+    
+
+
+
   }
 ]);

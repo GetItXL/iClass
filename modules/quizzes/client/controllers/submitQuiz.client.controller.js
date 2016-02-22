@@ -57,26 +57,33 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
         $scope.submit = function(answer){
 
-            Socket.emit('wth', {data: 'data'});
-            Socket.emit('myUserInfo', {username: $scope.authentication.user.username});
-            //Socket.socket.disconnect();
-
-
             console.log('my submitted answer is ' + answer);
 
-            //if(!alreadySubmitted()){
-                var quiz = $scope.quiz;
-                quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
 
+            //if(!alreadySubmitted()){
+            var quiz = $scope.quiz;
+            quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                // if(quiz.correctAnswer === answer) {
+                //     alert('my submitted answer is correct! ' + answer);
+                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                // }
+                // else {
+                //     alert('my submitted answer is wrong' + answer);
+                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
+                // }
+                   
 
                 quiz.$submit(function () {
 
+                    /*
                     Socket.emit('answerSubmitted', {
                        quizID: $scope.quiz._id,
                         answer: answer,// don't need this much info. passing in just in case
                         userID: $scope.authentication.user._id,
                         courseID: $scope.courseDisplayInfo //may return undefined...
-                    });
+                    });*/
+
+                    alert("thank you for submitting answer "+ answer);
 
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
@@ -138,15 +145,43 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             Socket.emit('testUserSocketPairBack', {data: 'hi'});
         });
 
+        /************ figure selecte number of choices *************/
+
+        $scope.figureOutChoicesNum = function(currentQuiz){
+            var choiceNum = currentQuiz.choices;
+            var QuizzesChoice = [];
+           
+            for(var i = 0; i < choiceNum.length; i++){
+               // console.log('choice number length ' + choiceNum.length);
+                QuizzesChoice[choiceNum[i].letter] = 0;
+                //console.log('choice is ' + choiceNum[i].letter);
+             
+            }  
+
+            for(var j = 0; j < choiceNum.length; j++){
+                for(var k = 0; k < currentQuiz.scores.length; k++) {
+                        //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+                    if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
+                         QuizzesChoice[choiceNum[j].letter]++;
+                    }
+                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+                }
+    
+            }  
+
+            $scope.numChoiceQuiz = QuizzesChoice;
+
+            console.log($scope.numChoiceQuiz);
+        }; 
+
 
         /*
-        $scope.$on('$locationChangeStart', function(event) {
-            //if ($scope.form.$invalid) {
-            //    event.preventDefault();
-            //}
-            Socket.socket.disconnect();
-        });*/
-
+         $scope.$on('$locationChangeStart', function(event) {
+         //if ($scope.form.$invalid) {
+         //    event.preventDefault();
+         //}
+         Socket.socket.disconnect();
+         });*/
 
     }
 ]);
