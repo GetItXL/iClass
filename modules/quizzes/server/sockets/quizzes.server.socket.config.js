@@ -14,20 +14,30 @@ module.exports = function (io, socket, socketClients) {
     io.emit('testUserSocketPair', {});
 
     socket.on('testUserSocketPairBack', function(data){
-       console.log(socketClients.length);
-        for(var i = 0; i < socketClients.length; i++){
-            console.log(socketClients[i].userID);
-            console.log(socketClients[i].socketID);
+        console.log('=================Connection established test=====================');
+
+        console.log('My Socket List:');
+        for(var property in socketClients){
+            if(socketClients.hasOwnProperty(property)){
+                console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
+            }
         }
+        console.log('=================================================================');
+
+
     });
     /*************************************/
 
 
 
-
-
     socket.on('answerSubmitted', function(data){
         //emit this only to the quiz's professor
+
+        //for(var i = 0; i < socketClients.length; i++){
+        //    if(socketClients[i].userID === data.professorID){
+        //        socketClients[i]
+        //    }
+        //}
 
         //io.emit('')
 
@@ -45,23 +55,25 @@ module.exports = function (io, socket, socketClients) {
     // Emit the status event when a socket client is disconnected
     socket.on('disconnect', function () {
 
+        console.log('=================Connection destroyed test=====================');
         console.log('ever disconnected?');
         console.log('my socket id: ' + socket.id);
+        console.log('my user id: ' + socket.userID);
 
-        var toBeRemoved;
-        for(var i = 0; i < socketClients.length; i++){
-            if(socketClients[i].socketID === socket.id){
-                toBeRemoved = socketClients[i];
-                socketClients.splice(i, 1);
-                break;
-            }
-
+        //remove from list
+        if(socket.userID){
+            delete socketClients[socket.userID];
         }
 
-        console.log('to be removed');
-        console.log('socket id ' + toBeRemoved.socketID);
-        console.log('userid' + toBeRemoved.userID);
 
+        //test
+        console.log('My Socket List:');
+        for(var property in socketClients){
+            if(socketClients.hasOwnProperty(property)){
+                console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
+            }
+        }
+        console.log('=================================================================');
     });
 
 };

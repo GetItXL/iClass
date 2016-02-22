@@ -13,7 +13,8 @@ var config = require('../config'),
   MongoStore = require('connect-mongo')(session);
 
 //stores userid and socket id pair
-var socketClients = [];
+//making this an object. property = userID
+var socketClients = {};
 
 // Define the Socket.io configuration method
 module.exports = function (app, db) {
@@ -103,15 +104,22 @@ module.exports = function (app, db) {
   });
 
   // Add an event listener to the 'connection' event
-  // MEANJS's original socket io integration
   io.on('connection', function (socket) {
-    //refresh page = reconnect
+    //refresh page will reconnect (new socket)
+
+    //attach a field to server side socket for the easiness of deleting
+    socket.userID = socket.request.user._id;
+
 
     //pairing user id with socket id
-    socketClients.push({userID: socket.request.user._id, socketID: socket.id});
+    socketClients[socket.request.user._id] = socket;
+    //This way, each userID is a property of the socketClients object
+    //Each userID has one and only one entry in the object
+
 
     console.log('AM I CONNECTED THIS TIME');
     console.log(socket.id);
+    console.log('my user id is: ' + socket.userID);
 
 
     config.files.server.sockets.forEach(function (socketConfiguration) {

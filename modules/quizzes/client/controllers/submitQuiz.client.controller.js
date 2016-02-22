@@ -60,7 +60,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             console.log('my submitted answer is ' + answer);
 
 
-            //if(!alreadySubmitted()){
+            //if(!alreadySubmitted()){ //TODO: this is commented out for testing purpose, uncomment after done
             var quiz = $scope.quiz;
             quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
                 // if(quiz.correctAnswer === answer) {
@@ -75,13 +75,14 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
                 quiz.$submit(function () {
 
-                    /*
+
                     Socket.emit('answerSubmitted', {
-                       quizID: $scope.quiz._id,
+                        quizID: $scope.quiz._id,
                         answer: answer,// don't need this much info. passing in just in case
                         userID: $scope.authentication.user._id,
-                        courseID: $scope.courseDisplayInfo //may return undefined...
-                    });*/
+                        course: $scope.courseDisplayInfo, //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
+                        professorID: $scope.courseDisplayInfo.professor._id
+                    });
 
                     alert("thank you for submitting answer "+ answer);
 
