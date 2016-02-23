@@ -6,8 +6,10 @@ angular.module('users.professor.routes').config(['$stateProvider',
     $stateProvider
       .state('professor.dashboard', {
         url: '/professordashboard',
-        templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
-       // controller: 'UserListController'
+        templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html',
+        data: {
+            roles: ['professor']
+        }
       })
       // .state('professor.user', {
       //   url: '/users/:userId',

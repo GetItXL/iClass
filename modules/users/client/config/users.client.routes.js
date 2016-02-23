@@ -76,15 +76,24 @@ angular.module('users').config(['$stateProvider',
       })
       .state('studentdashboard', {
         url: '/studentdashboard',
-        templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html'
+        templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html',
+        data: {
+          roles: ['user']
+        }
       })
       .state('admindashboard', {
         url: '/admindashboard',
-        templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html'
+        templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html',
+        data: {
+          roles: ['admin']
+        }
       })
       .state('professordashboard', {
         url: '/professordashboard',
-        templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html'
+        templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html',
+        data: {
+          roles: ['professor']
+        }
       });
   }
 ]);
