@@ -1,5 +1,5 @@
 <!-- this view is for student taking quiz -->
-<section ng-controller="SubmitQuizController" ng-init="findOne()">
+<section ng-controller="QuizzesController" ng-init="findOne()">
     <div class="col-lg-12 mt">
         <div class="row content-panel">
             <div class="green-panel">
@@ -7,7 +7,7 @@
                     <h5 ng-bind="quiz.title"></h5>
                 </div>
             </div>
-            <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-controller="QuizzesController" ng-init="findOne()">
+            <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
                 <a  class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
                  <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart()">
                           <i class="fa fa-check"></i> Open the quiz
@@ -33,10 +33,9 @@
                         </div>
                       </div>
                   
-                    <input type="submit" ng-show="isStudent()"value="All Done!" id="submit"  ng-click="submit(choice.letter)">    
                 </div>
             </div>
-            <div class="col-lg-10 col-lg-offset-1 main-chart" ng-show="!isStudent()">
+            <div class="col-lg-10 col-lg-offset-1 main-chart">
                       <!--CUSTOM CHART START -->
                       <hr>
                 <div class="border-head">

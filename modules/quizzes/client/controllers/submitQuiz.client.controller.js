@@ -155,34 +155,34 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             Socket.emit('testUserSocketPairBack', {data: 'hi'});
         });
 
-        /************ figure selecte number of choices *************/
+        // /************ figure selecte number of choices *************/
 
-        $scope.figureOutChoicesNum = function(currentQuiz){
-            var choiceNum = currentQuiz.choices;
-            var QuizzesChoice = [];
+        // $scope.figureOutChoicesNum = function(currentQuiz){
+        //     var choiceNum = currentQuiz.choices;
+        //     var QuizzesChoice = [];
            
-            for(var i = 0; i < choiceNum.length; i++){
-               // console.log('choice number length ' + choiceNum.length);
-                QuizzesChoice[choiceNum[i].letter] = 0;
-                //console.log('choice is ' + choiceNum[i].letter);
+        //     for(var i = 0; i < choiceNum.length; i++){
+        //        // console.log('choice number length ' + choiceNum.length);
+        //         QuizzesChoice[choiceNum[i].letter] = 0;
+        //         //console.log('choice is ' + choiceNum[i].letter);
              
-            }  
+        //     }  
 
-            for(var j = 0; j < choiceNum.length; j++){
-                for(var k = 0; k < currentQuiz.scores.length; k++) {
-                        //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
-                    if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
-                         QuizzesChoice[choiceNum[j].letter]++;
-                    }
-                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
-                }
+        //     for(var j = 0; j < choiceNum.length; j++){
+        //         for(var k = 0; k < currentQuiz.scores.length; k++) {
+        //                 //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+        //             if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
+        //                  QuizzesChoice[choiceNum[j].letter]++;
+        //             }
+        //             //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+        //         }
     
-            }  
+        //     }  
 
-            $scope.numChoiceQuiz = QuizzesChoice;
+        //     $scope.numChoiceQuiz = QuizzesChoice;
 
-            console.log($scope.numChoiceQuiz);
-        }; 
+        //     console.log($scope.numChoiceQuiz);
+        // }; 
 
 
 

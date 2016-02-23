@@ -306,6 +306,35 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       $scope.updateQuizStatus(false, true);
     };
 
+/************ figure selecte number of choices *************/
+
+        $scope.figureOutChoicesNum = function(currentQuiz){
+            var choiceNum = currentQuiz.choices;
+            var QuizzesChoice = [];
+           
+            for(var i = 0; i < choiceNum.length; i++){
+               // console.log('choice number length ' + choiceNum.length);
+                QuizzesChoice[choiceNum[i].letter] = 0;
+                //console.log('choice is ' + choiceNum[i].letter);
+             
+            }  
+
+            for(var j = 0; j < choiceNum.length; j++){
+                for(var k = 0; k < currentQuiz.scores.length; k++) {
+                        //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
+                    if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
+                         QuizzesChoice[choiceNum[j].letter]++;
+                    }
+                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+                }
+    
+            }  
+
+            $scope.numChoiceQuiz = QuizzesChoice;
+
+            console.log($scope.numChoiceQuiz);
+        }; 
+
 
 /*
     Socket.on('notifyProfQuizSubmission', function(data){

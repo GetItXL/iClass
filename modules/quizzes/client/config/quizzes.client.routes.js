@@ -38,11 +38,18 @@ angular.module('quizzes').config(['$stateProvider',
           roles: ['user', 'admin']
         }
       })
-      .state('quizzes.open', {
-        url: '/open/:quizId',
+      .state('quizzes.profopen', {
+        url: '/open/other/:quizId',
         templateUrl: 'modules/quizzes/client/views/open-quiz.client.view.html',
         data: {
-          roles: ['professor', 'user', 'admin']
+          roles: ['professor', 'admin']
+        }
+      })
+       .state('quizzes.open', {
+        url: '/open/:quizId',
+        templateUrl: 'modules/quizzes/client/views/student-open-quiz.client.view.html',
+        data: {
+          roles: ['user', 'admin']
         }
       })
       .state('quizzes.statistics', {
