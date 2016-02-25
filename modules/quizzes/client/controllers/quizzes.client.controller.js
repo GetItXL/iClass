@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
-  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location',  'Authentication',  '$filter', 'Quizzes','getQuizObject', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
+  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, getQuizObject, CourseInfoFactory, Courses, $modal, $log, Socket) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -173,7 +173,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       });
 
       getCourseDisplayInfo($scope.quiz.courseID);
-      //console.log("findOne() is called");
     };
 
     
@@ -306,44 +305,78 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       $scope.updateQuizStatus(false, true);
     };
 
-/************ figure selecte number of choices *************/
+/************ figure selecte number of choices (bar chart)   *************/
 
-        $scope.figureOutChoicesNum = function(currentQuiz){
-            var choiceNum = currentQuiz.choices;
-            var QuizzesChoice = [];
+    $scope.labels = [];
+    $scope.series = ['Series A'];
+    $scope.data = [];
+    $scope.numChoiceQuiz = [];
+    // correcting quiz letter 
+    $scope.figureoutchoice = function(currentQuizChoices) {
+        $scope.labels.push(currentQuizChoices.letter);
+        console.log('labels '+$scope.labels);
+    };
+
+    // correcting quiz result;
+    $scope.figureOutChoicesNum = function(currentQuiz){
+        var choiceNum = currentQuiz.choices;
+        var QuizzesChoice = [];
+      
+
+            //var choice = []
+           // var numChoice = []
            
-            for(var i = 0; i < choiceNum.length; i++){
+        for(var i = 0; i < choiceNum.length; i++){
                // console.log('choice number length ' + choiceNum.length);
                 QuizzesChoice[choiceNum[i].letter] = 0;
-                //console.log('choice is ' + choiceNum[i].letter);
-             
-            }  
+               
+        }  
 
-            for(var j = 0; j < choiceNum.length; j++){
-                for(var k = 0; k < currentQuiz.scores.length; k++) {
+        for(var j = 0; j < choiceNum.length; j++){
+            for(var k = 0; k < currentQuiz.scores.length; k++) {
                         //  console.log(courses[i]._id + '  ' + $scope.quiz.courseID);
-                    if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
-                         QuizzesChoice[choiceNum[j].letter]++;
-                    }
-                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+                if(choiceNum[j].letter === currentQuiz.scores[k].selectedAnswer) {
+                      QuizzesChoice[choiceNum[j].letter]++;
                 }
-    
-            }  
+                    //console.log(choiceNum[i].letter + '  ' + currentQuiz.scores[k].selectedAnswer);
+             }
+        }  
 
-            $scope.numChoiceQuiz = QuizzesChoice;
 
-            console.log($scope.numChoiceQuiz);
+        $scope.numChoiceQuiz = QuizzesChoice;
+
+            
         }; 
 
- $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+
+    $scope.figureoutchoice1 = function() {
+        
+
+        var quiz = Quizzes.get({
+            quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
+        }, function(){ //callback function to ensure that this executes after database query has finished
+              var numChoice = quiz.choices;
+              var tempData = [];
+              for(var z = 0; z < numChoice.length; z++) {
+                  tempData[z] = $scope.numChoiceQuiz[numChoice[z].letter];
+              }
+              $scope.data.push(tempData);
+            
+                console.log('choices '+ numChoice);
+                  console.log('labels '+$scope.labels);
+                    console.log('data '+$scope.data);
+
+
+        });
+
+
+    };
+
+// $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  //$scope.series = ['Series A'];
+
+  //$scope.data = [ [65, 59, 80, 81, 56, 55, 40]];    //array of data
+  
 
 
 /*

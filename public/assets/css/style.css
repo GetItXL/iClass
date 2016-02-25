@@ -897,6 +897,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     margin-left: 20px;
     position: relative;
     border-bottom: 1px solid #c9cdd7;
+    display:none;
 }
 
 .custom-bar-chart .bar {
