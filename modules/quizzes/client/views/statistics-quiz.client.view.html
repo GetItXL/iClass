@@ -1,4 +1,4 @@
-<section ng-controller="SubmitQuizController" ng-init="findOne()">
+<section ng-controller="QuizzesController" ng-init="findOne()">
     <div class="col-lg-12 mt">
         <div class="row content-panel mb">
             <div class="page-header centered">
@@ -17,9 +17,9 @@
                         <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                             <div class="box1">
                                 <span class="li_user"></span>
-                                <h3>{{course.numberOfStudent}}</h3>
+                                <h3>{{quiz.totalParticipant}}</h3>
                             </div>
-                              <p>{{course.numberOfStudent}} students took this quiz</p>
+                              <p>{{quiz.totalParticipant}} students took this quiz</p>
                         </div>
                         <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
@@ -42,15 +42,33 @@
                             </div>
                             <p> average grade in this course is 80% </p>
                         </div>
-                        <div class="col-md-2 col-sm-2 box0">
-                            <div class="box1">
-                                <span class="li_heart"></span>
-                                <h3>90%</h3>
-                            </div>
-                            <p>you have 90% of the grade in this course</p>
-                        </div>
+                        
                     </div><!-- /row mt -->
                 </div>
+                <div class="col-lg-10 col-lg-offset-1 main-chart">
+                      <!--CUSTOM CHART START -->
+                      <hr>
+  
+                <div class="custom-bar-chart">
+                    <ul class="y-axis">
+                        <li><span>5</span></li>
+                        <li><span>4</span></li>
+                        <li><span>3</span></li>
+                        <li><span>2</span></li>
+                        <li><span>1</span></li>
+                        <li><span>0</span></li>
+                    </ul>
+                    <div class="bar" ng-repeat="choice in quiz.choices">
+                          <div class="title" value="{{choice.letter}}" >{{choice.letter}}</div>
+                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
+                    </div>
+                </div>
+                      <!--custom chart end-->
+
+              <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
+              </canvas>
+            </div><!-- /row --> 
+          
 				<a ng-show="!isStudent()" class="btn btn-lg btn-theme02 " ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
 
 

@@ -312,10 +312,10 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
     $scope.data = [];
     $scope.numChoiceQuiz = [];
     // correcting quiz letter 
-    $scope.figureoutchoice = function(currentQuizChoices) {
-        $scope.labels.push(currentQuizChoices.letter);
-        console.log('labels '+$scope.labels);
-    };
+    // $scope.figureoutchoice = function(currentQuizChoices) {
+    //     $scope.labels.push(currentQuizChoices.letter);
+    //     console.log('labels '+$scope.labels);
+    // };
 
     // correcting quiz result;
     $scope.figureOutChoicesNum = function(currentQuiz){
@@ -358,6 +358,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
               var numChoice = quiz.choices;
               var tempData = [];
               for(var z = 0; z < numChoice.length; z++) {
+                  $scope.labels.push(numChoice[z].letter);
                   tempData[z] = $scope.numChoiceQuiz[numChoice[z].letter];
               }
               $scope.data.push(tempData);

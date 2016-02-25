@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
-                <a  class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
+                 <a class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
                  <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart()">
                           <i class="fa fa-check"></i> Open the quiz
                         </button>
@@ -24,7 +24,7 @@
                 <div class="steps" >
                     <div class = "col-md-4 col-sm-4 mb " ng-repeat="choice in quiz.choices">
                         <!-- <input type="checkbox" id="op" ng-model="choice.letter" ng-changed="letterChoose(choice.letter)">   -->
-                          <div class="radio" ng-init="figureoutchoice(choice)">
+                          <div class="radio">
                           <label>
                          <!--  <input type="checkbox" data-checklist-model="choice.letter" data-checklist-value="choice.letter" >  -->
                          <input class="check" type="radio" ng-model="$parent.choice.letter" value="{{choice.letter}}" >
@@ -41,26 +41,28 @@
                 <div class="border-head">
                     <h3>result total submission: {{quiz.totalParticipant}}<h3>
                 </div>
-                <div class="custom-bar-chart">
-                    <ul class="y-axis">
-                        <li><span>5</span></li>
-                        <li><span>4</span></li>
-                        <li><span>3</span></li>
-                        <li><span>2</span></li>
-                        <li><span>1</span></li>
-                        <li><span>0</span></li>
-                    </ul>
-                    <div class="bar" ng-repeat="choice in quiz.choices">
-                          <div class="title" value="{{choice.letter}}" >{{choice.letter}}</div>
-                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
+    
+      
+                    <div class="custom-bar-chart">
+                        <ul class="y-axis">
+                            <li><span>5</span></li>
+                            <li><span>4</span></li>
+                            <li><span>3</span></li>
+                            <li><span>2</span></li>
+                            <li><span>1</span></li>
+                            <li><span>0</span></li>
+                        </ul>
+                        <div class="bar" ng-repeat="choice in quiz.choices">
+                              <div class="title" value="{{choice.letter}}" >{{choice.letter}}</div>
+                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
+                        </div>
                     </div>
-                </div>
-                      <!--custom chart end-->
+                          <!--custom chart end-->
 
-              <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
-              </canvas>
+                  <canvas ng-show="!quiz.quizOpen" id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
+                  </canvas>
             </div><!-- /row --> 
-          
+            
                 <br>
                 <br>
 

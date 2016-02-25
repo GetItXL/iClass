@@ -44,6 +44,8 @@
                     <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button><br><br>
                     <a class="btn btn-lg btn-theme02 " ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
+                    <a class="btn btn-lg btn-theme "  ui-sref="quizzes.profopen({quizId: quiz._id})" >take quiz</a>
+                   
                    <!--  <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
                          End quiz
                     </button>
