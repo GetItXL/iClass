@@ -9,7 +9,7 @@
             </div>
             <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
                  <a class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
-                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart()">
+                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart();">
                           <i class="fa fa-check"></i> Open the quiz
                         </button>
                    <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizFinished()">
@@ -17,6 +17,13 @@
                         </button>
             </div>
             <div class="col-lg-10 col-lg-offset-1" ng-show="quiz.quizOpen">
+              <h3 ng-show="quiz.quizDuration>0" >
+                time left: {{timerSeconds}}
+                <timer>
+                <progressbar class="progress-striped active" value="timerSeconds" max="quiz.quizDuration/1000"></progressbar>
+              </timer>
+              
+              </h3>
                 <p class="mt">
                     <h3> {{quiz.question}} </h3>
                 </p>
@@ -35,9 +42,10 @@
                   
                 </div>
             </div>
+
             <div class="col-lg-10 col-lg-offset-1 main-chart">
                       <!--CUSTOM CHART START -->
-                      <hr>
+                    
                 <div class="border-head">
                     <h3>result total submission: {{quiz.totalParticipant}}<h3>
                 </div>

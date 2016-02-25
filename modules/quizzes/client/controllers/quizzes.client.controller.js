@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location',  'Authentication',  '$filter', 'Quizzes','getQuizObject', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
-  function ($scope, $state, $stateParams, $location, Authentication, $filter, Quizzes, getQuizObject, CourseInfoFactory, Courses, $modal, $log, Socket) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes','getQuizObject', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
+  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, getQuizObject, CourseInfoFactory, Courses, $modal, $log, Socket) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -142,8 +142,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
        // TODO: since student will update quiz model when submitting answer,
        // we may need to call findone() to update $scope.quiz before updating quiz status
        
-
-
       $scope.quiz.quizOpen = isQuizOpen;
       $scope.quiz.quizEnded = isQuizEnded;
       var quiz = $scope.quiz;
@@ -156,8 +154,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         $scope.error = errorResponse.data.message;
       });
     };
-
-
 
 
     // Find a list of Quizzes
@@ -235,6 +231,9 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
     /********  check quiz avaliablity **********/
 
+     
+
+
     $scope.isOpen = function(quiz) {
       console.log('quiz open is ' + quiz.quizOpen);
     
@@ -302,7 +301,8 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       //$scope.isQuizEnded = true;
       //$scope.isQuizOpen = false;
 
-      $scope.updateQuizStatus(false, true);
+        $scope.updateQuizStatus(false, true);
+         $scope.interval = 0;
     };
 
 /************ figure selecte number of choices (bar chart)   *************/
@@ -372,6 +372,45 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
 
     };
+
+
+/************* timer *******************/
+
+    $scope.timerSeconds = 0;
+
+    $scope.$on('timer-tick', function(event, value) {
+          $scope.timerSeconds = $scope.quiz.quizDuration/1000- (Math.floor(value.millis / 1000)) ;
+          if( $scope.timerSeconds === -1)
+              $scope.setQuizFinished();
+    });
+    $scope.interval = 0;
+    $interval(function() {}, 1000);
+
+
+    // $scope.openTimer = function(){
+    //     var quiz = Quizzes.get({
+    //         quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
+    //     }, function(){ //callback function to ensure that this executes after database query has finished
+    //          //if(quiz.quizDuration)
+
+
+              
+    //           // $interval(function() {
+    //           //   $scope.interval++; 
+    //           //   if($scope.interval === quiz.quizDuration/1000){
+
+
+    //           //   }
+    //           //      console.log($scope.interval + " interval");
+    //           //     console.log(quiz.quizDuration/1000+ " quizDuration");
+                    
+    //           // }, 1000);
+
+    //     });
+
+    // };
+
+
 
 // $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   //$scope.series = ['Series A'];

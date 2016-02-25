@@ -31,11 +31,20 @@ module.exports = {
         //'public/lib/angular-material/angular-material.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
-                'public/lib/Chart.js/Chart.js',
+        'public/lib/Chart.js/Chart.js',
         'public/lib/angular-chart.js/dist/angular-chart.js',
 
+        'public/lib/momentjs/min/moment.min.js',
+        'public/lib/momentjs/min/locales.min.js',
+        'public/lib/humanize-duration/humanize-duration.js',
+        'public/lib/angular-timer/dist/angular-timer.js',
+        
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+
+
+
+
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
       ],
