@@ -138,7 +138,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
     //Function used to update quiz status, where things will not be passed in by input fields
     $scope.updateQuizStatus = function (isQuizOpen, isQuizEnded) {
 
-
        // TODO: since student will update quiz model when submitting answer,
        // we may need to call findone() to update $scope.quiz before updating quiz status
        
@@ -153,6 +152,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+
     };
 
 
@@ -302,7 +302,30 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       //$scope.isQuizOpen = false;
 
         $scope.updateQuizStatus(false, true);
-         $scope.interval = 0;
+        //TODO: callback here is not working but is it needed?
+
+
+        $scope.interval = 0;
+        console.log('update quiz ever called?');
+
+        //alert to all students in THIS class
+
+        var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
+
+            console.log('ending the quiz on the professor side');
+            console.log($scope.quiz.courseID);
+            console.log($scope.quiz._id);
+            console.log(course.enrolledStudents);
+
+            Socket.emit('quizEnded', {
+                courseID : $scope.quiz.courseID,
+                quizID : $scope.quiz._id,
+                enrolledStudents: course.enrolledStudents
+            });
+
+        });
+
+
     };
 
 /************ figure selecte number of choices (bar chart)   *************/

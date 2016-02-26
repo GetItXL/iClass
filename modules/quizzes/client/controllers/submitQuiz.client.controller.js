@@ -76,7 +76,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                 quiz.$submit(function () {
 
                     var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
-                        
+
                         Socket.emit('answerSubmitted', {
                             quizID: $scope.quiz._id,
                             answer: answer,// don't need this much info. passing in just in case
@@ -190,6 +190,24 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             Socket.removeListener('notifyProfQuizSubmission');
             Socket.removeListener('testUserSocketPair');
         });*/
+
+
+        //put here for testing before separating pages
+        Socket.on('alertStudentQuizEnded', function(data){
+            //query database and then update totalParticipant number on the view
+
+            console.log('alertStudentQuizEnded recieved');
+            console.log('I go to: ' + data.courseID);
+
+            //don't need to check current location of student
+            //submitQuiz controller only exists on quiz taking page
+            $location.path('courses/'+data.courseID);
+
+            //TODO: submit to database: answer = '', score = 0??
+
+
+
+        });
 
     }
 ]);
