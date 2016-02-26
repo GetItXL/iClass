@@ -313,9 +313,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
 
             console.log('ending the quiz on the professor side');
-            console.log($scope.quiz.courseID);
-            console.log($scope.quiz._id);
-            console.log(course.enrolledStudents);
 
             Socket.emit('quizEnded', {
                 courseID : $scope.quiz.courseID,

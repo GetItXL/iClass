@@ -49,15 +49,11 @@ module.exports = function (io, socket, socketClients) {
     socket.on('quizEnded', function(data){
        //emit only to students in THIS class
         console.log('quizEnded called!');
-        console.log(data.courseID);
-        console.log(data.quizID);
 
         var enrolledStudents = data.enrolledStudents;
 
         for(var property in socketClients){
             if(socketClients.hasOwnProperty(property)){
-
-                console.log(property);
 
                 if(enrolledStudents.indexOf(property) !== -1){
                     console.log('alert student for quiz ended: ' + socketClients[property]);
