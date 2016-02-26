@@ -76,9 +76,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                 quiz.$submit(function () {
 
                     var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
-                        console.log('before emmit:' + course._id);
-                        console.log('before emmit:' + course.name);
-
+                        
                         Socket.emit('answerSubmitted', {
                             quizID: $scope.quiz._id,
                             answer: answer,// don't need this much info. passing in just in case
@@ -185,24 +183,6 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
         // }; 
 
 
-
-        //put here for testing before separating pages
-        Socket.on('notifyProfQuizSubmission', function(data){
-            //query database and then update totalParticipant number on the view
-
-            console.log('notifyProfQuizSubmission recieved');
-
-
-            //query db
-            var quiz = Quizzes.get({
-                quizId: data.quizID
-            }, function(){
-                $scope.quiz = quiz;
-            });
-
-            //console.log($scope.quiz.totalParticipant);
-
-        });
 
 
         /*

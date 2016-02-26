@@ -366,10 +366,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                 console.log('choices '+ numChoice);
                   console.log('labels '+$scope.labels);
                     console.log('data '+$scope.data);
-
-
         });
-
 
     };
 
@@ -431,6 +428,24 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
     });*/
 
+
+      //put here for testing before separating pages
+      Socket.on('notifyProfQuizSubmission', function(data){
+          //query database and then update totalParticipant number on the view
+
+          console.log('notifyProfQuizSubmission recieved');
+
+
+          //query db
+          var quiz = Quizzes.get({
+              quizId: data.quizID
+          }, function(){
+              $scope.quiz = quiz;
+          });
+
+          //console.log($scope.quiz.totalParticipant);
+
+      });
 
   }
 ]);
