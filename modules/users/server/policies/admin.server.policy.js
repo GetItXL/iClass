@@ -22,16 +22,18 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     }]
   }, {
-    roles: ['professor'], //professor can get list of users
+    roles: ['professor'],
     allows: [{
       resources: '/api/users',
-      permissions: ['get']
+      permissions: ['get'] //If disable professor's delete course function. Can get rid of this access grant
     }, {
       resources: '/api/users/:userId',
       permissions: ['get']
     }]
   }]);
 };
+
+
 
 /**
  * Check If Admin Policy Allows

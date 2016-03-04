@@ -17,6 +17,27 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url: '/',
       templateUrl: 'modules/core/client/views/home.client.view.html'
     })
+    .state('studentDashboard', {
+      url:'/studentdashboard',
+      templateUrl: 'modules/users/client/views/dashboard/student-dashboard.client.view.html',
+      data: {
+        roles: ['user']
+      }
+    })
+    .state('professorDashboard', {
+      url:'/professordashboard',
+      templateUrl: 'modules/users/client/views/dashboard/professor-dashboard.client.view.html',
+      data: {
+        roles: ['professor']
+      }
+    })
+    .state('adminDashboard', {
+      url:'/admindashboard',
+      templateUrl: 'modules/users/client/views/dashboard/admin-dashboard.client.view.html',
+      data: {
+        roles: ['admin']
+      }
+    })
     .state('not-found', {
       url: '/not-found',
       templateUrl: 'modules/core/client/views/404.client.view.html',
