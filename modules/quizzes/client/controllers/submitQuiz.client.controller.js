@@ -73,32 +73,32 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                 // }
 
 
-                quiz.$submit(function () {
+            quiz.$submit(function () {
 
-                    var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
+                var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
 
-                        Socket.emit('answerSubmitted', {
-                            quizID: $scope.quiz._id,
-                            answer: answer,// don't need this much info. passing in just in case
-                            userID: $scope.authentication.user._id,
-                            //course: $scope.courseDisplayInfo,
-                            professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
-                        });
+                    Socket.emit('answerSubmitted', {
+                        quizID: $scope.quiz._id,
+                        answer: answer,// don't need this much info. passing in just in case
+                        userID: $scope.authentication.user._id,
+                        //course: $scope.courseDisplayInfo,
+                        professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
                     });
-
-
-
-
-                    alert("thank you for submitting answer "+ answer);
-
-                    //fix firefox crashing server bug
-                    //Socket.socket.close();
-
-
-                    $location.path('courses/' + $scope.courseDisplayInfo._id);
-                }, function (errorResponse) {
-                    $scope.error = errorResponse.data.message;
                 });
+
+
+
+
+                alert("thank you for submitting answer "+ answer);
+
+                //fix firefox crashing server bug
+                //Socket.socket.close();
+
+
+                $location.path('courses/' + $scope.courseDisplayInfo._id);
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
             //}
 
         };
