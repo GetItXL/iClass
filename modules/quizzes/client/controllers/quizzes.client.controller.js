@@ -148,6 +148,9 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
       quiz.$update(function () {
         //$location.path('quizzes/' + quiz._id);
+
+        //update quiz
+        $scope.quiz = quiz;
         $state.reload();
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -294,6 +297,25 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       //$scope.isQuizOpen = true;
       //$scope.isQuizEnded = false;
       $scope.updateQuizStatus(true, false);
+
+
+        /*
+        //TODO: callback here is not working but is it needed?
+
+
+      var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
+
+          console.log('open the quiz on the professor side');
+
+          Socket.emit('quizOpened', {
+              courseID : $scope.quiz.courseID,
+              quizID : $scope.quiz._id,
+              enrolledStudents: course.enrolledStudents
+          });
+
+      });*/
+
+
     };
 
     //Call to manully end the quiz
@@ -306,10 +328,9 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
 
         $scope.interval = 0;
-        console.log('update quiz ever called?');
+
 
         //alert to all students in THIS class
-
         var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
 
             console.log('ending the quiz on the professor side');

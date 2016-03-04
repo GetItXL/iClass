@@ -68,10 +68,30 @@ module.exports = function (io, socket, socketClients) {
             }
         }
 
-
-
-
     });
+
+
+    /*
+    socket.on('quizOpened', function(data){
+        //emit only to students in THIS class
+        console.log('quizOpened called!');
+
+        var enrolledStudents = data.enrolledStudents;
+
+        for(var property in socketClients){
+            if(socketClients.hasOwnProperty(property)){
+
+                if(enrolledStudents.indexOf(property) !== -1){
+                    console.log('alert student for quiz opened: ' + socketClients[property]);
+                    socketClients[property].emit('alertStudentQuizOpened', {
+                        quizID: data.quizID,
+                        courseID: data.courseID
+                    });
+                }
+            }
+        }
+
+    });*/
 
 
     /*
