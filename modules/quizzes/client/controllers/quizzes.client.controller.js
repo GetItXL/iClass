@@ -299,7 +299,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       $scope.updateQuizStatus(true, false);
 
 
-        /*
+
         //TODO: callback here is not working but is it needed?
 
 
@@ -313,7 +313,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
               enrolledStudents: course.enrolledStudents
           });
 
-      });*/
+      });
 
 
     };

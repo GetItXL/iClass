@@ -203,7 +203,14 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             //TODO: submit to database: answer = '', score = 0??
 
+        });
 
+
+        Socket.on('alertStudentQuizOpened', function(data){
+            //don't need to check current location of student
+            //submitQuiz controller only exists on quiz taking page
+
+            $scope.quiz.quizOpen = true;
 
         });
 

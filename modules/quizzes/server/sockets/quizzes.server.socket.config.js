@@ -71,7 +71,7 @@ module.exports = function (io, socket, socketClients) {
     });
 
 
-    /*
+
     socket.on('quizOpened', function(data){
         //emit only to students in THIS class
         console.log('quizOpened called!');
@@ -91,7 +91,7 @@ module.exports = function (io, socket, socketClients) {
             }
         }
 
-    });*/
+    });
 
 
     /*
