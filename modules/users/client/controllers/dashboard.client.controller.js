@@ -131,6 +131,50 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     };
 
 
+    /********  check quiz avaliablity **********/
+
+     
+
+
+    $scope.isOpen = function(quizID) {
+     // console.log('quiz open is ' + quiz.quizOpen);
+    
+      var user = $scope.authentication.user;
+      var quizTaken = [];
+      var quizOpen = true;
+      
+      for(var i = 0; i < user.quizzesTaken.length; i++){
+          console.log('quiz taken' + i + ': ' + user.quizzesTaken[i].quizID);
+
+          quizTaken.push(Courses.All.get({
+            quizID: user.quizzesTaken[i].quizID
+          }));
+
+
+      }
+
+      for(var j = 0; j < quizTaken.length; j++) {
+          if(quizTaken[i] === quizID) {
+              quizOpen = false;
+              console.log('this quiz is already taken!');
+          }
+          
+      }
+
+
+      if(!quizOpen) {
+            $scope.modalQuizNotOpen('sm' ,quizID );
+            // $location.path('quizzes/close/'+quiz._id);
+      }
+      else {
+            //$location.path('quizzes/'+quiz._id+'/open');
+            $location.path('quizzes/open/'+quizID);
+      }
+      
+
+    };
+
+  
 
     /********************* shared ******************/
 
