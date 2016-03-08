@@ -238,7 +238,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
 
     $scope.isOpen = function(quiz) {
-        
+
         var userID = $scope.authentication.user._id;
         var studentTaken = [];
         var quizOpen = true;
@@ -411,11 +411,11 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         $scope.numChoiceQuiz = QuizzesChoice;
 
             
-        }; 
+    }; 
 
 
     $scope.figureoutchoice1 = function() {
-        
+         console.log('numChoiceQuiz '+ $scope.numChoiceQuiz);
 
         var quiz = Quizzes.get({
             quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
@@ -425,9 +425,10 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
               for(var z = 0; z < numChoice.length; z++) {
                   $scope.labels.push(numChoice[z].letter);
                   tempData[z] = $scope.numChoiceQuiz[numChoice[z].letter];
+                  // console.log('num Choice  '+ $scope.numChoiceQuiz[numChoice[z].letter]);
               }
               $scope.data.push(tempData);
-            
+                // console.log('tempData '+ tempData);
                 console.log('choices '+ numChoice);
                   console.log('labels '+$scope.labels);
                     console.log('data '+$scope.data);
@@ -472,7 +473,44 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
     // };
 
+/**************** nvd3 data and options ***************/
 
+        // $scope.options = {  
+        //     chart: {
+        //         type: 'discreteBarChart',
+        //         height: 450,
+        //         margin : {
+        //             top: 20,
+        //             right: 20,
+        //             bottom: 60,
+        //             left: 55
+        //         },
+        //         x: function(d){ return d.label; },
+        //         y: function(d){ return d.value; },
+        //         showValues: true,
+        //         valueFormat: function(d){
+        //             return d3.format(',.4f')(d);
+        //         },
+        //         transitionDuration: 1000,
+        //         xAxis: {
+        //             axisLabel: 'choices'
+        //         },
+        //         yAxis: {
+        //             axisLabel: 'student',
+        //             axisLabelDistance: 30
+        //         }
+        //     }
+        // };
+
+        // $scope.datas = [{
+        //     key: "Cumulative Return",
+        //     values: [
+        //         { "label" : "C" , "value" : 32.807804682612 },
+        //         { "label" : "D" , "value" : 16.45946739256 },
+        //         { "label" : "E" , "value" : 0.19434030906893 },
+        //         { "label" : "H" , "value" : 0 }
+        //     ]
+        // }];
 
 // $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   //$scope.series = ['Series A'];
