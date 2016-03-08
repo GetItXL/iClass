@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes','getQuizObject', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
-  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, getQuizObject, CourseInfoFactory, Courses, $modal, $log, Socket) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
+  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -238,11 +238,35 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
 
     $scope.isOpen = function(quiz) {
+        
+        var userID = $scope.authentication.user._id;
+        var studentTaken = [];
+        var quizOpen = true;
+        
+        console.log('number of student takes the quiz: ' +  quiz.scores.length);
+       
+        for(var i = 0; i < quiz.scores.length; i++){
+           // console.log('quiz taken' + i + ': ' + user.quizzesTaken[i].quizID);
+
+            // quizTaken.push(Courses.All.get({
+            //   quizID: user.quizzesTaken[i].quizID
+            // }));
+
+            studentTaken.push(quiz.scores[i].studentID);
+            console.log('current studentID ' + userID);
+            console.log('taken student ID is ' + studentTaken[i]);
+            if(quiz.scores[i].studentID === userID) {
+                quizOpen = false;
+                console.log('this quiz is already taken!');
+            }
+
+
+        }
       console.log('quiz open is ' + quiz.quizOpen);
     
     /*  need to fix refresh page in order to take quiz bug  */
     
-          if(!quiz.quizOpen) {
+          if(!quizOpen) {
             $scope.modalQuizNotOpen('sm' ,quiz );
             // $location.path('quizzes/close/'+quiz._id);
           }

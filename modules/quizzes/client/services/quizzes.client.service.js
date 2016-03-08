@@ -30,7 +30,7 @@ myModule.factory('SubmitQuiz', ['$resource',
 ]);
 
 //Quizzes service used for getting quiz object and callback function
-myModule.factory('getQuizObject', function ($q, $http) {
+//myModule.factory('getQuizObject', function ($q, $http) {
       // return {
       //     getQuizObject: function() {
       //         return $http.get('api/quizzes/:quizId')
@@ -57,5 +57,38 @@ myModule.factory('getQuizObject', function ($q, $http) {
   //       getQuiz: getQuiz
   //     };
   // }
-  return false;
-});
+//   return false;
+// });
+
+
+//Pass values b\w quiz and user
+// myModule.factory('QuizInfoFactory', function(){
+
+//   var service = {};
+//   var courseID = '';
+//   var quizID = '';
+//   var quizScore = '';
+
+//   service.getCourseID = function(){
+//       return courseID;
+//   };
+
+//   service.getQuizID = function(){
+//       return quizID;
+//   };
+
+//   service.getScore = function(){
+//       return quizID;
+//   };
+
+
+//   service.setCourseQuizIDScore = function(currentCourseID, currentQuizID, currentScore){
+//       courseID = currentCourseID;
+//       quizID = quizScore;
+//       quizScore = currentScore;
+
+//   };
+
+//   return service;
+
+// });
