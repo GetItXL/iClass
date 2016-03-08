@@ -6,6 +6,7 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/nvd3/build/nv.d3.css',
         'public/lib/angular-chart.js/dist/angular-chart.css'
         //'public/lib/angular-material/angular-material.css'
       ],
@@ -26,6 +27,10 @@ module.exports = {
         'public/assets/js/sparkline-chart.js',
 
         'public/lib/angular/angular.js',
+        'public/lib/d3/d3.js',
+        'public/lib/nvd3/build/nv.d3.js',
+        'public/lib/angular-nvd3/dist/angular-nvd3.js',
+
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
         //'public/lib/angular-material/angular-material.js',
