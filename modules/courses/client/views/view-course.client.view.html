@@ -105,7 +105,7 @@
 
                                     </a>
                                    <!--  <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item"> -->
-                                    <a ng-show="isStudent()" ng-controller="DashboardController" ng-click="isOpen(quiz._id)" class="list-group-item">
+                                    <a ng-show="isStudent()" ng-controller="DashboardController" ng-click="isOpen(quiz, quiz._id)" class="list-group-item">
 
                                         Posted on
                                         <span ng-bind="quiz.created | date:'mediumDate'"></span>

@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses', 'Users', 'Quizzes',
-  function ($scope, $stateParams, $location, Authentication, Courses, Users, Quizzes) {
+angular.module('users').controller('DashboardController', ['$scope', '$stateParams', '$location', 'Authentication', '$modal', 'Courses', 'Users', 'Quizzes',
+  function ($scope, $stateParams, $location, Authentication, $modal, Courses, Users, Quizzes) {
     $scope.authentication = Authentication;
 
     $scope.isAdmin = function(){
@@ -46,6 +46,11 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
       }
     };
 
+    /******* update user database after taking quiz  **********/
+
+    // $scope.updateUserQuiz = function() {
+    //     alert("im updating user database");
+    // };
 
     /* This function grabs numStudentsEnrolled in EACH courese in the database
       and store the courseID:numStudentEnrolled pair in $scope.numStudentInCourse
@@ -136,43 +141,96 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
      
 
 
-    $scope.isOpen = function(quizID) {
-     // console.log('quiz open is ' + quiz.quizOpen);
+    $scope.isOpen = function(quiz, quizID) {
+      //console.log('quiz open is ' + quiz.quizOpen);
     
       var user = $scope.authentication.user;
       var quizTaken = [];
       var quizOpen = true;
       
+      console.log('this quizzesTaken length' +  user.quizzesTaken.length);
+     
       for(var i = 0; i < user.quizzesTaken.length; i++){
-          console.log('quiz taken' + i + ': ' + user.quizzesTaken[i].quizID);
+         // console.log('quiz taken' + i + ': ' + user.quizzesTaken[i].quizID);
 
-          quizTaken.push(Courses.All.get({
-            quizID: user.quizzesTaken[i].quizID
-          }));
+          // quizTaken.push(Courses.All.get({
+          //   quizID: user.quizzesTaken[i].quizID
+          // }));
 
-
-      }
-
-      for(var j = 0; j < quizTaken.length; j++) {
-          if(quizTaken[i] === quizID) {
+          quizTaken.push(user.quizzesTaken[i].quizID);
+          console.log('current quizID ' + quizID);
+          console.log('taken quiz ID is ' + quizTaken[i]);
+          if(user.quizzesTaken[i].quizID === quizID) {
               quizOpen = false;
               console.log('this quiz is already taken!');
           }
-          
+
+
       }
+
+      //  console.log('this quiz taken length' +  quizTaken.length);
+      // for(var j = 0; j < quizTaken.length; j++) {
+      //     if(quizTaken[i] === quizID) {
+      //         quizOpen = false;
+      //         console.log('this quiz is already taken!');
+      //     }
+          
+      // }
 
 
       if(!quizOpen) {
             $scope.modalQuizNotOpen('sm' ,quizID );
             // $location.path('quizzes/close/'+quiz._id);
+            //console.log('this quiz is already taken!');
       }
       else {
             //$location.path('quizzes/'+quiz._id+'/open');
             $location.path('quizzes/open/'+quizID);
+           
       }
+
+      // alert('this quiz is ' + quiz.quizOpen);
       
 
     };
+
+     /*********  modal window quiz not open  *******************/
+
+    $scope.modalQuizNotOpen = function(size, selectedQuiz) {
+
+
+      var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
+        templateUrl: 'modules/quizzes/client/views/close-quiz.client.view.html',
+        controller: modalQuizNotOpenCtrl,
+        size: size,
+        resolve: {
+          quiz: function() {
+            return selectedQuiz;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        //$log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    var modalQuizNotOpenCtrl = function($scope, $modalInstance, quiz) {
+       $scope.quiz = quiz;
+      //console.log("I am update modal window " + Authentication.user.displayName);
+      $scope.ok = function() {
+        $modalInstance.close($scope.quiz);
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+      };
+    };
+
 
   
 

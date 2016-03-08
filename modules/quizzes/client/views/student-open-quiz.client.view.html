@@ -24,8 +24,12 @@
                         </div>
                       </div>
                   
-                    <input type="submit" value="All Done!" id="submit"  ng-click="submit(choice.letter)">    
+                    <input type="submit" value="All Done!" id="submit"  ng-click="submit(choice.letter)">  
+                    <!-- <div ng-controller="DashboardController" ng-init="updateUserQuiz()"></div>   -->
                 </div>
+            </div>
+            <div ng-show="!quiz.quizOpen">
+                <h3> waiting for quiz.....</h3>
             </div>
         </div><!-- /row --> 
           
