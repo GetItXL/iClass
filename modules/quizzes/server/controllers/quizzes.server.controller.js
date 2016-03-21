@@ -69,8 +69,8 @@ exports.submit = function(req, res){
   //The last one in array is the latest pushed one
   var submitted = scores.pop();
 
-  console.log(quiz.scores);
-  console.log(submitted);
+  //console.log(quiz.scores);
+  //console.log(submitted);
 
 
   //Used to check if student's answer already exists in db
