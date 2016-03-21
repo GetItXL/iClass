@@ -116,11 +116,14 @@ var UserSchema = new Schema({
       quizID: {
         type: String
       },
+      submittedAnswer: {
+        type: String,
+        default: ''
+      },
       quizScore: {
         type: Number
       }
     }]
-
   }
 });
 

@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'SubmitQuiz', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
-    function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, SubmitQuiz, CourseInfoFactory, Courses, $modal, $log, Socket) {
+app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', 'Authentication',  '$filter', 'Quizzes', 'SubmitQuiz', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket', 'Users',
+    function ($scope, $stateParams, $location, Authentication, $filter, Quizzes, SubmitQuiz, CourseInfoFactory, Courses, $modal, $log, Socket, Users) {
         $scope.authentication = Authentication;
 
 
@@ -60,7 +60,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             console.log('my submitted answer is ' + answer);
 
 
-            //if(!alreadySubmitted()){ //TODO: this is commented out for testing purpose, uncomment after done
+            //if(!alreadySubmitted()){ //TODO: !!!this is commented out for testing purpose, uncomment after done
             var quiz = $scope.quiz;
             quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
                 // if(quiz.correctAnswer === answer) {
@@ -77,6 +77,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
                 var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
 
+                    //broadcast to users
                     Socket.emit('answerSubmitted', {
                         quizID: $scope.quiz._id,
                         answer: answer,// don't need this much info. passing in just in case
@@ -84,16 +85,13 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                         //course: $scope.courseDisplayInfo,
                         professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
                     });
+
+
+                    //update user model
+                    updateUserModelQuizzesTaken(course._id);
                 });
 
-
-
-
                 alert("thank you for submitting answer "+ answer);
-
-                //fix firefox crashing server bug
-                //Socket.socket.close();
-
 
                 $location.path('courses/' + $scope.courseDisplayInfo._id);
             }, function (errorResponse) {
@@ -102,6 +100,30 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
             //}
 
         };
+
+        function updateUserModelQuizzesTaken(courseID){
+            $scope.quiz = Quizzes.get({quizId : $scope.quiz._id}, function(){
+
+                var myScoreRecord;
+
+                //This can be done because no student can submit to the same quiz twice
+                for(var k = 0; k < $scope.quiz.scores.length; k++){
+                    if($scope.quiz.scores[k].studentID === $scope.authentication.user._id){
+                        myScoreRecord = $scope.quiz.scores[k];
+                    }
+                }
+
+                var user = new Users(Authentication.user);
+                user.quizzesTaken.push({courseID : courseID, quizID : $scope.quiz._id, submittedAnswer : myScoreRecord.selectedAnswer, quizScore : myScoreRecord.quizScore});
+
+                user.$update(function(res){
+                    $scope.success = true;
+                    Authentication.user = res;
+                }, function(errorRes){
+                    $scope.error = errorRes.data.message;
+                });
+            });
+        }
 
 
         //Check if the student has already submitted the quiz answer

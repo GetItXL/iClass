@@ -13,16 +13,16 @@
                         <div class="list-group">
                             <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in enrolledCourses" >
                                 <div class="pn" >
-                                    <a ng-init="getNumQuiz()"ui-sref="courses.view({courseId: course._id})" class="list-group-item">
+                                    <a ng-controller="CoursesController" ng-init="getNumQuiz()" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
                                         <small class="list-group-item-text">
                                             Created on
-                                            <span ng-bind="course.created | date:'mediumDate'"></span>
+                                            <span ng-bind="$parent.course.created | date:'mediumDate'"></span>
                                             by Professor
-                                            <span ng-bind="course.professor.displayName"></span>
+                                            <span ng-bind="$parent.course.professor.displayName"></span>
                                         </small>
-                                        <h4 class="list-group-item-heading" ng-bind="course.number"></h4>
-                                        <p class="list-group-item-text" ng-bind="course.name"></p>
-                                        <p class="list-group-item-text" ng-bind="course.professor.displayName"></p>
+                                        <h4 class="list-group-item-heading" ng-bind="$parent.course.number"></h4>
+                                        <p class="list-group-item-text" ng-bind="$parent.course.name"></p>
+                                        <p class="list-group-item-text" ng-bind="$parent.course.professor.displayName"></p>
                                         Number of quizzes: {{numQuizzesInCourse[course._id]}}
                                     </a>
                                 </div>

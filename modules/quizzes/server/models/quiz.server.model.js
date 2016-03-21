@@ -63,7 +63,7 @@ var QuizSchema = new Schema({
     type: Boolean,
     default: false
   },
-  scores: { //still debating whether to score the quiz score in user or in quiz model
+  scores: { //ARRAY of Objects with properties: {studentID, selectedAnswer, quizScore}
     type: [{
       studentID: {
         type: String
