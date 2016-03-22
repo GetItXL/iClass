@@ -116,6 +116,9 @@ var UserSchema = new Schema({
       quizID: {
         type: String
       },
+      quizName: {
+        type: String
+      },
       submittedAnswer: {
         type: String,
         default: ''

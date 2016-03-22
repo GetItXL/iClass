@@ -212,6 +212,12 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     $scope.findOne = function () {
         $scope.course = Courses.All.get({
             courseId: $stateParams.courseId
+        }, function(){
+
+            if($scope.isStudent()){
+                getQuizScoresInClass();
+            }
+
         });
 
         //      console.log('number of student is ' + $scope.course.year);
@@ -517,16 +523,39 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
          $scope.quizTaken = numQuizTaken;
     };
 
-      if (!Socket.socket) {
-          //connect whenever in course taking page?
-          Socket.connect();
+    if (!Socket.socket) {
+      //connect whenever in course taking page?
+      Socket.connect();
 
+    }
+
+    Socket.on('testUserSocketPair', function(data){
+      console.log('test user socket pair recieved by front');
+      Socket.emit('testUserSocketPairBack', {data: 'hi'});
+    });
+
+      //used by students only
+    function getQuizScoresInClass(){
+
+      var scores = $scope.authentication.user.quizzesTaken;
+
+      var scoresInClass = [];
+      for(var i = 0; i < scores.length; i++){
+          if(scores[i].courseID === $scope.course._id){
+              scoresInClass.push(scores[i]);
+              //console.log("ADDED SCORE");
+          }
       }
 
-      Socket.on('testUserSocketPair', function(data){
-          console.log('test user socket pair recieved by front');
-          Socket.emit('testUserSocketPairBack', {data: 'hi'});
-      });
+
+      $scope.scoresInClass = scoresInClass;
+        /*
+        for(var j = 0; j < $scope.scoresInClass; j++){
+            console.log("SCORE: " + $scope.scoresInClass[j].quizScore);
+        }*/
+    }
+
+
 
   }
 ]);

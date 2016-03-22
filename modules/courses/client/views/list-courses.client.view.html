@@ -34,7 +34,7 @@
                                 <h4>{{course.semester}} {{course.year}}</h4>
                             </div>
                             <div class="col-md-12 CourseTitle">
-                                <a ng-show="isAdmin()" ui-sref="courses.view({courseId: course._id})"> 
+                                <a ng-show="isAdmin()" ui-sref="courses.view({courseId: course._id})">
                                     <h2 ng-bind="course.name"></h2>
                                 </a>
                                 <div ng-show="!isAdmin()"><h2 ng-bind="course.name"></h2></div>

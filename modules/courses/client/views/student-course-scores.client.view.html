@@ -1,0 +1,23 @@
+<section ng-controller="CoursesController" ng-init="findOne()">
+
+  <h1>{{course.name}}</h1>
+
+
+  <div>
+    <table>
+      <thread>
+        <tr>
+          <th>Quiz</th>
+          <th>Your Score</th>
+        </tr>
+      </thread>
+
+      <tbody ng-repeat="score in scoresInClass">
+        <td>{{score.quizName}}</td>
+        <td>{{score.quizScore}}</td>
+      </tbody>
+    </table>
+  </div>
+
+
+</section>

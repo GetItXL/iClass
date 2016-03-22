@@ -114,7 +114,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                 }
 
                 var user = new Users(Authentication.user);
-                user.quizzesTaken.push({courseID : courseID, quizID : $scope.quiz._id, submittedAnswer : myScoreRecord.selectedAnswer, quizScore : myScoreRecord.quizScore});
+                user.quizzesTaken.push({quizName : $scope.quiz.title, courseID : courseID, quizID : $scope.quiz._id, submittedAnswer : myScoreRecord.selectedAnswer, quizScore : myScoreRecord.quizScore});
 
                 user.$update(function(res){
                     $scope.success = true;
