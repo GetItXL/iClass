@@ -171,6 +171,8 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         quizId: $stateParams.quizId
       });
 
+
+
       getCourseDisplayInfo($scope.quiz.courseID);
     };
 
@@ -549,6 +551,5 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
           //console.log($scope.quiz.totalParticipant);
 
       });
-
   }
 ]);

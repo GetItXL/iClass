@@ -547,12 +547,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
           }
       }
 
-
       $scope.scoresInClass = scoresInClass;
-        /*
-        for(var j = 0; j < $scope.scoresInClass; j++){
-            console.log("SCORE: " + $scope.scoresInClass[j].quizScore);
-        }*/
+
     }
 
 

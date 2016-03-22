@@ -69,8 +69,6 @@ exports.submit = function(req, res){
   //The last one in array is the latest pushed one
   var submitted = scores.pop();
 
-  //console.log(quiz.scores);
-  //console.log(submitted);
 
 
   //Used to check if student's answer already exists in db
@@ -92,9 +90,9 @@ exports.submit = function(req, res){
     quiz.totalParticipant++;
 
     if(submitted.selectedAnswer === quiz.correctAnswer){
-      quiz.scores.push({ studentID : submitted.studentID, selectedAnswer : submitted.selectedAnswer, quizScore : 1});
+      quiz.scores.push({ studentID : submitted.studentID, student : user, selectedAnswer : submitted.selectedAnswer, quizScore : 1});
     }else{
-      quiz.scores.push({ studentID : submitted.studentID, selectedAnswer : submitted.selectedAnswer, quizScore : 0});
+      quiz.scores.push({ studentID : submitted.studentID, student : user, selectedAnswer : submitted.selectedAnswer, quizScore : 0});
     }
 
     //TODO: check if student score already exists in the database in the front as well
@@ -155,7 +153,7 @@ exports.list = function (req, res) {
     });
 
   }else{*/
-    Quiz.find().sort('-created').populate('user', 'displayName').exec(function (err, quizzes) {
+    Quiz.find().sort('-created').populate('user', 'displayName').populate('scores.student', 'displayName').exec(function (err, quizzes) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -182,7 +180,7 @@ exports.quizByID = function (req, res, next, id) {
     });
   }
 
-  Quiz.findById(id).populate('user', 'displayName').exec(function (err, quiz) {
+  Quiz.findById(id).populate('user', 'displayName').populate('scores.student', 'displayName').exec(function (err, quiz) {
     if (err) {
       return next(err);
     } else if (!quiz) {

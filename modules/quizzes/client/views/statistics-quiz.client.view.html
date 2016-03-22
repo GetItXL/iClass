@@ -42,13 +42,13 @@
                             </div>
                             <p> average grade in this course is 80% </p>
                         </div>
-                        
+
                     </div><!-- /row mt -->
                 </div>
                 <div class="col-lg-10 col-lg-offset-1 main-chart">
                       <!--CUSTOM CHART START -->
                       <hr>
-  
+
                 <div class="custom-bar-chart">
                     <ul class="y-axis">
                         <li><span>5</span></li>
@@ -67,8 +67,31 @@
 
               <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
               </canvas>
-            </div><!-- /row --> 
-          
+            </div><!-- /row -->
+
+
+
+          <!-- Students' scores table -->
+          <div>
+            <table>
+              <thread>
+                <tr>
+                  <th>Name</th>
+                  <th>Score</th>
+                </tr>
+              </thread>
+
+              <tbody ng-repeat="score in quiz.scores">
+              <td>{{score.student.displayName}}</td>
+              <td>{{score.quizScore}}</td>
+              </tbody>
+            </table>
+
+
+
+          </div>
+          <!-- END Students' scores table -->
+
 				<a ng-show="!isStudent()" class="btn btn-lg btn-theme02 " ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
 
 

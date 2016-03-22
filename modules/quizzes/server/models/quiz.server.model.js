@@ -65,8 +65,12 @@ var QuizSchema = new Schema({
   },
   scores: { //ARRAY of Objects with properties: {studentID, selectedAnswer, quizScore}
     type: [{
-      studentID: {
+      studentID: { //TODO: don't need can remove
         type: String
+      },
+      student: { //The professor who created the quiz
+        type: Schema.ObjectId,
+        ref: 'User'
       },
       selectedAnswer: {
         type: String,
