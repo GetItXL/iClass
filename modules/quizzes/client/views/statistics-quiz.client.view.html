@@ -12,88 +12,65 @@
                     </em>
                 </small>
             </div>
-            <div class="col-lg-12 main-chart">
-                    <div class="row ">
-                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                            <div class="box1">
-                                <span class="li_user"></span>
-                                <h3>{{quiz.totalParticipant}}</h3>
-                            </div>
-                              <p>{{quiz.totalParticipant}} students took this quiz</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2 box0">
-                            <div class="box1">
-                                <span class="li_note"></span>
-                                <h3>2</h3>
-                           </div>
-                                <p>totally 2 stduent get correct answer</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2 box0">
-                            <div class="box1">
-                                <span class="li_pen"></span>
-                                 <h3>1</h3>
-                            </div>
-                            <p>1 new quizzes created in this week</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2 box0">
-                            <div class="box1">
-                                <span class="li_star"></span>
-                                <h3>80%</h3>
-                            </div>
-                            <p> average grade in this course is 80% </p>
-                        </div>
-
-                    </div><!-- /row mt -->
-                </div>
+            <div class="col-lg-12">
+                <h3> <i class="fa fa-angle-right"></i> Selected Answer </h3>
+                <hr>
                 <div class="col-lg-10 col-lg-offset-1 main-chart">
-                      <!--CUSTOM CHART START -->
-                      <hr>
+                          <!--CUSTOM CHART START -->
 
-                <div class="custom-bar-chart">
-                    <ul class="y-axis">
-                        <li><span>5</span></li>
-                        <li><span>4</span></li>
-                        <li><span>3</span></li>
-                        <li><span>2</span></li>
-                        <li><span>1</span></li>
-                        <li><span>0</span></li>
-                    </ul>
-                    <div class="bar" ng-repeat="choice in quiz.choices">
-                          <div class="title" value="{{choice.letter}}" >{{choice.letter}}</div>
-                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
+                    <div class="custom-bar-chart">
+                        <ul class="y-axis">
+                            <li><span>5</span></li>
+                            <li><span>4</span></li>
+                            <li><span>3</span></li>
+                            <li><span>2</span></li>
+                            <li><span>1</span></li>
+                            <li><span>0</span></li>
+                        </ul>
+                        <div class="bar" ng-repeat="choice in quiz.choices">
+                              <div class="title" value="{{choice.letter}}" >{{choice.letter}}</div>
+                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" ng-init="figureOutChoicesNum(quiz)">{{numChoiceQuiz[choice.letter]}}%</div>
+                        </div>
                     </div>
-                </div>
-                      <!--custom chart end-->
+                          <!--custom chart end-->
 
-              <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
-              </canvas>
-            </div><!-- /row -->
+                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" ng-init="figureoutchoice1(choice)"> chart-series="series"
+                  </canvas>
+                </div><!-- /row -->
+            </div>
+            <br><br>
 
+            <div class="col-lg-12">
+                <h3> <i class="fa fa-angle-right"></i> Score Table </h3>
+                <hr>
+                <!-- Students' scores table -->
+                <table class="table table-hover table-striped">
+                    <thread>
+                      <tr>
+                        <th>#</th>
+                        <th>last Name</th>
+                        <th>first Name</th>
+                        <th>Score</th>
+                      </tr>
+                    </thread>
+                    <tbody ng-repeat="score in quiz.scores">
+                      <tr>
+                        <td>1</td>
+                        <td>{{score.student.lastName}}</td>
+                        <td>{{score.student.firstName}}</td>
+                        <td>{{score.quizScore}}</td>
+                      </tr>
+                    </tbody>
+                </table>
 
-
-          <!-- Students' scores table -->
-          <div>
-            <table>
-              <thread>
-                <tr>
-                  <th>Name</th>
-                  <th>Score</th>
-                </tr>
-              </thread>
-
-              <tbody ng-repeat="score in quiz.scores">
-              <td>{{score.student.displayName}}</td>
-              <td>{{score.quizScore}}</td>
-              </tbody>
-            </table>
-
-
-
-          </div>
+            </div>
           <!-- END Students' scores table -->
 
-				<a ng-show="!isStudent()" class="btn btn-lg btn-theme02 " ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</a>
-
+				<div class="col-lg-12 pull-right hidden-phone">
+          <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+          <button type="button" class="btn btn-theme04 btn-lg centered" onclick="/" >export to excel</button>
+        </div>
+        </div>
 
 
         </div>
