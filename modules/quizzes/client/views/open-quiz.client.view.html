@@ -8,13 +8,15 @@
                 </div>
             </div>
             <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
-                
-                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-show="!quiz.quizOpen" ng-click="setQuizStart();">
-                          <i class="fa fa-check"></i> Open the quiz
+                <div class="pull-right hidden-phone">
+                    <button type="submit" class="btn btn-theme04 btn-lg " ng-show="!quiz.quizOpen" ng-click="setQuizStart();">
+                          <i class="fa fa-check"></i> Quiz Start 
                         </button>
-                   <button type="submit" class="btn btn-theme btn-lg pull-right" ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
-                          <i class="fa fa-check"></i> End the quiz
+                    <button type="submit" class="btn btn-theme04 btn-lg " ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
+                          <i class="fa fa-check"></i> Quiz End
                         </button>
+                    <button type="button" class="btn btn-theme03 btn-lg " onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+                  </div>
             </div>
             <div class="col-lg-10 col-lg-offset-1" ng-show="quiz.quizOpen">
               <h3 ng-show="quiz.quizDuration>0" >
@@ -31,14 +33,15 @@
                 <div class="steps" >
                     <div class = "col-md-4 col-sm-4 mb " ng-repeat="choice in quiz.choices">
                         <!-- <input type="checkbox" id="op" ng-model="choice.letter" ng-changed="letterChoose(choice.letter)">   -->
-                          <div class="radio">
+                          <div class="radio" ng-show="isStudent()">
                           <label>
                          <!--  <input type="checkbox" data-checklist-model="choice.letter" data-checklist-value="choice.letter" >  -->
                          <input class="check" type="radio" ng-model="$parent.choice.letter" value="{{choice.letter}}" >
                       
                           <span class="label-text">{{choice.letter}}. {{choice.description}}</span></label>
                         </div>
-                      </div>
+                         <label ng-show="!isStudent()"> <span class="label-text">{{choice.letter}}. {{choice.description}}</span></label>
+                    </div>
                   
                 </div>
             </div>

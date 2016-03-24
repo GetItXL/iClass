@@ -74,7 +74,7 @@
                     <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
                     <button type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>
-                    <button type="button" class="btn btn-lg btn-theme02 " ui-sref="courses.student_scores({courseId:course._id})" ng-show="isStudent()"> My Scores </button>
+                    <button type="button" class="btn btn-lg btn-theme02 " ui-sref="courses.student_scores({courseId:course._id})" ng-show="isStudent()">  <i class="fa fa-heart"></i> Check My Scores </button>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -86,8 +86,8 @@
  -->                        <div ng-show="!isStudent()" class="col-lg-12 col-md-12 col-sm-12 room-box" ng-repeat="quiz in quizzesInCourse " >
                                     <h5 class="text-primary "><a ui-sref="quizzes.profopen({quizId: quiz._id})" ><span ng-bind="quiz.title"></span></a>
                                     </h5>
-                                    <div class="pull-right hidden-phone">
-                                        <button class="btn btn-theme03 " ui-sref="quizzes.view({quizId: quiz._id})" >view quiz</button>
+                                    <div class="pull-right hidden-phone" style=" margin-top: -15px;">
+                                        <button class="btn btn-theme03 " ui-sref="quizzes.view({quizId: quiz._id})" >overview</button>
                                         <button class="btn btn-theme02 " ui-sref="quizzes.statistics({quizId:quiz._id})" >statistic</button>
                                     </div>
                                     <p ng-bind="quiz.content"></p>
