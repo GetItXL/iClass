@@ -8,11 +8,11 @@
                 </div>
             </div>
             <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
-                 <a class="btn btn-lg btn-theme02 pull-right" ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
-                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizStart();">
+                
+                 <button type="submit" class="btn btn-theme btn-lg pull-right" ng-show="!quiz.quizOpen" ng-click="setQuizStart();">
                           <i class="fa fa-check"></i> Open the quiz
                         </button>
-                   <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizFinished()">
+                   <button type="submit" class="btn btn-theme btn-lg pull-right" ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
                           <i class="fa fa-check"></i> End the quiz
                         </button>
             </div>
