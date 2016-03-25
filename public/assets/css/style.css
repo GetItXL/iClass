@@ -3221,4 +3221,7 @@ ul.chat-available-user li a:hover {
     min-height: 900px;
 }
 
-
+.popover{
+    width:100%;
+   // height:250px;    
+}

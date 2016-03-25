@@ -306,5 +306,9 @@ angular.module('users').controller('DashboardController', ['$scope', '$statePara
     
     /**********************************************************/
 
+  // $(function () {
+  //   $('[data-toggle="popover"]').popover()
+  // })
+
   }
 ]);

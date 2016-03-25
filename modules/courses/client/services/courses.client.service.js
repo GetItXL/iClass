@@ -63,3 +63,29 @@ myModule.factory('CoursePasscodeFactory', function($rootScope){
     return service;
 
 });
+
+// myModule.directive('mydirective', function(){
+//   return{
+//     restrict: 'EA',
+//     replace: true,
+//     scope: {
+//       ngModel: '='
+//     },
+//     template: '<button popover-trigger="mouseenter" popover-placement="right" uib-popover="hahaha">Popover</button>',
+//     link: function(scope, iElement, iAttrs) {
+//       }
+//   };
+// });
+
+// myModule.directive('mydirectiveuib', function(){
+//   return{
+//     restrict: 'EA',
+//     replace: true,
+//     scope: {
+//       ngModel: '='
+//     },
+//     template: '<a href="#" uib-popover-template="\'remove-course.client.view.html\'" popover-placement="right" popover-trigger="mouseenter">Popover</a>',
+//     link: function(scope, iElement, iAttrs) {
+//     }
+//   };
+// });

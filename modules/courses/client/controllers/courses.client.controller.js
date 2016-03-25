@@ -551,10 +551,15 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     }
 
+/***************** mouseover ******************/
+ // $scope.name = 'John Smith';
 
-
+ 
   }
 ]);
 
 
+
 //CoursesController.$inject= ['$scope', 'CoursePasscodeFactory'];
+
+
