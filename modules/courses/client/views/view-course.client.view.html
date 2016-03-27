@@ -84,11 +84,18 @@
                 <div class="col-md-3">
                     <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
                     <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
-                    <button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
+                    <p><button type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
                     <button type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>
+                    </p>
+                    <p>
+                    <button type="button" class="btn btn-theme04 " ui-sref="courses.statistic({courseId:course._id})" href="../courses/{courseId:course._id}/statistic" ng-show="!isStudent()">view course statistic</button>
+                    
                     <button type="button" class="btn btn-lg btn-theme02 " ui-sref="courses.student_scores({courseId:course._id})" ng-show="isStudent()">  <i class="fa fa-heart"></i> Check My Scores </button>
+                    </p>
                 </div>
+                
+
                 <div class="row">
                     <div class="col-md-12">
                         <h2> Quizzes </h2>
@@ -109,7 +116,6 @@
                                         Created on <span ng-bind="quiz.created | date:'mediumDate'"></span>  
                                         by <span ng-bind="quiz.user.displayName"></span> 
                                     </p>
-
                         
                             </div>  
                             <div class="col-lg-12 col-md-12 col-sm-12 mb " ng-repeat="quiz in quizzesInCourse " >

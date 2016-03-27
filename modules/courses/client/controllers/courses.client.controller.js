@@ -421,7 +421,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       var currentCourseId = CourseInfoFactory.getCourseID();
       var courseQuizzes = [];
-
+      console.log("currentCourseId is " + currentCourseId);
       var quizzesInCourse = Quizzes.query(function(){
 
         for(var i = 0; i < quizzesInCourse.length; i++){
@@ -430,6 +430,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             }
         }
         $scope.quizzesInCourse = courseQuizzes;
+        console.log("quizinCourse is " + $scope.quizzesInCourse );
       });
     };
 
@@ -551,10 +552,56 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     }
 
-/***************** mouseover ******************/
- // $scope.name = 'John Smith';
+/************* display student overall scores ***************/
 
- 
+  $scope.totalQuizScore = [];
+  $scope.data = [];
+  $scope.series = ['Series A'];
+  $scope.labels =[];
+
+
+  $scope.overallScore = function() {
+    //TODO: get each quiz total score and add them together.
+    var currentCourseId = CourseInfoFactory.getCourseID();
+      var courseQuizzes = [];
+
+      var eachscore = 0;
+      var tempdata = [];
+      //var quizScore = [];
+      console.log("currentCourseId is " + currentCourseId);
+      var quizzesInCourse = Quizzes.query(function(){
+
+        for(var i = 0; i < quizzesInCourse.length; i++){
+            if(quizzesInCourse[i].courseID === currentCourseId){
+                courseQuizzes.push(quizzesInCourse[i]);
+             // quizScore.push(i+1);
+                $scope.labels.push(i+1);
+            }
+            for(var j = 0; j < quizzesInCourse[i].scores.length; j++) {
+                eachscore = quizzesInCourse[i].scores[j].quizScore;
+            }
+            tempdata.push(eachscore);
+        }
+        $scope.data.push(tempdata);
+       // $scope.quizzesInCourse = courseQuizzes;
+       // console.log("quizinCourse is " + $scope.quizzesInCourse );
+       //console.log("quizScore is " + quizScore);
+        console.log("labels is " + $scope.labels);
+
+
+      //  $scope.labels = quizScore;
+      });
+
+     
+    // console.log("quizzesInCourse is " + $scope.quizzesInCourse);
+      //var quizScore = [];
+      // for(var i = 1; i <= $scope.quizzesInCourse.length; i++){
+      //     quizScore.push(i);
+      // }
+      // console.log("quizScore is " + quizScore);
+      //  $scope.totalQuizScore = quizScore;
+  };
+
   }
 ]);
 
