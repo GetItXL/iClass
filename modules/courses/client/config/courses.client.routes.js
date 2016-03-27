@@ -52,6 +52,13 @@ angular.module('courses').config(['$stateProvider',
           roles: ['admin', 'professor']
         }
       })
+      .state('courses.statistic', {
+        url: '/:courseId/statistic',
+        templateUrl: 'modules/courses/client/views/statistic-courses.client.view.html',
+        data: {
+          roles: ['admin', 'professor']
+        }
+      })
       .state('courses.student_scores', {
         url: '/:courseId/scores',
         templateUrl: 'modules/courses/client/views/student-course-scores.client.view.html',
