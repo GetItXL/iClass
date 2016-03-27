@@ -1,24 +1,29 @@
 <section ng-controller="CoursesController" ng-init="findOne()">
  	<div class="row mt">
-       	 <div class="col-lg-12" >
-       	 	overall statistic
-       	 	<div ng-init="overallScore()">
-                    <!-- <div class="form-inline">
-                          <label>Mean</label>
-                          <input type="range" min=0 max=10 step=0.01 ng-model="mu" ng-init="mu=5">
-                          <label>&nbsp;&nbsp;Standard deviation</label>
-                          <input type="range" min=0 max=10 step=0.01 ng-model="sigma" ng-init="sigma=1">
-                        </div>
-                        <br>
+       	 <div class="col-lg-12 content-panel mb" >
+       	 	
+       	 	<div >
+       	 		
+       	 			<h3><i class="fa fa-angle-right"></i> overall student grade points in all quizzes</h3>
+       	 		
 
-                        <plot height=300 aspect=3 stroke-width=2 stroke="red">
-                          <lines x="[[seq(0,10,200)]]" y="[[normal(x,mu,sigma)]]"/>
-                        </plot> -->
-                        
-                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" > chart-series="series"
-                  </canvas>
-                    </div>
-                </div>
+	       	 	<div class="col-lg-10 col-lg-offset-1 main-chart" ng-init="overallScore()">
+	                    <!-- <div class="form-inline">
+	                          <label>Mean</label>
+	                          <input type="range" min=0 max=10 step=0.01 ng-model="mu" ng-init="mu=5">
+	                          <label>&nbsp;&nbsp;Standard deviation</label>
+	                          <input type="range" min=0 max=10 step=0.01 ng-model="sigma" ng-init="sigma=1">
+	                        </div>
+	                        <br>
+
+	                        <plot height=300 aspect=3 stroke-width=2 stroke="red">
+	                          <lines x="[[seq(0,10,200)]]" y="[[normal(x,mu,sigma)]]"/>
+	                        </plot> -->
+	                        
+	                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" > chart-series="series"
+	                  </canvas>
+	             </div>
+            </div>
          </div> <!-- col-lg-12 -->
     </div><!-- /row -->
 </section>

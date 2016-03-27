@@ -570,22 +570,25 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       //var quizScore = [];
       console.log("currentCourseId is " + currentCourseId);
       var quizzesInCourse = Quizzes.query(function(){
-
+        //console.log("quizzesInCourse length is " + currentCourseId);
         for(var i = 0; i < quizzesInCourse.length; i++){
             if(quizzesInCourse[i].courseID === currentCourseId){
                 courseQuizzes.push(quizzesInCourse[i]);
              // quizScore.push(i+1);
-                $scope.labels.push(i+1);
+                $scope.labels.push(i+1 + 'points');
+                for(var j = 0; j < quizzesInCourse[i].scores.length; j++) {
+                    eachscore = quizzesInCourse[i].scores[j].quizScore;
+                }
+                tempdata.push(eachscore);
             }
-            for(var j = 0; j < quizzesInCourse[i].scores.length; j++) {
-                eachscore = quizzesInCourse[i].scores[j].quizScore;
-            }
-            tempdata.push(eachscore);
+           
+
         }
         $scope.data.push(tempdata);
        // $scope.quizzesInCourse = courseQuizzes;
        // console.log("quizinCourse is " + $scope.quizzesInCourse );
        //console.log("quizScore is " + quizScore);
+        console.log("data is " +  $scope.data[0] );
         console.log("labels is " + $scope.labels);
 
 
@@ -606,7 +609,5 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 ]);
 
 
-
-//CoursesController.$inject= ['$scope', 'CoursePasscodeFactory'];
 
 
