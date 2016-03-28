@@ -556,7 +556,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
   $scope.totalQuizScore = [];
   $scope.data = [];
-  $scope.series = ['Current Course'];
+  $scope.series = [];
   $scope.labels =[];
 
 
@@ -594,11 +594,16 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       //  $scope.labels = quizScore;
       });
+      var course = Courses.All.get({
+          courseId: $stateParams.courseId //Quizzes.choices: $scope.quiz.choices;
+      }, function(){ //callback function to ensure that this executes after database query has finished
+                  $scope.series.push(course.name);
+              });
   };
 
   //$scope.totalQuizScore = [];
   $scope.averageData = [];
-  $scope.courseName = ['Current Course'];
+  $scope.courseName = [];
   $scope.AverageLabels =[];
 
   $scope.averageScore = function() {
@@ -639,6 +644,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
       //  $scope.labels = quizScore;
       });
+
   };
 
     var quizInaWeek = 0;
