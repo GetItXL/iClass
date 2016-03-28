@@ -1,13 +1,11 @@
 <section ng-controller="CoursesController" ng-init="findOne()">
  	<div class="row mt">
        	 <div class="col-lg-12 content-panel mb" >
-       	 	
-       	 	<div >
-       	 		
-       	 			<h3><i class="fa fa-angle-right"></i> overall student grade points in all quizzes</h3>
-       	 		
-
-	       	 	<div class="col-lg-10 col-lg-offset-1 main-chart" ng-init="overallScore()">
+<div class="chat-room-head">
+                    <h3> {{course.number}} {{course.name}} </h3>
+                </div>
+       	 	<h3><i class="fa fa-angle-right"></i> overall student grade points in all quizzes</h3>
+       	 	<div class="col-lg-10 col-lg-offset-1 main-chart" ng-init="overallScore()">
 	                    <!-- <div class="form-inline">
 	                          <label>Mean</label>
 	                          <input type="range" min=0 max=10 step=0.01 ng-model="mu" ng-init="mu=5">
@@ -20,9 +18,16 @@
 	                          <lines x="[[seq(0,10,200)]]" y="[[normal(x,mu,sigma)]]"/>
 	                        </plot> -->
 	                        
-	                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" > chart-series="series"
+	                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"  chart-legend="true"  chart-series="series">
 	                  </canvas>
-	             </div>
+            </div>
+         </div> <!-- col-lg-12 -->
+             	 <div class="col-lg-12 content-panel mb" >
+       	 	<h3><i class="fa fa-angle-right"></i> average scores for each quiz</h3>
+       	 	<div class="col-lg-10 col-lg-offset-1 main-chart"  ng-init="averageScore()">
+	                        
+	                <canvas id="line" class="chart chart-line" chart-data="averageData" chart-labels="AverageLabels" chart-legend="true" chart-series="courseName" chart-click="onClick" >
+					</canvas> 
             </div>
          </div> <!-- col-lg-12 -->
     </div><!-- /row -->
