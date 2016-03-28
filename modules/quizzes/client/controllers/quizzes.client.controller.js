@@ -375,7 +375,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 /************ figure selecte number of choices (bar chart)   *************/
 
     $scope.labels = [];
-    $scope.series = ['Series A'];
+    $scope.series = [];
     $scope.data = [];
     $scope.numChoiceQuiz = [];
     // correcting quiz letter 
@@ -415,10 +415,11 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
             
     }; 
 
-
+    $scope.average=[];
     $scope.figureoutchoice1 = function() {
          console.log('numChoiceQuiz '+ $scope.numChoiceQuiz);
-
+      var eachscore = 0;
+      var totalScore = 1;
         var quiz = Quizzes.get({
             quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
         }, function(){ //callback function to ensure that this executes after database query has finished
@@ -430,14 +431,30 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                   // console.log('num Choice  '+ $scope.numChoiceQuiz[numChoice[z].letter]);
               }
               $scope.data.push(tempData);
-                // console.log('tempData '+ tempData);
-                console.log('choices '+ numChoice);
+                 console.log('tempData '+ tempData);
+                 console.log('choices '+ numChoice);
+                //   console.log('labels '+$scope.labels);
+                //     console.log('data '+$scope.data);
+                $scope.series.push(quiz.title);
+              for(var j = 0; j < quiz.scores.length; j++) {
+                 eachscore = quiz.scores[j].quizScore;
+                    if(totalScore != 1)
+                      totalScore = 1+ totalScore;
+              }
+               var result = $filter('number')((eachscore/totalScore)*100, (eachscore/totalScore)) + '%';
+                console.log("average scores is " +  result);
+              $scope.average.push(result);
+        });
+        // console.log('choices '+ numChoice);
                   console.log('labels '+$scope.labels);
                     console.log('data '+$scope.data);
-        });
 
     };
 
+/************************* average score  ******************/
+  $scope.averageScore = function() {
+
+  };
 
 /************* timer *******************/
 
@@ -532,6 +549,25 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
 
     });*/
+/************* figure out scores student ****/
+
+  //$scope.checkStudent = function (currentScore){
+
+     // var quiz = Quizzes.get({
+     //        quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
+     //    }, function(){ //callback function to ensure that this executes after database query has finished
+     //            var student = currentScore.student.get({
+     //                userId: data.userId
+     //            } function() {
+     //              console.log('student name is '+ student.displayName);
+     //            });
+     //            console.log('student name is '+ student.displayName);
+     //    });
+              
+     
+
+  
+  //};
 
 
       //put here for testing before separating pages
