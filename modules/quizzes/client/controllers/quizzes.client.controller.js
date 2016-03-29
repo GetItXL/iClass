@@ -438,7 +438,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                 $scope.series.push(quiz.title);
               for(var j = 0; j < quiz.scores.length; j++) {
                  eachscore = quiz.scores[j].quizScore;
-                    if(totalScore != 1)
+                    if(totalScore !== 1)
                       totalScore = 1+ totalScore;
               }
                var result = $filter('number')((eachscore/totalScore)*100, (eachscore/totalScore)) + '%';

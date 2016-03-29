@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 'Socket',
-  function ($scope, $stateParams, $http, $location, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory, Socket) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', '$filter', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 'Socket',
+  function ($scope, $stateParams, $http, $location, $filter, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory, Socket) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
@@ -625,11 +625,15 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
                 $scope.AverageLabels.push(quizzesInCourse[i].title);
                 for(var j = 0; j < quizzesInCourse[i].scores.length; j++) {
                     eachscore = quizzesInCourse[i].scores[j].quizScore;
-                    if(totalScore != 1)
+                    if(totalScore !== 1)
                       totalScore = 1+ totalScore;
                 }
-                console.log("average scores is" + eachscore/totalScore);
-                tempdata.push(eachscore/totalScore);
+                //var result = $filter('number')((eachscore/totalScore)*100, (eachscore/totalScore)) + '%';
+                //console.log("average scores is" +  result);
+                //tempdata.push(result);
+                var result = (eachscore/totalScore);
+                console.log("average scores is" +  result);
+                tempdata.push(result);
             }
            
 
