@@ -443,7 +443,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
      
     };
 
-    $scope.newQuiz;
+    $scope.newQuiz = 0;
     function latestQuiz() {
         //alert("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
         console.log("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
@@ -476,7 +476,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     }
 /****** find number of quizzes one student have taken ********/
-    $scope.quizTaken;
+    $scope.quizTaken = 0;
     function findQuizTaken() {
 
         var user = $scope.authentication.user;
@@ -495,11 +495,11 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
     }
 
 /********** student course average score ********/
-  $scope.stuCourseAvg;
+  $scope.stuCourseAvg = 0;
   function studentAvg() {
       console.log("score length is " + $scope.scoresInClass.length);
       var score = 0;
-      var avg = 0
+      var avg = 0;
       var stuScore = 0;
       for(var i=0; i < $scope.scoresInClass.length; i++) {
         score = score+1;
@@ -593,7 +593,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       Socket.emit('testUserSocketPairBack', {data: 'hi'});
     });
 
-  $scope.scoresInClass;
+  $scope.scoresInClass = 0;
       //used by students only
     function getQuizScoresInClass(){
 
@@ -627,14 +627,14 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       var eachscore = 0;
       var tempdata = [];
       //var quizScore = [];
-      console.log("currentCourseId is " + currentCourseId);
+      //console.log("currentCourseId is " + currentCourseId);
       var quizzesInCourse = Quizzes.query(function(){
         //console.log("quizzesInCourse length is " + currentCourseId);
         for(var i = 0; i < quizzesInCourse.length; i++){
             if(quizzesInCourse[i].courseID === currentCourseId){
                 courseQuizzes.push(quizzesInCourse[i]);
              // quizScore.push(i+1);
-                $scope.labels.push(i+1 + 'points');
+           //     $scope.labels.push(i+1 + 'points');
                 for(var j = 0; j < quizzesInCourse[i].scores.length; j++) {
                     eachscore = quizzesInCourse[i].scores[j].quizScore;
                 }
@@ -647,8 +647,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
        // $scope.quizzesInCourse = courseQuizzes;
        // console.log("quizinCourse is " + $scope.quizzesInCourse );
        //console.log("quizScore is " + quizScore);
-        console.log("data is " +  $scope.data[0] );
-        console.log("labels is " + $scope.labels);
+       // console.log("data is " +  $scope.data[0] );
+       // console.log("labels is " + $scope.labels);
 
 
       //  $scope.labels = quizScore;
@@ -674,7 +674,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       var totalScore = 1;
       var tempdata = [];
       //var quizScore = [];
-      console.log("currentCourseId is " + currentCourseId);
+    //  console.log("currentCourseId is " + currentCourseId);
       var quizzesInCourse = Quizzes.query(function(){
         //console.log("quizzesInCourse length is " + currentCourseId);
         for(var i = 0; i < quizzesInCourse.length; i++){
@@ -691,7 +691,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
                 //console.log("average scores is" +  result);
                 //tempdata.push(result);
                 var result = (eachscore/totalScore);
-                console.log("average scores is" +  result);
+              //  console.log("average scores is" +  result);
                 tempdata.push(result);
             }
            
