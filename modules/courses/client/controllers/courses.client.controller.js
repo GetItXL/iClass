@@ -216,6 +216,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
             if($scope.isStudent()){
                 getQuizScoresInClass();
+                  studentAvg();
             }
 
         });
@@ -436,6 +437,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         
         if($scope.isStudent(findQuizTaken())){
             findQuizTaken();
+          
         }
       });
      
@@ -491,6 +493,28 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       
          $scope.quizTaken = numQuizTaken;
     }
+
+/********** student course average score ********/
+  $scope.stuCourseAvg;
+  function studentAvg() {
+      console.log("score length is " + $scope.scoresInClass.length);
+      var score = 0;
+      var avg = 0
+      var stuScore = 0;
+      for(var i=0; i < $scope.scoresInClass.length; i++) {
+        score = score+1;
+        stuScore = stuScore + $scope.scoresInClass[i].quizScore;
+        console.log("student score is " + $scope.scoresInClass[i].quizScore);
+        console.log(" score is " + score);
+      }
+      if(score === 0){
+        score = 1;
+      }
+     // avg = $filter('number')((stuScore/score)*100, (stuScore/score)) + '%';
+      avg = $filter('number')((stuScore/score)*100, 2) + '%';
+      $scope.stuCourseAvg = avg;
+      console.log(" average is " + avg);
+  }
 
     /********** find number of student in a course and quiz in course ********/
     $scope.findNumStudentEnrolled = function(){
@@ -569,6 +593,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       Socket.emit('testUserSocketPairBack', {data: 'hi'});
     });
 
+  $scope.scoresInClass;
       //used by students only
     function getQuizScoresInClass(){
 
