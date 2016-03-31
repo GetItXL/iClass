@@ -451,10 +451,11 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
     };
 
-/************************* average score  ******************/
-  $scope.averageScore = function() {
+// ************************ average score  *****************
+//   $scope.averageScore = function() {
 
-  };
+//   };
+
 
 /************* timer *******************/
 

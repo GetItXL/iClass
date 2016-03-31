@@ -35,12 +35,12 @@
                            </div>
                                 <p>totally {{quizzesInCourse.length}} quizzes created</p>
                         </div>
-                        <div class="col-md-3 col-sm-3 box0">
+                        <div class="col-md-3 col-sm-3 box0" ng-init="figureOutNewQuiz()" >
                             <div class="box1">
                                 <span class="li_pen"></span>
-                                 <h3>1</h3>
+                                 <h3>{{newQuiz}}</h3>
                             </div>
-                            <p>1 new quizzes created in this week</p>
+                            <p>{{newQuiz}} new quizzes created in 10 days</p>
                         </div>
                       <!--   <div class="col-md-3 col-sm-3 box0">
                             <div class="box1">
@@ -101,7 +101,7 @@
                         <h2> Quizzes </h2>
                         <hr>
                 <!--value of course._id does not pass to the function figureOutQuizToDisplay-->
-                        <div class="list-group" ng-init="figureOutQuizToDisplay()" >
+                        <div class="list-group" >
                    <!--  {{course._id}}
  -->                        <div ng-show="!isStudent()" class="col-lg-12 col-md-12 col-sm-12 room-box" ng-repeat="quiz in quizzesInCourse " >
                                     <h5 class="text-primary "><a ui-sref="quizzes.profopen({quizId: quiz._id})" ><span ng-bind="quiz.title"></span></a>

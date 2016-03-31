@@ -356,19 +356,19 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         //if(user.createdCourses.indexOf(createdCourseId) === -1)
         for(var i = 0; i < user.createdCourses.length; i++)
         {
-          console.log('length is ' + user.createdCourses.length);
-          console.log('i is ' + i);
+          // console.log('length is ' + user.createdCourses.length);
+          // console.log('i is ' + i);
           if(user.createdCourses[i] === createdCourseId){
             console.log(user.createdCourses[i]);
             console.log(createdCourseId);
-            console.log('it is my course.');
+            //console.log('it is my course.');
             return true;
           } 
         }
       }
       else
       {
-        console.log('I am not a professor');
+        //console.log('I am not a professor');
         return false;
       }
     };
@@ -417,7 +417,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
     /****** Finds all quizzes in a class *******/
     $scope.quizzesInCourse = [];
-    $scope.figureOutQuizToDisplay = function (currentCourseID) {
+    $scope.figureOutNewQuiz = function () {
+      
 
       var currentCourseId = CourseInfoFactory.getCourseID();
       var courseQuizzes = [];
@@ -431,9 +432,43 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         }
         $scope.quizzesInCourse = courseQuizzes;
         console.log("quizinCourse is " + $scope.quizzesInCourse );
+         latestQuiz();
       });
+     
     };
 
+    $scope.newQuiz;
+    function latestQuiz() {
+        alert("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
+        console.log("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
+        var newquiz = 0;
+
+        var nowdate = new Date();
+
+
+        var newQuizinTenDay = 10;
+        for(var i = 0; i <  $scope.quizzesInCourse.length; i++) {
+            var inputDate =  $scope.quizzesInCourse[i].created;
+            var date = new Date(inputDate);
+            var currentDate = new Date();
+            var numberOfDaysToAdd = 10;
+          //  alert("now  date is " + someDate );
+            console.log("now  date is " + currentDate );
+            currentDate.setDate(currentDate.getDate() - numberOfDaysToAdd); 
+           //  alert("now  date is " + someDate );
+              console.log("new date should be in " + currentDate );
+
+           // alert("new  quiz date is " + date );
+            console.log("new  quiz date is " + date );
+            if (currentDate.getTime() > date.getTime()) {
+            }
+            else{
+              newquiz = newquiz+1;
+            }
+        }
+       $scope.newQuiz = newquiz;
+
+    }
 
     /********** find number of student in a course and quiz in course ********/
     $scope.findNumStudentEnrolled = function(){
@@ -651,13 +686,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
   };
 
-    var quizInaWeek = 0;
-    $scope.newQuiz = function() {
-        var newquiz = 0;
-        var date = new Date();
-
-        console.log("AAAAAAAAAAAA  now date is " + date );
-    };
 
   }
 ]);
