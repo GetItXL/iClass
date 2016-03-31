@@ -511,7 +511,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         score = 1;
       }
      // avg = $filter('number')((stuScore/score)*100, (stuScore/score)) + '%';
-      avg = $filter('number')((stuScore/score)*100, 2) + '%';
+      avg = $filter('number')((stuScore/score)*100, 1) + '%';
       $scope.stuCourseAvg = avg;
       console.log(" average is " + avg);
   }
