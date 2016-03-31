@@ -20,7 +20,7 @@
                         <div class="row list-group">
                             <div class="col-lg-12 col-md-12 col-sm-12 mb" ng-repeat="course in courses | filter:{active: true}">
                                 <div class="pn" >
-                                    <a ng-controller="CoursesController"  ng-init="findNumStudentEnrolled(); getNumQuiz();" ui-sref="courses.view({courseId: course._id})" uib-popover-template="'modules/courses/client/views/remove-course.client.view.html'" popover-trigger="mouseenter"  popover-placement="right"  class="list-group-item">
+                                    <a ng-controller="CoursesController"  ng-init="findNumStudentEnrolled(); getNumQuiz();" ui-sref="courses.view({courseId: course._id})" class="list-group-item">
 
                                              {{course.semester}} {{course.year}}
                                             <h4> {{course.number}} {{course.name}} </h4>
