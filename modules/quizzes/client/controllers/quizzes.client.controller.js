@@ -419,7 +419,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
     $scope.figureoutchoice1 = function() {
          console.log('numChoiceQuiz '+ $scope.numChoiceQuiz);
       var eachscore = 0;
-      var totalScore = 1;
+      var totalScore = 0;
         var quiz = Quizzes.get({
             quizId: $stateParams.quizId //Quizzes.choices: $scope.quiz.choices;
         }, function(){ //callback function to ensure that this executes after database query has finished
@@ -438,10 +438,13 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                 $scope.series.push(quiz.title);
               for(var j = 0; j < quiz.scores.length; j++) {
                  eachscore = quiz.scores[j].quizScore;
-                    if(totalScore !== 1)
+                   
                       totalScore = 1+ totalScore;
               }
-               var result = $filter('number')((eachscore/totalScore)*100, (eachscore/totalScore)) + '%';
+              if(totalScore === 0) {
+                totalScore = 1;
+              }
+               var result = $filter('number')((eachscore/totalScore)*100, 2) + '%';
                 console.log("average scores is " +  result);
               $scope.average.push(result);
         });
