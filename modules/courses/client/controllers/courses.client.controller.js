@@ -433,13 +433,17 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         $scope.quizzesInCourse = courseQuizzes;
         console.log("quizinCourse is " + $scope.quizzesInCourse );
          latestQuiz();
+        
+        if($scope.isStudent(findQuizTaken())){
+            findQuizTaken();
+        }
       });
      
     };
 
     $scope.newQuiz;
     function latestQuiz() {
-        alert("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
+        //alert("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
         console.log("new quiz checking!!!!! " +  $scope.quizzesInCourse.length);
         var newquiz = 0;
 
@@ -469,14 +473,27 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
        $scope.newQuiz = newquiz;
 
     }
+/****** find number of quizzes one student have taken ********/
+    $scope.quizTaken;
+    function findQuizTaken() {
+
+        var user = $scope.authentication.user;
+        var numQuizTaken = 0;
+       
+        var quizTaken = user.quizzesTaken;
+            for(var i = 0; i < quizTaken.length; i++) {
+                for(var j = 0; j < $scope.quizzesInCourse.length; j++) {
+                      if(quizTaken[i].quizID === $scope.quizzesInCourse[j]._id) {
+                           numQuizTaken++;
+                      } 
+                }
+            }
+      
+         $scope.quizTaken = numQuizTaken;
+    }
 
     /********** find number of student in a course and quiz in course ********/
     $scope.findNumStudentEnrolled = function(){
-
-      //$scope.numStudentInCourse = $scope.courses.enrolledStudents.length;
-      //console.log("weird");
-      //console.log($scope.courses);
-      //console.log($scope.courses.numStudents);
 
         var courseStudentPair = {};
 
@@ -540,24 +557,6 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
       
     };
 
-/****** find number of quizzes one student have taken ********/
-
-    $scope.findQuizTaken = function() {
-         var user = $scope.authentication.user;
-         var numQuizTaken = 0;
-         if($scope.isStudent()) {
-              var quizTaken = user.quizzesTaken;
-              for(var i = 0; i < quizTaken.length; i++) {
-                  for(var j = 0; j < $scope.quizzesInCourse.length; j++) {
-                      if(quizTaken[i].quizID === $scope.quizzesInCourse[j]) {
-                           numQuizTaken++;
-                      } 
-                  }
-              }
-         }
-
-         $scope.quizTaken = numQuizTaken;
-    };
 
     if (!Socket.socket) {
       //connect whenever in course taking page?

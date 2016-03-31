@@ -4,7 +4,7 @@
             <div class="form-panel">
                 <header >
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-9" ng-init="figureOutNewQuiz()">
                             <h2 class="title"> {{course.number}} {{course.name}} </h2>
                             <p class="meta">
                                 create by professor <b>{{course.professor.displayName}}</b> on <span ng-bind="course.created | date:'mediumDate'"></span>
@@ -35,7 +35,7 @@
                            </div>
                                 <p>totally {{quizzesInCourse.length}} quizzes created</p>
                         </div>
-                        <div class="col-md-3 col-sm-3 box0" ng-init="figureOutNewQuiz()" >
+                        <div class="col-md-3 col-sm-3 box0"  >
                             <div class="box1">
                                 <span class="li_pen"></span>
                                  <h3>{{newQuiz}}</h3>
@@ -63,7 +63,7 @@
                            </div>
                                 <p>totally {{quizzesInCourse.length}} quizzes created</p>
                         </div>
-                        <div class="col-md-3 col-sm-3 box0" ng-show="isStudent()" ng-init="findQuizTaken()">
+                        <div class="col-md-3 col-sm-3 box0" ng-init="findQuizTaken()">
                             <div class="box1">
                                 <span class="li_pen"></span>
                                  <h3>{{quizTaken}}</h3>
