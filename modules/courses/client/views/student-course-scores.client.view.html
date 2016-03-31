@@ -1,23 +1,27 @@
 <section ng-controller="CoursesController" ng-init="findOne()">
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+                <h1>{{course.name}}</h1>
 
-  <h1>{{course.name}}</h1>
 
+                <div>
+                  <table>
+                    <thread>
+                      <tr>
+                        <th>Quiz</th>
+                        <th>Your Score</th>
+                      </tr>
+                    </thread>
 
-  <div>
-    <table>
-      <thread>
-        <tr>
-          <th>Quiz</th>
-          <th>Your Score</th>
-        </tr>
-      </thread>
-
-      <tbody ng-repeat="score in scoresInClass">
-        <td>{{score.quizName}}</td>
-        <td>{{score.quizScore}}</td>
-      </tbody>
-    </table>
-  </div>
-
+                    <tbody ng-repeat="score in scoresInClass">
+                      <td>{{score.quizName}}</td>
+                      <td>{{score.quizScore}}</td>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div><!-- col-lg-12-->
+    </div><!-- /row -->
 
 </section>
