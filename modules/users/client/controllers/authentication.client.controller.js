@@ -21,9 +21,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     }
   
   // If user is not signed in then redirect back to signin page
-    if (!$scope.authentication.user) {
-        $location.path('/authentication/signin');
-    }
+    // if (!$scope.authentication.user) {
+    //     $location.path('/authentication/signin');
+    // }
 
     $scope.signup = function (isValid) {
       $scope.error = null;

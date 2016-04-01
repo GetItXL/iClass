@@ -198,11 +198,11 @@ module.exports = function (grunt) {
         }
       }
     },
-    karma: {
-      unit: {
-        configFile: 'karma.conf.js'
-      }
-    },
+    // karma: {
+    //   unit: {
+    //     configFile: 'karma.conf.js'
+    //   }
+    // },
     // SAVE & LOAD MONGODB INSTANCES!
     easy_mongo_fixture: {
       load: {
@@ -326,12 +326,14 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
-  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
+  //grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'protractor']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
-  grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
+ // grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
   grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);
   // Run project coverage
-  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
+//  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
+  grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage']);
 
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
