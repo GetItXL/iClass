@@ -21,7 +21,12 @@ var validateLocalStrategyProperty = function (property) {
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || /^\w+([\.-]?\w+)*@ufl.edu+$/.test(email));
+  if((this.provider !== 'local' && !this.updated) || validator.isEmail(email)) {
+      if((/^\w+([\.-]?\w+)*@ufl.edu+$/.test(email)))
+        return true;
+  }
+  return false;
+  //return (((this.provider !== 'local' && !this.updated) || validator.isEmail(email)) || /^\w+([\.-]?\w+)*@ufl.edu+$/.test(email));
 };
 
 var validateLocalStrategyUser = function (role) {
