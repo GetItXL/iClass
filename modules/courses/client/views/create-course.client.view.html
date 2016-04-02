@@ -9,48 +9,57 @@
                     <form class="form-horizontal style-form" name="courseForm" ng-submit="create(courseForm.$valid)" novalidate>                      
                         <fieldset>
                             <div class="form-group" show-errors>
-                                 <label class="col-sm-2 col-sm-2 control-label"> Course Number </label>
-                                <div class="col-sm-10">
-                                    <input ng-model="number" type="text" id="number" class="form-control" placeholder="e.g. COP4331" required>
+                                <label class="col-sm-2 col-sm-2 control-label" for="number">Course Number</label>
+                                 <div class="col-sm-10">
+                                    <input name="number" type="text" ng-model="number" id="number" class="form-control" placeholder="e.g. COP4331" required>
                                     <div ng-messages="courseForm.number.$error" role="alert">
-                                        <span class="help-block error-text" ng-message="required">Course number is required. </span>
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="form-group" show-errors>
-                                 <label class="col-sm-2 col-sm-2 control-label"> Course Name </label>
-                                <div class="col-sm-10">
-                                    <input ng-model="name" type="text" id="name" class="form-control" placeholder="e.g. Object Oriented Programming" required>
-                                    <div ng-messages="courseForm.name.$error" role="alert">
-                                        <span class="help-block error-text" ng-message="required">Course name is required. </span>
+                                        <p class="help-block error-text" ng-message="required">Course number is required.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" show-errors>
+                                <label class="col-sm-2 col-sm-2 control-label"  for="name"> Course Name </label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="name" name="name" class="form-control" ng-model="name" placeholder="e.g. Object Oriented Programming"  required>
+                                    <div ng-messages="courseForm.name.$error" role="alert">
+                                          <p class="help-block error-text" ng-message="required">Coure name is required.</p>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" show-errors>
                                 <label class="col-sm-2 col-sm-2 control-label" for="passcode">Course Passcode</label>
                                 <div class="col-sm-10">
                                     <input name="passcode" ng-model="passcode" id="passcode" class="form-control" placeholder="Create a course passcode"></input>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" show-errors>
                                 <label class="col-sm-2 col-sm-2 control-label" > Semester & year </label>
                                 <div class="col-sm-10" >             
                                     <div class="radio" >
                                         <label class="radio-inline">
-                                            Choose a semester: <select ng-model="semester" data-ng-options="act for act in semesters"></select>
+                                            Choose a semester: <select ng-model="semester" name='semester' data-ng-options="act for act in semesters" required></select>
                                         </label>
                                         <label class="radio-inline">
                                             Choose a year: <select ng-model="year"
-                                      data-ng-options="act for act in years"></select>
+                                      data-ng-options="act for act in years" name='year' required></select>
                                         </label>
                                      </div>
                                        <!-- TODO: make radio button selection required input -->
-                                  
+                                    <div ng-messages="courseForm.semester.$error || conrseForm.year.$error " role="alert">
+                                          <p class="help-block error-text" ng-message="required">Semester and years are required!</p>
+                                       
+                                    </div>
                                 </div>
+                            </div>
+                            <div ng-show="error" class="text-center text-danger">
+                                    <strong ng-bind="error"></strong>
                             </div>
 
                             <div class="form-group">
+                                
                                 <div class="col-sm-12 text-center">
+
                                         <button type="submit" class="btn btn-theme btn-lg">
                                             <i class="fa fa-check"></i> submit 
                                         </button>
@@ -63,7 +72,7 @@
                   </div>
               </div><!-- col-lg-12-->       
             </div><!-- /row -->
-      
-
+      <label>
 
 </section>
+
