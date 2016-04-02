@@ -1,5 +1,8 @@
 'use strict';
 
+var mongoose = require('mongoose');
+var db = mongoose.createConnection('mongodb://localhost/mean-test');
+
 describe('Users E2E Tests:', function () {
   var user1 = {
     firstName: 'test',
@@ -96,7 +99,7 @@ describe('Users E2E Tests:', function () {
      * Note: 123@123 is a valid email adress according to HTML5.
      * However, 123@123@123 is an invalid email address.
      */
-  
+
     it('Should report invalid email address - "123@123.com"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
@@ -445,8 +448,24 @@ describe('Users E2E Tests:', function () {
       element(by.model('passwordDetails.verifyPassword')).sendKeys('P@$$w0rds!!');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
+      
       // Password Changed
       expect(element.all(by.css('.text-success')).get(0).getText()).toBe('Password Changed Successfully');
+     
     });
+
+    it('Should clear database"', function () {
+       db.db.dropDatabase();
+    });
+
   });
+// after(function (done) {
+//     db.db.dropDatabase();
+// });
+// afterEach(function(){
+//     //Clear database
+//     db.db.dropDatabase()
+//   });
+
+
 });
