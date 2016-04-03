@@ -7,10 +7,10 @@ describe('Courses E2E Tests:', function () {
 	    firstName: 'professor',
 	    lastName: 'user',
 	    email: 'test.user@ufl.edu',
-	   // username: 'testUser',
-	   // password: 'P@$$w0rds!!'
-	   username: 'testpro',
-	   password: 'ASDFasdf!@#$1234'
+	    username: 'testUser',
+	    password: 'P@$$w0rds!!'
+	   //username: 'testpro',
+	   //password: 'ASDFasdf!@#$1234'
 	};
 
   	var user2 = {
@@ -114,22 +114,23 @@ describe('Courses E2E Tests:', function () {
 	    });
 	    /*  TODO: still unable to create course */
 
-	    // it('should be able to create course ', function () {
-	    //   	browser.get(browser.baseUrl + 'courses/create');
-	    //   	 // Enter name
-		   //  element(by.model('name')).sendKeys(course1.name);
-		   //  // Enter number
-		   //  element(by.model('number')).sendKeys(course1.number);
-		   //  // Enter passcode
-		   //  element(by.model('passcode')).sendKeys(course1.passcode);
-		   //  // Select semester
-		   //  element(by.model('semester')).$('[value="2"]').click();
-		   //  // Select year
-		   //  element(by.model('year')).$('[value="2"]').click();
-		   //  // Click Submit button
-     //  		element(by.css('button[type=submit]')).click();
-	    //   	expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'professordashboard');
-	    // });
+	    it('should be able to create course ', function () {
+	      	browser.get(browser.baseUrl + 'courses/create');
+	      	 // Enter name
+		    element(by.model('name')).sendKeys(course1.name);
+		    // Enter number
+		    element(by.model('number')).sendKeys(course1.number);
+		    // Enter passcode
+		    element(by.model('passcode')).sendKeys(course1.passcode);
+		    // Select semester
+		    element(by.model('semester')).$('[value="2"]').click();
+		    // Select year
+		    element(by.model('year')).$('[value="2"]').click();
+		    // Click Submit button
+      		element(by.css('button[type=submit]')).click();
+      		expect(element.all(by.css('.title')).get(0).getText()).toBe(course1.number + ' '+ course1.name);
+	      	//expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'professordashboard');
+	    });
 
 	});
 

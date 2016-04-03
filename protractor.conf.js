@@ -14,7 +14,7 @@ var config = {
   			],
 
 
-    baseUrl: "http://localhost:3000/",
+    baseUrl: "http://localhost:3001/",
 
     beforeLaunch: function() {
         console.log("Starting setup...");
@@ -25,7 +25,7 @@ var config = {
 
     afterLaunch: function() {
         console.log("Starting cleanup...");
-
+        //drop database
         db.db.dropDatabase();
         // Return a promise when dealing with asynchronous
         // functions here (like removing users from the database)
