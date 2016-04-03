@@ -1,8 +1,39 @@
+
+
 'use strict';
+
+var mongoose = require('mongoose');
+var db = mongoose.createConnection('mongodb://localhost/mean-test');
 
 // Protractor configuration
 var config = {
-  specs: ['modules/*/tests/e2e/*.js']
+	
+  	specs: [
+  			'modules/users/tests/e2e/users.e2e.tests.js',
+  			'modules/courses/tests/e2e/courses.e2e.tests.js'
+  			],
+
+
+   // baseUrl: "http://localhost:3001/",
+
+    beforeLaunch: function() {
+        console.log("Starting setup...");
+
+        // Return a promise when dealing with asynchronous
+        // functions here (like creating users in the database)
+    },
+
+    afterLaunch: function() {
+        console.log("Starting cleanup...");
+
+        db.db.dropDatabase();
+        // Return a promise when dealing with asynchronous
+        // functions here (like removing users from the database)
+    },
+
+    onPrepare: function() {
+	  browser.driver.manage().window().maximize();
+	}
 };
 
 if (process.env.TRAVIS) {
