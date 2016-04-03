@@ -5,7 +5,7 @@ var db = mongoose.createConnection('mongodb://localhost/mean-test');
 
 describe('Users E2E Tests:', function () {
   var user1 = {
-    firstName: 'test',
+    firstName: 'professor',
     lastName: 'user',
     email: 'test.user@ufl.edu',
     username: 'testUser',
@@ -13,7 +13,7 @@ describe('Users E2E Tests:', function () {
   };
 
   var user2 = {
-    firstName: 'test',
+    firstName: 'student',
     lastName: 'user2',
     email: 'test.user2@ufl.edu',
     username: 'testUser2',
@@ -253,14 +253,14 @@ describe('Users E2E Tests:', function () {
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
       // select userrole
-      element(by.id('student')).click();
+      element(by.id('professor')).click();
       // Enter UserName
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/studentdashboard');
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/professordashboard');
     });
 
     it('Should report Email already exists', function () {
@@ -307,6 +307,25 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
     });
 
+    it('Should Successfully register new student', function () {
+      browser.get('http://localhost:3001/authentication/signup');
+      // Enter FirstName
+      element(by.model('credentials.firstName')).sendKeys(user2.firstName);
+      // Enter LastName
+      element(by.model('credentials.lastName')).sendKeys(user2.lastName);
+      // Enter Email
+      element(by.model('credentials.email')).sendKeys(user2.email);
+      // select userrole
+      element(by.id('student')).click();
+      // Enter UserName
+      element(by.model('credentials.username')).sendKeys(user2.username);
+      // Enter Password
+      element(by.model('credentials.password')).sendKeys(user2.password);
+      // Click Submit button
+      element(by.css('button[type="submit"]')).click();
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/studentdashboard');
+    });
+
   });
 
   describe('Signin Validation', function () {
@@ -335,7 +354,7 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/studentdashboard');
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/professordashboard');
     });
 
   });
@@ -452,10 +471,6 @@ describe('Users E2E Tests:', function () {
       // Password Changed
       expect(element.all(by.css('.text-success')).get(0).getText()).toBe('Password Changed Successfully');
      
-    });
-
-    it('Should clear database"', function () {
-       db.db.dropDatabase();
     });
 
   });
