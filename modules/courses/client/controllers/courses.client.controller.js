@@ -95,7 +95,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         // check if date semester is vaild
         if($scope.isCorrectDate(this.semester,this.year)) {
             // Create new Course object
-          var course = new Courses({
+          var course = new Courses.All({
             name: this.name,
             number: this.number,
             passcode: this.passcode,
