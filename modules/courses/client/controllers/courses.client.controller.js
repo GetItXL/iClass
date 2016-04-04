@@ -1,8 +1,8 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$http', '$location', '$filter', 'Authentication', 'Courses', 'Users', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 'Socket',
-  function ($scope, $stateParams, $http, $location, $filter, Authentication, Courses, Users, CourseInfoFactory, Quizzes, CoursePasscodeFactory, Socket) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', 'Authentication', 'Courses', 'Users', '$http', '$filter', '$location', 'CourseInfoFactory', 'Quizzes', 'CoursePasscodeFactory', 'Socket',
+  function ($scope, $stateParams, Authentication, Courses, Users, $http, $filter, $location, CourseInfoFactory, Quizzes, CoursePasscodeFactory, Socket) {
     //Courses is refering to the service on the client side
 
     $scope.authentication = Authentication;
@@ -10,7 +10,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
   /****************    setting for start and end course date  ***************/
 
     $scope.semesters = ['Spring','Summer','Fall'];
-    $scope.years = ['2015','2016','2017','2018'];
+    $scope.years = ['2016','2017','2018'];
    // $scope.selectedItem = $scope.semesters[0];
 
     $scope.isCorrectDate = function(selectedSemester,selectedYear)
@@ -92,6 +92,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         }
 
         console.log('this year is ' + this.year);
+
+
+
         // check if date semester is vaild
         if($scope.isCorrectDate(this.semester,this.year)) {
             // Create new Course object
