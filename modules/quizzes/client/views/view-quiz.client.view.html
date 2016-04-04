@@ -16,9 +16,9 @@
             <div class="col-lg-8 col-md-9 col-lg-offset-1">
                 <div >
                     <h2>Quiz Status</h2>
-                    </t><p>Is open: {{quiz.quizOpen}}</p>
-                    <p>Is finished: {{quiz.quizEnded}}</p>
-
+                    <p ng-show="quiz.quizOpen">Quiz is open</p>
+                    <p ng-show="quiz.quizEnded">Quiz is ended</p>
+                    <p ng-show="!quiz.quizOpen && !quiz.quizEnded">Quiz has not been opened yet</p>
 
                     <h2>Class Info</h2>
                     <p>{{courseDisplayInfo.number}}</p>
@@ -29,23 +29,25 @@
 
                     <h2>choices</h2>
                     <div ng-repeat="choice in quiz.choices">
-                      <p>{{choice.letter}}  {{choice.description}}</p>
+                      <p>{{choice.letter}}.  {{choice.description}}</p>
                     </div>
 
                     <h2>Correct answer</h2>
                     <p>{{quiz.correctAnswer}}</p>
 
                     <h2>Quiz Duration</h2>
-                    <p>{{quiz.quizDuration}} milliseconds</p>
+                    <p ng-show="quiz.quizDuration !== -1">{{quiz.quizDuration/1000- (Math.floor(value.millis / 1000))}} seconds</p>
+                    <p ng-show="quiz.quizDuration === -1">End quiz manually</p>
                 </div>
             </div>
 
              <div class="col-lg-3 col-md-3">
                     <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button><br><br>
-                    <a class="btn btn-lg btn-theme02 " ui-sref="quizzes.statistics({quizId:quiz._id})" >view statistic</a>
-                    <a class="btn btn-lg btn-theme "  ui-sref="quizzes.profopen({quizId: quiz._id})" >take quiz</a>
-                   
+                    <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+
+
+
                    <!--  <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
                          End quiz
                     </button>
@@ -55,26 +57,6 @@
                     </button>
                              -->
             </div>
-
-                    <!-- test button -->
-                     <!-- test button -->
-                    <!-- TODO: move this to list view -->
-                    <div class="form-group md">
-                      <div class="col-sm-6 text-center">
-                        <button type="submit" class="btn btn-theme btn-lg pull-right" ng-click="setQuizFinished()">
-                          <i class="fa fa-check"></i> End the quiz
-                        </button>
-                      </div>
-                      <div class="col-sm-6 text-center">
-                        <button type="submit" class="btn btn-theme btn-lg pull-left" ng-click="setQuizStart()">
-                          <i class="fa fa-check"></i> Open the quiz
-                        </button>
-                      </div>
-                    </div>
-
-
-
-
         </div>
     </div>
 </section>
