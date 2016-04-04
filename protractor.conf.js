@@ -10,7 +10,8 @@ var config = {
 	
   	specs: [
   			'modules/users/tests/e2e/users.e2e.tests.js',
-  			'modules/courses/tests/e2e/courses.e2e.tests.js'
+  			'modules/courses/tests/e2e/courses.e2e.tests.js',
+  			'modules/quizzes/tests/e2e/quizzes.e2e.tests.js'
   			],
 
 
