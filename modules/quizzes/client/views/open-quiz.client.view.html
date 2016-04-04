@@ -15,7 +15,7 @@
                     <button type="submit" class="btn btn-theme04 btn-lg " ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
                           <i class="fa fa-check"></i> Quiz End
                         </button>
-                    <button type="button" class="btn btn-theme03 btn-lg " onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+                    <button type="button" class="btn btn-theme03 btn-lg " onclick="history.back(-1)"ng-show="!quiz.quizOpen" ><i class="fa fa-reply"></i> back</button>
                   </div>
             </div>
             <div class="col-lg-10 col-lg-offset-1" ng-show="quiz.quizOpen">

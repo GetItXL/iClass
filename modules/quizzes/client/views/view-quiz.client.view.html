@@ -16,35 +16,36 @@
             <div class="col-lg-8 col-md-9 col-lg-offset-1">
                 <div >
                     <h2>Quiz Status</h2>
-                    <p ng-show="quiz.quizOpen">Quiz is open</p>
-                    <p ng-show="quiz.quizEnded">Quiz is ended</p>
-                    <p ng-show="!quiz.quizOpen && !quiz.quizEnded">Quiz has not been opened yet</p>
+                    <h4 ng-show="quiz.quizOpen"> <li> Quiz is open </li></h4>
+                    <h4 ng-show="quiz.quizEnded"> <li> Quiz is ended </li></h4>
+                    <h4 ng-show="!quiz.quizOpen && !quiz.quizEnded"> <li> Quiz has not been opened yet </li></h4>
 
                     <h2>Class Info</h2>
-                    <p>{{courseDisplayInfo.number}}</p>
-                    <p>{{courseDisplayInfo.name}}</p>
+                    <h4> <li> {{courseDisplayInfo.number}} </li></h4>
+                    <h4> <li> {{courseDisplayInfo.name}} </li></h4>
 
                     <h2>Quiz Question</h2>
-                    <p>{{quiz.question}}</p>
+                    <h4> <li> {{quiz.question}} </li></h4>
 
                     <h2>choices</h2>
                     <div ng-repeat="choice in quiz.choices">
-                      <p>{{choice.letter}}.  {{choice.description}}</p>
+                      <h4> <li> {{choice.letter}}.  {{choice.description}} </li></h4>
                     </div>
 
                     <h2>Correct answer</h2>
-                    <p>{{quiz.correctAnswer}}</p>
+                    <h4> <li> {{quiz.correctAnswer}} </li></h4>
 
                     <h2>Quiz Duration</h2>
-                    <p ng-show="quiz.quizDuration !== -1">{{quiz.quizDuration/1000- (Math.floor(value.millis / 1000))}} seconds</p>
-                    <p ng-show="quiz.quizDuration === -1">End quiz manually</p>
+                    <h4 ng-show="quiz.quizDuration !== -1"> <li> {{quiz.quizDuration/1000- (Math.floor(value.millis / 1000))}} seconds</li></h4>
+                    <h4 ng-show="quiz.quizDuration === -1"> <li>End quiz manually </li></h4>
                 </div>
             </div>
 
              <div class="col-lg-3 col-md-3">
-                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button><br><br>
-                    <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+                    <button id="edit" type="button" style="width:100px" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i> edit</button>
+                    <button id="remove" type="button" style="width:100px" class="btn btn-theme" ng-show="!isStudent()" data-ng-click="modalRemove('sm', quiz)"><i class="fa fa-trash-o"></i> delete</button><br><br>
+                    <a id="back" type="button" style="width:100px" class="btn btn-theme03 " href="http://localhost:3000/courses/{{quiz.courseID}}"><i class="fa fa-reply"></i> back</a>
+                    <!-- <button id="back" type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button> -->
 
 
 

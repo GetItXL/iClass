@@ -85,7 +85,7 @@
                     <p class="lead" ng-show="isAdmin()">Passcode: {{course.passcode}} </p>
                     <p class="lead" ng-show="isCourseCreated(course._id)">Passcode: {{course.passcode}}</p>
                     <p><button id="edit" type="button" class="btn btn-theme" ng-show="isCourseCreated(course._id) || isAdmin()" ng-controller="CoursesListController" data-ng-click="modalUpdate('lg', course)"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-theme" ng-show="isAdmin()" ng-click="remove();"><i class="fa fa-trash-o"></i></button>
+                    <button id="remove" type="button" class="btn btn-theme" ng-show="isAdmin()" data-ng-click="modalRemove('sm', course)"><i class="fa fa-trash-o"></i></button>
                     <button  id="createQuiz" type="button" class="btn btn-theme02 " ui-sref="quizzes.create" ng-show="!isStudent()">+ create Quiz</button>
                     </p>
                     <p>
