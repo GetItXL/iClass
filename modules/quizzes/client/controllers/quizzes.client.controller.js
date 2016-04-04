@@ -535,10 +535,89 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
     };
 
-// ************************ average score  *****************
-//   $scope.averageScore = function() {
+/*********  modal window update quiz *******************/
 
-//   };
+    $scope.modalUpdate = function(size, selectedQuiz) {
+
+
+      var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
+        templateUrl: 'modules/quizzes/client/views/edit-quiz.client.view.html',
+        controller: ModalUpdateCtrl,
+        size: size,
+
+        resolve: {
+          quiz: function() {
+            return selectedQuiz;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    var ModalUpdateCtrl = function($scope, $modalInstance, quiz) {
+        $scope.quiz = quiz;
+        //console.log("I am update modal window " + Authentication.user.displayName);
+        $scope.ok = function() {
+            $modalInstance.close($scope.quiz);
+            $state.reload();
+    
+        };
+
+
+        $scope.cancel = function() {
+          //$modalInstance.dismiss('cancel');
+          $state.reload();
+        };
+    };
+
+    /*********  modal window remove quiz *******************/
+
+    $scope.modalRemove = function(size, selectedQuiz) {
+
+      var modalInstance = $modal.open({
+        backdrop : 'static',
+        keyboard :false,
+        templateUrl: 'modules/quizzes/client/views/delete-quiz.client.view.html',
+        controller: ModalRemoveCtrl,
+        size: size,
+        resolve: {
+          quiz: function() {
+            return selectedQuiz;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        //console.log('Modal dismissed at: ' + new Date());
+       // $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    var ModalRemoveCtrl = function($scope, $modalInstance, quiz) {
+      $scope.quiz = quiz;
+
+      $scope.ok = function() {
+        //console.log('user click ok');
+        $modalInstance.close($scope.quiz);
+       // $state.reload();
+        var removedQuizCourseID = $scope.quiz.courseID;
+        $location.path('courses/'+removedQuizCourseID);
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+        //$state.reload();
+      };
+    };
 
 
 /************* timer *******************/
