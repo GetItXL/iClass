@@ -50,7 +50,7 @@ var QuizSchema = new Schema({
     type: String
   },/* May need to modify later */
   quizDuration: { //convert duration into millisecond and store as number
-    type: Number  //if quizDuration = -1, means user selected manually hit stop quiz button
+    type: Number,  //if quizDuration = -1, means user selected manually hit stop quiz button
   },
   quizType: {
     type: String //"MC", vs "attendence"
