@@ -28,7 +28,6 @@ var config = {
         //drop database
         db.db.dropDatabase();
         // Return a promise when dealing with asynchronous
-        // functions here (like removing users from the database)
     },
 
     onPrepare: function() {
