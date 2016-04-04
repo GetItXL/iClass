@@ -35,7 +35,7 @@
                     </div>
                           <!--custom chart end-->
 
-                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-legend="true"  chart-series="series" ng-init="figureoutchoice1(choice)"> 
+                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-legend="true"  chart-series="series" ng-init="figureoutchoice1(choice)">
                   </canvas>
                 </div><!-- /row -->
             </div>
@@ -54,11 +54,11 @@
                         <th>Score</th>
                       </tr>
                     </thread>
-                    <tbody ng-repeat="score in quiz.scores" ng-init="count=1">
+                    <tbody ng-repeat="score in quiz.scores">
                       <tr>
-                        <td>{{count}}</td>
-                        <td>{{quiz.user.displayName}}</td>
-                        <td>{{score.student.displayName}}</td>
+                        <td>{{$index+1}}</td>
+                        <td>{{score.student.lastName}}</td>
+                        <td>{{score.student.firstName}}</td>
                         <td>{{score.quizScore}}</td>
                       </tr>
                     </tbody>

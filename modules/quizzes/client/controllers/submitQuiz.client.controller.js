@@ -59,46 +59,44 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
 
             console.log('my submitted answer is ' + answer);
 
+            if(!alreadySubmitted()){ //TODO: !!!this is commented out for testing purpose, uncomment after done
+                var quiz = $scope.quiz;
+                quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                    // if(quiz.correctAnswer === answer) {
+                    //     alert('my submitted answer is correct! ' + answer);
+                    //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
+                    // }
+                    // else {
+                    //     alert('my submitted answer is wrong' + answer);
+                    //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
+                    // }
 
-            //if(!alreadySubmitted()){ //TODO: !!!this is commented out for testing purpose, uncomment after done
-            var quiz = $scope.quiz;
-            quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
-                // if(quiz.correctAnswer === answer) {
-                //     alert('my submitted answer is correct! ' + answer);
-                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 1});
-                // }
-                // else {
-                //     alert('my submitted answer is wrong' + answer);
-                //     quiz.scores.push({studentID : $scope.authentication.user._id, selectedAnswer : answer, quizScore : 0});
-                // }
+
+                quiz.$submit(function () {
+
+                    var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
+
+                        //broadcast to users
+                        Socket.emit('answerSubmitted', {
+                            quizID: $scope.quiz._id,
+                            answer: answer,// don't need this much info. passing in just in case
+                            userID: $scope.authentication.user._id,
+                            //course: $scope.courseDisplayInfo,
+                            professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
+                        });
 
 
-            quiz.$submit(function () {
-
-                var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
-
-                    //broadcast to users
-                    Socket.emit('answerSubmitted', {
-                        quizID: $scope.quiz._id,
-                        answer: answer,// don't need this much info. passing in just in case
-                        userID: $scope.authentication.user._id,
-                        //course: $scope.courseDisplayInfo,
-                        professorID: course.professor._id //may return undefined... //TODO: handle - happens only when students submit quiz too quickly (almost impossible?)
+                        //update user model
+                        updateUserModelQuizzesTaken(course._id);
                     });
 
+                    alert("thank you for submitting answer "+ answer);
 
-                    //update user model
-                    updateUserModelQuizzesTaken(course._id);
+                    $location.path('courses/' + $scope.courseDisplayInfo._id);
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
                 });
-
-                alert("thank you for submitting answer "+ answer);
-
-                $location.path('courses/' + $scope.courseDisplayInfo._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-            //}
-
+            }
         };
 
         function updateUserModelQuizzesTaken(courseID){

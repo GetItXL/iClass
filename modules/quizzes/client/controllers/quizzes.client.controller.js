@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket',
-  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket', 'Users',
+  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket, Users) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -152,11 +152,92 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         //update quiz
         $scope.quiz = quiz;
         $state.reload();
+
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
-
     };
+
+    function addAbsentStudentScores(){
+        var quiz = $scope.quiz;
+        var scores = quiz.scores;
+
+        var absentStuID = [];
+
+        var course = Courses.All.get({courseId : quiz.courseID}, function(){
+           var studentsEnrolled = course.enrolledStudents;
+
+            for(var i = 0; i < studentsEnrolled.length; i++){
+                var takenQuizFlag = false;
+
+                for(var j = 0; j < scores.length; j++){
+                    if(studentsEnrolled[i] === scores[j].studentID){
+                        takenQuizFlag = true;
+                    }
+                }
+
+                if(!takenQuizFlag){
+                    absentStuID.push(studentsEnrolled[i]);
+                    //console.log('ABS STU ID ADDED: ' + studentsEnrolled[i]);
+                }
+            }
+
+
+            var users = Users.query(function(){
+                var absentStudents = [];
+
+                for(var i = 0; i < users.length; i++){
+                    for(var j = 0; j < absentStuID.length; j++){
+                        if(absentStuID[j] === users[i]._id){
+                            absentStudents.push(users[i]);
+                        }
+                    }
+                }
+
+                for(var k = 0; k < absentStudents.length; k++){
+                    //console.log('absent STUS: ' + absentStudents[k].displayName);
+                    quiz.scores.push({studentID : absentStudents[k]._id, student : absentStudents[k], selectedAnswer : '', quizScore : 0});
+                    //console.log('PUSH QUIZ SCORE: ' + quiz.scores[quiz.scores.length-1].student.displayName);
+
+                    var student = new Users(absentStudents[k]);
+                    student.quizzesTaken.push({quizName : quiz.title, courseID : course._id, quizID : quiz._id, submittedAnswer : '', quizScore : 0});
+
+                    student.$update();
+                }
+
+
+                quiz.$update(function () {
+                    $scope.quiz = quiz;
+                    //console.log('ABS QUIZ UPDATED');
+                    //console.log('ABS QUIZ UPDATED SCORE: ' + $scope.quiz.scores[$scope.quiz.scores.length-1].student.displayName);
+                    //$state.reload();
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            });
+
+
+        });
+    }
+
+
+  function getUserByID(idList){
+      var userList = [];
+
+      var users = Users.query(function(){
+
+          for(var i = 0; i < users.length; i++){
+              for(var j = 0; j < idList.length; j++){
+                  if(idList[j] === users[i]._id){
+                      userList.push(users[i]);
+                  }
+              }
+          }
+      });
+
+      return userList;
+  }
+
 
 
     // Find a list of Quizzes
@@ -352,9 +433,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
         $scope.updateQuizStatus(false, true);
         //TODO: callback here is not working but is it needed?
 
-
         $scope.interval = 0;
-
 
         //alert to all students in THIS class
         var course = Courses.All.get({courseId: $scope.quiz.courseID}, function(){
@@ -368,6 +447,8 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
             });
 
         });
+
+        addAbsentStudentScores();
 
 
     };

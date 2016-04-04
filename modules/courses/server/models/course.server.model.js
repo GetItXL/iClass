@@ -50,9 +50,9 @@ var CourseSchema = new Schema({
   enrolledStudents: [{ //Holds a list of ids of enrolled students
     type: String
   }]
-  //ref is very expensive so stores the key only
 
-  //Don't need a list of quizzes because it is not many to many relationship?
+
+
 });
 
 mongoose.model('Course', CourseSchema);

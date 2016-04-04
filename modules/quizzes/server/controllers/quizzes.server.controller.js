@@ -45,6 +45,7 @@ exports.update = function (req, res) {
   quiz.correctAnswer = req.body.correctAnswer;
   quiz.quizOpen = req.body.quizOpen;
   quiz.quizEnded = req.body.quizEnded;
+  quiz.scores = req.body.scores;
 
   quiz.save(function (err) {
     if (err) {
@@ -180,7 +181,7 @@ exports.quizByID = function (req, res, next, id) {
     });
   }
 
-  Quiz.findById(id).populate('user', 'displayName').populate('scores.student', 'displayName').exec(function (err, quiz) {
+  Quiz.findById(id).populate('user', 'displayName').populate('scores.student', 'displayName firstName lastName').exec(function (err, quiz) {
     if (err) {
       return next(err);
     } else if (!quiz) {
