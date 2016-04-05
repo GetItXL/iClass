@@ -1,0 +1,15 @@
+<section data-ng-controller="QuizzesController" >
+    <div class="form-group">
+        <div class="alert alert-danger text-center" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 
+            <span>You are going to remove this quiz!</span>
+        </div>
+        <div class="text-center form-group">
+            <b>{{quiz.title}}</b>
+        </div> 
+    </div>
+    <div class="text-center form-group">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-danger" ng-click="remove(quiz); ok()">Delete</button>
+    </div>
+</section>

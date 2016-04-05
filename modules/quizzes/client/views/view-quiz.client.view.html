@@ -1,62 +1,69 @@
 <section ng-controller="QuizzesController" ng-init="findOne()">
-    <div class="col-lg-12 mt">
-        <div class="row content-panel mb">
-            <div class="page-header centered">
-                <h1 ng-bind="quiz.title"></h1>
-                <small>
-                    <em class="text-muted">
-                        Create by
-                        <span ng-bind="quiz.created | date:'mediumDate'"></span>
-                        by
-                        <span ng-bind="quiz.user.displayName"></span>
-                    </em>
-                </small>
-            </div>
-            <div clss="row">
-            <div class="col-lg-8 col-md-9 col-lg-offset-1">
-                <div >
-                    <h2>Quiz Status</h2>
-                    <p ng-show="quiz.quizOpen">Quiz is open</p>
-                    <p ng-show="quiz.quizEnded">Quiz is ended</p>
-                    <p ng-show="!quiz.quizOpen && !quiz.quizEnded">Quiz has not been opened yet</p>
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+                <header>
+                    <div class="row">
 
-                    <h2>Class Info</h2>
-                    <p>{{courseDisplayInfo.number}}</p>
-                    <p>{{courseDisplayInfo.name}}</p>
-
-                    <h2>Quiz Question</h2>
-                    <p>{{quiz.question}}</p>
-
-                    <h2>choices</h2>
-                    <div ng-repeat="choice in quiz.choices">
-                      <p>{{choice.letter}}.  {{choice.description}}</p>
+                        <div class="col-md-12 page-header centered">
+                            <h2 class="title" ng-bind="quiz.title"> </h2>
+                            <p class="meta">
+                                create by <span ng-bind="quiz.created | date:'mediumDate'"></span>
+                            by
+                            <!--  <a id="back" type="button" style="width:80px; margin-top: -15px" class="btn btn-theme03 chat-tools" href="http://localhost:3000/courses/{{quiz.courseID}}"><i class="fa fa-reply"></i> back</a> -->
+                            <span ng-bind="quiz.user.displayName"></span>
+                            </p>
+                           
+                        </div>
                     </div>
+                </header>
+               
+                <div class="col-lg-7 col-md-7 col-sm-7 col-lg-offset-1 col-md-offset-1 main-chart" style="margin-bottom: 30px;">
+                    <div >
+                    <h2>Quiz Status</h2>
+                            <h4 ng-show="quiz.quizOpen"> <li> Quiz is open <li></h4>
+                            <h4 ng-show="quiz.quizEnded"> <li> Quiz is ended </li></h4>
+                            <h4 ng-show="!quiz.quizOpen && !quiz.quizEnded"> <li> Quiz has not been opened yet </li></h4>
 
-                    <h2>Correct answer</h2>
-                    <p>{{quiz.correctAnswer}}</p>
+                            <h2>Class Info</h2>
+                            <h4> <li> {{courseDisplayInfo.number}} </li></h4>
+                            <h4> <li> {{courseDisplayInfo.name}} </li></h4>
 
-                    <h2>Quiz Duration</h2>
-                    <p ng-show="quiz.quizDuration !== -1">{{quiz.quizDuration/1000- (Math.floor(value.millis / 1000))}} seconds</p>
-                    <p ng-show="quiz.quizDuration === -1">End quiz manually</p>
+                            <h2>Quiz Question</h2>
+                            <h4> <li> {{quiz.question}} </li></h4>
+
+                            <h2>choices</h2>
+                            <div ng-repeat="choice in quiz.choices">
+                              <h4> <li> {{choice.letter}}.  {{choice.description}} </li></h4>
+                            </div>
+
+                            <h2>Correct answer</h2>
+                            <h4> <li> {{quiz.correctAnswer}} </li></h4>
+
+                            <h2>Quiz Duration</h2>
+                            <h4 ng-show="quiz.quizDuration !== -1"> <li> {{quiz.quizDuration/1000- (Math.floor(value.millis / 1000))}} seconds</li></h4>
+                            <h4 ng-show="quiz.quizDuration === -1"> <li>End quiz manually </li></h4>
+                    </div>
+                        
                 </div>
-            </div>
+                <div class="col-md-3 main-chart">
 
-             <div class="col-lg-3 col-md-3">
-                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-theme" ng-show="!isStudent()" ng-click="remove();"><i class="fa fa-trash-o"></i></button><br><br>
-                    <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
+                    <p><button id="edit" type="button" style="width:80px" class="btn chat-tools btn-theme" ng-show="!isStudent()" ui-sref="quizzes.edit({quizId: quiz._id})"><i class="fa fa-edit"></i> edit</button>
+                        <button id="remove" type="button" style="width:80px" class="btn chat-tools btn-theme" ng-show="!isStudent()" data-ng-click="modalRemove('sm', quiz)"><i class="fa fa-trash-o"></i> delete</button>
+                    </p>
+                    <p>
+                         <a id="back" type="button" style="width:170px" class="btn btn-theme04 chat-tools" ui-sref="quizzes.profopen({quizId: quiz._id})">quiz open view</a>
+                    </p>
+                    <!-- <p>
+                    <button id="remove" type="button" style="width:100px" class="btn btn-theme" ng-show="!isStudent()" data-ng-click="modalRemove('sm', quiz)"><i class="fa fa-trash-o"></i> delete</button>
+                    </p> -->
+                </div>
+                
 
-
-
-                   <!--  <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizFinished()">
-                         End quiz
-                    </button>
-                    <br>
-                    <button type="submit" class="btn btn-theme btn-lg" ng-click="setQuizStart()">
-                        Open quiz
-                    </button>
-                             -->
-            </div>
-        </div>
-    </div>
+                <div class="row">
+                </div>
+            </div><!--form-panel -->
+        </div> <!-- col-lg-12 -->
+    </div><!-- /row -->
 </section>
+

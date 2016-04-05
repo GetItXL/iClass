@@ -19,14 +19,23 @@ describe('Quizzes E2E Tests:', function () {
 	    password: 'P@$$w0rd!!'
   	};
 
-  	var quiz1 = {
-  		name: 'test quiz',
+  	var course1 = {
+  		name: 'test course',
   		number: 'COP35055',
   		passcode : '123456',
   		semester: 'spring',
   		year: '2017'
   	};
 
+  	var quiz1 = {
+  		title: 'test quiz',
+  		question: 'how many choice here?',
+  		choiceIn1: '1',
+  		choiceIn2: '2',
+  		choiceIn3: '3'
+  	};
+  	var courseUrl;
+  	var quizCreated = 0;
 
   	var signout = function () {
     // Make sure user is signed out first
@@ -36,10 +45,11 @@ describe('Quizzes E2E Tests:', function () {
 	};
   	describe('Test quizzes page', function () {
 
-	    it('Should report missing credentials', function () {
-	      	browser.get('http://localhost:3001/quizzes');
-	      	expect(element.all(by.repeater('quiz in quizzes')).count()).toEqual(0);
-	    });
+	    // it('Should report missing credentials', function () {
+	    //   	browser.get('http://localhost:3001/quizzes');
+	    //   	quizCreated = element.all(by.repeater('quiz in quizzes')).count();
+	    //   //	expect(element.all(by.repeater('quiz in quizzes')).count()).toEqual(0);
+	    // });
 
 	    it('Verify that the professor logged in', function() {
 			//Make sure user is signed out first
@@ -54,5 +64,137 @@ describe('Quizzes E2E Tests:', function () {
 			element(by.css('button[type="submit"]')).click();
 			expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'professordashboard');
 		});
+
+		it('should be able to visit course page', function() {
+			// Enter passcode
+		   	browser.get(browser.baseUrl + 'professordashboard');
+		   	//click first item in course list
+			element(by.repeater('course in courses').row(0)).$('a').click();
+			//course name should changed
+		   	expect(element.all(by.css('.title')).get(0).getText()).toBe(course1.number + ' '+ course1.name);
+		});
+
+		it('should be able to click create quiz button', function() {
+			//click join button
+		    element(by.css('button[id="createQuiz"]')).click();
+			//course name should changed
+		   	expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'quizzes/create');
+		});
+
+		it('should be able to create attendence', function() {
+			//click attancance button
+		    element(by.css('button[id="attendance"]')).click();
+		    //browser.sleep(5000);
+		    //click submit button
+		    element(by.css('button[type="submit1"]')).click();
+		    
+			quizCreated = quizCreated +1;
+			//1 quiz should be created
+
+			//back to course view page	
+			//browser.get(courseUrl);
+			//browser.sleep(5000);
+	      	//expect(element.all(by.repeater('quiz in quizzes')).count()).toEqual(quizCreated);
+		});
+
+		it('should be able to create multiply choice quiz', function() {
+
+			browser.get(browser.baseUrl + 'quizzes/create');
+			//click join button
+		    element(by.css('button[id="multiple"]')).click();
+			//quiz-option is display
+		   	//expect(element.all(by.css('[ng-show="error"]')).isDisplayed()).toBeTruthy();
+		   	expect(element.all(by.css('[ng-show="showQuizOption"]')).isDisplayed()).toBeTruthy();
+		});
+
+		it('should display missing quiz title error', function () {
+			browser.get(browser.baseUrl + 'quizzes/create');
+			//click multiply quiz button
+		    element(by.css('button[id="multiple"]')).click();
+		    // Enter title
+		    //element(by.model('title')).sendKeys(quiz1.title);
+		    // Enter question
+		    element(by.model('question')).sendKeys(quiz1.question);
+		    //select choice button
+		    element(by.repeater('choice in choices').row(0)).element(by.tagName('input')).sendKeys(quiz1.choiceIn1);
+		   	// click answer button
+		   	element(by.id('answer')).click();
+		    // Click Submit button
+      		element(by.css('button[type=submit2]')).click();
+      		//display quiz title error
+	      	expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Quiz title is required.');
+	    });
+
+	    it('should display missing quiz question error', function () {
+		    browser.get(browser.baseUrl + 'quizzes/create');
+			//click multiply quiz button
+		    element(by.css('button[id="multiple"]')).click();
+		    // Enter title
+		    element(by.model('title')).sendKeys(quiz1.title);
+		    // Enter question
+		    //element(by.model('question')).sendKeys(quiz1.question);
+		    //select choice button
+		    element(by.repeater('choice in choices').row(0)).element(by.tagName('input')).sendKeys(quiz1.choiceIn1);
+		   	// click answer button
+		   	element(by.id('answer')).click();
+		    // Click Submit button
+      		element(by.css('button[type=submit2]')).click();
+      		//display quiz title error
+	      	//expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Quiz title is required.');
+	      	expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Quiz question is required.');
+	    });
+
+	    it('should display missing quiz choice error', function () {
+	    	browser.get(browser.baseUrl + 'quizzes/create');
+			//click multiply quiz button
+		    element(by.css('button[id="multiple"]')).click();
+		    // Enter title
+		    element(by.model('title')).sendKeys(quiz1.title);
+		    // Enter question
+		    element(by.model('question')).sendKeys(quiz1.question);
+		    //select choice button
+		    //element(by.repeater('choice in choices').row(0)).element(by.tagName('input')).sendKeys(quiz1.choiceIn1);
+		   	// click answer button
+		   	element(by.id('answer')).click();
+		    // Click Submit button
+      		element(by.css('button[type=submit2]')).click();
+      		//display quiz title error
+	      	expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Quiz choice is required.');
+	    });
+
+	    it('should display select answer error', function () {
+	    	browser.get(browser.baseUrl + 'quizzes/create');
+			//click multiply quiz button
+		    element(by.css('button[id="multiple"]')).click();
+		    // Enter title
+		    element(by.model('title')).sendKeys(quiz1.title);
+		    // Enter question
+		    element(by.model('question')).sendKeys(quiz1.question);
+		    //select choice button
+		    element(by.repeater('choice in choices').row(0)).element(by.tagName('input')).sendKeys(quiz1.choiceIn1);
+		   	// click answer button
+		   	//element(by.id('answer')).click();
+		    // Click Submit button
+      		element(by.css('button[type=submit2]')).click();
+      		//display quiz answer error
+	     	expect(element.all(by.css('[ng-show="error"]')).isDisplayed()).toBeTruthy();
+	    });
+
+	    it('should be able to create quiz', function () {
+	    	browser.get(browser.baseUrl + 'quizzes/create');
+			//click multiply quiz button
+		    element(by.css('button[id="multiple"]')).click();
+		    // Enter title
+		    element(by.model('title')).sendKeys(quiz1.title);
+		    // Enter question
+		    element(by.model('question')).sendKeys(quiz1.question);
+		    //select choice button
+		    element(by.repeater('choice in choices').row(0)).element(by.tagName('input')).sendKeys(quiz1.choiceIn1);
+		   	// click answer button
+		   	element(by.id('answer')).click();
+		    // Click Submit button
+      		element(by.css('button[type=submit2]')).click();
+      		
+	    });
   	});
 });
