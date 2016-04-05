@@ -12,7 +12,7 @@
                     </em>
                 </small>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12 main-chart">
                 <h3 class="checkbox-inline"> <i class="fa fa-angle-right"></i> Selected Answer </h3>
                 <h3 class="pull-right"> Average Score is {{average[0]}}</h3>
                 <hr>
@@ -41,7 +41,7 @@
             </div>
             <br><br>
 
-            <div class="col-lg-12">
+            <div class="col-lg-12 main-chart" >
                 <h3> <i class="fa fa-angle-right"></i> Score Table {{quiz.scores.student._id}}</h3>
                 <hr>
                 <!-- Students' scores table -->
@@ -67,9 +67,9 @@
             </div>
           <!-- END Students' scores table -->
 
-				<div class="col-lg-12 pull-right hidden-phone">
-          <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
-          <button type="button" class="btn btn-theme04 btn-lg centered" onclick="/" >export to excel</button>
+		<div class="col-lg-12 main-chart" style="margin-bottom: 30px;">
+            <button type="button" class="btn btn-theme03 btn-lg chat-tools" onclick="history.back(-1)" style="width:80px"><i class="fa fa-reply"></i> back</button>
+            <button type="button" class="btn btn-theme04 btn-lg chat-tools" onclick="/" style="width:150px" >export to excel</button>
         </div>
         </div>
 
