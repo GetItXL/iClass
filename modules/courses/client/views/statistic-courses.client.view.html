@@ -20,11 +20,11 @@
 		                          <lines x="[[seq(0,10,200)]]" y="[[normal(x,mu,sigma)]]"/>
 		                        </plot> -->
 		                        
-		                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"  chart-legend="true"  chart-series="series">
+		                  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-legend="true"  chart-series="series">
 		                  </canvas>
 	            </div>
 	      
-	             <div class="row" style="margin-bottom: 30px;">
+	             <div class="row"  style="margin-bottom: 30px;">
 	             	<div class="col-lg-12  main-chart">
 			       	 	<h3><i class="fa fa-angle-right"></i> average scores for each quiz</h3>
 			       	 	<div class="col-lg-10 col-lg-offset-1 main-chart"  ng-init="averageScore()">
@@ -33,7 +33,11 @@
 							</canvas> 
 			            </div>
 	         		</div> <!-- col-lg-12 -->
-	    		</div><!-- /row -->
+	         		<div class="col-lg-12 main-chart centered">
+			        	<a type="button" class="btn btn-theme03 btn-lg" onclick="history.back(-1)" style="width:150px" ng-show="!quiz.quizOpen" ><i class="fa fa-reply"></i> back</a>
+			        	<!-- <button type="button"  class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button> -->
+			    	</div>
+	    		</div><!-- /row -->	
 	        </div>
         </div><!-- col-lg-12-->
     </div><!-- /row -->
