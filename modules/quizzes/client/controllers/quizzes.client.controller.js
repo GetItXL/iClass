@@ -194,12 +194,14 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                     }
                 }
 
+
                 for(var k = 0; k < absentStudents.length; k++){
                     //console.log('absent STUS: ' + absentStudents[k].displayName);
                     quiz.scores.push({studentID : absentStudents[k]._id, student : absentStudents[k], selectedAnswer : '', quizScore : 0});
                     //console.log('PUSH QUIZ SCORE: ' + quiz.scores[quiz.scores.length-1].student.displayName);
 
                     var student = new Users(absentStudents[k]);
+                    //var student = new UsersOther(absentStudents[k]);
                     student.quizzesTaken.push({quizName : quiz.title, courseID : course._id, quizID : quiz._id, submittedAnswer : '', quizScore : 0});
 
                     student.$update();
@@ -672,5 +674,16 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
           //console.log($scope.quiz.totalParticipant);
 
       });
+
+
+
+      $scope.exportToExcel = function (elementID) {
+          var blob = new Blob([document.getElementById(elementID).innerHTML], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+          });
+          //saveAs(blob, "Report.xls");
+      };
+
+
   }
 ]);

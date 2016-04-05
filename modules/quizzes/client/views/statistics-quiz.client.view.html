@@ -41,11 +41,15 @@
             </div>
             <br><br>
 
-            <div class="col-lg-12">
+
+          <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+
+
+            <div class="col-lg-12" id="tableToExport">
                 <h3> <i class="fa fa-angle-right"></i> Score Table {{quiz.scores.student._id}}</h3>
                 <hr>
                 <!-- Students' scores table -->
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" >
                     <thread>
                       <tr>
                         <th>#</th>
@@ -69,7 +73,7 @@
 
 				<div class="col-lg-12 pull-right hidden-phone">
           <button type="button" class="btn btn-theme03 btn-lg centered" onclick="history.back(-1)" ><i class="fa fa-reply"></i> back</button>
-          <button type="button" class="btn btn-theme04 btn-lg centered" onclick="/" >export to excel</button>
+          <button type="button" class="btn btn-theme04 btn-lg centered" ng-click="exportToExcel('tableToExport')" >export to excel</button>
         </div>
         </div>
 
@@ -77,3 +81,5 @@
         </div>
     </div>
 </section>
+
+
