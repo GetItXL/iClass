@@ -518,9 +518,9 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
                 //     console.log('data '+$scope.data);
                 $scope.series.push(quiz.title);
               for(var j = 0; j < quiz.scores.length; j++) {
-                 eachscore = quiz.scores[j].quizScore;
-                   
-                      totalScore = 1+ totalScore;
+                 eachscore = quiz.scores[j].quizScore + eachscore;
+                   // console.log('eachscore '+ eachscore);
+                  totalScore = 1+ totalScore;
               }
               if(totalScore === 0) {
                 totalScore = 1;
@@ -530,7 +530,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
               $scope.average.push(result);
         });
         // console.log('choices '+ numChoice);
-                  console.log('labels '+$scope.labels);
+               //   console.log('labels '+$scope.labels);
                     console.log('data '+$scope.data);
 
     };
