@@ -41,11 +41,13 @@
       </div>
       <br><br>
 
+      <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+
       <div class="col-lg-12 main-chart" >
         <h3> <i class="fa fa-angle-right"></i> Score Table {{quiz.scores.student._id}}</h3>
         <hr>
         <!-- Students' scores table -->
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped" id="tableToExport">
           <thread>
             <tr>
               <th>#</th>
@@ -69,7 +71,7 @@
 
       <div class="col-lg-12 main-chart " style="margin-bottom: 30px;">
         <a type="button" class="btn btn-theme03 btn-lg chat-tools" href="http://localhost:3000/courses/{{quiz.courseID}}" style="width:150px" ><i class="fa fa-reply"></i> back</a>
-        <button type="button" class="btn btn-theme04 btn-lg chat-tools" onclick="/" style="width:150px" >export to excel</button>
+        <button type="button" class="btn btn-theme04 btn-lg chat-tools" ng-click="exportToExcel()" style="width:150px" >export to file</button>
       </div>
     </div>
 

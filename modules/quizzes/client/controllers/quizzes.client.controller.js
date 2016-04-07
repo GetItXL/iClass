@@ -755,14 +755,55 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
       });
 
 
-
-      $scope.exportToExcel = function (elementID) {
-          var blob = new Blob([document.getElementById(elementID).innerHTML], {
-              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+      $scope.exportToExcel = function()
+      {
+          //sort in alphabetical order by last name
+          var scores = $scope.quiz.scores;
+          scores.sort(function(a,b){
+              if(a.student.lastName < b.student.lastName) return -1;
+              if(a.student.lastName > b.student.lastName) return 1;
+              return 0;
           });
-          //saveAs(blob, "Report.xls");
-      };
 
 
+          var title = ['"Last Name"', '"First Name"', '"Score"'];
+          var lastName = [];
+          var firstName = [];
+          var score = [];
+          var data = [];
+
+          for(var k = 0; k < $scope.quiz.scores.length; k++){
+              lastName.push(scores[k].student.lastName);
+              firstName.push(scores[k].student.firstName);
+              score.push(scores[k].quizScore);
+          }
+          data.push(lastName);
+          data.push(firstName);
+          data.push(score);
+
+          var temp;
+          var quotes;
+          var convertToCSV = function(data, title) {
+              var orderedData = [];
+              for (var i = 0; i < data.length; i++) {
+                  temp = data[i];
+                  for (var j = 0; j < temp.length; j++) {
+
+                      quotes = ['"'+temp[j]+'"'];
+                      if (!orderedData[j]) {
+                          orderedData.push([quotes]);
+                      } else {
+                          orderedData[j].push(quotes);
+                      }
+                  }
+              }
+              return title.join(',') + '\r\n' + orderedData.join('\r\n');
+          };
+
+          var str = convertToCSV(data, title);
+
+          var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
+          saveAs(blob, [$scope.quiz.title+'.csv']);
+      }
   }
 ]);
