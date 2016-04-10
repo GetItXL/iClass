@@ -138,17 +138,17 @@ describe('Student Quizzes E2E Tests:', function () {
 
       it('should be able to sleep for 10000 ms', function()  {
           element(by.css('button[id="OK"]')).click();
-          browser.sleep(13000);
+          browser.sleep(5000);
       });
 
-      it('should be able to see visit course view page', function() {
-          browser.sleep(10000);
-          browser.get(browser.baseUrl + 'studentdashboard');
-          //click first item in course list
-          element(by.repeater('course in enrolledCourses').row(0)).$('a').click();
-          //course name should changed
-          expect(element.all(by.css('.title')).get(0).getText()).toBe(course1.number + ' '+ course1.name);
-      });
+      // it('should be able to see visit course view page', function() {
+      //     browser.sleep(10000);
+      //     browser.get(browser.baseUrl + 'studentdashboard');
+      //     //click first item in course list
+      //     element(by.repeater('course in enrolledCourses').row(0)).$('a').click();
+      //     //course name should changed
+      //     expect(element.all(by.css('.title')).get(0).getText()).toBe(course1.number + ' '+ course1.name);
+      // });
 
 
       // it('should be able to see 2 quizzes in the course page', function()  {
