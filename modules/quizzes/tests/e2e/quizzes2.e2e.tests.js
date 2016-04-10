@@ -46,6 +46,7 @@ describe('Student Quizzes E2E Tests:', function () {
         it('Verify that the student logged in', function() {
         //Make sure user is signed out first
         signout();
+        browser.sleep(2000);
         //Sign in
         browser.get(browser.baseUrl + 'authentication/signin');
         // Enter UserName
@@ -72,7 +73,7 @@ describe('Student Quizzes E2E Tests:', function () {
           element.all(by.css('[ng-show="isStudent"]')).isDisplayed().then(function (isVisible) {
               if (isVisible) {
                   var items = element.all(by.css('.list-group .studentview a'));
-                  browser.sleep(3000);
+                 
                   expect(items.count()).toBe(1);
               } else {
               // element is not visible
@@ -94,8 +95,8 @@ describe('Student Quizzes E2E Tests:', function () {
           });
       });
 
-      it('should be able to sleep for 3000 ms', function()  {
-          browser.sleep(3000);
+      it('should be able to sleep for 6000 ms', function()  {
+          browser.sleep(6000);
       });
 
       it('should be able to see open quiz', function() {
@@ -107,6 +108,7 @@ describe('Student Quizzes E2E Tests:', function () {
       it('should be able to take open quiz', function() {
         
          // browser.wait(EC.alertIsPresent(), 3000);
+          browser.sleep(2000);
           element(by.css('.radio')).click();
           element(by.css('input[type="submit"]')).click();
           
@@ -120,7 +122,54 @@ describe('Student Quizzes E2E Tests:', function () {
              
       });
 
+      it('should not able to goes to previous quiz', function()  {
+          element.all(by.css('[ng-show="isStudent"]')).isDisplayed().then(function (isVisible) {
+              if (isVisible) {
+                 // element(by.repeater('quiz in quizzesInCourse ').row(0)).$('a').click();
+                  element(by.css('.list-group .studentview a')).click();
+                  browser.sleep(1000);
+                 // expect model window
+                  expect(element.all(by.css('.modal-content')));
+              } else {
+              // element is not visible
+              }
+          });
+      });
 
+      it('should be able to sleep for 10000 ms', function()  {
+          element(by.css('button[id="OK"]')).click();
+          browser.sleep(13000);
+      });
+
+      it('should be able to see visit course view page', function() {
+          browser.sleep(10000);
+          browser.get(browser.baseUrl + 'studentdashboard');
+          //click first item in course list
+          element(by.repeater('course in enrolledCourses').row(0)).$('a').click();
+          //course name should changed
+          expect(element.all(by.css('.title')).get(0).getText()).toBe(course1.number + ' '+ course1.name);
+      });
+
+
+      // it('should be able to see 2 quizzes in the course page', function()  {
+          
+      //     //refresh page
+      //     // browser.driver.navigate().refresh();
+      //     // browser.refresh();
+      //     browser.sleep(2000);
+      //     element.all(by.css('[ng-show="isStudent"]')).isDisplayed().then(function (isVisible) {
+      //         if (isVisible) {
+      //             var items = element.all(by.css('.list-group .studentview a'));
+      //            // browser.sleep(3000);
+      //             expect(items.count()).toBe(2);
+      //         } else {
+      //         // element is not visible
+      //         }
+      //     });
+         
+      // });
+
+      
 
 
 

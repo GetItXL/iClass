@@ -117,9 +117,9 @@ module.exports = function (app, db) {
     //Each userID has one and only one entry in the object
 
 
-    console.log('AM I CONNECTED THIS TIME');
-    console.log(socket.id);
-    console.log('my user id is: ' + socket.userID);
+    // console.log('AM I CONNECTED THIS TIME');
+    // console.log(socket.id);
+    // console.log('my user id is: ' + socket.userID);
 
 
     config.files.server.sockets.forEach(function (socketConfiguration) {

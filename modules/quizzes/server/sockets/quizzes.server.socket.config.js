@@ -14,15 +14,15 @@ module.exports = function (io, socket, socketClients) {
     io.emit('testUserSocketPair', {});
 
     socket.on('testUserSocketPairBack', function(data){
-        console.log('=================Connection established test=====================');
+       // console.log('=================Connection established test=====================');
 
-        console.log('My Socket List:');
+       // console.log('My Socket List:');
         for(var property in socketClients){
             if(socketClients.hasOwnProperty(property)){
-                console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
+          //      console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
             }
         }
-        console.log('=================================================================');
+       // console.log('=================================================================');
 
 
     });
@@ -110,10 +110,10 @@ module.exports = function (io, socket, socketClients) {
         //socket.close();
 
 
-        console.log('=================Connection destroyed test=====================');
-        console.log('ever disconnected?');
-        console.log('my socket id: ' + socket.id);
-        console.log('my user id: ' + socket.userID);
+        // console.log('=================Connection destroyed test=====================');
+        // console.log('ever disconnected?');
+        // console.log('my socket id: ' + socket.id);
+        // console.log('my user id: ' + socket.userID);
 
         //remove from list
         if(socket.userID){
@@ -122,13 +122,13 @@ module.exports = function (io, socket, socketClients) {
 
 
         //test
-        console.log('My Socket List:');
+        //console.log('My Socket List:');
         for(var property in socketClients){
             if(socketClients.hasOwnProperty(property)){
-                console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
+                //console.log('userID: ' + property + ' | ' + 'socketID: ' + socketClients[property].id);
             }
         }
-        console.log('=================================================================');
+       // console.log('=================================================================');
     });
 
 };

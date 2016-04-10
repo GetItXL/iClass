@@ -90,7 +90,7 @@ app.controller('SubmitQuizController', ['$scope', '$stateParams', '$location', '
                         updateUserModelQuizzesTaken(course._id);
                     });
 
-                    alert("thank you for submitting answer "+ answer);
+                   // alert("thank you for submitting answer "+ answer);
 
                     $location.path('courses/' + $scope.courseDisplayInfo._id);
                 }, function (errorResponse) {
