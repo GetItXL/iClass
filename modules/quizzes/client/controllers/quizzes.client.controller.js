@@ -2,8 +2,8 @@
 
 // Quizzes controller
 var app = angular.module('quizzes');
-app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket', 'Users',
-  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket, Users) {
+app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$location', '$interval', 'Authentication',  '$filter', 'Quizzes', 'CourseInfoFactory', 'Courses', '$modal', '$log', 'Socket', 'Users', 'FileSaver', 'Blob',
+  function ($scope, $state, $stateParams, $location, $interval, Authentication, $filter, Quizzes, CourseInfoFactory, Courses, $modal, $log, Socket, Users, FileSaver, Blob) {
     $scope.authentication = Authentication;
 
     //keeps track of choices added
@@ -803,7 +803,7 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
           var str = convertToCSV(data, title);
 
           var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
-          saveAs(blob, [$scope.quiz.title+'.csv']);
+          FileSaver.saveAs(blob, $scope.quiz.title+'.csv');
       };
   }
 ]);

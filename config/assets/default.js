@@ -43,6 +43,9 @@ module.exports = {
         'public/lib/momentjs/min/locales.min.js',
         'public/lib/humanize-duration/humanize-duration.js',
         'public/lib/angular-timer/dist/angular-timer.js',
+        'public/lib/angular-file-saver/dist/angular-file-saver.js',
+        'public/lib/blob-polyfill/Blob.js',
+        'public/lib/file-saver.js/FileSaver.js',
         
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
