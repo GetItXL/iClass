@@ -804,6 +804,6 @@ app.controller('QuizzesController', ['$scope', '$state','$stateParams', '$locati
 
           var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
           saveAs(blob, [$scope.quiz.title+'.csv']);
-      }
+      };
   }
 ]);

@@ -91,7 +91,7 @@
                     <p>
                     <button id="statistic" type="button" class="btn btn-theme04 " ui-sref="courses.statistic({courseId:course._id})" href="../courses/{courseId:course._id}/statistic" ng-show="!isStudent()">view course statistic</button>
                     
-                    <button type="button" class="btn btn-lg btn-theme02 " ui-sref="courses.student_scores({courseId:course._id})" ng-show="isStudent()">  <i class="fa fa-heart"></i> Check My Scores </button>
+                    <button type="button" class="btn btn-lg btn-theme02 studentview" ui-sref="courses.student_scores({courseId:course._id})" ng-show="isStudent()">  <i class="fa fa-heart"></i> Check My Scores </button>
                     </p>
                 </div>
                 
@@ -118,9 +118,11 @@
                                     </p>
                         
                             </div>  
-                            <div class="col-lg-12 col-md-12 col-sm-12 " ng-repeat="quiz in quizzesInCourse " >
-                                <div class="pn" >
-                                    <a ng-show="isStudent()" ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item">
+                         </div> <!-- list-group -->
+                         <div class="list-group" >
+                            <div ng-show="isStudent()" class="col-lg-12 col-md-12 col-sm-12 studentview" ng-repeat="quiz in quizzesInCourse " >
+                                
+                                    <a ng-controller="QuizzesController" ng-click="isOpen(quiz)" class="list-group-item">
                                     <!-- <a ng-show="isStudent()" ng-controller="DashboardController" ng-click="isOpen(quiz, quiz._id)" class="list-group-item"> -->
 
                                         Created on
@@ -131,7 +133,7 @@
                                         <h4 class="list-group-item-heading" ng-bind="quiz.title"></h4>
                                         <p class="list-group-item-text" ng-bind="quiz.content"></p>
                                     </a>
-                                </div>
+                                
                             </div>
                        
                     </div> <!-- col-lg-12 -->

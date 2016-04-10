@@ -8,14 +8,14 @@
                 </div>
             </div>
             <div class="row col-lg-12 mt" ng-show="!isStudent()" ng-init="findOne()">
-                <div class="pull-right hidden-phone">
-                    <button type="submit" class="btn btn-theme04 btn-lg " style="width:150px" ng-show="!quiz.quizOpen" ng-click="setQuizStart();">
+                <div class="pull-right hidden-phone" style="margin-right: 10px">
+                    <button type="start" class="btn btn-theme04 btn-lg " style="width:150px" ng-show="!quiz.quizOpen" ng-click="setQuizStart();">
                           <i class="fa fa-check"></i> Quiz Start 
                         </button>
-                    <button type="submit" class="btn btn-theme04 btn-lg " style="width:150px" ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
+                    <button type="end" class="btn btn-theme04 btn-lg " style="width:150px" ng-show="quiz.quizOpen" ng-click="setQuizFinished()">
                           <i class="fa fa-check"></i> Quiz End
                     </button>
-                    <a type="button" class="btn btn-theme03 btn-lg " href="http://localhost:3000/courses/{{quiz.courseID}}" ng-show="!quiz.quizOpen" ><i class="fa fa-reply"></i> back</a>
+                    <a type="back" class="btn btn-theme03 btn-lg " href="http://localhost:3000/courses/{{quiz.courseID}}" ng-show="!quiz.quizOpen" ><i class="fa fa-reply"></i> back</a>
                     
                   </div>
             </div>
