@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var db = mongoose.createConnection('mongodb://localhost/mean-test');
 
-describe('Users E2E Tests:', function () {
+describe('professor E2E Tests:', function () {
   var user1 = {
     firstName: 'professor',
     lastName: 'user',
@@ -307,24 +307,24 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
     });
 
-    it('Should Successfully register new student', function () {
-      browser.get('http://localhost:3001/authentication/signup');
-      // Enter FirstName
-      element(by.model('credentials.firstName')).sendKeys(user2.firstName);
-      // Enter LastName
-      element(by.model('credentials.lastName')).sendKeys(user2.lastName);
-      // Enter Email
-      element(by.model('credentials.email')).sendKeys(user2.email);
-      // select userrole
-      element(by.id('student')).click();
-      // Enter UserName
-      element(by.model('credentials.username')).sendKeys(user2.username);
-      // Enter Password
-      element(by.model('credentials.password')).sendKeys(user2.password);
-      // Click Submit button
-      element(by.css('button[type="submit"]')).click();
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/studentdashboard');
-    });
+    // it('Should Successfully register new student', function () {
+    //   browser.get('http://localhost:3001/authentication/signup');
+    //   // Enter FirstName
+    //   element(by.model('credentials.firstName')).sendKeys(user2.firstName);
+    //   // Enter LastName
+    //   element(by.model('credentials.lastName')).sendKeys(user2.lastName);
+    //   // Enter Email
+    //   element(by.model('credentials.email')).sendKeys(user2.email);
+    //   // select userrole
+    //   element(by.id('student')).click();
+    //   // Enter UserName
+    //   element(by.model('credentials.username')).sendKeys(user2.username);
+    //   // Enter Password
+    //   element(by.model('credentials.password')).sendKeys(user2.password);
+    //   // Click Submit button
+    //   element(by.css('button[type="submit"]')).click();
+    //   expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/studentdashboard');
+    // });
 
   });
 
