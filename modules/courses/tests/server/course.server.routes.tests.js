@@ -111,118 +111,115 @@ describe('Course CRUD tests', function () {
       });
   });
 
-  // it('should not be able to save an course if no title is provided', function (done) {
-  //   // Invalidate title field
-  //   course.title = '';
+   it('should not be able to save an course if no title is provided', function (done) {
+     // Invalidate title field
+     course.name = '';
 
-  //   agent.post('/api/auth/signin')
-  //     .send(credentials)
-  //     .expect(200)
-  //     .end(function (signinErr, signinRes) {
-  //       // Handle signin error
-  //       if (signinErr) {
-  //         return done(signinErr);
-  //       }
+     agent.post('/api/auth/signin')
+       .send(credentials)
+       .expect(200)
+       .end(function (signinErr, signinRes) {
+         // Handle signin error
+         if (signinErr) {
+           return done(signinErr);
+         }
 
-  //       // Get the userId
-  //       var userId = user.id;
+         // Get the userId
+         var userId = user.id;
 
-  //       // Save a new course
-  //       agent.post('/api/courses')
-  //         .send(course)
-  //         .expect(400)
-  //         .end(function (courseSaveErr, courseSaveRes) {
-  //           // Set message assertion
-  //           (courseSaveRes.body.message).should.match('Title cannot be blank');
+         // Save a new course
+         agent.post('/api/courses')
+           .send(course)
+           .expect(400)
+           .end(function (courseSaveErr, courseSaveRes) {
+             // Set message assertion
+             (courseSaveRes.body.message).should.match('Course name cannot be blank');
 
-  //           // Handle course save error
-  //           done(courseSaveErr);
-  //         });
-  //     });
-  // });
+             // Handle course save error
+             done(courseSaveErr);
+           });
+       });
+   });
 
-  // it('should be able to update an course if signed in', function (done) {
-  //   agent.post('/api/auth/signin')
-  //     .send(credentials)
-  //     .expect(200)
-  //     .end(function (signinErr, signinRes) {
-  //       // Handle signin error
-  //       if (signinErr) {
-  //         return done(signinErr);
-  //       }
+   //it('should be able to update an course if signed in', function (done) {
+   //  agent.post('/api/auth/signin')
+   //    .send(credentials)
+   //    .expect(200)
+   //    .end(function (signinErr, signinRes) {
+   //      // Handle signin error
+   //      if (signinErr) {
+   //        return done(signinErr);
+   //      }
+   //
+   //      // Get the userId
+   //      var userId = user.id;
+   //
+   //      // Save a new course
+   //      agent.post('/api/courses')
+   //        .send(course)
+   //        .expect(200)
+   //        .end(function (courseSaveErr, courseSaveRes) {
+   //          // Handle course save error
+   //          if (courseSaveErr) {
+   //            return done(courseSaveErr);
+   //          }
+   //
+   //          // Update course title
+   //          course.passcode = '12345';
+   //
+   //          // Update an existing course
+   //          agent.put('/api/courses/' + courseSaveRes.body._id)
+   //            .send(course)
+   //            .expect(200)
+   //            .end(function (courseUpdateErr, courseUpdateRes) {
+   //              // Handle course update error
+   //              if (courseUpdateErr) {
+   //                return done(courseUpdateErr);
+   //              }
+   //
+   //              // Set assertions
+   //              (courseUpdateRes.body._id).should.equal(courseSaveRes.body._id);
+   //              (courseUpdateRes.body.passcode).should.passcode('12345');
+   //
+   //              // Call the assertion callback
+   //              done();
+   //            });
+   //        });
+   //    });
+   //});
 
-  //       // Get the userId
-  //       var userId = user.id;
+   it('should be able to get a list of courses if not signed in', function (done) {
+     // Create new course model instance
+     var courseObj = new Course(course);
 
-  //       // Save a new course
-  //       agent.post('/api/courses')
-  //         .send(course)
-  //         .expect(200)
-  //         .end(function (courseSaveErr, courseSaveRes) {
-  //           // Handle course save error
-  //           if (courseSaveErr) {
-  //             return done(courseSaveErr);
-  //           }
 
-  //           // Update course title
-  //           course.title = 'WHY YOU GOTTA BE SO MEAN?';
+     // Save the course
+     courseObj.save(function () {
+       // Request courses
+       request(app).get('/api/courses')
+          .expect(403)
+         .end(function (req, res) {
+           // Set assertion
+             done(req);
+         });
 
-  //           // Update an existing course
-  //           agent.put('/api/courses/' + courseSaveRes.body._id)
-  //             .send(course)
-  //             .expect(200)
-  //             .end(function (courseUpdateErr, courseUpdateRes) {
-  //               // Handle course update error
-  //               if (courseUpdateErr) {
-  //                 return done(courseUpdateErr);
-  //               }
+     });
+   });
 
-  //               // Set assertions
-  //               (courseUpdateRes.body._id).should.equal(courseSaveRes.body._id);
-  //               (courseUpdateRes.body.title).should.match('WHY YOU GOTTA BE SO MEAN?');
+   it('should not be able to get a single course if not signed in', function (done) {
+     // Create new course model instance
+     var courseObj = new Course(course);
 
-  //               // Call the assertion callback
-  //               done();
-  //             });
-  //         });
-  //     });
-  // });
+     // Save the course
+     courseObj.save(function () {
+       request(app).get('/api/courses/' + courseObj._id)
+           .expect(403)
+         .end(function (req, res) {
 
-  // it('should be able to get a list of courses if not signed in', function (done) {
-  //   // Create new course model instance
-  //   var courseObj = new Course(course);
-
-  //   // Save the course
-  //   courseObj.save(function () {
-  //     // Request courses
-  //     request(app).get('/api/courses')
-  //       .end(function (req, res) {
-  //         // Set assertion
-  //         res.body.should.be.instanceof(Array).and.have.lengthOf(1);
-
-  //         // Call the assertion callback
-  //         done();
-  //       });
-
-  //   });
-  // });
-
-  // it('should be able to get a single course if not signed in', function (done) {
-  //   // Create new course model instance
-  //   var courseObj = new Course(course);
-
-  //   // Save the course
-  //   courseObj.save(function () {
-  //     request(app).get('/api/courses/' + courseObj._id)
-  //       .end(function (req, res) {
-  //         // Set assertion
-  //         res.body.should.be.instanceof(Object).and.have.property('title', course.title);
-
-  //         // Call the assertion callback
-  //         done();
-  //       });
-  //   });
-  // });
+           done(req);
+         });
+     });
+   });
 
   it('should return proper error for single course with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id

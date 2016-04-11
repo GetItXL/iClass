@@ -190,8 +190,8 @@ describe('Quiz CRUD tests', function () {
       });
   });
 
-    /* TODO: change to should not
-  it('should be able to get a list of quizzes if not signed in', function (done) {
+
+  it('should not be able to get a list of quizzes if not signed in', function (done) {
     // Create new quiz model instance
     var quizObj = new Quiz(quiz);
 
@@ -199,34 +199,30 @@ describe('Quiz CRUD tests', function () {
     quizObj.save(function () {
       // Request quizzes
       request(app).get('/api/quizzes')
-        .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Array).and.have.lengthOf(1);
-
-          // Call the assertion callback
-          done();
+          .expect(403)
+        .end(function (quizSaveErr, quizSaveRes) {
+            // Call the assertion callback
+            done(quizSaveErr);
         });
 
     });
-  });*/
+  });
 
-    /*
-  it('should be able to get a single quiz if not signed in', function (done) {
+
+  it('should not be able to get a single quiz if not signed in', function (done) {
     // Create new quiz model instance
     var quizObj = new Quiz(quiz);
 
     // Save the quiz
     quizObj.save(function () {
       request(app).get('/api/quizzes/' + quizObj._id)
+          .expect(403)
         .end(function (req, res) {
           // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('title', quiz.title);
-
-          // Call the assertion callback
-          done();
+          done(req);
         });
     });
-  });*/
+  });
 
   it('should return proper error for single quiz with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
